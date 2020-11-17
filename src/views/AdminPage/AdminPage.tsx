@@ -1,7 +1,8 @@
 import React from "react";
-import { Col, Container, Row } from "reactstrap";
+import { Col, Container, Form, FormGroup, Input, Row } from "reactstrap";
 import { NavBar } from "../../components/NavBar/NavBar";
 import { NewClientButton } from "../../components/NewClientButton/NewClientButton";
+import "./BatchFormStyle.scss";
 
 export const AdminPage: React.FC = () => {
   return (
@@ -16,12 +17,44 @@ export const AdminPage: React.FC = () => {
         <NavBar />
         <Row className="justify-content-between">
           <Col xs="auto"></Col>
-          <Col xs="8" className="text-left" style={{ marginTop: "50px" }}>
-            {/*
-
-                    Page content
-                    
-                    */}
+          <Col xs="3" className="text-left" style={{ marginTop: "50px" }}>
+            <Form className="BatchForm">
+              Map Batch To Client
+              <Input type="select">
+                <option>Select Client</option>
+                <option>Dummy Client 1</option>
+                <option>Dummy Client 2</option>
+              </Input>
+              <br />
+              <Input type="select">
+                <option>Select Batch</option>
+                <option>Dummy Batch 1</option>
+                <option>Dummy Batch 2</option>
+              </Input>
+              <Input className="BatchFormSubmit" type="submit">
+                Submit
+              </Input>
+            </Form>
+          </Col>
+          <Col xs="3" className="text-right" style={{ marginTop: "50px" }}>
+            <Form className="BatchForm">
+              Unmap Batch From Client
+              <Input type="select">
+                <option>Select Client</option>
+                <option>Dummy Client 1</option>
+                <option>Dummy Client 2</option>
+              </Input>
+              <br />
+              <Input type="select">
+                Select Batch
+                <option>Select Batch</option>
+                <option>Dummy Batch 3</option>
+                <option>Dummy Batch 4</option>
+              </Input>
+              <Input className="BatchFormSubmit" type="submit">
+                Submit
+              </Input>
+            </Form>
           </Col>
           <Col xs="auto"></Col>
         </Row>
