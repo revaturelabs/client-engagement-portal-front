@@ -1,0 +1,40 @@
+.RequestBatchCard {
+    width: 400px;
+    height: 300px;
+    border: 2px solid black;
+    margin: 30px auto;
+    border-radius: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    background-color: white;
+    box-shadow: 3px 3px 15px #72A4C2;
+    border: 2px solid #72A4C2;
+    color: #474C55;
+}
+
+.RequestBatchCardText {
+    text-align: left;
+    margin-bottom: 30px;
+}
+
+.RequestBatchButton {
+    width: 300px;
+    height: 30px;
+    background-color: #F26925;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    border: 2.5px solid #F26925;
+    user-select: none;
+}
+
+.RequestBatchButton:hover {
+    background-color: white;
+    color: #F26925;
+    cursor: pointer;
+}
