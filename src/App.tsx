@@ -1,12 +1,15 @@
 import React from 'react';
 import logo from './logo.svg';
 import './scss/app.scss';
+import './scss/batch-card.scss'
 import { Provider } from 'react-redux';
 import { AnyAction } from 'redux';
 import { store } from './Store';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import { LoginPage } from './views/LoginPage/LoginPage';
 import { HomePage } from './views/HomePage/HomePage';
+import { AssociateCard } from './components/AssociateCard/AssociateCard';
+import { AssociateCardModal } from './components/AssociateCard/AssociateCardModal';
 
 function App() {
   return (
@@ -22,6 +25,8 @@ function App() {
           </Switch>
         </BrowserRouter>
       </Provider>
+      {/* <AssociateCard /> */}
+      {/* <AssociateCardModal /> */}
     </div>
   );
 }
