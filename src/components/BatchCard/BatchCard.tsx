@@ -1,4 +1,5 @@
 import React from 'react';
+import "../../scss/batch-card.scss";
 
 interface IBatchCardProps{
     titlePic:string,
@@ -8,13 +9,19 @@ interface IBatchCardProps{
 
 export const BatchCard:React.FC<IBatchCardProps> = (props:IBatchCardProps) => {
     return(
-        <div className="justify-content-center text-center" style={{backgroundColor: "white", height:"200px", paddingTop: "10px", border:"1px solid #F26925", borderRadius:"20px", marginTop: "10px"}}>
+        <div className="rev-card justify-content-center text-center">
             
-            <img src={props.titlePic} alt={props.specialization + " thumbnail"} style={{maxWidth:"85%", height:"30%"}} />
+            <div className="row justify-content-center">
+                <img src={props.titlePic} alt={props.specialization + " thumbnail"} className="pic" />
+            </div>
+            
             <br />
-            <p style={{fontSize: "14px"}}>{props.specialization}</p>
+            <p className="spec-text">{props.specialization}</p>
             <p>{props.batchName}</p>
-            <button style={{lineHeight: 1.5, width: "70%", border:"none", backgroundColor:"#F26925", color:"white", fontSize:"20px"}}>View</button>
+            <div className="row justify-content-center">
+                <button className=" view-btn">View</button>
+            </div>
+            
         </div>
     )
 }
