@@ -26,7 +26,7 @@ export const HomePage:React.FC<undefined> = () => {
                     <p style={{color: "#474C55", fontSize:"1.2em"}}>Click to find out more...</p>
                     <br />
                     <Container>
-                        {/* <Row>
+                        <Row>
                             <Col xl="2" lg="3" md="4" sm="4" xs="6">
                                 <BatchCard titlePic={reactReduxLogo} specialization="React-Redux" batchName="Batch Name" />
                             </Col>
@@ -36,7 +36,7 @@ export const HomePage:React.FC<undefined> = () => {
                             <Col xl="2" lg="3" md="4" sm="4" xs="6">
                                 <BatchCard titlePic={reactReduxLogo} specialization="React-Redux" batchName="Batch Name" />
                             </Col>
-                        </Row> */}
+                        </Row>
                     </Container>
                 </Col>
                 <Col xs="auto">
