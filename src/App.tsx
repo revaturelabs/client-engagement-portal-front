@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from './logo.svg';
-import './App.css';
+import './scss/app.scss';
 import { Provider } from 'react-redux';
 import { AnyAction } from 'redux';
 import { store } from './Store';
