@@ -7,6 +7,7 @@ import { store } from './Store';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import { LoginPage } from './views/LoginPage/LoginPage';
 import { HomePage } from './views/HomePage/HomePage';
+import {AdminPage} from './views/AdminPage/AdminPage';
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
             <Route path="/login" component={LoginPage}/>
             <Route path="/login-admin" />
             <Route path="/home" component={HomePage}/>
-            <Route path="/admin" />
+            <Route path="/admin" component={AdminPage}/>
           </Switch>
         </BrowserRouter>
       </Provider>

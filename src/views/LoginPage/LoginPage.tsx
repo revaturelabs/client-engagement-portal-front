@@ -15,6 +15,9 @@ export const LoginPage:React.FC<undefined> = () => {
                             <br />
                             <br />
                             <LoginComponent loginType="client" />
+                            <br />
+                            <br />
+                            <Link to="/admin"><button>Log In As Admin</button></Link>
                         </div>
                     </td>
                 </tr>
