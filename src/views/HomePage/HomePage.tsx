@@ -4,6 +4,8 @@ import { BatchCard } from '../../components/BatchCard/BatchCard';
 import { NavBar } from '../../components/NavBar/NavBar';
 import reactReduxLogo from '../../assets/react-redux-logo.png';
 import javaLogo from '../../assets/java-logo.png';
+import RequestBatchCard from '../../components/RequestBatchCard/RequestBatchCard'
+import RequestBatchCardModal from '../../components/RequestBatchCard/RequestBatchCardModal'
 
 export const HomePage:React.FC<undefined> = () => {
 
@@ -12,6 +14,8 @@ export const HomePage:React.FC<undefined> = () => {
     return(
         <Container style={{height: "100vh", maxWidth: "100vw", backgroundColor:"#B9B9BA"}}>
             <NavBar />
+            <RequestBatchCard />
+            <RequestBatchCardModal />
             <Row className="justify-content-between">
                 <Col xs="auto">
                 </Col>
