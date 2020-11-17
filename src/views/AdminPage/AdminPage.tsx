@@ -15,34 +15,36 @@ export const AdminPage: React.FC = () => {
                 <Col xs="3" className="text-left" style={{marginTop:"50px"}}>
                     <Form className="BatchForm">
                     Map Batch To Client
-                        <FormGroup>
-                            <Input type="select">
-                                <option>Select Client</option>
-                                <option>Client 1</option>
-                                <option>Client 2</option>
-                            </Input>
-                            <br/>
-                            <Input type="select">
-                                <option>Select Batch</option>
-                                <option>Batch 206</option>
-                                <option>Batch 207</option>
-                            </Input>
-                            
-                            <Input type="submit" className="BatchFormSubmit">Submit</Input>
-                        </FormGroup>
+                        <Input type="select">
+                            <option>Select Client</option>
+                            <option>Dummy Client 1</option>
+                            <option>Dummy Client 2</option>
+                        </Input>
+                        <br/>
+                        <Input type="select">
+                            <option>Select Batch</option>
+                            <option>Dummy Batch 1</option>
+                            <option>Dummy Batch 2</option>
+                        </Input>    
+                        <Input className="BatchFormSubmit" type="submit" >Submit</Input>
                     </Form>
                 </Col>
                 <Col xs="3" className="text-right" style={{marginTop:"50px"}}>
                     <Form className="BatchForm">
                         Unmap Batch From Client
-                        <Input type="select">Select Client
-                            <option>Client 1</option>
-                            <option>Client 2</option>
+                        <Input type="select">
+                            <option>Select Client</option>
+                            <option>Dummy Client 1</option>
+                            <option>Dummy Client 2</option>
                         </Input>
+                        <br/>
                         <Input type="select">Select Batch
-                            <option>Batch 206</option>
-                            <option>Batch 207</option>
+                            <option>Select Batch</option>
+                            <option>Dummy Batch 3</option>
+                            <option>Dummy Batch 4</option>
                         </Input>
+
+                        <Input className="BatchFormSubmit" type="submit" >Submit</Input>
                     </Form>
                 </Col>
                 <Col xs="auto">
