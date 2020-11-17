@@ -5,6 +5,7 @@ import {NavBar} from '../../components/NavBar/NavBar'
 
 export const AdminPage:React.FC = () => {
     return (
+        <>
         <Container style={{height: "100vh", maxWidth: "100vw", backgroundColor:"#B9B9BA"}}>
             <NavBar />
             <Row className="justify-content-between">
@@ -24,5 +25,8 @@ export const AdminPage:React.FC = () => {
                 Footer?
             </Row> */}
         </Container>
+        
+        {/* sticky footer */}
+        </>
     )
 }  
