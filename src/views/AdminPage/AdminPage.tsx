@@ -58,11 +58,18 @@ export const AdminPage: React.FC = () => {
           </Col>
           <Col xs="auto"></Col>
         </Row>
+        <Row style={{ marginTop: "20px" }}>
+          <Col xs="5" />
+          <Col>
+            <NewClientButton />
+          </Col>
+          <Col xs="5" />
+        </Row>
         {/* <Row>
                 Footer?
             </Row> */}
       </Container>
-      <NewClientButton />
+
       {/* sticky footer */}
     </>
   );

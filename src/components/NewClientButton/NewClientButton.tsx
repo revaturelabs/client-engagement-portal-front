@@ -16,10 +16,7 @@ import {
 //This component includes the button for a new client account
 //This also has a modal form that pops up when the button is clicked
 
-export const NewClientButton: React.FC<any> = (props) => {
-  // it needs props to work
-  const { buttonLabel, className } = props;
-
+export const NewClientButton: React.FC<any> = () => {
   const [modal, setModal] = useState(false);
 
   const toggle = () => setModal(!modal);
@@ -31,7 +28,7 @@ export const NewClientButton: React.FC<any> = (props) => {
           backgroundColor: "#F26925",
           fontFamily: " futura-pt, sans-serif",
           fontStyle: "normal",
-          fontWeight: 200,
+          fontWeight: 300,
           width: "16rem",
           border: "none",
         }}
@@ -40,7 +37,7 @@ export const NewClientButton: React.FC<any> = (props) => {
         Create Account
       </Button>
 
-      <Modal isOpen={modal} toggle={toggle} className={className}>
+      <Modal isOpen={modal} toggle={toggle}>
         <Row>
           <Col xs="6">
             <ModalHeader
