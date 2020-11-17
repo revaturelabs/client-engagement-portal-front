@@ -5,13 +5,17 @@ $darkgray:  #474C55;
 #notif-header {
     background-color: $orange;
     color: $white;
-
-    
-    // .notif-row {
-    //     height: 20px;
-
-    //     td {
-    //         height: 20px !important;
-    //     }
-    // }
 }
+
+#notif-header:hover {
+    background-color: $darkgray;
+}
+
+.myTable {
+    margin-bottom: 0px !important;
+}
+
+// .notif-row {
+//     background-color: $darkgray;
+//     color: $white;
+// }

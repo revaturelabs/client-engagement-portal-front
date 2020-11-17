@@ -35,17 +35,40 @@ export const notificationReducer =
     (state:INotificationState = initialState, action:{type:string, payload:INotification}):INotificationState => {
         switch(action.type) {
             case "GET_NOTIFICATIONS":
-                //make a request to gather all pending notifications
-                break;
+
+                //TODO: make an axios get request here to populate the notification state
+
+                return {notifications: null};
             case "ADD_NOTIFICATION":
-                //create request for more talent/intervention
-                break;
+                if(state == null)
+                    return {notifications: null};
+
+                state = {
+                    notifications:[
+                        ...state.notifications as INotification[],
+                        action.payload
+                    ]
+                };
+
+                //TODO: make an axios post request here to add the notification
+
+                return state;
             case "REMOVE_NOTIFICATION":
-                //cancel request
-                break;
+                if(state == null)
+                    return {notifications: null};
+
+                const payload = (element:INotification) => element = action.payload;
+
+                const index = state.notifications?.findIndex(payload);
+
+                state = {
+                    notifications: state.notifications?.splice(index as number, 1) as INotification[]
+                }
+
+                //TODO: make an axios delete request here to remove the notification
+
+                return state;
             default:
                 return state;
         }
-
-        return state;
 }
