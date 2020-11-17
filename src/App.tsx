@@ -8,6 +8,7 @@ import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import { LoginPage } from './views/LoginPage/LoginPage';
 import { HomePage } from './views/HomePage/HomePage';
 import {AdminPage} from './views/AdminPage/AdminPage';
+import { Notifications } from './components/Notifications/Notifications';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route path="/admin" component={AdminPage}/>
           </Switch>
         </BrowserRouter>
+        <Notifications />
       </Provider>
     </div>
   );
