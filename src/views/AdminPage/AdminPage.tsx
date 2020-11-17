@@ -1,6 +1,7 @@
 import React from 'react';
 import { Col, Container, Form, FormGroup, Input, Row } from 'reactstrap';
 import {NavBar} from '../../components/NavBar/NavBar'
+import './BatchFormStyle.scss';
 
 
 export const AdminPage: React.FC = () => {
@@ -11,29 +12,29 @@ export const AdminPage: React.FC = () => {
             <Row className="justify-content-between">
                 <Col xs="auto">
                 </Col>
-                <Col xs="4" className="text-left" style={{marginTop:"50px"}}>
-                    <Form style={{height: "40vh", maxWidth: "30vw", backgroundColor:"white", borderRadius:"25px", textAlign:"center", color:"#F26925", border:"solid",borderColor:"black",borderWidth:"1px"}}>
+                <Col xs="3" className="text-left" style={{marginTop:"50px"}}>
+                    <Form className="BatchForm">
                     Map Batch To Client
                         <FormGroup>
-                            <br/>
                             <Input type="select">
                                 <option>Select Client</option>
                                 <option>Client 1</option>
                                 <option>Client 2</option>
                             </Input>
                             <br/>
-                            <br/>
                             <Input type="select">
                                 <option>Select Batch</option>
                                 <option>Batch 206</option>
                                 <option>Batch 207</option>
                             </Input>
-                            <Input type="submit">Submit</Input>
+                            
+                            <Input type="submit" className="BatchFormSubmit">Submit</Input>
                         </FormGroup>
                     </Form>
                 </Col>
-                <Col xs="4" className="text-right" style={{marginTop:"50px"}}>
-                    <Form>
+                <Col xs="3" className="text-right" style={{marginTop:"50px"}}>
+                    <Form className="BatchForm">
+                        Unmap Batch From Client
                         <Input type="select">Select Client
                             <option>Client 1</option>
                             <option>Client 2</option>
