@@ -3,8 +3,14 @@ import { Col, Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Row } from '
 import logo from '../../assets/logo.png';
 import menuArrow from '../../assets/down-arrow.png';
 
-export const NavBar:React.FC<any> = () => {
+// interface INavBarProps{
+//     dropDownProps?:React.ComponentType<DropdownItem>[];
+// }
+
+export const NavBar:React.FC<any> = (props:any) => {
     const [navMenuOpen, setNavMenuOpen] = useState(false);
+
+    console.log("props: " + props.dropDownProps);
 
     return(
         <Row className="justify-content-around" style={{height: "100px", backgroundColor: "white", borderBottom: "3px solid #F26925"}}>
@@ -19,6 +25,7 @@ export const NavBar:React.FC<any> = () => {
                     </DropdownToggle>
                     <DropdownMenu right>
                         <a href="/"><DropdownItem>Logout</DropdownItem></a>
+                        { props.children }
                     </DropdownMenu>
                 </Dropdown>
             </Col>
