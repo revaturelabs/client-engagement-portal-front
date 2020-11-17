@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Col, Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Row, ButtonDropdown } from 'reactstrap';
 import logo from '../../assets/logo.png';
 import menuArrow from '../../assets/down-arrow.png';
-import  '../../css/navStyles.scss';
+import  '../../scss/navStyles.scss';
 import { Turn as Hamburger } from 'hamburger-react'
 
 // interface INavBarProps{
