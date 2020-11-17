@@ -35,10 +35,13 @@ export const notificationReducer =
     (state:INotificationState = initialState, action:{type:string, payload:INotification}):INotificationState => {
         switch(action.type) {
             case "GET_NOTIFICATIONS":
+                //make a request to gather all pending notifications
                 break;
             case "ADD_NOTIFICATION":
+                //create request for more talent/intervention
                 break;
             case "REMOVE_NOTIFICATION":
+                //cancel request
                 break;
             default:
                 return state;

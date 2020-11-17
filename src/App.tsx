@@ -8,7 +8,6 @@ import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import { LoginPage } from './views/LoginPage/LoginPage';
 import { HomePage } from './views/HomePage/HomePage';
 import {AdminPage} from './views/AdminPage/AdminPage';
-import { Notifications } from './components/Notifications/Notifications';
 import NotificationsContainer from './components/Notifications/NotificationsContainer';
 
 function App() {
