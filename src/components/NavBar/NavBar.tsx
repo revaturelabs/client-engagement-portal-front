@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { Col, Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Row } from 'reactstrap';
+import { Col, Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Row, ButtonDropdown } from 'reactstrap';
 import logo from '../../assets/logo.png';
 import menuArrow from '../../assets/down-arrow.png';
+import  '../../css/navStyles.scss';
+import { Turn as Hamburger } from 'hamburger-react'
 
 // interface INavBarProps{
 //     dropDownProps?:React.ComponentType<DropdownItem>[];
@@ -9,26 +11,48 @@ import menuArrow from '../../assets/down-arrow.png';
 
 export const NavBar:React.FC<any> = (props:any) => {
     const [navMenuOpen, setNavMenuOpen] = useState(false);
+    const [hamOpen, setHamOpen] = useState(false);
+
+    const hamToggle = () => setHamOpen(!hamOpen);
+    const toggle = () => {setNavMenuOpen(!navMenuOpen)
+        setHamOpen(!navMenuOpen);
+    };
 
     console.log("props: " + props.dropDownProps);
 
     return(
-        <Row className="justify-content-around" style={{height: "100px", backgroundColor: "white", borderBottom: "3px solid #F26925"}}>
-            <Col xs="auto" className="justify-content-start">
-                <img src={logo} alt="revature logo" style={{marginTop: "15px"}} />
+        <Row className="justify-content-around myNav">
+            <Col xs="auto" className="justify-content-start logoContainer">
+                <img src={logo} className="myLogo" alt="revature logo"/>
             </Col>
-            <Col className="d-flex align-items-center justify-content-end auto" >
-                Welcome, Lorem Ipsum
-                <Dropdown isOpen={navMenuOpen} toggle={() => setNavMenuOpen(!navMenuOpen)}>
-                    <DropdownToggle style={{margin:"10px", backgroundColor: "white", border: "none"}}>
-                        <img src={menuArrow} alt="dropdown menu arrow" height="20px" width="25px" />
+            
+            <Col className="d-flex align-items-center justify-content-end auto " >
+                <ButtonDropdown isOpen={navMenuOpen} toggle={toggle}>
+                     {/* Mobile Hamburger Menu */}
+                     <DropdownToggle className="" style={{margin:"10px", backgroundColor: "white", border: "none"}}>
+                        <span className="myDropdown" style={{margin:"5px",color:"#474C55", backgroundColor: "white", border: "none"}}>Welcome, Lorem Ipsum &#9660;</span>
+                        <span className="myMobileDropdown">
+                         <Hamburger toggled={hamOpen} toggle={setHamOpen} color="#474C55"></Hamburger>
+                        </span>
                     </DropdownToggle>
+                    {/* Desktop Menu */}    
                     <DropdownMenu right>
                         <a href="/"><DropdownItem>Logout</DropdownItem></a>
                         { props.children }
                     </DropdownMenu>
-                </Dropdown>
+                </ButtonDropdown>
             </Col>
+
+
+{/* 
+            <Col className="d-flex align-items-center justify-content-end auto" id="myMobileDropdown" >
+                <Dropdown isOpen={navMenuOpen} toggle={toggle}>
+                    
+                    <DropdownMenu right>
+                        <a href="/"><DropdownItem>Logout</DropdownItem></a>
+                    </DropdownMenu>
+                </Dropdown>
+            </Col> */}
         </Row>
     )
 }
