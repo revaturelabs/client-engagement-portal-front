@@ -14,7 +14,7 @@ import { AssociateCardModal } from './components/AssociateCard/AssociateCardModa
 function App() {
   return (
     <div className="App">
-      <Provider store={store}>
+      {/* <Provider store={store}>
         <BrowserRouter>
           <Switch>
             <Route exact path="/" component={() => <Redirect to="/login" />}/>
@@ -24,8 +24,8 @@ function App() {
             <Route path="/admin" />
           </Switch>
         </BrowserRouter>
-      </Provider>
-      {/* <AssociateCard /> */}
+      </Provider> */}
+      <AssociateCard />
       {/* <AssociateCardModal /> */}
     </div>
   );

@@ -1,0 +1,27 @@
+@import "revature-colors.scss";
+
+.aso-card
+{
+    background-color: white !important;
+    padding: 15px !important;
+    border: 1px solid $rev-orange !important;
+    border-radius: 20px !important;
+    margin: auto !important;
+    margin-top: 10px !important;
+    box-shadow: 3px 3px 15px $rev-blue-trans !important;
+    width: 10% !important;
+    text-align: center !important;
+    align-content: center !important;
+    display: flex !important;
+}
+
+
+.h-divider{
+    margin-top:5px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom:5px;
+    height:1px;
+    width:80%;
+    border-top:1px solid $rev-dgray;
+}
