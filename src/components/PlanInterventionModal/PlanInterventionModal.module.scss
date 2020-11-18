@@ -1,0 +1,162 @@
+@import '../../scss/revature-colors.scss';
+
+.Backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.418);
+    z-index: 100;
+}
+
+.ModalContainer {
+    height: 450px;
+    width: 500px;
+    background-color: white;
+    z-index: 150;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: $rev-font;
+}
+
+.ModalTaskBar {
+    height: 50px;
+    background-color: white;
+    width: 100%;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    z-index: 150px;
+}
+
+.TaskBarTitle {
+    color: $rev-orange;
+    // margin-left: 20px;
+    width: 250px;
+    font-weight: 500;
+    padding: 10px 0;
+    padding-right: 30px;
+    border-bottom: 1px solid $rev-superlgray;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.XButton {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 210px;
+    color:#f2692598;
+    font-size: 25px;
+    font-weight: 800;
+}
+
+.XButton:hover {
+    color: $rev-orange;
+    cursor: pointer;
+}
+
+.ModalBody {
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.TextAreaLabel {
+    margin-bottom: 5px;
+}
+
+.TextAreaInput {
+    padding: 10px;
+    outline: none;
+    border: 1px solid $rev-superlgray;
+    border-radius: 8px;
+    transition: all .1s ease-in-out;
+}
+
+.TextAreaInput:focus {
+    transition: all .1s ease-in-out;
+    // border: 1px solid $rev-blue;
+    box-shadow: 0 0 5px 2px $rev-blue;
+}
+
+.TextAreaInput {
+    resize: none;
+    width: 400px;
+    height: 200px;
+}
+
+.DatePickerContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.DatePickerLabel {
+    color: black;
+}
+
+.DatePicker {
+    cursor: pointer;
+    border: 1px solid $rev-superlgray;
+    padding: 5px;
+    border-radius: 8px;
+    outline: none;
+}
+
+.DatePicker:hover {
+    background-color: aliceblue;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 8px;
+    outline: none;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:focus {
+    box-shadow: 0 0 5px 2px $rev-blue;
+}
+
+.SubmitButton {
+    border: 2px solid $rev-orange;
+    border-radius: 4px;
+    background-color: $rev-orange;
+    color: white;
+    width: 200px;
+    height: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.SubmitButton:hover {
+    background-color: white;
+    color: $rev-orange;
+    cursor: pointer;
+}
