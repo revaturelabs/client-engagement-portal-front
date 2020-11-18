@@ -1,5 +1,5 @@
-import React from 'react';
-import { Col, Container, Row } from 'reactstrap';
+import React, { useState } from 'react';
+import { Col, Container, DropdownItem, Row } from 'reactstrap';
 import { BatchCard } from '../../components/BatchCard/BatchCard';
 import { NavBar } from '../../components/NavBar/NavBar';
 import reactReduxLogo from '../../assets/react-redux-logo.png';
@@ -9,13 +9,18 @@ import RequestBatchCardModal from '../../components/RequestBatchCard/RequestBatc
 
 export const HomePage:React.FC<undefined> = () => {
 
-
+    const [hasBatches, setHasBatches] = useState(true);
 
     return(
         <Container style={{height: "100vh", maxWidth: "100vw", backgroundColor:"#B9B9BA"}}>
-            <NavBar />
-            <RequestBatchCard />
-            <RequestBatchCardModal />
+            <NavBar>
+                <DropdownItem header>Development Options</DropdownItem>
+                <DropdownItem onClick={() => setHasBatches(false)}>Simulate no batches</DropdownItem>
+                <DropdownItem onClick={() => setHasBatches(true)}>Simulate 3 batches</DropdownItem>
+            </NavBar>
+            
+            {hasBatches ?
+
             <Row className="justify-content-between">
                 <Col xs="auto">
                 </Col>
@@ -43,6 +48,11 @@ export const HomePage:React.FC<undefined> = () => {
                     
                 </Col>
             </Row>
+            :
+            <><RequestBatchCard />
+            <RequestBatchCardModal /></>
+            
+            }
         </Container>
     )
 }
