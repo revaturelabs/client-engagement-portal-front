@@ -101,6 +101,9 @@
 }
 
 .TextAreaInput {
+    resize: none;
+    width: 400px;
+    height: 200px;
     padding: 10px;
     outline: none;
     border: 1px solid $rev-superlgray;
@@ -112,12 +115,6 @@
     transition: all .1s ease-in-out;
     border: 1px solid rgb(123, 176, 255);
     box-shadow: 0 0 5px 2px rgb(123, 176, 255);
-}
-
-.TextAreaInput {
-    resize: none;
-    width: 400px;
-    height: 200px;
 }
 
 .DatePickerContainer {
