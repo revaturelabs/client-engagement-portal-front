@@ -144,6 +144,7 @@ export const NewClientButton: React.FC<any> = () => {
 
           <ModalFooter>
             <Button
+              id={"newClientButton"}
               style={{
                 margin: "auto",
                 backgroundColor: "#F26925",
