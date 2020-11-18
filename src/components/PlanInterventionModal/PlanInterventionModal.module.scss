@@ -110,8 +110,8 @@
 
 .TextAreaInput:focus {
     transition: all .1s ease-in-out;
-    // border: 1px solid $rev-blue;
-    box-shadow: 0 0 5px 2px $rev-blue;
+    border: 1px solid rgb(123, 176, 255);
+    box-shadow: 0 0 5px 2px rgb(123, 176, 255);
 }
 
 .TextAreaInput {
@@ -180,7 +180,6 @@ input[type="date"]::-webkit-calendar-picker-indicator:focus {
     top: 25%;
     left: 50%;
     transform: translate(-50%, -25%);
-    // transition: opacity .25s ease-in-out;
     opacity: 1;
 }
 
@@ -190,6 +189,5 @@ input[type="date"]::-webkit-calendar-picker-indicator:focus {
     top: 25%;
     left: 50%;
     transform: translate(-50%, -55%);
-    // transition: opacity .25s ease-in-out;
     opacity: 0;
 }
