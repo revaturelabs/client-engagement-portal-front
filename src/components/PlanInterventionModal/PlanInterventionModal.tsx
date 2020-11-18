@@ -13,7 +13,6 @@ const PlanInterventionModal = (props: Props) => {
 
     return (
         <>
-            {/* {props.show ? */}
 
             <div className={backdropShown}>
                 <div className={`${classes.ModalContainer}  ${transitionClass}`}>
@@ -35,7 +34,6 @@ const PlanInterventionModal = (props: Props) => {
                 </div>
             </div>
 
-            {/* : null} */}
         </>
     )
 }
