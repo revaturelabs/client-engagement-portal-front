@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Col, Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Row, ButtonDropdown } from 'reactstrap';
+import { Col, DropdownItem, DropdownMenu, DropdownToggle, Row, ButtonDropdown } from 'reactstrap';
 import logo from '../../assets/logo.png';
 import '../../scss/navStyles.scss';
 import { Turn as Hamburger } from 'hamburger-react';
@@ -23,7 +23,7 @@ export const NavBar:React.FC<any> = (props:any) => {
                     <DropdownToggle className="" style={{margin:"10px", backgroundColor: "white", border: "none"}}>
                         <span className="myDropdown" style={{margin:"5px", color:"#474C55", backgroundColor: "white", border:"none"}}>Welcome, Lorem Ipsum &#9660;</span>
                         <span className="myMobileDropdown">
-                            <Hamburger toggled={hamOpen} toggle={setHamOpen} color="#474C55"></Hamburger>
+                            <Hamburger toggled={hamOpen} toggle={hamToggle} color="#474C55"></Hamburger>
                         </span>
                     </DropdownToggle>
                     {/* Desktop Menu */}

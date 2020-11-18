@@ -1,5 +1,5 @@
 import React from 'react';
-import Amplify, {Auth} from 'aws-amplify';
+import Amplify from 'aws-amplify';
 import awsconfig from './aws-exports';
 import './scss/app.scss';
 import { Provider } from 'react-redux';
