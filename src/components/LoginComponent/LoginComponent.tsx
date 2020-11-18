@@ -13,6 +13,9 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
 
     const [isClient, setClient] = useState(false);
     const [isAdmin, setAdmin] = useState(false);
+
+
+
     // WHEN THE LOGIN BUTTON IS PRESSED
     const handleSubmit = async (event: any) => {
         event.preventDefault();
@@ -31,12 +34,10 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
             const user = // !!!EMAIL WILL BE RETURNED IN: user.attributes.email
                 await Auth.signIn(loginCredentials.email, loginCredentials.password);
             // THIS OPERATION COSTS ~800 MILLISECONDS
-            console.log(user);
-            console.log(user.attributes["custom:userRole"]);
+
 
 
             // Switch statement for assigning what page to redirect to based upon what role the user has
-            console.log(Auth.currentSession());
             switch (user.attributes["custom:userRole"]) {
                 case "Client":
                     setAdmin(false);
@@ -52,8 +53,8 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
 
 
             }
-            Auth.currentSession = user.currentSession;
-            await console.log(user.userSession);
+
+            // await console.log(user.userSession);
             // const midTime = Date.now();
 
             // console.log(midTime - startTime);

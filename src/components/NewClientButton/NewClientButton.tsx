@@ -1,4 +1,5 @@
 import { Auth } from "aws-amplify";
+import Axios from "axios";
 import React, { useState } from "react";
 import {
   Button,
@@ -24,17 +25,42 @@ export const NewClientButton: React.FC<any> = () => {
   const toggle = () => setModal(!modal);
 
   const registerUser = async (event: React.FormEvent<HTMLFormElement>) => {
-    //Check database if they have the admin role and their current session token matches for security. If not exit out
-    /*
-    if (role !== "Admin") {
-      return null;
-    }
-    */
+
+
+
 
     event.preventDefault();
+    //These need to be up here. Data is dropped when user is checked for some reason
     const email = event.currentTarget["email"].value;
     const password = event.currentTarget["password"].value;
     const role = event.currentTarget["select"].value;
+
+
+    //Checks cognito if they have the admin role in the current session  for security. If not exit out
+    //This checking operation takes about 150 MS 
+    //Unknown Error - Response time can be 10,000 MS. Usually happens when react is updating. This shouldn't be a problem
+
+    console.log((await Auth.currentSession()).getAccessToken().getJwtToken())
+    const checkRole = Auth.currentUserInfo();
+    const checker = await checkRole.then(function (result) {
+      if (result.attributes["custom:userRole"] !== "Admin") {
+        return false;
+      }
+      else {
+        return true;
+      }
+    })
+    //Example
+    //Axios.post("/getUsers", data, headers{Authorization:idToken})
+
+    if (!checker) {
+      console.log("Error: User does not have permissions to create an account")
+      return null;
+    }
+
+
+
+
 
     // console.log("Email: " + email + "\nPassword: " + password);
 
