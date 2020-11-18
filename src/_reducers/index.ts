@@ -1,5 +1,4 @@
 import { AnyAction, CombinedState, combineReducers, Reducer } from "redux";
-import { IBatchState } from "./BatchReducer";
 import { IUserState, userReducer } from "./UserReducer";
 
 export interface IRootState{
