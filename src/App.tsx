@@ -6,7 +6,7 @@ import { AnyAction } from 'redux';
 import { store } from './Store';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import { LoginPage } from './views/LoginPage/LoginPage';
-import { HomePage } from './views/HomePage/HomePage';
+import HomePage from './views/HomePage/HomePage';
 import {AdminPage} from './views/AdminPage/AdminPage';
 
 function App() {

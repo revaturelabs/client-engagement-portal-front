@@ -6,17 +6,28 @@ import reactReduxLogo from '../../assets/react-redux-logo.png';
 import javaLogo from '../../assets/java-logo.png';
 import RequestBatchCard from '../../components/RequestBatchCard/RequestBatchCard'
 import RequestBatchCardModal from '../../components/RequestBatchCard/RequestBatchCardModal'
+import { getBatchCardData } from '../../actions/BatchCardActions';
+import { IBatchState } from '../../_reducers/BatchReducer';
+import { connect } from 'react-redux';
 
-export const HomePage:React.FC<undefined> = () => {
+interface IProps {
+    batches: [],
+}
+
+const HomePage:React.FC<IProps> = (props:IProps) => {
 
     const [hasBatches, setHasBatches] = useState(true);
+
+    const getBatches = () => {
+        getBatchCardData(1);
+    }
 
     return(
         <Container style={{height: "100vh", maxWidth: "100vw", backgroundColor:"#B9B9BA"}}>
             <NavBar>
                 <DropdownItem header>Development Options</DropdownItem>
                 <DropdownItem onClick={() => setHasBatches(false)}>Simulate no batches</DropdownItem>
-                <DropdownItem onClick={() => setHasBatches(true)}>Simulate 3 batches</DropdownItem>
+                <DropdownItem onClick={() => {setHasBatches(true); getBatches;} }>Get Batches from Database</DropdownItem>
             </NavBar>
             
             {hasBatches ?
@@ -31,17 +42,7 @@ export const HomePage:React.FC<undefined> = () => {
                     <p style={{color: "#474C55", fontSize:"1.2em"}}>Click to find out more...</p>
                     <br />
                     <Container>
-                        <Row>
-                            <Col xl="2" lg="3" md="4" sm="4" xs="6">
-                                <BatchCard titlePic={reactReduxLogo} specialization="React-Redux" batchName="Batch Name" />
-                            </Col>
-                            <Col xl="2" lg="3" md="4" sm="4" xs="6">
-                                <BatchCard titlePic={javaLogo} specialization="Java" batchName="Batch Name" />
-                            </Col>
-                            <Col xl="2" lg="3" md="4" sm="4" xs="6">
-                                <BatchCard titlePic={reactReduxLogo} specialization="React-Redux" batchName="Batch Name" />
-                            </Col>
-                        </Row>
+                        { props.batches }
                     </Container>
                 </Col>
                 <Col xs="auto">
@@ -56,3 +57,11 @@ export const HomePage:React.FC<undefined> = () => {
         </Container>
     )
 }
+
+const mapStateToProps = (store: any) => {
+    return {
+        batches: store.batchState.batches,
+    }
+}
+
+export default connect<any>(mapStateToProps)(HomePage);
