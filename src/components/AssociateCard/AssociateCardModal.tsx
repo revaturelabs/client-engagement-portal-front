@@ -1,62 +1,65 @@
 import React from 'react';
 import { Card, Modal, Button, ModalBody } from 'reactstrap';
-import { isPropertySignature } from 'typescript';
 // import '../../scss/revature-colors.scss';
 // import '../../scss/app.scss';
 // import '../../scss/batch-card.scss'
 import '../../scss/associate-card.scss';
+//import {IProps} from './AssociateCard';
 
 interface IProps{
-    profilePic:string,
-    firstName:string,
-    lastName:string
-    testScores:{
+    firstName?:string,
+    lastName?:string,
+    profilePic?:string,
+    testScores?:{
         week:number,
         score:number
     }[],
-    techScores:{
+    techScores?:{
         tech:string,
         score:number
     }[]
 };
 
-export const AssociateCardModal:React.FC<any> = (props:IProps) => {
+//TRY IT NOW, changed how pass props in other class
+//I used this https://stackoverflow.com/questions/48240449/type-is-not-assignable-to-type-intrinsicattributes-intrinsicclassattribu
+
+//will be bookmarking that
+export const AssociateCardModal:React.FC<IProps> = (props:IProps) => {
+//i think we push for now so it can get integrated, and work on css
 
     //  this is for the modal functionality
     const [show, setShow] = React.useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-/*
+
     // this will create the list of weekly scores that we will render below
     const tests = props.testScores;
-    const testMap = tests.map((test) => <p>Week {test.week}: {test.score}%</p>);
+    let testMap;
+    let averageTest = 0;
+    if(tests === undefined){
+        
+    } else{
+        testMap = tests.map((test) => <p>Week {test.week}: {test.score}%</p>);
+        for(let test of tests){
+            averageTest += test.score;
+        }
+    }
+    
 
     // this will create the list of tech skill and score that we will render below
     const techs = props.techScores;
-    const techMap = props.techScores.map((techs) => <p>{techs.tech}: {techs.score}%</p>);
-*/
-
-    /*
-        For the averages, we could do some sort of for loop
-        maybe something like this?
-        yeah
-        I'm gonna comment out some code for now, it's not compiling, and I want to push since this functionality is getting talked about a lot
-    */
-
-    /*
-    let averageTest = 0;
+    let techMap;
     let averageTech = 0;
+    if(techs === undefined){
 
-    for(let test of tests){
-        averageTech += test.score;
-    }
-    for(let tech of techs){
-        averageTech += tech.score;
-    } */
+    } else{
+        techMap = techs.map((techs) => <p>{techs.tech}: {techs.score}%</p>);
+        for(let tech of techs){
+            averageTech += tech.score;
+        } 
+    } 
 
     /* https://reactjs.org/docs/lists-and-keys.html
-        props.map((props.testScores) => <p>Week {props.testScores.week}: {props.testScores.score}% </p> )
-        const x = props.map (...)
         */
 
     return (
@@ -84,27 +87,27 @@ export const AssociateCardModal:React.FC<any> = (props:IProps) => {
                 {/* div for past assesment scores */}
                 <div>
                     {/* div for scroll area */}
-                    <div style={{ display: "inline-block"}}>
+                    <div className="aso-scroll">
                         {/* Week #    grade% */}
-                        <div>{/*testMap*/}</div>
+                        <div>{testMap}</div>
                     </div>
                     {/* div for average grade */}
                     <div style={{ display: "inline-block"}}>
-                        <h3>Average</h3>
-                        <h2>{/*averageTest*/}%</h2>
+                        <h6>Average</h6>
+                        <h5>{averageTest}%</h5>
                     </div>
                 </div>
                 {/* div for past quiz scores */}
                 <div>
                     {/* div for scroll area */}
-                    <div style={{ display: "inline-block"}}>
+                    <div className="aso-scroll">
                         {/* Quiz name   grade% */}
-                        <div>{/*techMap*/}</div>
+                        <div>{techMap}</div>
                     </div>
                     {/* div for average grade */}
                     <div style={{ display: "inline-block"}}>
-                        <h3>Average</h3>
-                        <h2>{/*averageTech*/}%</h2>
+                        <h6>Average</h6>
+                        <h5>{averageTech}%</h5>
                     </div>
                 </div>
                 {/* </Card>  */}

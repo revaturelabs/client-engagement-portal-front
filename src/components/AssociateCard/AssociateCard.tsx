@@ -7,22 +7,22 @@ import { AssociateCardModal } from './AssociateCardModal';
 import '../../scss/associate-card.scss'
 
 //this interface will take in information about each associate
-interface IProps{
-    profilePic:string,
-    firstName:string,
-    lastName:string,
-    testScores:{
+export interface IProps{
+    firstName?:string,
+    lastName?:string,
+    profilePic?:string,
+    testScores?:{
         week:number,
         score:number
     }[],
-    techScores:{
+    techScores?:{
         tech:string,
         score:number
     }[]
 };
 
 //This component displays the associate's information on a batch's page.
-export const AssociateCard:React.FC<any> = (props:IProps) => {
+export const AssociateCard:React.FC<IProps> = (props:IProps) => {
 
     // props.testScores = [{
     //     week:1,
@@ -39,6 +39,21 @@ export const AssociateCard:React.FC<any> = (props:IProps) => {
     // props.testScores.push(fakeTest);
     // props.techScores.push(fakeTech);
 
+    const fakeData:IProps = {
+        firstName:"Bill",
+        lastName:"Gates",
+        profilePic:"",
+        testScores:[{
+            week:1,
+            score:90
+        }],
+        techScores:[{
+            tech:"Java",
+            score:80
+        }]
+    };
+
+
     //this variable will hold the last test score the associate got
     const score = () => {
 
@@ -46,10 +61,18 @@ export const AssociateCard:React.FC<any> = (props:IProps) => {
         let i = 0;
 
         //for each item in test scores, change value to match
-        for(;props.testScores[i];){
-            value = props.testScores[i].score;
+
+        //if testScores is undefined, don't change the value
+        if(fakeData.testScores === undefined){
+
+        } else{
+            for(;fakeData.testScores[i];){
+               value = fakeData.testScores[i].score;
+               i++;
+            }
         }
 
+        
         //and then return value
         return value;
     }
@@ -60,8 +83,8 @@ export const AssociateCard:React.FC<any> = (props:IProps) => {
             <Card className="aso-card" >
                {/* div for image and name */}
                <div>
-                   <h5 font-family={"$rev-font"}>{props.firstName} {props.lastName}Test User</h5>
-                   <img className="pic" src={props.profilePic} alt="associate_profile_pic"/>
+                   <h5 font-family={"$rev-font"}>{fakeData.firstName} {fakeData.lastName}</h5>
+                   <img className="pic" src={fakeData.profilePic} alt="associate_profile_pic"/>
                </div>
                {/* div for past quiz grades */}
                <div>
@@ -69,7 +92,7 @@ export const AssociateCard:React.FC<any> = (props:IProps) => {
                </div>
                {/* div for holding the modal button */}
                <div style={{display:"block", textAlign:"center", alignContent:"center", justifyContent:"center"}}>
-                    <AssociateCardModal props/>
+                    <AssociateCardModal {...fakeData}/>
                </div>
                
            </Card>
