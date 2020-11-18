@@ -12,6 +12,7 @@ import { AdminPage } from './views/AdminPage/AdminPage';
 Amplify.configure(awsconfig);
 
 function App() {
+
   return (
     <div className="App">
       <Provider store={store}>

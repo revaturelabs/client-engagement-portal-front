@@ -1,5 +1,5 @@
 import { Auth } from "aws-amplify";
-import React, { useState } from "react";
+import React, { ChangeEvent, SyntheticEvent, useState } from "react";
 import {
     Button,
     Modal,
@@ -13,7 +13,8 @@ import {
     Row,
     Col,
 } from "reactstrap";
-import { isConstructorDeclaration } from "typescript";
+import './NewClientButton.scss'
+import { convertCompilerOptionsFromJson, isConstructorDeclaration } from "typescript";
 
 //This component includes the button for a new client account
 //This also has a modal form that pops up when the button is clicked
@@ -50,6 +51,13 @@ export const NewClientButton: React.FC<any> = () => {
       // Runs if you create a user with a duplicate email or if you try creating a password with less than 6 characters
     }
 
+  }
+
+  const [accountType, setAccountType] = useState(" ");
+
+  //Setting the state on accountType for conditional rendering
+  const changeForm = (event:ChangeEvent<HTMLInputElement>) => {
+    setAccountType (event.target.value);
   }
 
   return (
@@ -103,34 +111,46 @@ export const NewClientButton: React.FC<any> = () => {
         <ModalBody>
           {/* <Form onSubmit={registerUser}> */}
             <FormGroup>
-              <Label for="exampleSelect">Client Type</Label>
+              <Label for="exampleSelect">Select Account</Label>
               <Input
                 type="select"
                 name="select"
                 id="exampleSelect"
                 placeholder="Client Type"
+                onChange={changeForm} 
               >
-                <option>Client Type 1</option>
-                <option>Client Type 2</option>
-                <option>Client Type 3</option>
+                <option>Select Account</option>
+                <option value="client">Client</option>
+                <option value="admin">Admin</option>
               </Input>
-            </FormGroup>
-            <FormGroup>
+            </FormGroup> 
+            {(accountType === "client")? 
+            <FormGroup className="isClient">
               <Label>Email</Label>
               <Input type="text" required name="email"></Input>
-            </FormGroup>
-            <FormGroup>
               <Label>Name</Label>
               <Input type="text" required></Input>
-            </FormGroup>
-            <FormGroup>
               <Label>Password</Label>
               <Input type="password" required minLength={6} name="password"></Input>
-            </FormGroup>
-            <FormGroup>
               <Label>Confirm Password</Label>
               <Input type="password"></Input>
+              <Label>Company Name</Label>
+              <Input type="text" required name="companyName"></Input>
             </FormGroup>
+            : (accountType==="admin")?
+            <FormGroup className="isAdmin">
+              <Label>Email</Label>
+              <Input type="text" required name="email"></Input>
+              <Label>Name</Label>
+              <Input type="text" required></Input>
+              <Label>Password</Label>
+              <Input type="password" required minLength={6} name="password"></Input>
+              <Label>Confirm Password</Label>
+              <Input type="password"></Input>
+            </FormGroup>:
+            <div/>
+            }
+
         </ModalBody>
 
         <ModalFooter>
