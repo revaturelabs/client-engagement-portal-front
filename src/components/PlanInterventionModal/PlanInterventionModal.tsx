@@ -7,12 +7,16 @@ interface Props {
 }
 
 const PlanInterventionModal = (props: Props) => {
+
+    const transitionClass = props.show ? classes.ReactModal__Overlay_after_open : classes.ReactModal__Overlay_before_close;
+    const backdropShown = props.show ? classes.BackdropVisible : classes.BackdropNotVisible;
+
     return (
         <>
-            {props.show ?
+            {/* {props.show ? */}
 
-            <div className={classes.Backdrop}>
-                <div className={classes.ModalContainer}>
+            <div className={backdropShown}>
+                <div className={`${classes.ModalContainer}  ${transitionClass}`}>
                     <div className={classes.ModalTaskBar}>
                         <div className={classes.TaskBarTitle}>Request An Intervention</div>
                         <div className={classes.XButton}  onClick={() => props.setShow()}>X</div>
@@ -31,7 +35,7 @@ const PlanInterventionModal = (props: Props) => {
                 </div>
             </div>
 
-            : null}
+            {/* : null} */}
         </>
     )
 }
