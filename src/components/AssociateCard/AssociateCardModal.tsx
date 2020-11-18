@@ -1,27 +1,20 @@
 import React from 'react';
-import { Card, Modal, Button, ModalBody } from 'reactstrap';
+import { Card, Modal, Button, ModalBody, Row } from 'reactstrap';
 // import '../../scss/revature-colors.scss';
 // import '../../scss/app.scss';
 // import '../../scss/batch-card.scss'
 import '../../scss/associate-card.scss';
-//import {IProps} from './AssociateCard';
-
-interface IProps{
-    firstName?:string,
-    lastName?:string,
-    profilePic?:string,
-    testScores?:{
-        week:number,
-        score:number
-    }[],
-    techScores?:{
-        tech:string,
-        score:number
-    }[]
-};
+import {IAssociate} from '../../_reducers/AssociateReducer'
 
 
-export const AssociateCardModal:React.FC<IProps> = (props:IProps) => {
+/**
+ * This component shows a modal that gives information about an associate.
+ * Takes in props containing information about the associate.
+ * @param props - Type: IProps {firstName, lastName, profilePic, testScores, techScores}
+ * 
+ * @returns TSX Element to render
+ */
+export const AssociateCardModal:React.FC<IAssociate> = (props:IAssociate) => {
 
     //  this is for the modal functionality
     const [show, setShow] = React.useState(false);
@@ -32,29 +25,33 @@ export const AssociateCardModal:React.FC<IProps> = (props:IProps) => {
     const tests = props.testScores;
     let testMap;
     let averageTest = 0;
+    let testWeek = 0;
     if(tests === undefined){
         
     } else{
-        testMap = tests.map((test) => <p>Week {test.week}: {test.score}%</p>);
+        testMap = tests.map((test) => <div><p>Week {test.week}: {test.score}%</p><div className="h-divider"></div></div>);
         for(let test of tests){
             averageTest += test.score;
+            testWeek++;
         }
+        averageTest = averageTest / testWeek;
     }
-    
 
     // this will create the list of tech skill and score that we will render below
     const techs = props.techScores;
     let techMap;
     let averageTech = 0;
+    let techWeek = 0;
     if(techs === undefined){
 
     } else{
-        techMap = techs.map((techs) => <p>{techs.tech}: {techs.score}%</p>);
+        techMap = techs.map((techs) => <div><p>{techs.tech}: {techs.score}%</p><div className="h-divider"></div></div>);
         for(let tech of techs){
             averageTech += tech.score;
+            techWeek++;
         } 
+        averageTech = averageTech / techWeek;
     } 
-
 
     return (
         <body style={{display:"flex", alignContent:"center", margin:"auto"}}>
@@ -65,46 +62,56 @@ export const AssociateCardModal:React.FC<IProps> = (props:IProps) => {
                 size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
-                className="rev-card"
-            >
-                <ModalBody style={{display:"block", margin:"auto", textAlign:"center"}}>
+                className="aso-modal-card" 
+
+            >   
+                <ModalBody className="aso-modal-body">
                 {/* <Card className="rev-card" style={{ margin: "auto",  width: "50%" }}> */}
-                <Button className="view-btn" onClick={handleClose}>Close</Button>
                 {/* div for image and name */}
                 <div>
-                    <img className="pic" src={props.profilePic} alt="associate_profile_pic"/>
+                    {/* <img className="pic" src={props.profilePic} alt="associate_profile_pic"/> */}
                     <h3>{props.firstName}</h3>
-                    <h2>{props.lastName}</h2>
+                    <h4>{props.lastName}</h4>
                 </div>
                 {/* div for divider */}
                 <div className="h-divider"></div>
                 {/* div for past assesment scores */}
-                <div>
-                    {/* div for scroll area */}
-                    <div className="aso-scroll">
-                        {/* Week #    grade% */}
-                        <div>{testMap}</div>
-                    </div>
-                    {/* div for average grade */}
-                    <div style={{ display: "inline-block"}}>
-                        <h6>Average</h6>
-                        <h5>{averageTest}%</h5>
-                    </div>
+                <div className="aso-info">
+                    <div>Weekly Assessments</div>
+                    <Row>
+                        <div className="col-1"/>
+                        {/* div for scroll area */}
+                        <div className="aso-scroll col-8">
+                            {/* Week #    grade% */}
+                            <div>{testMap}</div>
+                        </div>
+                        {/* div for average grade */}
+                        <div className="aso-average col-1">
+                            <h6>Average</h6>
+                            <h6>{averageTest}%</h6>
+                        </div>
+                    </Row>
                 </div>
                 {/* div for past quiz scores */}
-                <div>
+                <div className="aso-info">
+                    <div>Technology Assessments</div>
                     {/* div for scroll area */}
-                    <div className="aso-scroll">
-                        {/* Quiz name   grade% */}
-                        <div>{techMap}</div>
-                    </div>
-                    {/* div for average grade */}
-                    <div style={{ display: "inline-block"}}>
-                        <h6>Average</h6>
-                        <h5>{averageTech}%</h5>
-                    </div>
+                    <Row>
+                        <div className="col-1"/>
+                        <div className="aso-scroll col-8">
+                            {/* Quiz name   grade% */}
+                            <div>{techMap}</div>
+                        </div>
+                        {/* div for average grade */}
+                        <div className="aso-average col-1" /*style={{ display: "inline-block", marginTop: "10px"}}*/>
+                            <h6>Average</h6>
+                            <h6>{averageTech}%</h6>
+                        </div>
+                    </Row>
+                    
                 </div>
                 {/* </Card>  */}
+                <Button className="view-btn" onClick={handleClose}>Close</Button>
                 </ModalBody>            
             </Modal>
         </body>

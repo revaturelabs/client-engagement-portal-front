@@ -27,9 +27,9 @@ function App() {
             <Route path="/admin" component={AdminPage}/>
           </Switch>
         </BrowserRouter>
+        <AssociateCard />
       </Provider>
-      {/* <AssociateCard /> */}
-      {/* <AssociateCardModal /> */}
+      
     </div>
   );
 }
