@@ -1,8 +1,6 @@
 import React from 'react'
 import classes from './PlanInterventionModal.module.scss'
 
-
-
 interface Props {
     show: boolean;
     setShow: Function
