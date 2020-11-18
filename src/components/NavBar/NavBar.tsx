@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { Col, Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Row } from 'reactstrap';
 import logo from '../../assets/logo.png';
 import menuArrow from '../../assets/down-arrow.png';
+import { Link } from 'react-router-dom';
 
-export const NavBar:React.FC<any> = () => {
+export const NavBar:React.FC<any> = (props:any) => {
     const [navMenuOpen, setNavMenuOpen] = useState(false);
 
     return(
@@ -18,7 +19,8 @@ export const NavBar:React.FC<any> = () => {
                         <img src={menuArrow} alt="dropdown menu arrow" height="20px" width="25px" />
                     </DropdownToggle>
                     <DropdownMenu right>
-                        <a href="/"><DropdownItem>Logout</DropdownItem></a>
+                        <Link to="/"><DropdownItem>Logout</DropdownItem></Link>
+                        { props.children }
                     </DropdownMenu>
                 </Dropdown>
             </Col>

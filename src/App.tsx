@@ -1,13 +1,15 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Amplify, {Auth} from 'aws-amplify';
+import awsconfig from './aws-exports';
+import './scss/app.scss';
 import { Provider } from 'react-redux';
-import { AnyAction } from 'redux';
 import { store } from './Store';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import { LoginPage } from './views/LoginPage/LoginPage';
 import { HomePage } from './views/HomePage/HomePage';
-import {AdminPage} from './views/AdminPage/AdminPage';
+import { AdminPage } from './views/AdminPage/AdminPage';
+
+Amplify.configure(awsconfig);
 
 function App() {
   return (
