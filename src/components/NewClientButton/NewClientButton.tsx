@@ -1,19 +1,7 @@
 import { Auth } from "aws-amplify";
-import React, { useState } from "react";
-import {
-    Button,
-    Modal,
-    ModalHeader,
-    ModalBody,
-    ModalFooter,
-    Form,
-    FormGroup,
-    Label,
-    Input,
-    Row,
-    Col,
-} from "reactstrap";
-import { isConstructorDeclaration } from "typescript";
+import React, { ChangeEvent, useState } from "react";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input, Row, Col } from "reactstrap";
+import './NewClientButton.scss';
 
 //This component includes the button for a new client account
 //This also has a modal form that pops up when the button is clicked
@@ -63,6 +51,11 @@ export const NewClientButton: React.FC<any> = () => {
 
     }
 
+    const [accountType, setAccountType] = useState("Client");
+
+    //Setting the state on accountType for conditional rendering
+    const changeForm = (event:ChangeEvent<HTMLInputElement>) => setAccountType(event.target.value);
+    
     return (
         <>
             <Button
@@ -120,9 +113,10 @@ export const NewClientButton: React.FC<any> = () => {
                                 name="select"
                                 id="exampleSelect"
                                 placeholder="Client Type"
+                                onChange={changeForm}
                             >
-                                <option>Client</option>
-                                <option>Admin</option>
+                                <option value="Client">Client</option>
+                                <option value="Admin">Admin</option>
                             </Input>
                         </FormGroup>
                         <FormGroup>
@@ -133,6 +127,14 @@ export const NewClientButton: React.FC<any> = () => {
                             <Label>Name</Label>
                             <Input type="text" required></Input>
                         </FormGroup>
+                        {accountType === "Client" ?
+                        <FormGroup>
+                            <Label>Company Name</Label>
+                            <Input type="text"></Input>
+                        </FormGroup>
+                        :
+                        <></>
+                        }
                         <FormGroup>
                             <Label>Password</Label>
                             <Input type="password" required minLength={6} name="password"></Input>

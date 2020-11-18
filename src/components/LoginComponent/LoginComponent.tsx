@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import hands from '../../assets/engagementPortalLogo.svg';
 import userThumb from '../../assets/user-thumb.png';
 import passThumb from '../../assets/pass-thumb.png';
@@ -10,8 +10,6 @@ interface ILoginProps{
 }
 
 export const LoginComponent:React.FC<ILoginProps> = (props:ILoginProps) => {
-
-    const [isValidated, setValidated] = useState(false);
 
     const [isClient, setClient] = useState(false);
     const [isAdmin, setAdmin] = useState(false);
@@ -54,7 +52,7 @@ export const LoginComponent:React.FC<ILoginProps> = (props:ILoginProps) => {
                     setClient(false);
                     setAdmin(true);
             }
-            Auth.currentSession = user.currentSession; // ??? Reassigning the Auth class currentSession method proto???
+
             await console.log(user.userSession);
 
             // const midTime = Date.now();
@@ -79,7 +77,7 @@ export const LoginComponent:React.FC<ILoginProps> = (props:ILoginProps) => {
                 
                 <div style={{maxHeight: "90%"}}>
                     <div style={{position: "relative", textAlign: "center"}}>
-                        <img src={hands} alt="hands background image" style={{width: "45%", minHeight: "6em", opacity: 0.2}} />
+                        <img src={hands} alt="hands background" style={{width: "45%", minHeight: "6em", opacity: 0.2}} />
                         <div className="logoarea"
                             style={{position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)"}} >
 
