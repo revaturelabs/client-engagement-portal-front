@@ -3,7 +3,7 @@ import { Link, Redirect } from 'react-router-dom';
 import hands from '../../assets/hands-cropped.png';
 import userThumb from '../../assets/user-thumb.png';
 import passThumb from '../../assets/pass-thumb.png';
-import { Form } from 'reactstrap';
+import { Auth } from 'aws-amplify';
 
 interface ILoginProps{
     loginType:string
@@ -14,7 +14,7 @@ export const LoginComponent:React.FC<ILoginProps> = (props:ILoginProps) => {
     const [isValidated, setValidated] = useState(false);
 
     // WHEN THE LOGIN BUTTON IS PRESSED
-    const handleSubmit = (event:any) => {
+    const handleSubmit = async (event:any) => {
         event.preventDefault();
         const form = event.currentTarget;
         if(form.checkValidity() === false)
@@ -25,8 +25,28 @@ export const LoginComponent:React.FC<ILoginProps> = (props:ILoginProps) => {
             password: form["password"].value
         }
 
-        // THIS SHOULD ONLY RUN IF THE LOGIN IS VALID; THIS WILL REDIRECT TO HOME.
-        setValidated(true);
+        try{
+            // const startTime = Date.now();
+
+            // const user = // !!!EMAIL WILL BE RETURNED IN: user.attributes.email
+                await Auth.signIn(loginCredentials.email, loginCredentials.password);
+            // THIS OPERATION COSTS ~800 MILLISECONDS
+
+            // console.log(user);
+            // const midTime = Date.now();
+
+            // console.log(midTime - startTime);
+
+            await Auth.signOut();
+
+            // console.log(Date.now() - midTime);
+
+            // THIS SHOULD ONLY RUN IF THE LOGIN IS VALID; THIS WILL REDIRECT TO HOME.
+            setValidated(true);
+        } catch(error){
+            console.log("Couldn't sign in: ", error);
+        }
+
     }
 
     return(

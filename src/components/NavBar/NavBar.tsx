@@ -2,15 +2,10 @@ import React, { useState } from 'react';
 import { Col, Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Row } from 'reactstrap';
 import logo from '../../assets/logo.png';
 import menuArrow from '../../assets/down-arrow.png';
-
-// interface INavBarProps{
-//     dropDownProps?:React.ComponentType<DropdownItem>[];
-// }
+import { Link } from 'react-router-dom';
 
 export const NavBar:React.FC<any> = (props:any) => {
     const [navMenuOpen, setNavMenuOpen] = useState(false);
-
-    console.log("props: " + props.dropDownProps);
 
     return(
         <Row className="justify-content-around" style={{height: "100px", backgroundColor: "white", borderBottom: "3px solid #F26925"}}>
@@ -24,7 +19,7 @@ export const NavBar:React.FC<any> = (props:any) => {
                         <img src={menuArrow} alt="dropdown menu arrow" height="20px" width="25px" />
                     </DropdownToggle>
                     <DropdownMenu right>
-                        <a href="/"><DropdownItem>Logout</DropdownItem></a>
+                        <Link to="/"><DropdownItem>Logout</DropdownItem></Link>
                         { props.children }
                     </DropdownMenu>
                 </Dropdown>
