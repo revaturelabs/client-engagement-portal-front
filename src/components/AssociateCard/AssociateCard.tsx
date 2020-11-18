@@ -24,21 +24,7 @@ export interface IProps{
 //This component displays the associate's information on a batch's page.
 export const AssociateCard:React.FC<IProps> = (props:IProps) => {
 
-    // props.testScores = [{
-    //     week:1,
-    //     score:90
-    // }];
-    // props.techScores = [{
-    //     tech:"Java",
-    //     score:80
-    // }];
-
-    // const fakeTest = {week:1,score:90};
-    // const fakeTech = {tech:"Java",score:80}
-
-    // props.testScores.push(fakeTest);
-    // props.techScores.push(fakeTech);
-
+    //just for testing purposes
     const fakeData:IProps = {
         firstName:"Bill",
         lastName:"Gates",
@@ -64,10 +50,12 @@ export const AssociateCard:React.FC<IProps> = (props:IProps) => {
 
         //if testScores is undefined, don't change the value
         if(fakeData.testScores === undefined){
-
+        //if(props.testScores === undefined){
         } else{
             for(;fakeData.testScores[i];){
+            //for(;props.testScores[i];){
                value = fakeData.testScores[i].score;
+               //value = props.testScores[i].score;
                i++;
             }
         }
@@ -77,7 +65,7 @@ export const AssociateCard:React.FC<IProps> = (props:IProps) => {
         return value;
     }
 
-
+    //there are four places here where fake data will be replaced with props
     return (
         <body>
             <Card className="aso-card" >

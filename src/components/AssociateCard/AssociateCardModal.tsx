@@ -20,12 +20,8 @@ interface IProps{
     }[]
 };
 
-//TRY IT NOW, changed how pass props in other class
-//I used this https://stackoverflow.com/questions/48240449/type-is-not-assignable-to-type-intrinsicattributes-intrinsicclassattribu
 
-//will be bookmarking that
 export const AssociateCardModal:React.FC<IProps> = (props:IProps) => {
-//i think we push for now so it can get integrated, and work on css
 
     //  this is for the modal functionality
     const [show, setShow] = React.useState(false);
@@ -59,8 +55,6 @@ export const AssociateCardModal:React.FC<IProps> = (props:IProps) => {
         } 
     } 
 
-    /* https://reactjs.org/docs/lists-and-keys.html
-        */
 
     return (
         <body style={{display:"flex", alignContent:"center", margin:"auto"}}>
