@@ -5,6 +5,8 @@ import { NewClientButton } from "../../components/NewClientButton/NewClientButto
 import "./BatchFormStyle.scss";
 
 export const AdminPage: React.FC = () => {
+
+  
   return (
     <>
       <Container
