@@ -1,3 +1,4 @@
+import { Auth } from "aws-amplify";
 import React, { useState } from "react";
 import {
     Button,
@@ -12,6 +13,7 @@ import {
     Row,
     Col,
 } from "reactstrap";
+import { isConstructorDeclaration } from "typescript";
 
 //This component includes the button for a new client account
 //This also has a modal form that pops up when the button is clicked
@@ -20,6 +22,35 @@ export const NewClientButton: React.FC<any> = () => {
   const [modal, setModal] = useState(false);
 
   const toggle = () => setModal(!modal);
+
+  const registerUser = async (event:React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const email = event.currentTarget["email"].value;
+    const password = event.currentTarget["password"].value;
+
+    // console.log("Email: " + email + "\nPassword: " + password);
+
+    setModal(!modal);
+    
+    try{
+      // const signUpResult =
+      await Auth.signUp({
+        username: email,
+        password: password
+      });
+
+      // console.log("Cognito User: " + signUpResult.user + "\nUserConfirmed: " + signUpResult.userConfirmed +
+      //             "\nUserSub: " + signUpResult.userSub + "\nCode delivery details: " + signUpResult.codeDeliveryDetails);
+
+      // console.log(signUpResult.user);
+      // console.log(signUpResult.codeDeliveryDetails);
+    } catch(error){
+      console.log("Couldn't sign up: ", error);
+      // Runs if you create a user with a duplicate email or if you try creating a password with less than 6 characters
+    }
+
+  }
 
   return (
     <>
@@ -68,9 +99,9 @@ export const NewClientButton: React.FC<any> = () => {
             </Button>
           </Col>
         </Row>
+          <Form onSubmit={(event:React.FormEvent<HTMLFormElement>) => registerUser(event)}>
         <ModalBody>
           {/* <Form onSubmit={registerUser}> */}
-          <Form>
             <FormGroup>
               <Label for="exampleSelect">Client Type</Label>
               <Input
@@ -86,21 +117,20 @@ export const NewClientButton: React.FC<any> = () => {
             </FormGroup>
             <FormGroup>
               <Label>Email</Label>
-              <Input type="text"></Input>
+              <Input type="text" required name="email"></Input>
             </FormGroup>
             <FormGroup>
               <Label>Name</Label>
-              <Input type="text"></Input>
+              <Input type="text" required></Input>
             </FormGroup>
             <FormGroup>
               <Label>Password</Label>
-              <Input type="text"></Input>
+              <Input type="password" required minLength={6} name="password"></Input>
             </FormGroup>
             <FormGroup>
               <Label>Confirm Password</Label>
-              <Input type="text"></Input>
+              <Input type="password"></Input>
             </FormGroup>
-          </Form>
         </ModalBody>
 
         <ModalFooter>
@@ -115,11 +145,13 @@ export const NewClientButton: React.FC<any> = () => {
               border: "none",
               fontSize: "1.5rem",
             }}
-            onClick={toggle}
-          >
+            // onClick={toggle} // This causes the form to toggle off before it's submitted; remember event bubbling!
+            // LINE 96: This now submits the form, and it will close the modal only if the signup was successful.
+            >
             Submit
           </Button>
         </ModalFooter>
+            </Form>
       </Modal>
     </>
   );
