@@ -1,61 +1,62 @@
 import { Auth } from "aws-amplify";
 import React, { ChangeEvent, SyntheticEvent, useState } from "react";
-import {
-    Button,
-    Modal,
-    ModalHeader,
-    ModalBody,
-    ModalFooter,
-    Form,
-    FormGroup,
-    Label,
-    Input,
-    Row,
-    Col,
-} from "reactstrap";
-import './NewClientButton.scss'
+import {Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input, Row, Col} from "reactstrap";
 import { convertCompilerOptionsFromJson, isConstructorDeclaration } from "typescript";
 
-//This component includes the button for a new client account
-//This also has a modal form that pops up when the button is clicked
+/**
+ * @function newClientButton
+ * This component includes the button for a new client account
+ * 
+ * This also has a modal form that pops up when the button is clicked
+ */
 
 export const NewClientButton: React.FC<any> = () => {
   const [modal, setModal] = useState(false);
 
+  /**
+   * @function toggle
+   * 
+   * When the create account button is clicked it opens the modal.
+   * 
+   * When clicking anywhere outside of the form on the "x" it hides the modal
+   */
   const toggle = () => setModal(!modal);
 
+
+  /**
+   * @function registerUser
+   * Collect information and sends it to AWS to get authorized 
+   * 
+   * @param event 
+   * Collecting the information form the form
+   * 
+   * @param error
+   * If the user fails to sign up they will get a message letting them know they can not sign up
+   * 
+   */
   const registerUser = async (event:React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
     const email = event.currentTarget["email"].value;
     const password = event.currentTarget["password"].value;
-
-    // console.log("Email: " + email + "\nPassword: " + password);
-
     setModal(!modal);
-    
     try{
-      // const signUpResult =
       await Auth.signUp({
         username: email,
         password: password
       });
-
-      // console.log("Cognito User: " + signUpResult.user + "\nUserConfirmed: " + signUpResult.userConfirmed +
-      //             "\nUserSub: " + signUpResult.userSub + "\nCode delivery details: " + signUpResult.codeDeliveryDetails);
-
-      // console.log(signUpResult.user);
-      // console.log(signUpResult.codeDeliveryDetails);
     } catch(error){
       console.log("Couldn't sign up: ", error);
-      // Runs if you create a user with a duplicate email or if you try creating a password with less than 6 characters
     }
-
   }
 
   const [accountType, setAccountType] = useState(" ");
 
-  //Setting the state on accountType for conditional rendering
+  /**
+   * 
+   * @param event 
+   * 
+   * this function calls setAccountType which takes in the event element and sets it to accountType.
+   */
   const changeForm = (event:ChangeEvent<HTMLInputElement>) => {
     setAccountType (event.target.value);
   }
@@ -109,7 +110,6 @@ export const NewClientButton: React.FC<any> = () => {
         </Row>
           <Form onSubmit={(event:React.FormEvent<HTMLFormElement>) => registerUser(event)}>
         <ModalBody>
-          {/* <Form onSubmit={registerUser}> */}
             <FormGroup>
               <Label for="exampleSelect">Select Account</Label>
               <Input
@@ -165,8 +165,6 @@ export const NewClientButton: React.FC<any> = () => {
               border: "none",
               fontSize: "1.5rem",
             }}
-            // onClick={toggle} // This causes the form to toggle off before it's submitted; remember event bubbling!
-            // LINE 96: This now submits the form, and it will close the modal only if the signup was successful.
             >
             Submit
           </Button>
