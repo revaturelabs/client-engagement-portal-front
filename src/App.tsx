@@ -10,7 +10,7 @@ import { LoginPage } from './views/LoginPage/LoginPage';
 import { HomePage } from './views/HomePage/HomePage';
 import { AdminPage } from './views/AdminPage/AdminPage';
 
-// Amplify.configure(awsconfig);
+Amplify.configure(awsconfig);
 
 function App() {
     return (
