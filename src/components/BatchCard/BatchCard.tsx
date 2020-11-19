@@ -2,9 +2,9 @@ import React from 'react';
 import "../../scss/batch-card.scss";
 
 interface IBatchCardProps{
-    titlePic:string,
-    specialization:string,
-    batchName:string
+    titlePic?:string,
+    specialization?:string,
+    batchName?:string
 }
 
 export const BatchCard:React.FC<IBatchCardProps> = (props:IBatchCardProps) => {
@@ -19,7 +19,7 @@ export const BatchCard:React.FC<IBatchCardProps> = (props:IBatchCardProps) => {
             <p className="spec-text">{props.specialization}</p>
             <p>{props.batchName}</p>
             <div className="row justify-content-center">
-                <button className=" view-btn">View</button>
+                <button className= " view-btn test1">View</button>
             </div>
             
         </div>

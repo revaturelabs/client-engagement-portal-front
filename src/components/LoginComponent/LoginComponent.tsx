@@ -6,7 +6,7 @@ import passThumb from '../../assets/pass-thumb.png';
 import { Auth } from 'aws-amplify';
 
 interface ILoginProps{
-    loginType:string
+    loginType?:string
 }
 
 export const LoginComponent:React.FC<ILoginProps> = (props:ILoginProps) => {
@@ -63,8 +63,7 @@ export const LoginComponent:React.FC<ILoginProps> = (props:ILoginProps) => {
                                 style={{position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)"}} >
 
                                 <div
-                                    style={{ color: "#202430", fontSize: "20px", fontWeight:500 }}>
-                                
+                                    className = "test1" style={{ color: "#202430", fontSize: "20px", fontWeight:500 }}>    
                                     Engagement Force
                                 </div>
                             </div>
@@ -86,13 +85,13 @@ export const LoginComponent:React.FC<ILoginProps> = (props:ILoginProps) => {
                             </div>
                         </div>
     
-                        <button type="submit"
+                        <button className="test2" type="submit"
                             style={{margin: "10px", lineHeight: 2.2, width: "70%", border:"none", backgroundColor:"#F26925", color:"white", fontSize:"20px"}}>Login</button>
                     </div>
                 </form>
             }
             </>
-    );
+      )  ;
 }
 
 export class CEPLoginInputStyle implements React.CSSProperties{

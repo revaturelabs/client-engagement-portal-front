@@ -12,7 +12,7 @@ export const NavBar:React.FC<any> = (props:any) => {
             <Col xs="auto" className="justify-content-start">
                 <img src={logo} alt="revature logo" style={{marginTop: "15px"}} />
             </Col>
-            <Col className="d-flex align-items-center justify-content-end auto" >
+            <Col className="d-flex align-items-center justify-content-end auto test1" >
                 Welcome, Lorem Ipsum
                 <Dropdown isOpen={navMenuOpen} toggle={() => setNavMenuOpen(!navMenuOpen)}>
                     <DropdownToggle style={{margin:"10px", backgroundColor: "white", border: "none"}}>
