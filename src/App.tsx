@@ -7,11 +7,7 @@ import { Provider } from 'react-redux';
 import { store } from './Store';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import { LoginPage } from './views/LoginPage/LoginPage';
-<<<<<<< HEAD
-import { HomePage } from './views/HomePage/HomePage';
-=======
 import HomePage from './views/HomePage/HomePage';
->>>>>>> 5ed7bf30c6203d5a9ce4f173e9c3b0b15626deca
 import { AdminPage } from './views/AdminPage/AdminPage';
 
 Amplify.configure(awsconfig);
