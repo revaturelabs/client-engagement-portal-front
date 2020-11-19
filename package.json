@@ -100,7 +100,7 @@
       "./src/index.tsx",
       "./src/serviceWorker.ts",
       "/node_modules/",
-      "/test/"
+      "/__test__/"
     ],
     "coverageReporters": [
       "json",
@@ -108,14 +108,6 @@
       "text-summary",
       "clover"
     ],
-    "coverageThreshold": {
-      "global": {
-        "statements": 95,
-        "branches": 95,
-        "lines": 95,
-        "functions": 95
-      }
-    },
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
     ],
