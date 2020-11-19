@@ -1,12 +1,11 @@
 import React from 'react';
-import { Table } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { LoginComponent } from '../../components/LoginComponent/LoginComponent';
 import logo from '../../assets/logo.png';
 
 export const LoginPage:React.FC<undefined> = () => {
     return(
-        <table style={{height: "100vh", width: "100vw", backgroundColor:"#B9B9BA"}}>
+        <table style={{height: "100vh", width: "100vw", backgroundColor:"#E3E3E3"}}>
             <tbody>
                 <tr>
                     <td>

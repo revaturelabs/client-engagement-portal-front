@@ -2,7 +2,7 @@ import React from 'react'
 import classes from './RequestBatchCard.module.scss'
 
 interface Props {
-    
+
 }
 
 const RequestBatchCard = (props: Props) => {
@@ -12,7 +12,7 @@ const RequestBatchCard = (props: Props) => {
     return (
         <div className={classes.RequestBatchCard}>
             <div className={classes.RequestBatchCardText}>
-                { requestBatchCardText }
+                {requestBatchCardText}
             </div>
             <div className={classes.RequestBatchButton}>Request Batch</div>
         </div>
