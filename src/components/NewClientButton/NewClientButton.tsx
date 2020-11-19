@@ -79,7 +79,7 @@ export const NewClientButton: React.FC<any> = () => {
       console.log("Error: User does not have permissions to create an account");
       return null;
     }
-
+    console.log("Before signup")
     setModal(!modal);
 
     try {
