@@ -104,7 +104,7 @@
       "./src/index.tsx",
       "./src/serviceWorker.ts",
       "/node_modules/",
-      "/test/"
+      "/__test__/"
     ],
     "coverageReporters": [
       "json",
@@ -112,14 +112,6 @@
       "text-summary",
       "clover"
     ],
-    "coverageThreshold": {
-      "global": {
-        "statements": 95,
-        "branches": 95,
-        "lines": 95,
-        "functions": 95
-      }
-    },
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
     ],
@@ -136,6 +128,16 @@
       "src//(.*)$": "<rootDir>/src/$1",
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "identity-obj-proxy",
       "\\.(s?css|less)$": "identity-obj-proxy"
+    }
+  },
+  "jestSonar": {
+    "reportPath": "reports",
+    "reportFile": "test-reporter.xml",
+    "indent": 4,
+    "env": {
+      "test": {
+        "reportPath": "reports-test"
+      }
     }
   }
 }

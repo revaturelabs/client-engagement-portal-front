@@ -37,17 +37,17 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
 
             // Switch statement for assigning what page to redirect to based upon what role the user has
             switch (user.attributes["custom:userRole"]) {
-                case "Client":
+                case "client":
                     setAdmin(false);
                     setClient(true);
                     break;
-                case "Admin":
+                case "admin":
                     setClient(false);
                     setAdmin(true);
                     break;
                 default:
                     setClient(false);
-                    setAdmin(true);
+                    setAdmin(false);
             }
 
             // await console.log(user.userSession);
@@ -63,7 +63,6 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
         }
 
     }
-
 
     return (
         <>
@@ -106,11 +105,11 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
 
                         <button type="submit"
                             style={{ margin: "10px", lineHeight: 2.2, width: "70%", border: "none", backgroundColor: "#F26925", color: "white", fontSize: "20px" }}>
-                            
+
                             Login
                         </button>
-                    </div>
-                </form>
+                    </div >
+                </form >
             }
         </>
     );
