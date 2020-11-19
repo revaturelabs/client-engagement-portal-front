@@ -6,18 +6,25 @@ import reactReduxLogo from '../../assets/react-redux-logo.png';
 import javaLogo from '../../assets/java-logo.png';
 import RequestBatchCard from '../../components/RequestBatchCard/RequestBatchCard'
 import RequestBatchCardModal from '../../components/RequestBatchCard/RequestBatchCardModal'
+import PlanInterventionModal from '../../components/PlanInterventionModal/PlanInterventionModal';
 
 export const HomePage:React.FC<undefined> = () => {
 
     const [hasBatches, setHasBatches] = useState(true);
+    const [showInterventionModal, setShowInterventionModal] = useState(false); // temporary place for the Intervention Modal
 
     return(
-        <Container style={{height: "100vh", maxWidth: "100vw", backgroundColor:"#B9B9BA"}}>
+        <Container style={{height: "100vh", maxWidth: "100vw", backgroundColor:"#E3E3E3"}}>
             <NavBar>
                 <DropdownItem header>Development Options</DropdownItem>
                 <DropdownItem onClick={() => setHasBatches(false)}>Simulate no batches</DropdownItem>
                 <DropdownItem onClick={() => setHasBatches(true)}>Simulate 3 batches</DropdownItem>
             </NavBar>
+
+            {/* Modal for Requesting an Intervention, will be moved to batch info page */}
+            <button onClick={() => setShowInterventionModal(!showInterventionModal)}>Temporary Test Intervention Modal (Will Go on Batch Info Page)</button>
+            <PlanInterventionModal show={showInterventionModal} setShow={setShowInterventionModal} />
+            {/* Modal for Requesting an Intervention, will be moved to batch info page */}
             
             {hasBatches ?
 

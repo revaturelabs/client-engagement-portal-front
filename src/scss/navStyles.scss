@@ -1,0 +1,30 @@
+.myNav {
+    height: 120px;
+     background-color: white;
+     border-bottom: 3px solid #F26925;
+}
+.myLogo {
+    margin-top: 25px;
+}
+.logoContainer {
+    padding-left: 25px;
+    padding-right: 25px;
+}
+@media (max-width: 768px){
+    .myLogo {
+        width: 150px;
+        margin-top: 33px;
+    }
+    .myDropdown {
+        display: none !important;
+    }
+    div#myMobileDropdown {
+        display: flex;
+    }
+
+}
+@media (min-width: 769px){
+    .myMobileDropdown{
+        display: none !important;
+    }
+}
