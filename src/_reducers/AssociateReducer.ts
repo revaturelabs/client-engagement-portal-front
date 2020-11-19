@@ -11,9 +11,9 @@ export interface IAssociate {
     }[]
 };
 
-// const initialState: IAssociateState = "";
+// const initialState: IAssociateState = {};
 
-// export associateReducer = (state = initialState, action: associateAction) => {
+// export associateReducer = (state = initialState, action:{type:string, payload:IAssociate}) => {
     // switch(action.type) {
     //     case associateTypes.GET_ALL_ASSOCIATES:
     //         return {

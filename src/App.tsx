@@ -1,5 +1,6 @@
+
 import React from 'react';
-import Amplify, {Auth} from 'aws-amplify';
+import Amplify from 'aws-amplify';
 import awsconfig from './aws-exports';
 import './scss/app.scss';
 import './scss/batch-card.scss'
@@ -12,7 +13,7 @@ import { AssociateCard } from './components/AssociateCard/AssociateCard';
 import { AssociateCardModal } from './components/AssociateCard/AssociateCardModal';
 import { AdminPage } from './views/AdminPage/AdminPage';
 
-Amplify.configure(awsconfig);
+// Amplify.configure(awsconfig);
 
 function App() {
   return (
