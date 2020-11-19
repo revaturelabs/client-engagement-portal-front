@@ -1,17 +1,17 @@
 import { Auth } from "aws-amplify";
 import React, { useState } from "react";
 import {
-    Button,
-    Modal,
-    ModalHeader,
-    ModalBody,
-    ModalFooter,
-    Form,
-    FormGroup,
-    Label,
-    Input,
-    Row,
-    Col,
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  Row,
+  Col,
 } from "reactstrap";
 import { isConstructorDeclaration } from "typescript";
 
@@ -23,7 +23,7 @@ export const NewClientButton: React.FC<any> = () => {
 
   const toggle = () => setModal(!modal);
 
-  const registerUser = async (event:React.FormEvent<HTMLFormElement>) => {
+  const registerUser = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const email = event.currentTarget["email"].value;
@@ -32,12 +32,12 @@ export const NewClientButton: React.FC<any> = () => {
     // console.log("Email: " + email + "\nPassword: " + password);
 
     setModal(!modal);
-    
-    try{
+
+    try {
       // const signUpResult =
       await Auth.signUp({
         username: email,
-        password: password
+        password: password,
       });
 
       // console.log("Cognito User: " + signUpResult.user + "\nUserConfirmed: " + signUpResult.userConfirmed +
@@ -45,12 +45,11 @@ export const NewClientButton: React.FC<any> = () => {
 
       // console.log(signUpResult.user);
       // console.log(signUpResult.codeDeliveryDetails);
-    } catch(error){
+    } catch (error) {
       console.log("Couldn't sign up: ", error);
       // Runs if you create a user with a duplicate email or if you try creating a password with less than 6 characters
     }
-
-  }
+  };
 
   return (
     <>
@@ -64,6 +63,7 @@ export const NewClientButton: React.FC<any> = () => {
           border: "none",
         }}
         onClick={toggle}
+        id={"toggleButton"}
       >
         Create Account
       </Button>
@@ -99,9 +99,13 @@ export const NewClientButton: React.FC<any> = () => {
             </Button>
           </Col>
         </Row>
-          <Form onSubmit={(event:React.FormEvent<HTMLFormElement>) => registerUser(event)}>
-        <ModalBody>
-          {/* <Form onSubmit={registerUser}> */}
+        <Form
+          onSubmit={(event: React.FormEvent<HTMLFormElement>) =>
+            registerUser(event)
+          }
+        >
+          <ModalBody>
+            {/* <Form onSubmit={registerUser}> */}
             <FormGroup>
               <Label for="exampleSelect">Client Type</Label>
               <Input
@@ -125,33 +129,40 @@ export const NewClientButton: React.FC<any> = () => {
             </FormGroup>
             <FormGroup>
               <Label>Password</Label>
-              <Input type="password" required minLength={6} name="password"></Input>
+              <Input
+                type="password"
+                required
+                minLength={6}
+                name="password"
+              ></Input>
             </FormGroup>
             <FormGroup>
               <Label>Confirm Password</Label>
               <Input type="password"></Input>
             </FormGroup>
-        </ModalBody>
+          </ModalBody>
 
-        <ModalFooter>
-          <Button
-            style={{
-              margin: "auto",
-              backgroundColor: "#F26925",
-              fontFamily: " futura-pt, sans-serif",
-              fontStyle: "normal",
-              fontWeight: 300,
-              width: "10rem",
-              border: "none",
-              fontSize: "1.5rem",
-            }}
-            // onClick={toggle} // This causes the form to toggle off before it's submitted; remember event bubbling!
-            // LINE 96: This now submits the form, and it will close the modal only if the signup was successful.
+          <ModalFooter>
+            <Button
+              id={"newClientButton"}
+              style={{
+                margin: "auto",
+                backgroundColor: "#F26925",
+                fontFamily: " futura-pt, sans-serif",
+                fontStyle: "normal",
+                fontWeight: 300,
+                width: "10rem",
+                border: "none",
+                fontSize: "1.5rem",
+              }}
+
+              // onClick={toggle} // This causes the form to toggle off before it's submitted; remember event bubbling!
+              // LINE 96: This now submits the form, and it will close the modal only if the signup was successful.
             >
-            Submit
-          </Button>
-        </ModalFooter>
-            </Form>
+              Submit
+            </Button>
+          </ModalFooter>
+        </Form>
       </Modal>
     </>
   );

@@ -89,6 +89,11 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
                 <DropdownItem onClick={() => setHasBatches(false)}>Simulate no batches</DropdownItem>
                 <DropdownItem onClick={() => {setHasBatches(true); getBatches();} }>Get ALL Mock Batches from the Calipur Database</DropdownItem>
             </NavBar>
+
+            {/* Modal for Requesting An Intervention, Will Be Moved To Batch Info Page 
+            <button onClick={() => setShowInterventionModal(!showInterventionModal)}>Temporary Test Intervention Modal (Will Go On Batch Info Page)</button>
+            <PlanIntervetionModal show={showInterventionModal} setShow={setShowInterventionModal} />
+            Modal for Requesting An Intervention, Will Be Moved To Batch Info Page */}
             
             {hasBatches ?
 
