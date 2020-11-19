@@ -16,6 +16,11 @@ pipeline {
         sh 'npm install'
       }
     }
+    stage('node-sass rebuilding') {
+      steps{
+        sh 'npm rebuild node-sass'
+      }
+    }
     stage('Test and Build') {
       parallel {
         stage('Run Tests') {
