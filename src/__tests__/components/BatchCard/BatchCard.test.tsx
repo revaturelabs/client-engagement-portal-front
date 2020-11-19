@@ -3,11 +3,39 @@ import { shallow } from "enzyme";
 import { BatchCard } from "../../../components/BatchCard/BatchCard";
 import { Modal } from "reactstrap";
 
-// Simple Test 1
-it("Should render View", () => {
-    const wrapper = shallow(<BatchCard/>)
-    const button = wrapper.find('button.test1').text();
+const setUp = (props={}) => {
+    const component = shallow(<BatchCard {...props}/>);
+    return component;
+}
 
-    expect(button).toBe("View");
 
-});
+
+describe('batchcardcomp', () => {
+   
+    let component: any;
+    beforeEach(() => {
+        component = setUp();
+    });
+
+   // Simple Test 1
+    it("Should render View", () => {
+        const button = component.find('button.test1').text();
+
+        expect(button).toBe("View");
+    });
+   
+    //Simple Test 2
+    it("Should render without errors", () => {
+        const wrapper = component.find('.batchcardcomp');
+    
+        expect(wrapper.length).toBe(1);
+    });
+
+    //Simple Test 3
+    it("Should render an image", () => {
+        const image = component.find('.logoimg');
+        expect(image.length).toBe(1);
+    })
+})
+
+

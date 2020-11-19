@@ -3,22 +3,42 @@ import { shallow } from "enzyme";
 import { LoginComponent } from "../../../components/LoginComponent/LoginComponent";
 import { Modal } from "reactstrap";
 
+const setUp = (props={}) => {
+    const component = shallow(<LoginComponent {...props}/>);
+    return component;
+}
 
-// Simple Test 1
-it("Should render Engagement Force", () => {
-    const wrapper = shallow(<LoginComponent/>)
-    const div = wrapper.find('div.test1').text();
+describe('logincomp', () => {
 
-    expect(div).toBe("Engagement Force");
+    let component: any;
+    beforeEach(() => {
+        component = setUp();
+    });
 
-});
+    // Simple Test 1
+    it("Should render Engagement Force", () => {
+        const div = component.find('div.test1').text();
 
-// Simple Test 2
-it("Should render Login", () => {
-    const wrapper = shallow(<LoginComponent/>)
-    const div = wrapper.find('button.test2').text();
+        expect(div).toBe("Engagement Force");
 
-    expect(div).toBe("Login");
+    });
+
+    // Simple Test 2
+    it("Should render Login", () => {
+        const div = component.find('button.test2').text();
+
+        expect(div).toBe("Login");
+    })
+
+      //Simple Test 3
+      it("Should render an image", () => {
+        const image = component.find('.userthumbcheck');
+        expect(image.length).toBe(1);
+    })
+
+      //Simple Test 4
+      it("Should render an image", () => {
+        const image = component.find('.passthumbcheck');
+        expect(image.length).toBe(1);
+    })
 })
-
-

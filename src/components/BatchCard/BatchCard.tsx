@@ -9,10 +9,10 @@ interface IBatchCardProps{
 
 export const BatchCard:React.FC<IBatchCardProps> = (props:IBatchCardProps) => {
     return(
-        <div className="rev-card justify-content-center text-center">
+        <div className="batchcardcomp rev-card justify-content-center text-center">
             
             <div className="row justify-content-center">
-                <img src={props.titlePic} alt={props.specialization + " thumbnail"} className="pic" />
+                <img src={props.titlePic} alt={props.specialization + " thumbnail"} className="pic logoimg" />
             </div>
             
             <br />
