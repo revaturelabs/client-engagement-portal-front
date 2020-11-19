@@ -3,14 +3,35 @@ import React, { ChangeEvent, useState } from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input, Row, Col } from "reactstrap";
 import './NewClientButton.scss';
 
-//This component includes the button for a new client account
-//This also has a modal form that pops up when the button is clicked
-
+/**
+ * @function newClientButton
+ * This component includes the button for a new client account
+ * 
+ * This also has a modal form that pops up when the button is clicked
+ */
 export const NewClientButton: React.FC<any> = () => {
     const [modal, setModal] = useState(false);
 
+    /**
+     * @function toggle
+     * 
+     * When the create account button is clicked it opens the modal.
+     * 
+     * When clicking anywhere outside of the form on the "x" it hides the modal
+     */
     const toggle = () => setModal(!modal);
 
+    /**
+     * @function registerUser
+     * Collect information and sends it to AWS to get authorized 
+     * 
+     * @param event 
+     * Collecting the information form the form
+     * 
+     * @param error
+     * If the user fails to sign up they will get a message letting them know they can not sign up
+     * 
+     */
     const registerUser = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
@@ -21,11 +42,38 @@ export const NewClientButton: React.FC<any> = () => {
         }
         */
 
+        // These need to be up here. Data is dropped when user is checked {for some reason} <= these fields are cleared when the modal unloads
         const email = event.currentTarget["email"].value;
         const password = event.currentTarget["password"].value;
         const role = event.currentTarget["select"].value;
 
-        // console.log("Email: " + email + "\nPassword: " + password);
+
+
+        // Checks cognito if they have the admin role in the current session  for security. If not exit out
+        // This checking operation takes about 150 MS 
+        // Unknown Error - Response time can be 10,000 MS. Usually happens when react is updating. This shouldn't be a problem
+
+        console.log((await Auth.currentSession()).getAccessToken().getJwtToken());
+        const checkRole = Auth.currentUserInfo();
+        const checker = await checkRole.then(function (result) {
+            if (result.attributes["custom:userRole"] !== "admin") {
+              return false;
+            }
+            else {
+              return true;
+            }
+        });
+        //Example
+        //Axios.post("/getUsers", data, headers{Authorization:idToken})
+
+        if (!checker) {
+            console.log("Error: User does not have permissions to create an account")
+            return null;
+        }
+
+
+
+
 
         setModal(!modal);
 
@@ -38,22 +86,26 @@ export const NewClientButton: React.FC<any> = () => {
                         'custom:userRole': role // custom role for assigning user to admin or client role
                     }
                 });
-
+            
             console.log("Cognito User: " + signUpResult.user + "\nUserConfirmed: " + signUpResult.userConfirmed +
-                        "\nUserSub: " + signUpResult.userSub + "\nCode delivery details: " + signUpResult.codeDeliveryDetails);
-
+                "\nUserSub: " + signUpResult.userSub + "\nCode delivery details: " + signUpResult.codeDeliveryDetails);
+            
             // console.log(signUpResult.user);
             // console.log(signUpResult.codeDeliveryDetails);
         } catch (error) {
             console.log("Couldn't sign up: ", error);
-            // Runs if you create a user with a duplicate email or if you try creating a password with less than 6 characters
         }
 
     }
 
-    const [accountType, setAccountType] = useState("Client");
+    const [accountType, setAccountType] = useState("client");
 
-    //Setting the state on accountType for conditional rendering
+    /**
+     * 
+     * @param event 
+     * 
+     * this function calls setAccountType which takes in the event element and sets it to accountType.
+     */
     const changeForm = (event:ChangeEvent<HTMLInputElement>) => setAccountType(event.target.value);
     
     return (
@@ -115,8 +167,8 @@ export const NewClientButton: React.FC<any> = () => {
                                 placeholder="Client Type"
                                 onChange={changeForm}
                             >
-                                <option value="Client">Client</option>
-                                <option value="Admin">Admin</option>
+                                <option value="client">Client</option>
+                                <option value="admin">Admin</option>
                             </Input>
                         </FormGroup>
                         <FormGroup>
@@ -127,7 +179,7 @@ export const NewClientButton: React.FC<any> = () => {
                             <Label>Name</Label>
                             <Input type="text" required></Input>
                         </FormGroup>
-                        {accountType === "Client" ?
+                        {accountType === "client" ?
                         <FormGroup>
                             <Label>Company Name</Label>
                             <Input type="text"></Input>
@@ -153,12 +205,10 @@ export const NewClientButton: React.FC<any> = () => {
                                 fontFamily: " futura-pt, sans-serif",
                                 fontStyle: "normal",
                                 fontWeight: 300,
-                                width: "10rem",
+                                width: "100%",
                                 border: "none",
                                 fontSize: "1.5rem",
                             }}
-                        // onClick={toggle} // This causes the form to toggle off before it's submitted; remember event bubbling!
-                        // LINE 113: This now submits the form, and it will close the modal only if the signup was successful.
                         >
                             Submit
                         </Button>

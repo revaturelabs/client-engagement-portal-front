@@ -6,6 +6,12 @@ interface Props {
     setShow: Function
 }
 
+/**
+ * Author: Kyle Aoki
+ * 
+ * Modal for planning an intervention. Client can give reasons for calling an intervention
+ * in a textarea. Client can select a date for intervention.
+ */
 const PlanInterventionModal = (props: Props) => {
 
     const transitionClass = props.show ? classes.ReactModal__Overlay_after_open : classes.ReactModal__Overlay_before_close;

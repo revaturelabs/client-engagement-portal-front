@@ -14,7 +14,7 @@ export const HomePage:React.FC<undefined> = () => {
     const [showInterventionModal, setShowInterventionModal] = useState(false); // temporary place for the Intervention Modal
 
     return(
-        <Container style={{height: "100vh", maxWidth: "100vw", backgroundColor:"#B9B9BA"}}>
+        <Container style={{height: "100vh", maxWidth: "100vw", backgroundColor:"#E3E3E3"}}>
             <NavBar>
                 <DropdownItem header>Development Options</DropdownItem>
                 <DropdownItem onClick={() => setHasBatches(false)}>Simulate no batches</DropdownItem>
