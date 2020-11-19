@@ -4,6 +4,8 @@ import hands from '../../assets/engagementPortalLogo.svg';
 import userThumb from '../../assets/user-thumb.png';
 import passThumb from '../../assets/pass-thumb.png';
 import { Auth } from 'aws-amplify';
+import { useDispatch } from 'react-redux';
+import { setRole } from '../../_actions/LoginAction';
 
 interface ILoginProps {
     loginType: string
@@ -13,6 +15,7 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
 
     const [isClient, setClient] = useState(false);
     const [isAdmin, setAdmin] = useState(false);
+    const dispatch = useDispatch();
 
     // WHEN THE LOGIN BUTTON IS PRESSED
     const handleSubmit = async (event: any) => {
@@ -58,6 +61,7 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
             // await Auth.signOut();
 
             // console.log(Date.now() - midTime);
+            dispatch(setRole({ role: user.attributes["custom:userRole"] }));
         } catch (error) {
             console.log("Couldn't sign in: ", error);
         }
