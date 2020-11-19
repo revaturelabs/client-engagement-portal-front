@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import hands from '../../assets/hands-cropped.png';
 import userThumb from '../../assets/user-thumb.png';
 import passThumb from '../../assets/pass-thumb.png';
 import { Auth } from 'aws-amplify';
+import  '../../scss/loginStyles.scss';
+import ceplogo from '../../assets/engagementPortalLogo.svg';
+import ceplogo2 from '../../assets/engagementPortalLogov2.svg'
+
+ 
 
 interface ILoginProps{
     loginType:string
@@ -52,21 +56,15 @@ export const LoginComponent:React.FC<ILoginProps> = (props:ILoginProps) => {
     return(
             <>
             {isValidated ? <Redirect to="/home" /> :
-                <form onSubmit={handleSubmit}
-                    style={{textAlign: "center", backgroundColor: "white", width: "15vw", height: "32vh", minWidth:"200px", display: "inline-block",
-                            borderRadius: "50px", padding: "10px", border: "1px solid #F26925"}}>
+                <form onSubmit={handleSubmit} className="login-form">
                 
                     <div style={{maxHeight: "90%"}}>
                         <div style={{position: "relative", textAlign: "center"}}>
-                            <Link to="/login"><img src={hands} alt="hands" style={{width: "60%", minHeight: "6em", opacity: 0.1}} /></Link>
-                            <div className="logoarea"
-                                style={{position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)"}} >
-
-                                <div
-                                    style={{ color: "#202430", fontSize: "20px", fontWeight:500 }}>
-                                
-                                    Engagement Force
-                                </div>
+                            <div className="login-header">
+                                Client Engagement Portal
+                            </div>
+                            <div className="cep-logo-area">
+                                <img src={ceplogo2} alt="cep-logo" width="200px"/>                                
                             </div>
                         </div>
     
