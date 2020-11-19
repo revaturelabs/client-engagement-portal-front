@@ -47,7 +47,7 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
                     break;
                 default:
                     setClient(false);
-                    setAdmin(true);
+                    setAdmin(false);
             }
 
             // await console.log(user.userSession);
