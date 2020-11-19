@@ -64,6 +64,7 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
 
     }
 
+
     return (
         <>
             {isClient ? <Redirect to="/home" /> : isAdmin ? <Redirect to="/admin" /> :
