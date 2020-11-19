@@ -1,13 +1,12 @@
 name: Build
 on:
-  push:
-    branches:
-      - main
   pull_request:
+    branches: 
+      - main
     types: [opened, synchronize, reopened]
 jobs:
   sonarcloud:
-    name: SonarCloud
+    name: SonarCloudMain
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
