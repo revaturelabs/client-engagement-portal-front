@@ -32,8 +32,12 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "jest --coverage",
-    "eject": "react-scripts eject"
+    "test": "react-scripts test",
+    "test:coverage": "react-scripts test --coverage --runInBand --watchAll=false",
+    "eject": "react-scripts eject",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx src --color",
+    "format": "prettier --write src/**/*.{ts,tsx,scss,css,json}",
+    "isready": "npm run format && npm run lint && npm run test:coverage && npm run build"
   },
   "eslintConfig": {
     "extends": [
@@ -58,7 +62,8 @@
     "@babel/preset-env": "^7.12.1",
     "@babel/preset-typescript": "^7.12.1",
     "@types/axios": "^0.14.0",
-    "@types/enzyme-adapter-react-16": "^1.0.6",
+    "@types/enzyme": "3.10.8",
+    "@types/enzyme-adapter-react-16": "1.0.6",
     "@types/react-dom": "^16.9.9",
     "@types/react-redux": "^7.1.11",
     "@types/react-router": "^5.1.8",
@@ -68,21 +73,61 @@
     "@types/redux-thunk": "^2.1.0",
     "@types/typescript": "^2.0.0",
     "babel-jest": "^26.6.3",
-    "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.5",
+    "enzyme": "3.11.0",
+    "enzyme-adapter-react-16": "1.15.5",
+    "enzyme-to-json": "3.6.1",
+    "jest-fetch-mock": "3.0.3",
     "jest-sonar-reporter": "^2.0.0"
+    "ts-jest": "26.4.4"
   },
   "jest": {
-    "testEnvironment": "node",
     "collectCoverage": true,
-    "testResultsProcessor": "jest-sonar-reporter",
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}",
+      "!src/**/*.d.ts",
+      "!src/index.tsx",
+      "!src/serviceWorker.ts"
+    ],
     "coveragePathIgnorePatterns": [
+      "./src/*/*.types.{ts,tsx}",
+      "./src/index.tsx",
+      "./src/serviceWorker.ts",
       "/node_modules/",
       "/test/"
     ],
+    "coverageReporters": [
+      "json",
+      "lcov",
+      "text-summary",
+      "clover"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "statements": 95,
+        "branches": 95,
+        "lines": 95,
+        "functions": 95
+      }
+    },
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
+    "testEnvironment": "node",
+    "testResultsProcessor": "jest-sonar-reporter",
+    "transform": {
+      "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/ts-jest"
+    },
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx)$",
+      "^.+\\.module\\.(css|sass|scss)$"
+    ],
     "moduleNameMapper": {
+      "^react-native$": "react-native-web",
+      "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy",
+      "src//(.*)$": "<rootDir>/src/$1",
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "identity-obj-proxy",
       "\\.(s?css|less)$": "identity-obj-proxy"
     }
   }
 }
+
