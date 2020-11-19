@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Col, Form, FormGroup, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader, Row } from 'reactstrap';
+import { Col, Form, Input, Modal, ModalBody, ModalHeader, Row } from 'reactstrap';
 import '../../scss/BatchFormStyle.scss';
 
 export const BatchForms: React.FC = () => {
@@ -28,7 +28,7 @@ export const BatchForms: React.FC = () => {
             <Row className="justify-content-between my-form-row">
                 <Col sm="1" md="1" lg="2" xl="3"></Col>
                 <Col sm="5" md="5" lg="4" xl="3" className="text-left" style={{marginTop:"50px"}}>
-                    <Form className="batch-form">
+                    <Form className="batch-form" onSubmit={(e:React.FormEvent<HTMLFormElement>) => e.preventDefault()}>
                         <h5>Map Batch To Client</h5>
                         <Input type="select">
                             <option>Select Client</option>
@@ -45,7 +45,7 @@ export const BatchForms: React.FC = () => {
                     </Form>
                 </Col>
                 <Col sm="5" md="5" lg="4" xl="3" className="text-right" style={{marginTop:"50px"}}>
-                    <Form className="batch-form">
+                    <Form className="batch-form" onSubmit={(e:React.FormEvent<HTMLFormElement>) => e.preventDefault()}>
                         <h5>Unmap Batch From Client</h5>
                         <Input type="select">
                             <option>Select Client</option>
