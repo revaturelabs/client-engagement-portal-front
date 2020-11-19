@@ -1,5 +1,5 @@
-import { Auth } from "aws-amplify";
 import React, { ChangeEvent, useState } from "react";
+import { Auth } from "aws-amplify";
 import {
   Button,
   Modal,
@@ -79,7 +79,7 @@ export const NewClientButton: React.FC<any> = () => {
       console.log("Error: User does not have permissions to create an account");
       return null;
     }
-
+    console.log("Before signup")
     setModal(!modal);
 
     try {
@@ -93,13 +93,13 @@ export const NewClientButton: React.FC<any> = () => {
 
       console.log(
         "Cognito User: " +
-          signUpResult.user +
-          "\nUserConfirmed: " +
-          signUpResult.userConfirmed +
-          "\nUserSub: " +
-          signUpResult.userSub +
-          "\nCode delivery details: " +
-          signUpResult.codeDeliveryDetails
+        signUpResult.user +
+        "\nUserConfirmed: " +
+        signUpResult.userConfirmed +
+        "\nUserSub: " +
+        signUpResult.userSub +
+        "\nCode delivery details: " +
+        signUpResult.codeDeliveryDetails
       );
 
       // console.log(signUpResult.user);
@@ -201,8 +201,8 @@ export const NewClientButton: React.FC<any> = () => {
                 <Input type="text"></Input>
               </FormGroup>
             ) : (
-              <></>
-            )}
+                <></>
+              )}
             <FormGroup>
               <Label>Password</Label>
               <Input

@@ -36,7 +36,7 @@ export const NavBar: React.FC<any> = (props: any) => {
                     </DropdownToggle>
                     {/* Desktop Menu */}    
                     <DropdownMenu right>
-                        <Link to="/"><DropdownItem onClick={LogOut}>Logout</DropdownItem></Link>
+                        {/* <Link to="/"><DropdownItem onClick={LogOut}>Logout</DropdownItem></Link> */}
                         {props.children}
                     </DropdownMenu>
                 </ButtonDropdown>
