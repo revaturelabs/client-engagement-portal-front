@@ -2,7 +2,7 @@ import React from 'react'
 import classes from './RequestBatchCardModal.module.scss'
 
 interface Props {
-    
+
 }
 
 const RequestBatchCardModal = (props: Props) => {
