@@ -30,21 +30,19 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
 
     const [hasBatches, setHasBatches] = useState(false);
     const [hasSpinner, setSpinner] = useState(false);
-
-    console.log("number of batches: " + props.batches.length);
-    console.log("first batch id: " + props.batches[0].id);
-    console.log("first batch skill: " + props.batches[0].skill);
-    console.log("first batch name: " + props.batches[0].name);
  
     const dispatch = useDispatch();
 
+    //temporary functions which are called from the nav bar
     const getBatches = () =>
     {   
+        //gets batch data from calipur
         dispatch(getBatchCardData(1));
     }
 
     const resetBatches = () =>
     {   
+        //removes calipur data / resets the batch state
         dispatch(setBatchState(initialBatchState));
     }
 
