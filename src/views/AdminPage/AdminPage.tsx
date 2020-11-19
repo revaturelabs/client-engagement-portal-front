@@ -1,5 +1,5 @@
 import React from "react";
-import { Col, Container, Form, FormGroup, Input, Row } from "reactstrap";
+import { Col, Container, Form, Input, Row } from "reactstrap";
 import { NavBar } from "../../components/NavBar/NavBar";
 import { NewClientButton } from "../../components/NewClientButton/NewClientButton";
 import "./BatchFormStyle.scss";

@@ -68,6 +68,7 @@ export const NewClientButton: React.FC<any> = () => {
                     border: "none",
                 }}
                 onClick={toggle}
+                className={"toggleButton"}
             >
                 Create Account
       </Button>
@@ -105,7 +106,6 @@ export const NewClientButton: React.FC<any> = () => {
                 </Row>
                 <Form onSubmit={(event: React.FormEvent<HTMLFormElement>) => registerUser(event)}>
                     <ModalBody>
-                        {/* <Form onSubmit={registerUser}> */}
                         <FormGroup>
                             <Label for="exampleSelect">Account Type</Label>
                             <Input

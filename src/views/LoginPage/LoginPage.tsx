@@ -1,5 +1,4 @@
 import React from 'react';
-import { Table } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { LoginComponent } from '../../components/LoginComponent/LoginComponent';
 import logo from '../../assets/logo.png';
