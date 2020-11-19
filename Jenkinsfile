@@ -16,9 +16,9 @@ pipeline {
         sh 'npm cache clean --force'
       }
     }
-    stage('Delete node_modules') {
+    stage('Delete node_modules & package-lock.json') {
       steps {
-        sh 'rm -rf node_modules'
+        sh 'rm -rf node_modules package-lock.json'
       }
     }
     stage('Install Packages') {
