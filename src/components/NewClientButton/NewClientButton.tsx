@@ -1,19 +1,14 @@
-import React, { ChangeEvent, useState } from "react";
 import { Auth } from "aws-amplify";
-import {
-  Button,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  Row,
-  Col,
-} from "reactstrap";
-import "./NewClientButton.scss";
+import React, { ChangeEvent, SyntheticEvent, useState } from "react";
+import {Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input, Row, Col} from "reactstrap";
+import { convertCompilerOptionsFromJson, isConstructorDeclaration } from "typescript";
+
+/**
+ * @function newClientButton
+ * This component includes the button for a new client account
+ * 
+ * This also has a modal form that pops up when the button is clicked
+ */
 
 /**
  * @function newClientButton
@@ -26,9 +21,7 @@ export const NewClientButton: React.FC<any> = () => {
 
   /**
    * @function toggle
-   *
    * When the create account button is clicked it opens the modal.
-   *
    * When clicking anywhere outside of the form on the "x" it hides the modal
    */
   const toggle = () => setModal(!modal);
@@ -186,12 +179,11 @@ export const NewClientButton: React.FC<any> = () => {
                 <option value="client">Client</option>
                 <option value="admin">Admin</option>
               </Input>
-            </FormGroup>
-            <FormGroup>
+            </FormGroup> 
+            {(accountType === "client")? 
+            <FormGroup className="isClient">
               <Label>Email</Label>
               <Input type="text" required name="email"></Input>
-            </FormGroup>
-            <FormGroup>
               <Label>Name</Label>
               <Input type="text" required></Input>
             </FormGroup>

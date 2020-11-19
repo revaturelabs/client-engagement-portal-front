@@ -13,6 +13,7 @@ import { AdminPage } from './views/AdminPage/AdminPage';
 Amplify.configure(awsconfig);
 
 function App() {
+<<<<<<< HEAD
     return (
         <div className="App">
             <Provider store={store}>
@@ -28,6 +29,24 @@ function App() {
             </Provider>
         </div>
     );
+=======
+
+  return (
+    <div className="App">
+      <Provider store={store}>
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/" component={() => <Redirect to="/login" />}/>
+            <Route path="/login" component={LoginPage}/>
+            <Route path="/login-admin" />
+            <Route path="/home" component={HomePage}/>
+            <Route path="/admin" component={AdminPage}/>
+          </Switch>
+        </BrowserRouter>
+      </Provider>
+    </div>
+  );
+>>>>>>> b0029e68ba9f805b2e3d15bcbcde473bd02ed497
 }
 
 export default App;
