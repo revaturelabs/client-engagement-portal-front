@@ -85,7 +85,7 @@
     "enzyme-adapter-react-16": "1.15.5",
     "enzyme-to-json": "3.6.1",
     "jest-fetch-mock": "3.0.3",
-    "jest-sonar-reporter": "^2.0.0"
+    "jest-sonar-reporter": "^2.0.0",
     "ts-jest": "26.4.4"
   },
   "jest": {
