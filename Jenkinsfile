@@ -1,7 +1,9 @@
 pipeline {
-  agent any
-  tools {
-    nodejs 'node'
+  agent {
+    docker {
+     image 'node:12.19.1-alpine3.10'
+     args '-p 3000:3000'
+    }
   }
   environment {
     CI = 'true'
@@ -22,11 +24,6 @@ pipeline {
     stage('Install Packages') {
       steps {
         sh 'npm install'
-      }
-    }
-    stage('node-sass rebuilding') {
-      steps{
-        sh 'npm rebuild node-sass'
       }
     }
     stage('Test and Build') {
