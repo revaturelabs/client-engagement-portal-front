@@ -16,6 +16,11 @@ pipeline {
         sh 'npm cache clean --force'
       }
     }
+    stage('Delete node_modules') {
+      steps {
+        sh 'rm -rf node_modules'
+      }
+    }
     stage('Install Packages') {
       steps {
         sh 'npm install'
