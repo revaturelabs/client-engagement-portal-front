@@ -1,9 +1,7 @@
 pipeline {
-  agent {
-    docker {
-     image 'node:12.19.1-alpine3.10'
-     args '-p 3000:3000'
-    }
+  agent any
+  tools {
+    nodejs 'node'
   }
   environment {
     CI = 'true'
