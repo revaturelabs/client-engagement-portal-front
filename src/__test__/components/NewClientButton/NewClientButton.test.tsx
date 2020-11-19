@@ -6,25 +6,25 @@ import { Label, Modal, Input } from "reactstrap";
 let wrapper: any;
 
 beforeEach(() => {
-    wrapper = shallow(<NewClientButton />);
+  wrapper = shallow(<NewClientButton />);
 });
 
 test("modal toggles on and off", () => {
-    expect(wrapper.find(Modal).prop("isOpen")).toBe(false);
-    wrapper.find("#toggleButton").simulate("click");
-    expect(wrapper.find(Modal).prop("isOpen")).toBe(true);
+  expect(wrapper.find(Modal).prop("isOpen")).toBe(false);
+  wrapper.find(".toggleButton").simulate("click");
+  expect(wrapper.find(Modal).prop("isOpen")).toBe(true);
 });
 
 it("modal should have 5 label fields", () => {
-    const labels = wrapper.find(Label);
-    expect(labels.length).toBe(5);
+  const labels = wrapper.find(Label);
+  expect(labels.length).toBe(6);
 });
 
 it("modal should have 5 input fields", () => {
-    const inputs = wrapper.find(Input);
-    expect(inputs.length).toBe(5);
+  const inputs = wrapper.find(Input);
+  expect(inputs.length).toBe(6);
 });
 
 it("submit button should say 'Submit'", () => {
-    expect(wrapper.find("#newClientButton").render().text()).toBe("Submit");
+  expect(wrapper.find(".newClientButton").render().text()).toBe("Submit");
 });
