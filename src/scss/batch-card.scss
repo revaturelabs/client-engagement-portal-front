@@ -16,11 +16,13 @@
 {
     max-width: 150px;
     max-height: 50px;
+    overflow: hidden;
 }
 
 .spec-text
 {
     font-size: 12px;
+    overflow: hidden;
 }
 
 .view-btn

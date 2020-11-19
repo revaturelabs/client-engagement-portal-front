@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { Col, Container, DropdownItem, Row, Spinner } from 'reactstrap';
 import { BatchCard } from '../../components/BatchCard/BatchCard';
 import { NavBar } from '../../components/NavBar/NavBar';
-import reactReduxLogo from '../../assets/react-redux-logo.png';
-import javaLogo from '../../assets/java-logo.png';
+
 import RequestBatchCard from '../../components/RequestBatchCard/RequestBatchCard';
 import RequestBatchCardModal from '../../components/RequestBatchCard/RequestBatchCardModal';
-import { IBatchState } from '../../_reducers/BatchReducer';
+import { IBatchState, initialBatchState } from '../../_reducers/BatchReducer';
 import { connect, useDispatch } from 'react-redux';
 import Axios from 'axios';
 import { setBatchState } from '../../actions/BatchCardActions';
+import PlanInterventionModal from '../../components/PlanInterventionModal/PlanInterventionModal';
 
 interface IProps {
     batches: {
@@ -19,6 +19,13 @@ interface IProps {
     }[],
 }
 
+/**
+ * Will show the batches that were mapped to the logged in client. Unless they were not mapped any
+ * batches. In that case, they will be shown a message which assures them that they will be mapped
+ * one in the near future and can even notify the admin users with the "request batch" button. 
+ * 
+ * @param props batch information. Should be pulled from the database whenever this component loads 
+ */
 const HomePage:React.FC<IProps> = (props:IProps) => {
 
     const [hasBatches, setHasBatches] = useState(false);
@@ -34,6 +41,11 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
     const getBatches = () =>
     {   
         dispatch(getBatchCardData(1));
+    }
+
+    const resetBatches = () =>
+    {   
+        dispatch(setBatchState(initialBatchState));
     }
 
     /**
@@ -55,7 +67,7 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
         };
 
         //get data from server based on user id that was given
-        const response:any = await Axios.get("https://caliber2-mock.revaturelabs.com/mock/training/batch")
+        const response:any = await Axios.get("https://caliber2-mock.revaturelabs.com/mock/training/batch/current")
         .then((response:any) => {
     
             if (response != null)
@@ -86,14 +98,16 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
         <Container style={{height: "100%", maxWidth: "100%", backgroundColor:"#e3e3e3"}}>
             <NavBar>
                 <DropdownItem header>Development Options</DropdownItem>
-                <DropdownItem onClick={() => setHasBatches(false)}>Simulate no batches</DropdownItem>
+                <DropdownItem onClick={() => {setHasBatches(false); resetBatches();}}>Simulate no batches</DropdownItem>
                 <DropdownItem onClick={() => {setHasBatches(true); getBatches();} }>Get ALL Mock Batches from the Calipur Database</DropdownItem>
             </NavBar>
 
-            {/* Modal for Requesting an Intervention, will be moved to batch info page 
+            {/* I only commented this out because I couldn't add all the modules in my version for some reason
+            
+            Modal for Requesting an Intervention, will be moved to batch info page
             <button onClick={() => setShowInterventionModal(!showInterventionModal)}>Temporary Test Intervention Modal (Will Go on Batch Info Page)</button>
             <PlanInterventionModal show={showInterventionModal} setShow={setShowInterventionModal} />
-             Modal for Requesting an Intervention, will be moved to batch info page */}
+              Modal for Requesting an Intervention, will be moved to batch info page */}
             
             {hasBatches ?
 
@@ -113,7 +127,7 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
                         { 
                             props.batches.map((element,index) => (
                                 <span key={index} className="col-3" >
-                                    <BatchCard batchId={element.id} titlePic={reactReduxLogo} specialization={element.skill}
+                                    <BatchCard batchId={element.id} specialization={element.skill}
                                     batchName={element.name} />
                                 </span>
                                 

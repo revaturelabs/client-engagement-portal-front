@@ -1,6 +1,7 @@
 import { batch } from "react-redux";
 import { SET_BATCHES } from "../actions/BatchCardActions"
 
+//Batch state is essentially just an array of batch objects
 export interface IBatchState{
     batches: [{
         id: number,
