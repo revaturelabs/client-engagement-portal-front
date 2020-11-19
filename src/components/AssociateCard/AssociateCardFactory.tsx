@@ -35,7 +35,7 @@ export const AssociateCardFactory:React.FC<any> = (props:IProps) => {
      * This will get all associates from the back-end given the batchID
      */
     const beginningUrl = "http://ec2-35-174-62-5.compute-1.amazonaws.com:9011/";
-    const url = beginningUrl+"someUrl";
+    const url = beginningUrl+"someUrl"; 
     let associates:IAssociate[];
     const getAssociates = async () => {
         const response = await Axios.get(url+`?batchID=${props.batchID}`); 

@@ -1,0 +1,41 @@
+#batch-info-wrapper {
+    margin-top: 40px;
+}
+#batch-info-wrapper h1 {
+    margin-top: 40px;
+    text-align: center;
+    color: #F26925;
+    border-bottom: 1px solid #474C55;
+}
+#batch-info-wrapper .batch-info-card {
+    border-radius: 20px;
+}
+.batch-info-card .card-header {
+    text-align: center;
+}
+.card-header h4 {
+    color: #F26925;
+}
+.batch-info-card .card-body {
+    color: #474C55;
+}
+.logo-container {
+    text-align: center; 
+}
+.logo-container img{
+    max-width: 60%;
+    max-height: 80px;
+    vertical-align: middle;
+    margin: auto; 
+}
+.helper{
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+.card-body .row{
+    margin-top: 15px;
+}
+b {
+    font-weight: bold !important;
+}

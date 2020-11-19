@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Modal, Button, ModalBody, Row } from 'reactstrap';
+import { Modal, Button, ModalBody, Row } from 'reactstrap';
 // import '../../scss/revature-colors.scss';
 // import '../../scss/app.scss';
 // import '../../scss/batch-card.scss'
@@ -32,9 +32,7 @@ export const AssociateCardModal:React.FC<IAssociate> = (props:IAssociate) => {
     let testMap;
     let averageTest = 0;
     let testWeek = 0;
-    if(tests === undefined){
-        
-    } else{
+    if(tests !== undefined){
         testMap = tests.map((test) => <div id="weekAndScore"><p>Week {test.week}: {test.score}%</p><div className="h-divider"></div></div>);
         for(let test of tests){
             averageTest += test.score;
@@ -56,8 +54,7 @@ export const AssociateCardModal:React.FC<IAssociate> = (props:IAssociate) => {
      * Otherwise calculate the total score and divide by total weeks
      * then return the average.
      */
-    if(techs === undefined){
-    } else{
+    if(techs !== undefined){
         techMap = techs.map((techs) => <div id="techAndScore"><p>{techs.tech}: {techs.score}%</p><div className="h-divider"></div></div>);
         for(let tech of techs){
             averageTech += tech.score;

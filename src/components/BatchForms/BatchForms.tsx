@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Col, Form, Input, Modal, ModalBody, ModalHeader, Row } from 'reactstrap';
+import { Button, Col, Form, FormGroup, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader, Row } from 'reactstrap';
 import '../../scss/BatchFormStyle.scss';
 
 export const BatchForms: React.FC = () => {

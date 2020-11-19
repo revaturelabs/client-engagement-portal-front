@@ -128,7 +128,7 @@ export const NewClientButton: React.FC<any> = () => {
           fontFamily: " futura-pt, sans-serif",
           fontStyle: "normal",
           fontWeight: 300,
-          width: "16rem",
+          width: "100%",
           border: "none",
         }}
         onClick={toggle}

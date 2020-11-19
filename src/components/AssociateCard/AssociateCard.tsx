@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Card, Modal, Row } from 'reactstrap';
+import { Card } from 'reactstrap';
 import { AssociateCardModal } from './AssociateCardModal';
 import '../../scss/associate-card.scss'
 import { IAssociate } from '../../_reducers/AssociateReducer'
@@ -55,8 +55,7 @@ export const AssociateCard: React.FC<IAssociate> = (props: IAssociate) => {
          * Otherwise, add each test score to a total, divide by the number of scores,
          * and return the average score
          */
-        if (props.testScores === undefined) {
-        } else {
+        if (props.testScores !== undefined) {
             for (let test of props.testScores) {
                 sc += test.score;
                 weeks++;
@@ -79,9 +78,7 @@ export const AssociateCard: React.FC<IAssociate> = (props: IAssociate) => {
          * If there are no test scores, return 0.
          * Otherwise, set the value to be equal to the last test.
          */
-        if (props.testScores === undefined) {
-
-        } else {
+        if (props.testScores !== undefined) {
             for (; props.testScores[i];) {
                 /**
                 * For each item in test scores, change the value to match.
