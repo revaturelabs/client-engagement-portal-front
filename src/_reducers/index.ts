@@ -1,10 +1,14 @@
 import { AnyAction, CombinedState, combineReducers, Reducer } from "redux";
-import { IBatchState } from "./BatchReducer";
+import { BatchReducer, IBatchState } from "./BatchReducer";
 import { IUserState, userReducer } from "./UserReducer";
 
 export interface IRootState{
     userState:IUserState,
-    //batchState:IBatchState
+    batchState:IBatchState
 }
 
-export const rootReducer:Reducer<CombinedState<IRootState>, AnyAction> = combineReducers<IRootState>({userState: userReducer});
+export const rootReducer:Reducer<CombinedState<IRootState>, AnyAction> = combineReducers<IRootState>(
+    {userState: userReducer,
+    batchState:BatchReducer,
+    //place your state:reducer here
+});
