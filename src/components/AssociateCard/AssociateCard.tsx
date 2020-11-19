@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Card, Modal, Row } from 'reactstrap';
 import { AssociateCardModal } from './AssociateCardModal';
-// import '../../scss/revature-colors.scss';
-// import '../../scss/app.scss';
-// import '../../scss/batch-card.scss'
 import '../../scss/associate-card.scss'
-import {IAssociate} from '../../_reducers/AssociateReducer'
+import { IAssociate } from '../../_reducers/AssociateReducer'
 
-//This component displays the associate's information on a batch's page.
+/**
+ * This component shows a card giving some brief information about an associate.
+ * Takes in props containing information about the associate.
+ * @param props - Type: IAssociate {firstName, lastName, testScores, techScores}
+ * 
+ * @returns TSX Element to render
+ */
 export const AssociateCard: React.FC<IAssociate> = (props: IAssociate) => {
-
-    const [isHidden, setHidden] = React.useState(true);
-    const handleHide = () => setHidden(!isHidden);
 
     //just for testing purposes
     const fakeData: IAssociate = {
@@ -42,13 +42,19 @@ export const AssociateCard: React.FC<IAssociate> = (props: IAssociate) => {
         }]
     };
 
-    //the variable will hold the average test score of the associate
+    /**
+     * This field will calculate the average test score of the associate.
+     */
     const avg = () => {
 
         let sc = 0;
         let weeks = 0;
 
-        //if testScores is unndefined, don't iterate
+        /** 
+         * If the list of scores is empty, don't iterate through.
+         * Otherwise, add each test score to a total, divide by the number of scores,
+         * and return the average score
+         */
         if (props.testScores === undefined) {
         } else {
             for (let test of props.testScores) {
@@ -61,45 +67,54 @@ export const AssociateCard: React.FC<IAssociate> = (props: IAssociate) => {
         return sc;
     }
 
-    //this variable will hold the last test score the associate got
+    /**
+     * This field will hold the last test score the associate got.
+     */
     const score = () => {
 
         let value = 0;
         let i = 0;
 
-        //if testScores is undefined, don't change the value
+        /**
+         * If there are no test scores, return 0.
+         * Otherwise, set the value to be equal to the last test.
+         */
         if (props.testScores === undefined) {
 
         } else {
             for (; props.testScores[i];) {
-                //for each item in test scores, change value to match.
-                //when it stops iterating, we'll have the last value
+                /**
+                * For each item in test scores, change the value to match.
+                * When it stops iterating, we'll have the last value.
+                */
                 value = props.testScores[i].score;
                 i++;
             }
         }
-
-        //and then return value
         return value;
     }
 
     //there are four places here where fake data will be replaced with props
+    /**
+     * This function returns the TSX element itself.
+     * It contains a button to toggle a card,
+     * a card that holds the associate's information,
+     * and another component, AssociateCardModal, which takes the associate object as props.
+     */
     return (
         <body>
-            <Button onClick={handleHide}>Associates</Button>
-            <Card className="aso-card" hidden={isHidden}>
-                {/* div for image and name */}
+            <Card className="aso-card">
+                {/* div for name and average */}
                 <div>
-                    <h5 font-family={"$rev-font"}>{fakeData.firstName} {fakeData.lastName}</h5>
-                    {/* <img className="pic" src={fakeData.profilePic} alt="associate_profile_pic" /> */}
+                    <h5 id="nameHolder" font-family={"$rev-font"}>{props.firstName} {props.lastName}</h5>
                     <h5 font-family={"$rev-font"}>Average:</h5>
-                    <h4 font-family={"$rev-font"}>{avg()}%</h4>
+                    <h4 id="averageHolder" font-family={"$rev-font"}>{avg()}%</h4>
                 </div>
-                {/* div for past quiz grades */}
+                {/* div for last quiz grade */}
                 <div>
-                    <h5>Latest Test Score: {score()}%</h5>
+                    <h5 id="scoreHolder">Latest Test Score: {score()}%</h5>
                 </div>
-                {/* div for holding the modal button */}
+                {/* div for holding the modal */}
                 <div style={{ display: "block", textAlign: "center", alignContent: "center", justifyContent: "center" }}>
                     <AssociateCardModal {...fakeData} />
                 </div>

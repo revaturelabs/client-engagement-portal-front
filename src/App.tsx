@@ -9,9 +9,8 @@ import { store } from './Store';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import { LoginPage } from './views/LoginPage/LoginPage';
 import { HomePage } from './views/HomePage/HomePage';
-import { AssociateCard } from './components/AssociateCard/AssociateCard';
-import { AssociateCardModal } from './components/AssociateCard/AssociateCardModal';
 import { AdminPage } from './views/AdminPage/AdminPage';
+import { AssociateCardFactory } from './components/AssociateCard/AssociateCardFactory';
 
 // Amplify.configure(awsconfig);
 
@@ -28,7 +27,7 @@ function App() {
             <Route path="/admin" component={AdminPage}/>
           </Switch>
         </BrowserRouter>
-        <AssociateCard />
+        <AssociateCardFactory />
       </Provider>
       
     </div>
