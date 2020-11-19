@@ -2,11 +2,13 @@
 
 .rev-card
 {
+    max-width: 200px;
+    min-width: 100px;
     background-color: white;
-    padding: 15px;
+    padding: 20px;
     border: 1px solid $rev-orange;
     border-radius: 20px;
-    margin-top: 10px;
+    margin: 10px;
     box-shadow: 3px 3px 15px $rev-blue-trans;
 }
 
