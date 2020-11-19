@@ -13,7 +13,12 @@ import {
   Row,
   Col,
 } from "reactstrap";
-import "./NewClientButton.scss";
+import { isConstructorDeclaration } from "typescript";
+import  '../../scss/NewClientButton.scss';
+
+
+//This component includes the button for a new client account
+//This also has a modal form that pops up when the button is clicked
 
 /**
  * @function newClientButton
@@ -122,58 +127,17 @@ export const NewClientButton: React.FC<any> = () => {
 
   return (
     <>
-      <Button
-        style={{
-          backgroundColor: "#F26925",
-          fontFamily: " futura-pt, sans-serif",
-          fontStyle: "normal",
-          fontWeight: 300,
-          width: "100%",
-          border: "none",
-        }}
-        onClick={toggle}
-        className={"toggleButton"}
-      >
+      <Button onClick={toggle} className="create-account-button">
         Create Account
       </Button>
 
       <Modal isOpen={modal} toggle={toggle}>
-        <Row>
-          <Col xs="6">
-            <ModalHeader
-              className="container"
-              style={{
-                color: "#F26925",
-                display: "flex",
-                justifyContent: "space-between",
-                marginRight: "50%",
-              }}
-            >
+            <ModalHeader toggle={toggle} className="container create-account-modal-header">
               Create Account
-            </ModalHeader>
-          </Col>
-          <Col xs="6">
-            <Button
-              className="close"
-              style={{
-                backgroundColor: "white",
-                color: "#F26925",
-                border: "none",
-                fontWeight: 800,
-                padding: "15px",
-              }}
-              onClick={toggle}
-            >
-              X
-            </Button>
-          </Col>
-        </Row>
-        <Form
-          onSubmit={(event: React.FormEvent<HTMLFormElement>) =>
-            registerUser(event)
-          }
-        >
-          <ModalBody>
+            </ModalHeader>        
+          <Form onSubmit={(event:React.FormEvent<HTMLFormElement>) => registerUser(event)}>
+        <ModalBody>
+          {/* <Form onSubmit={registerUser}> */}
             <FormGroup>
               <Label for="exampleSelect">Account Type</Label>
               <Input
@@ -216,26 +180,13 @@ export const NewClientButton: React.FC<any> = () => {
               <Label>Confirm Password</Label>
               <Input type="password"></Input>
             </FormGroup>
-          </ModalBody>
+        </ModalBody>
 
-          <ModalFooter>
-            <Button
-              className="newClientButton"
-              style={{
-                margin: "auto",
-                backgroundColor: "#F26925",
-                fontFamily: " futura-pt, sans-serif",
-                fontStyle: "normal",
-                fontWeight: 300,
-                width: "100%",
-                border: "none",
-                fontSize: "1.5rem",
-              }}
-            >
-              Submit
-            </Button>
-          </ModalFooter>
-        </Form>
+        <ModalFooter>
+          <input type="submit" className="create-account-submit">
+          </input>
+        </ModalFooter>
+            </Form>
       </Modal>
     </>
   );
