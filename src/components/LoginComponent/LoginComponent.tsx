@@ -131,6 +131,6 @@ export class CEPLoginInputStyle implements React.CSSProperties {
         this.margin = "2px";
         this.width = "70%";
         this.display = "inline-block"
-        this.boxShadow = "inset 1px 2px 0 0 #ccc, inset 0 4px 0 0 #ddd, inset 2px 6px 0 0 #eee";
+        this.boxShadow = "inset 1px 2px 0 0 #ddd, inset 0 4px 0 0 #eee, inset 2px 6px 0 0 #fef";
     }
 }
