@@ -3,7 +3,16 @@ import { shallow } from "enzyme";
 import { BatchCard } from "../../../components/BatchCard/BatchCard";
 import { Modal } from "reactstrap";
 
-const setUp = (props={}) => {
+const setUp =
+    (
+        props=
+        {
+            batchId: 1,
+            specialization: "Java/Microservices",
+            batchName: "Dummy Batch"
+        }
+    ) =>
+{
     const component = shallow(<BatchCard {...props}/>);
     return component;
 }

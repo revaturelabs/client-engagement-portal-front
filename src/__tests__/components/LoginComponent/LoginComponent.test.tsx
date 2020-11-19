@@ -3,7 +3,7 @@ import { shallow } from "enzyme";
 import { LoginComponent } from "../../../components/LoginComponent/LoginComponent";
 import { Modal } from "reactstrap";
 
-const setUp = (props={}) => {
+const setUp = (props={loginType:"client"}) => {
     const component = shallow(<LoginComponent {...props}/>);
     return component;
 }

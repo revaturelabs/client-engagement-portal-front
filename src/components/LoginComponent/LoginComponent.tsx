@@ -6,7 +6,7 @@ import passThumb from '../../assets/pass-thumb.png';
 import { Auth } from 'aws-amplify';
 
 interface ILoginProps{
-    loginType?:string
+    loginType:string
 }
 
 export const LoginComponent:React.FC<ILoginProps> = (props:ILoginProps) => {
@@ -91,7 +91,7 @@ export const LoginComponent:React.FC<ILoginProps> = (props:ILoginProps) => {
                 </form>
             }
             </>
-      )  ;
+      );
 }
 
 export class CEPLoginInputStyle implements React.CSSProperties{
