@@ -4,12 +4,14 @@ import hands from '../../assets/engagementPortalLogo.svg';
 import userThumb from '../../assets/user-thumb.png';
 import passThumb from '../../assets/pass-thumb.png';
 import { Auth } from 'aws-amplify';
+import Axios from 'axios';
 
 interface ILoginProps {
     loginType: string
 }
 
 export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
+
 
     const [isClient, setClient] = useState(false);
     const [isAdmin, setAdmin] = useState(false);
@@ -32,6 +34,7 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
             const user = // !!!EMAIL WILL BE RETURNED IN: user.attributes.email
                 await Auth.signIn(loginCredentials.email, loginCredentials.password);
             // THIS OPERATION COSTS ~800 MILLISECONDS
+            console.log(user);
 
 
 

@@ -14,6 +14,7 @@ import {
   Col,
 } from "reactstrap";
 import "./NewClientButton.scss";
+import Axios from "axios";
 
 /**
  * @function newClientButton
@@ -23,6 +24,42 @@ import "./NewClientButton.scss";
  */
 export const NewClientButton: React.FC<any> = () => {
   const [modal, setModal] = useState(false);
+
+
+
+
+
+  //Below is testing code
+
+  //This requires an Async function to parse the current JWT token due to promises
+  const test = async () => {
+
+    //Assigns the current session promise
+    const sessionPromise = (Auth.currentSession());
+
+    //Awaits the promise to fufill, then triggers and axios
+    await sessionPromise.then(function (result) {
+      //Grabs the JWT token from the promise
+      let to = result.getIdToken().getJwtToken();
+      console.log(to);
+      //Makes an Axios with the JWT token in the header
+      Axios.get('http://localhost:9011/admin/', {
+        headers: {
+          'Authorization': `Bearer ${to}`
+        }
+      })
+        .then((res) => {
+          console.log(res.data)
+        })
+        .catch((error) => {
+          console.error(error)
+        })
+
+
+    });
+  }
+  test();
+
 
   /**
    * @function toggle
@@ -58,12 +95,11 @@ export const NewClientButton: React.FC<any> = () => {
     const email = event.currentTarget["email"].value;
     const password = event.currentTarget["password"].value;
     const role = event.currentTarget["select"].value;
-
     // Checks cognito if they have the admin role in the current session  for security. If not exit out
     // This checking operation takes about 150 MS
     // Unknown Error - Response time can be 10,000 MS. Usually happens when react is updating. This shouldn't be a problem
 
-    console.log((await Auth.currentSession()).getAccessToken().getJwtToken());
+    console.log((await Auth.currentSession()).getIdToken().getJwtToken());
     const checkRole = Auth.currentUserInfo();
     const checker = await checkRole.then(function (result) {
       if (result.attributes["custom:userRole"] !== "admin") {
