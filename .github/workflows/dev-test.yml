@@ -1,19 +1,19 @@
-name: Build
+
+name: Test Development
 on:
-  pull_request:
-    branches: 
-      - main
-    types: [opened, synchronize, reopened]
+  push:
+    branches:
+      - development
 jobs:
   sonarcloud:
-    name: SonarCloudMain
+    name: SonarCloud
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      - name: Get master
-        run: git fetch origin main
+      - name: Get development
+        run: git fetch origin development
       - name: Install dependencies
         run:  npm install
       - name: Install Jest globally
