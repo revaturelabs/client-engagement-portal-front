@@ -60,8 +60,6 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
             ]
         };
 
-        console.log("Ping!")
-
         dispatch(setBatchState(batchArray));
 
         setSpinner(false);
@@ -117,9 +115,9 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
         <Container style={{minHeight: "100vh", maxWidth: "100vw", backgroundColor:"#E3E3E3"}}>
             <NavBar>
                 <DropdownItem header>Development Options</DropdownItem>
-                <DropdownItem onClick={() => {setHasBatches(false); console.log("Poing!"); resetBatches();}}>Simulate no batches</DropdownItem>
-                <DropdownItem onClick={() => {setHasBatches(true); console.log("Pong!"); getSimulatedBatches();}}>Simulate 3 batches</DropdownItem>
-                <DropdownItem onClick={() => {setHasBatches(true); console.log("Pang!"); getBatches();} }>Get ALL Mock Batches from the Caliber Database</DropdownItem>
+                <DropdownItem onClick={() => {setHasBatches(false); resetBatches();}}>Simulate no batches</DropdownItem>
+                <DropdownItem onClick={() => {setHasBatches(true); getSimulatedBatches();}}>Simulate 3 batches</DropdownItem>
+                <DropdownItem onClick={() => {setHasBatches(true); getBatches();} }>Get ALL Mock Batches from the Caliber Database</DropdownItem>
             </NavBar>
 
             {/* Modal for Requesting an Intervention, will be moved to batch info page */}
