@@ -1,13 +1,13 @@
-import React from "react";
-import Amplify from "aws-amplify";
-import awsconfig from "./aws-exports";
-import "./scss/app.scss";
-import { connect } from "react-redux";
-import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-import { LoginPage } from "./views/LoginPage/LoginPage";
-import { HomePage } from "./views/HomePage/HomePage";
-import { AdminPage } from "./views/AdminPage/AdminPage";
-import { IRole } from "./_reducers/LoginReducer";
+import React from 'react';
+import Amplify from 'aws-amplify';
+import awsconfig from './aws-exports';
+import './scss/app.scss';
+import { Provider } from 'react-redux';
+import { store } from './Store';
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import { LoginPage } from './views/LoginPage/LoginPage';
+import HomePage from './views/HomePage/HomePage';
+import { AdminPage } from './views/AdminPage/AdminPage';
 import { PageNotFound } from "./views/PageNotFound/PageNotFound";
 
 Amplify.configure(awsconfig);
