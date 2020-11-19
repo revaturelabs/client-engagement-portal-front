@@ -3,7 +3,7 @@ import "../../scss/batch-card.scss";
 import javaLogo from '../../assets/java-logo.png';
 import reactReduxLogo from '../../assets/react-redux-logo.png';
 import javaAuto from '../../assets/JavaAutoLogo.png';
-import javaMicro from '../../assets/JavaMicroLogo.jpg';
+// import javaMicro from '../../assets/JavaMicroLogo.jpg';
 import pegaLogo from '../../assets/Pegalogo.jpg';
 import salesLogo from '../../assets/sales.png';
 import bigData from '../../assets/bigData.png';
