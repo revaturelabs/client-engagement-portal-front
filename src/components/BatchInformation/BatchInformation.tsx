@@ -6,9 +6,10 @@ import javaLogo from '../../assets/java-logo.png';
 import springLogo from '../../assets/spring-logo.png';
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { AssociateCardFactory } from '../AssociateCard/AssociateCardFactory';
 
 interface IBatchInformationProps {
-    name:string,
+    name?:string,
 }
 
 export const BatchInformation:React.FC<IBatchInformationProps> = (props:IBatchInformationProps) => {
@@ -80,7 +81,7 @@ export const BatchInformation:React.FC<IBatchInformationProps> = (props:IBatchIn
                     <h1>Batch Engineers</h1>
                     
                     <Carousel responsive={responsive}>
-                        <Card>
+                        {/* <Card>
                             <CardHeader>
                                 Alex Orr
                             </CardHeader>
@@ -156,7 +157,8 @@ export const BatchInformation:React.FC<IBatchInformationProps> = (props:IBatchIn
                             <CardFooter>
                                 <button>View</button>
                             </CardFooter>
-                        </Card>
+                        </Card> */}
+                        <AssociateCardFactory />
                     </Carousel>
 
                 </div>

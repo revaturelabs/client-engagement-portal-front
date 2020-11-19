@@ -23,7 +23,7 @@ export const AssociateCardFactory:React.FC<any> = (props:IProps) => {
     /**
      * This state is used to show and hide the associate cards based on a button.
      */
-    const [isHidden, setHidden] = React.useState(true);
+    const [isHidden, setHidden] = React.useState(false);
     /**
      * The button flips the hidden state of the cards based on the current state.
      */
@@ -35,30 +35,39 @@ export const AssociateCardFactory:React.FC<any> = (props:IProps) => {
      * This will get all associates from the back-end given the batchID
      */
     const beginningUrl = "http://ec2-35-174-62-5.compute-1.amazonaws.com:9011/";
-    const url = beginningUrl+"someUrl"; 
+    const url = beginningUrl+"client/batch/"+props.batchID; 
     let associates:IAssociate[];
     const getAssociates = async () => {
-        const response = await Axios.get(url+`?batchID=${props.batchID}`); 
+        const response = await Axios.get(url); 
         associates = await response.data;
     }
 
+    let cards;
     /**
      * This field will hold all of the AssociateCards, based on the associates
      * returned from the batch.
      */
-    const content = () => {
+    const content = (() => {
         
-        let cards = "";
+        
+        cards = <AssociateCard />;
+    cards = [<AssociateCard />,<AssociateCard />,<AssociateCard />,<AssociateCard />,<AssociateCard />];
         /**
          * For each associate in the batch, create a new AssociateCard,
          * and pass in their information as props.
          */
-        for(let associate of associates){
-            cards += <AssociateCard {...associate} />;
-        }
+        // if(associates === undefined){
+        //     //do nothing
+        // } else{
+        //     for(let associate of associates){
+        //         cards += <AssociateCard {...associate} />;
+        //     }
+        // }
+        
+        console.log(cards);
+        
+    })()
 
-        return cards;
-    }
 
     /**
      * This function returns the TSX element itself.
@@ -67,7 +76,7 @@ export const AssociateCardFactory:React.FC<any> = (props:IProps) => {
     return(
         <>
             <Button onClick={handleHide}>Associates</Button>
-            <div id="contentHolder" hidden={isHidden}>{content}</div>            
+            <span id="contentHolder" hidden={isHidden}>{cards}</span>            
         </>
     )
 

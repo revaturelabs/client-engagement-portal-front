@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Card } from 'reactstrap';
 import { AssociateCardModal } from './AssociateCardModal';
 import '../../scss/associate-card.scss'
@@ -99,7 +99,7 @@ export const AssociateCard: React.FC<IAssociate> = (props: IAssociate) => {
      * and another component, AssociateCardModal, which takes the associate object as props.
      */
     return (
-        <body>
+        <li>
             <Card className="aso-card">
                 {/* div for name and average */}
                 <div>
@@ -118,7 +118,7 @@ export const AssociateCard: React.FC<IAssociate> = (props: IAssociate) => {
 
             </Card>
 
-        </body>
+        </li>
     )
 
 }

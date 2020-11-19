@@ -3,7 +3,7 @@ import "../../scss/batch-card.scss";
 import javaLogo from '../../assets/java-logo.png';
 import reactReduxLogo from '../../assets/react-redux-logo.png';
 import javaAuto from '../../assets/JavaAutoLogo.png';
-import javaMicro from '../../assets/JavaMicroLogo.jpg';
+// import javaMicro from '../../assets/JavaMicroLogo.jpg';
 import pegaLogo from '../../assets/Pegalogo.jpg';
 import salesLogo from '../../assets/sales.png';
 import bigData from '../../assets/bigData.png';
@@ -20,7 +20,7 @@ export const BatchCard:React.FC<IProps> = (props:IProps) => {
 
     const goToBatchViewPage = () => {
         console.log("send this id to the \"batch view page\" to load the right page: " + props.batchId);
-        //window.location.href = "/batchView"+props.batchId;
+        // window.location.href = "/batch/"+props.batchId;
     }
 
     //sets the image of this card to match the specialization
