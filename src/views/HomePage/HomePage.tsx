@@ -34,7 +34,7 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
  
     const dispatch = useDispatch();
 
-    //temporary functions which are called from the nav bar
+    // temporary DEVELOPMENT functions which are called from the nav bar
     const getBatches = () =>
     {   
         //gets batch data from caliber
@@ -45,6 +45,26 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
     {   
         //removes caliber data / resets the batch state
         dispatch(setBatchState(initialBatchState));
+    }
+
+    const getSimulatedBatches = () =>
+    {
+        //displays simulated batch data
+        setSpinner(true);
+
+        const batchArray:IBatchState = {
+            batches: [
+                {id: 1, skill: "Java React", name: "Some of a Batch"},
+                {id: 2, skill: "SalesForce", name: "The Batchelors"},
+                {id: 3, skill: ".NET/Microservices", name: "Ala-batch-ter"},
+            ]
+        };
+
+        console.log("Ping!")
+
+        dispatch(setBatchState(batchArray));
+
+        setSpinner(false);
     }
 
     /**
@@ -61,12 +81,12 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
         setSpinner(true);
 
         //array to place batch data into
-        let batchArray:any = {
+        let batchArray:IBatchState = {
             batches: [],
         };
 
         //get data from server based on user id that was given
-        const response:any = await Axios.get("https://caliber2-mock.revaturelabs.com/mock/training/batch/current")
+        await Axios.get("https://caliber2-mock.revaturelabs.com/mock/training/batch/current")
         .then((response:any) => {
     
             if (response != null)
@@ -97,8 +117,9 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
         <Container style={{minHeight: "100vh", maxWidth: "100vw", backgroundColor:"#E3E3E3"}}>
             <NavBar>
                 <DropdownItem header>Development Options</DropdownItem>
-                <DropdownItem onClick={() => {setHasBatches(false); resetBatches();}}>Simulate no batches</DropdownItem>
-                <DropdownItem onClick={() => {setHasBatches(true); getBatches();} }>Get ALL Mock Batches from the Caliber Database</DropdownItem>
+                <DropdownItem onClick={() => {setHasBatches(false); console.log("Poing!"); resetBatches();}}>Simulate no batches</DropdownItem>
+                <DropdownItem onClick={() => {setHasBatches(true); console.log("Pong!"); getSimulatedBatches();}}>Simulate 3 batches</DropdownItem>
+                <DropdownItem onClick={() => {setHasBatches(true); console.log("Pang!"); getBatches();} }>Get ALL Mock Batches from the Caliber Database</DropdownItem>
             </NavBar>
 
             {/* Modal for Requesting an Intervention, will be moved to batch info page */}
