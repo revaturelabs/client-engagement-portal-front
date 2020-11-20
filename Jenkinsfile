@@ -51,7 +51,7 @@ pipeline {
     }
     stage('Post-Production') {
       steps {
-        sh 'rm -rf node_modules'
+        sh 'rm -rf node_modules npm-cache/_cacache'
       }
     }
    }
