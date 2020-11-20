@@ -28,26 +28,45 @@ interface IProps {
  */
 const HomePage:React.FC<IProps> = (props:IProps) => {
 
+    const [showInterventionModal, setShowInterventionModal] = useState(false);
     const [hasBatches, setHasBatches] = useState(false);
     const [hasSpinner, setSpinner] = useState(false);
  
     const dispatch = useDispatch();
 
-    //temporary functions which are called from the nav bar
+    // temporary DEVELOPMENT functions which are called from the nav bar
     const getBatches = () =>
     {   
-        //gets batch data from calipur
+        //gets batch data from caliber
         dispatch(getBatchCardData(1));
     }
 
     const resetBatches = () =>
     {   
-        //removes calipur data / resets the batch state
+        //removes caliber data / resets the batch state
         dispatch(setBatchState(initialBatchState));
     }
 
+    const getSimulatedBatches = () =>
+    {
+        //displays simulated batch data
+        setSpinner(true);
+
+        const batchArray:IBatchState = {
+            batches: [
+                {id: 1, skill: "Java React", name: "Some of a Batch"},
+                {id: 2, skill: "SalesForce", name: "The Batchelors"},
+                {id: 3, skill: ".NET/Microservices", name: "Ala-batch-ter"},
+            ]
+        };
+
+        dispatch(setBatchState(batchArray));
+
+        setSpinner(false);
+    }
+
     /**
-     * This function gets all of the batch data currently in the Calipur
+     * This function gets all of the batch data currently in the Caliber
      *  db. It places all of the data from that endpoint into the "batch
      *  state".
      * 
@@ -60,12 +79,12 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
         setSpinner(true);
 
         //array to place batch data into
-        let batchArray:any = {
+        let batchArray:IBatchState = {
             batches: [],
         };
 
         //get data from server based on user id that was given
-        const response:any = await Axios.get("https://caliber2-mock.revaturelabs.com/mock/training/batch/current")
+        await Axios.get("https://caliber2-mock.revaturelabs.com/mock/training/batch/current")
         .then((response:any) => {
     
             if (response != null)
@@ -93,19 +112,17 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
     };
 
     return(
-        <Container style={{height: "100%", maxWidth: "100%", backgroundColor:"#e3e3e3"}}>
+        <Container style={{minHeight: "100vh", maxWidth: "100vw", backgroundColor:"#E3E3E3"}}>
             <NavBar>
                 <DropdownItem header>Development Options</DropdownItem>
                 <DropdownItem onClick={() => {setHasBatches(false); resetBatches();}}>Simulate no batches</DropdownItem>
-                <DropdownItem onClick={() => {setHasBatches(true); getBatches();} }>Get ALL Mock Batches from the Calipur Database</DropdownItem>
+                <DropdownItem onClick={() => {setHasBatches(true); getSimulatedBatches();}}>Simulate 3 batches</DropdownItem>
+                <DropdownItem onClick={() => {setHasBatches(true); getBatches();} }>Get ALL Mock Batches from the Caliber Database</DropdownItem>
             </NavBar>
 
-            {/* I only commented this out because I couldn't add all the modules in my version for some reason
-            
-            Modal for Requesting an Intervention, will be moved to batch info page
+            {/* Modal for Requesting an Intervention, will be moved to batch info page */}
             <button onClick={() => setShowInterventionModal(!showInterventionModal)}>Temporary Test Intervention Modal (Will Go on Batch Info Page)</button>
             <PlanInterventionModal show={showInterventionModal} setShow={setShowInterventionModal} />
-              Modal for Requesting an Intervention, will be moved to batch info page */}
             
             {hasBatches ?
 
@@ -124,10 +141,10 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
                         <Row>
                         { 
                             props.batches.map((element,index) => (
-                                <span key={index} className="col-3" >
+                                <Col xl="2" lg="3" md="4" sm="4" xs="6" key={index}>
                                     <BatchCard batchId={element.id} specialization={element.skill}
                                     batchName={element.name} />
-                                </span>
+                                </Col>
                                 
                             ))
                         }
