@@ -1,41 +1,26 @@
-import React, { SyntheticEvent } from 'react';
+import React from 'react';
 import { Accordion, Card } from 'react-bootstrap';
 import { Table } from 'reactstrap';
-import { INotification } from '../../_reducers/NotificationReducer';
+import { INotificationState } from '../../_reducers/NotificationReducer';
 import './Notifications.scss';
 
-//TODO: Add actions, styling
-
-interface IProps {
-    notifications:INotification[] | null
-    addNotif: (cName:string, subj:string, date:string) => void;
-    getNotifs: (cName:string, subj:string, date:string) => void;
-    removeNotif: (cName:string, subj:string, date:string) => void;
-}
-
-export const Notifications:React.FC<IProps> = (props:IProps) => {
-
-    const handleAdd = (e:SyntheticEvent<HTMLFormElement>) => {
-        e.preventDefault();
-
-        props.addNotif(e.currentTarget["n"].value, e.currentTarget["s"].value, e.currentTarget["d"].value);
-    }
+/**
+ * This component creates an Accordion element that is populated with the current notification state.
+ * Once it reaches a certain height, an overflow attribute will trigger and turn the notifications into a scrollable box.
+ * 
+ * @param props the current state of notifications
+ * 
+ * @returns An Accordion element populated with all current requests for more Talent and desires to stage Interventions.
+ */
+export const Notifications:React.FC<INotificationState> = (props:INotificationState) => {
 
     return (
-        <div className="notifs">
-            {/*THIS FORM IS JUST TO TEST STATE*/}
-            <form onSubmit={handleAdd}>
-                <input type="text" name="n" placeholder="Client Name" defaultValue=""/>
-                <input type="text" name="s" placeholder="Subject" defaultValue=""/>
-                <input type="text" name="d" placeholder="Requested On" defaultValue=""/>
-                <input type="submit" value="Submit"/>
-            </form>
-
-            <Accordion>
-                    <Accordion.Toggle as={Card.Header} variant="link" eventKey="0" id="notif-header">
-                        Notifications
-                    </Accordion.Toggle>
-                    
+        <Accordion className="notifs-container">
+                <Accordion.Toggle as={Card.Header} variant="link" eventKey="0" id="notif-header">
+                    Notifications
+                </Accordion.Toggle>
+                
+                <div className="notifs">
                     {props.notifications?.map(
                             (e, i) =>
                             <Accordion.Collapse eventKey="0" key={i}>
@@ -51,7 +36,7 @@ export const Notifications:React.FC<IProps> = (props:IProps) => {
                             </Accordion.Collapse>
                         )
                     }
-            </Accordion>
-        </div>
+                </div>
+        </Accordion>
     )
 }

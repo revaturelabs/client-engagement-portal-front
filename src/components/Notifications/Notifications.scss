@@ -1,10 +1,15 @@
 @import "../../scss/revature-colors.scss";
 
-.notifs {
-    position: fixed;
+.notifs-container {
+    position: fixed;      
     bottom: 0;
     width: 100%;
-    max-height: 1000px;
+}
+
+.notifs {
+    max-height: 200px;
+    overflow-y: scroll;
+    background-color: white;
 }
 
 #notif-header {
@@ -14,10 +19,15 @@
     font-style: $rev-font-style;
     font-weight: $rev-font-weight;
     color: $rev-cust-gray;
+    transition: all 0.3s ease 0s;
 }
 
 #notif-header:hover {
-    background-color: $rev-yellow;
+    background-color:white;
+    border: 3px solid #F26925;
+    box-shadow: none;
+    color: #F26925;
+    font-weight: bold;
 }
 
 .myTable {

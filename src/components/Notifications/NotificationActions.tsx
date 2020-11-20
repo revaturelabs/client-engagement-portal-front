@@ -1,5 +1,5 @@
 /**
- * Creates an ADD_NOTIFICATION action
+ * @returns an ADD_NOTIFICATION action
  */
 export const addNotification = (cName:string, subj:string, date:string) => {
     return {
@@ -13,7 +13,9 @@ export const addNotification = (cName:string, subj:string, date:string) => {
 };
 
 /**
- * Creates a GET_NOTIFICATIONS action
+ * !!! MIGHT NOT USE THIS
+ * 
+ * @returns a GET_NOTIFICATIONS action
  */
 export const getNotifications = (cName:string, subj:string, date:string) => {
     return {
@@ -27,7 +29,7 @@ export const getNotifications = (cName:string, subj:string, date:string) => {
 };
 
 /**
- * Creates a REMOVE_NOTIFICATION action
+ * @returns a REMOVE_NOTIFICATION action
  */
 export const removeNotification = (cName:string, subj:string, date:string) => {
     return {
