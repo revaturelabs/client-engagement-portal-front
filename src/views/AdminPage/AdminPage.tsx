@@ -3,6 +3,7 @@ import { Col, Container, Form, Input, Row } from "reactstrap";
 import { BatchForms } from "../../components/BatchForms/BatchForms";
 import { NavBar } from "../../components/NavBar/NavBar";
 import { NewClientButton } from "../../components/NewClientButton/NewClientButton";
+import NotificationsContainer from "../../components/Notifications/NotificationsContainer";
 
 export const AdminPage: React.FC = () => {
     return (
@@ -28,7 +29,7 @@ export const AdminPage: React.FC = () => {
                     Footer?
                 </Row> */}
             </Container>
-
+            <NotificationsContainer/>
             {/* sticky footer */}
         </>
     );

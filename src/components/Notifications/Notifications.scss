@@ -1,21 +1,29 @@
-$orange: #F26925;
-$white:  #FFFFFF;
-$darkgray:  #474C55;
+@import "../../scss/revature-colors.scss";
+
+.notifs {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    max-height: 1000px;
+}
 
 #notif-header {
-    background-color: $orange;
-    color: $white;
+    background-color: $rev-orange;
+    text-align: center;
+    font-family: $rev-font;
+    font-style: $rev-font-style;
+    font-weight: $rev-font-weight;
+    color: $rev-cust-gray;
 }
 
 #notif-header:hover {
-    background-color: $darkgray;
+    background-color: $rev-yellow;
 }
 
 .myTable {
+    text-align: center;
     margin-bottom: 0px !important;
+    font-family: $rev-font;
+    font-style: $rev-font-style;
+    font-weight: $rev-font-weight;
 }
-
-// .notif-row {
-//     background-color: $darkgray;
-//     color: $white;
-// }

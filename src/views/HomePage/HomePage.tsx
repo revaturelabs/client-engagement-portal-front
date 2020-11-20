@@ -26,7 +26,7 @@ interface IProps {
  * 
  * @param props batch information. Should be pulled from the database whenever this component loads 
  */
-const HomePage:React.FC<IProps> = (props:IProps) => {
+export const HomePage:React.FC<IProps> = (props:IProps) => {
 
     const [showInterventionModal, setShowInterventionModal] = useState(false);
     const [hasBatches, setHasBatches] = useState(false);

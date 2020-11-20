@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { IRootState } from "../../_reducers";
-import { INotification } from "../../_reducers/NotificationReducer";
+import { addNotification, getNotifications, removeNotification } from "./NotificationActions";
 import { Notifications } from "./Notifications";
 
 const mapStateToProps = (state:IRootState) => {
@@ -9,54 +9,10 @@ const mapStateToProps = (state:IRootState) => {
     }
 }
 
-export interface INotificationActions {
-    addNotification:(cName:string, subj:string, date:string) => {type:string, payload:INotification}
-    getNotifications:(cName:string, subj:string, date:string) => {type:string, payload:INotification}
-    removeNotification:(cName:string, subj:string, date:string) => {type:string, payload:INotification}
+const mapDispatchToProps = {
+    addNotif: addNotification,
+    getNotifs: getNotifications,
+    removeNotif: removeNotification
 }
 
-const mapDispatchToProps:INotificationActions = {
-    /**
-     * Creates an ADD_NOTIFICATION action
-     */
-    addNotification:(cName:string, subj:string, date:string) => {
-        return {
-            type: "ADD_NOTIFICATION",
-            payload: {
-                clientName: cName,
-                subject: subj,
-                requestDate: date
-            }
-        }
-    },
-
-    /**
-     * Creates a GET_NOTIFICATIONS action
-     */
-    getNotifications:(cName:string, subj:string, date:string) => {
-        return {
-            type: "GET_NOTIFICATIONS",
-            payload: {
-                clientName: cName,
-                subject: subj,
-                requestDate: date
-            }
-        }
-    },
-
-    /**
-     * Creates a REMOVE_NOTIFICATION action
-     */
-    removeNotification:(cName:string, subj:string, date:string) => {
-        return {
-            type: "REMOVE_NOTIFICATION",
-            payload: {
-                clientName: cName,
-                subject: subj,
-                requestDate: date
-            }
-        }
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Notifications)
+export default connect(mapStateToProps, mapDispatchToProps)(Notifications);

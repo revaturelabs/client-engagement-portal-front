@@ -1,41 +1,42 @@
 import React, { SyntheticEvent } from 'react';
 import { Accordion, Card } from 'react-bootstrap';
 import { Table } from 'reactstrap';
-import { INotificationState } from '../../_reducers/NotificationReducer';
+import { INotification } from '../../_reducers/NotificationReducer';
 import './Notifications.scss';
-import { INotificationActions } from './NotificationsContainer';
 
 //TODO: Add actions, styling
 
-interface IStateAndActions {
-    state: INotificationState
-    actions: INotificationActions
+interface IProps {
+    notifications:INotification[] | null
+    addNotif: (cName:string, subj:string, date:string) => void;
+    getNotifs: (cName:string, subj:string, date:string) => void;
+    removeNotif: (cName:string, subj:string, date:string) => void;
 }
 
-export const Notifications:React.FC<IStateAndActions> = (props:IStateAndActions) => {
+export const Notifications:React.FC<IProps> = (props:IProps) => {
 
     const handleAdd = (e:SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        
+        props.addNotif(e.currentTarget["n"].value, e.currentTarget["s"].value, e.currentTarget["d"].value);
     }
 
     return (
-        <div>
+        <div className="notifs">
             {/*THIS FORM IS JUST TO TEST STATE*/}
             <form onSubmit={handleAdd}>
-                <input type="text" placeholder="Client Name" defaultValue=""/>
-                <input type="text" placeholder="Subject" defaultValue=""/>
-                <input type="text" placeholder="Requested On" defaultValue=""/>
+                <input type="text" name="n" placeholder="Client Name" defaultValue=""/>
+                <input type="text" name="s" placeholder="Subject" defaultValue=""/>
+                <input type="text" name="d" placeholder="Requested On" defaultValue=""/>
                 <input type="submit" value="Submit"/>
             </form>
 
-            <Accordion defaultActiveKey="0">
+            <Accordion>
                     <Accordion.Toggle as={Card.Header} variant="link" eventKey="0" id="notif-header">
                         Notifications
                     </Accordion.Toggle>
                     
-                    {props.state.notifications?.map(
+                    {props.notifications?.map(
                             (e, i) =>
                             <Accordion.Collapse eventKey="0" key={i}>
                                 <Table className="myTable" hover>

@@ -12,23 +12,7 @@ export interface INotificationState {
 
 //basic initial state just to display info
 const initialState:INotificationState = {
-        notifications: [
-        {
-            clientName:'a1',
-            subject:'a2',
-            requestDate:'a3'
-        },
-        {
-            clientName:'b1',
-            subject:'b2',
-            requestDate:'b3'
-        },
-        {
-            clientName:'c1',
-            subject:'c2',
-            requestDate:'c3'
-        },
-    ]
+        notifications: []
 }
 
 export const notificationReducer = 
