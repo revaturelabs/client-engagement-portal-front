@@ -125,7 +125,7 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
                 <DropdownItem header>Development Options</DropdownItem>
                 <DropdownItem onClick={() => resetBatches()}>Simulate no batches</DropdownItem>
                 <DropdownItem onClick={() => getSimulatedBatches()}>Simulate 3 batches</DropdownItem>
-                <DropdownItem onClick={() => getBatches()}>Get ALL Mock Batches from the Caliber Database</DropdownItem>
+                <DropdownItem onClick={() => getBatches()}>Get ALL Mock Batches from Caliber (Requires CORS Extension)</DropdownItem>
             </NavBar>
 
             {/* Modal for Requesting an Intervention, will be moved to batch info page */}
