@@ -41,14 +41,18 @@ pipeline {
         }
       }
     }
-
-stage('Production') {
-  steps {
-    withAWS(region:'us-east-1',credentials:'AWSCredentialsID') {
-    s3Delete(bucket: 'robert-connell-batch-906-frontend', path:'**/*')
-    s3Upload(bucket: 'robert-connell-batch-906-frontend', workingDir:'build', includePathPattern:'**/*');
-            }
-          }
+    stage('Production') {
+    steps {
+      withAWS(region:'us-east-1',credentials:'AWSCredentialsID') {
+        s3Delete(bucket: 'robert-connell-batch-906-frontend', path:'**/*')
+        s3Upload(bucket: 'robert-connell-batch-906-frontend', workingDir:'build', includePathPattern:'**/*');
         }
+      }
     }
+    stage('Post-Production') {
+      steps {
+        sh 'rm -rf node_modules'
+      }
+    }
+   }
 }
