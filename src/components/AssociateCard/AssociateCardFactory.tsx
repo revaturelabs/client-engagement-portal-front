@@ -31,7 +31,7 @@ export const AssociateCardFactory:React.FC<any> = (props:IProps) => {
     const handleHide = () => setHidden(!isHidden);
 
 
-    //const url = '${baseURL}/some url'; //for if we configure a base url
+
     /**
      * This will get all associates from the back-end given the batchID
      */
@@ -51,7 +51,7 @@ export const AssociateCardFactory:React.FC<any> = (props:IProps) => {
     const content = (() => {
         
         // cards.push(<AssociateCard />);
-    cards = [<AssociateCard />,<AssociateCard />,<AssociateCard />,<AssociateCard />,<AssociateCard />, <AssociateCard />, <AssociateCard />];
+        cards = [<AssociateCard />,<AssociateCard />,<AssociateCard />,<AssociateCard />,<AssociateCard />, <AssociateCard />, <AssociateCard />];
         /**
          * For each associate in the batch, create a new AssociateCard,
          * and pass in their information as props.
@@ -64,7 +64,6 @@ export const AssociateCardFactory:React.FC<any> = (props:IProps) => {
         //     }
         // }
         
-        console.log(cards);
     })()
 
     /**

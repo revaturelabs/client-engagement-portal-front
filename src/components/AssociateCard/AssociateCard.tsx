@@ -13,8 +13,8 @@ import { IAssociate } from '../../_reducers/AssociateReducer'
  */
 export const AssociateCard: React.FC<IAssociate> = (props: IAssociate) => {
 
-    //just for testing purposes
-    const fakeData: IAssociate = {
+    
+    const fakeData: IAssociate = { //just for testing purposes
         firstName: "Bill",
         lastName: "Gates",
         testScores: [{
@@ -91,7 +91,7 @@ export const AssociateCard: React.FC<IAssociate> = (props: IAssociate) => {
         return value;
     }
 
-    //there are four places here where fake data will be replaced with props
+    //there is one place here where fake data will be replaced with props
     /**
      * This function returns the TSX element itself.
      * It contains a button to toggle a card,

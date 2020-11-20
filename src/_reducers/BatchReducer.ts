@@ -36,8 +36,9 @@ export const BatchReducer = (batchState: IBatchState = initialBatchState, action
     }
 }
 
-//Jordan code below
-//This interface is used to get more detailed information about a batch
+/**
+ * This interface holds detailed information about a particular batch.
+ */
 export interface IBatchDetailedState {
     batches: {
         id: number,
@@ -60,6 +61,7 @@ export interface IBatchDetailedState {
 
 }
 
+//This state gives some default values to reside in the batch detailed state
 export const initialBatchDetailedState: IBatchDetailedState = {
     batches: [{
         id: 0,
@@ -82,6 +84,16 @@ export const initialBatchDetailedState: IBatchDetailedState = {
 
 }
 
+/**
+ * 
+ * This reducer goes through every action type that exists in this program but will 
+ *  only respond to the one that's called SET_BATCHES_DETAILS
+ * 
+ * @param batchDetailedState the batch details state in the store is passed in automatically
+ * @param action goes through every action in the program 
+ * 
+ * @returns Batch detailed state. Basically just updates the batches details
+ */
 export const BatchDetailReducer = (action: any, batchDetailedState: IBatchDetailedState = initialBatchDetailedState) => {
     switch (action.type) {
         case SET_BATCHES_DETAILS:

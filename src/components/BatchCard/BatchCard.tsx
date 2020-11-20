@@ -33,20 +33,27 @@ export const BatchCard:React.FC<IProps> = (props:IProps) => {
         // SET A DETAILED BATCH STATE TO INCLUDE THE DETAILS OF THE BATCH BEING VIEWED
         // This detailed batch state will be displayed when the redirect to "/batch" runs
 
-        //Jordan code, line 36-49
-        // const allBatchDetails = BatchDetailReducer("");
-        // let batchDetails:IBatchDetailedState = {batches:[]};
-        // let i = 0;
-        // console.log(allBatchDetails.batches[i])
-        // loop: for(;allBatchDetails.batches;){
-        //     if(allBatchDetails.batches[i]?.name === props.batchName){
-        //         batchDetails.batches.push(allBatchDetails.batches[i]);
-        //         break loop;
-        //     }
-        //     i++;
-        // }
-
-        // BatchDetailReducer(SET_BATCHES_DETAILS, batchDetails);
+        /**
+         * The fields here are used to grab data on all of the batches from
+         * a state. Then, we iterate through those batches until we find
+         * a batch name that matches the props of this component. Finally,
+         * we reset the state to only include the one batch, which we can return
+         * on the batch information page.
+         */
+        const allBatchDetails = BatchDetailReducer("");
+        const justBatches = allBatchDetails.batches; //list of batches
+        let batchDetails:IBatchDetailedState = {batches:[]};
+        let i = 0;
+        for(;justBatches[i];){
+            let oneBatch = justBatches[i] //specific batch
+            let bName = oneBatch.name //batch name
+            if(bName === props.batchName){
+                batchDetails.batches.push(oneBatch);
+                break;
+            }
+            i++;
+        }
+        BatchDetailReducer(SET_BATCHES_DETAILS, batchDetails);
 
         setBatchButtonClicked(true);
     }

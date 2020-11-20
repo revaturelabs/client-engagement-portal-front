@@ -89,7 +89,7 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
             batches: [],
         };
 
-        //Jordan code lines 93-85
+        /** array that takes in detailed information about a batch */
         let batchDetailedArray:IBatchDetailedState = {
             batches: []
         }
@@ -105,12 +105,12 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
                 {
                     let batchCardInfo = {  ...response.data[i] }
                     batchArray.batches.push(batchCardInfo);
-                    batchDetailedArray.batches.push(batchCardInfo); //Jordan line
+                    batchDetailedArray.batches.push(batchCardInfo);
                 }
                 
                 //the "batch state" is set to be whatever was extracted from the db
                 dispatch(setBatchState(batchArray));
-                dispatch(setBatchDetailsState(batchDetailedArray)); //Jordan line
+                dispatch(setBatchDetailsState(batchDetailedArray)); /** as well as the batchDetailsState */
                 
             }
             setSpinner(false);

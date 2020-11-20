@@ -8,7 +8,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { AssociateCardFactory } from '../AssociateCard/AssociateCardFactory';
 import { BatchDetailReducer } from '../../_reducers/BatchReducer';
-import { IAssociate, IAssociatesState, initialAssociateState } from '../../_reducers/AssociateReducer';
+import { IAssociate, IAssociatesState, } from '../../_reducers/AssociateReducer';
 
 interface IBatchInformationProps {
     name?:string,
@@ -40,15 +40,18 @@ export const BatchInformation:React.FC<IBatchInformationProps> = (props:IBatchIn
         }
       };
 
-      //Jordan code
-    //   const bDetails = BatchDetailReducer("");
-    //   let aDetails:IAssociatesState = initialAssociateState;
+      /**
+       * Gets the state of the batch detail reducer. The commented code is for pulling information out of the batch
+       * and into associates. Might be deprecated, but keeping until new endpoint is received.
+       */
+       const bDetails = BatchDetailReducer("");
+    /*   let aDetails:IAssociatesState = initialAssociateState;
     //   let i = 0;
     //   for(;bDetails.batches.associateAssignments;){
     //       let first = bDetails.batches.associateAssignments[i].associate.firstName;
     //       let last = bDetails.batches.associateAssignments[i].associate.lastName;
     //       aDetails.associates.push({firstName:first,lastName:last})
-    //   }
+       } */
 
 
     return(
@@ -59,8 +62,8 @@ export const BatchInformation:React.FC<IBatchInformationProps> = (props:IBatchIn
                 <div id="batch-info-wrapper">
                     <Card className="batch-info-card">
                         <CardHeader>
-                            <h4>2009 Sep 28 Batch</h4>
-                            {/* <h4>{bDetails.batches[0].name}</h4> */}
+                            {/* <h4>2009 Sep 28 Batch</h4> */}
+                            <h4>{bDetails.batches[0].name}</h4>
                         </CardHeader>
                         <CardBody>
                             <h5>Core Technologies  Learned:</h5>
@@ -85,7 +88,7 @@ export const BatchInformation:React.FC<IBatchInformationProps> = (props:IBatchIn
                                 <Col xs="4"><p>React Redux</p></Col>
                                 <Col xs="4"><p>Java 8</p></Col>
                                 <Col xs="4"><p>Spring MVC & ORM</p></Col>
-                                {/* <Col xs="4"><p>{bDetails.batches[0].name}</p></Col> */}
+                                <Col xs="4"><p>{bDetails.batches[0].skill}</p></Col>
                             </Row>
                             <p><b>Trainer:</b> Robert Connel</p>
                             {/* <p><b>Trainer:</b> {bDetails.batches[0].employeeAssignments.employee.firstName} {bDetails.batches[0].employeeAssignments.employee.lastName}</p> */}

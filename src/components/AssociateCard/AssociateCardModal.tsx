@@ -17,12 +17,10 @@ import {IAssociate} from '../../_reducers/AssociateReducer'
 export const AssociateCardModal:React.FC<IAssociate> = (props:IAssociate) => {
 
     /**
-     * This state determines if this modal component is showing
+     * This state determines if this modal component is showing.
      */
     const [show, setShow] = React.useState(false);
     const toggle = () => setShow(!show);
-    // const handleClose = () => setShow(false);
-    // const handleShow = () => setShow(true);
 
     /**
      * This will map the associate's test scores into TSX elements.
@@ -43,7 +41,7 @@ export const AssociateCardModal:React.FC<IAssociate> = (props:IAssociate) => {
 
     /**
      * This will map the associate's tech and tech score into TSX elements.
-     * As well as calculate the average tech score
+     * As well as calculate the average tech score.
      */
     const techs = props.techScores;
     let techMap;
