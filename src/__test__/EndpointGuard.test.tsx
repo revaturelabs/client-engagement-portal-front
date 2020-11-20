@@ -9,6 +9,8 @@ import Adapter from "enzyme-adapter-react-16";
 
 configure({ adapter: new Adapter() });
 
+
+//TODO finish setting up tests once enzyme is fixed.
 describe('Testing endpoint guards', () => {
 
 	test('invalid path should redirect to page not found',() => {
