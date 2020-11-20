@@ -24,7 +24,7 @@ export const NavBar: React.FC<any> = (props: any) => {
             <Col xs="auto" className="justify-content-start logoContainer">
                 <img src={logo} className="myLogo" alt="revature logo" />
             </Col>
-            <Col className="d-flex align-items-center justify-content-end auto" >
+            <Col className="d-flex align-items-center justify-content-end auto test1" >
                 <ButtonDropdown isOpen={navMenuOpen} toggle={toggle}>
                     {/* Mobile Hamburger Menu */}
                     <DropdownToggle className="" style={{ margin: "10px", backgroundColor: "white", border: "none" }}>
