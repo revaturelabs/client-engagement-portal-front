@@ -3,11 +3,11 @@ import { SET_BATCHES } from "../actions/BatchCardActions"
 
 //Batch state is essentially just an array of batch objects
 export interface IBatchState{
-    batches: [{
+    batches: {
         id: number,
         skill: string,
         name: string
-    }];
+    }[];
 }
 
 export const initialBatchState:IBatchState = {
