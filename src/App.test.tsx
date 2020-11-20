@@ -1,9 +1,18 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import { shallow } from 'enzyme';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+import App from './App';
+import { Route } from 'react-router-dom';
+
+// Some trivial tests for now
+it('renders without crashing', () => {
+    shallow(<App />);
+});
+
+it("renders Provider", () => {
+    const wrapper = shallow(<App />);
+
+    const testRoute = <Route path="/login-admin" />;
+
+    expect(wrapper.contains(testRoute)).toEqual(true);
 });

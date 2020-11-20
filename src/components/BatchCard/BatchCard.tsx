@@ -1,20 +1,87 @@
-import React from 'react';
+import React, { useState } from 'react';
+import "../../scss/batch-card.scss";
+import javaLogo from '../../assets/java-logo.png';
+import reactReduxLogo from '../../assets/react-redux-logo.png';
+import javaAuto from '../../assets/JavaAutoLogo.png';
+// import javaMicro from '../../assets/JavaMicroLogo.jpg';
+import pegaLogo from '../../assets/Pegalogo.jpg';
+import salesLogo from '../../assets/sales.png';
+import bigData from '../../assets/bigData.png';
+import netLogo from '../../assets/NET.jpg';
+import devOpsLogo from '../../assets/devOps.jpg';
+import { Redirect } from 'react-router-dom';
 
-interface IBatchCardProps{
-    titlePic:string,
+interface IProps{
+    batchId: number,
     specialization:string,
-    batchName:string
+    batchName:string,
 }
 
-export const BatchCard:React.FC<IBatchCardProps> = (props:IBatchCardProps) => {
+export const BatchCard:React.FC<IProps> = (props:IProps) => {
+
+    const [batchButtonClicked, setBatchButtonClicked] = useState(false);
+
+    const goToBatchViewPage = (event:React.MouseEvent<Element, MouseEvent>) => {
+        console.log("send this id to the \"batch view page\" to load the right page: " + props.batchId);
+        //window.location.href = "/batchView"+props.batchId;
+
+        // SET A DETAILED BATCH STATE TO INCLUDE THE DETAILS OF THE BATCH BEING VIEWED
+        // This detailed batch state will be displayed when the redirect to "/batch" runs
+
+        setBatchButtonClicked(true);
+    }
+
+    //sets the image of this card to match the specialization
+    let image = "";
+    if (props.specialization === "Java/Microservices")
+    {
+        image = javaLogo;
+    }
+    else if (props.specialization === "PEGA")
+    {
+        image = pegaLogo;
+    }
+    else if (props.specialization === "Java with Automation")
+    {
+        image = javaAuto;
+    }
+    else if (props.specialization === "Java React")
+    {
+        image = reactReduxLogo;
+    }
+    else if (props.specialization === "Big Data")
+    {
+        image = bigData;
+    }
+    else if (props.specialization === "SalesForce")
+    {
+        image = salesLogo;
+    }
+    else if (props.specialization === ".NET/Microservices")
+    {
+        image = netLogo;
+    }
+    else if (props.specialization === "Java Devops")
+    {
+        image = devOpsLogo;
+    }
+    
+
     return(
-        <div className="justify-content-center text-center" style={{backgroundColor: "white", height:"200px", paddingTop: "10px", border:"1px solid #F26925", borderRadius:"20px", marginTop: "10px"}}>
+        <div className="batchcardcomp rev-card justify-content-center text-center">
             
-            <img src={props.titlePic} alt={props.specialization + " thumbnail"} style={{maxWidth:"85%", height:"30%"}} />
+            <div className="row justify-content-center">
+                <img src={image} alt={props.specialization + " thumbnail"} className="pic logoimg" />
+            </div>
+            
             <br />
-            <p style={{fontSize: "14px"}}>{props.specialization}</p>
+            <p className="spec-text">{props.specialization}</p>
             <p>{props.batchName}</p>
-            <button style={{lineHeight: 1.5, width: "70%", border:"none", backgroundColor:"#F26925", color:"white", fontSize:"20px"}}>View</button>
+            <div className="row justify-content-center">
+                <button onClick={(event:React.MouseEvent<Element, MouseEvent>) => goToBatchViewPage(event)} className="view-btn test1">View</button>
+            </div>
+            {batchButtonClicked ? <Redirect to="/batch" /> : <></>}
+            
         </div>
     )
 }

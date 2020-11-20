@@ -1,5 +1,3 @@
-
-
 export interface IUser{
     email:string,
     password?:string,
@@ -24,6 +22,13 @@ export interface IUserState{
 
 const initialState:IUserState = {user:null};
 
+/**
+ * Stores the necessary front user details after a user has logged in.
+ * 
+ * @param state The current User.
+ * 
+ * @param action Object indicating which user is being affected and how.
+ */
 export const userReducer = (state:IUserState = initialState, action:{type:string, payload:IUser}):IUserState => {
     switch(action.type){
         case "ADMIN_LOGIN":
