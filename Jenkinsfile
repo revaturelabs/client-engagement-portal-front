@@ -44,7 +44,7 @@ pipeline {
 
 stage('Production') {
   steps {
-    withAWS(region:'US-EAST-1',credentials:'AWSCredentialsID') {
+    withAWS(region:'us-east-1',credentials:'AWSCredentialsID') {
     s3Delete(bucket: 'robert-connell-batch-906', path:'**/*')
     s3Upload(bucket: 'robert-connell-batch-906', workingDir:'build', includePathPattern:'**/*');
             }
