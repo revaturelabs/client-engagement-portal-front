@@ -13,31 +13,18 @@ import {
   Row,
   Col,
 } from "reactstrap";
-import { isConstructorDeclaration } from "typescript";
 import '../../scss/NewClientButton.scss';
 
-
-//This component includes the button for a new client account
-//This also has a modal form that pops up when the button is clicked
 
 /**
  * @function newClientButton
  * This component includes the button for a new client account
  *
  * This also has a modal form that pops up when the button is clicked
- */
+ *
+  */
 export const NewClientButton: React.FC<any> = () => {
   const [modal, setModal] = useState(false);
-
-
-
-
-
-  //Below is testing code
-
-  //This requires an Async function to parse the current JWT token due to promises
-
-
 
   /**
    * @function toggle
@@ -62,12 +49,6 @@ export const NewClientButton: React.FC<any> = () => {
   const registerUser = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // Check database if they have the admin role and their current session token matches for security. If not, exit out
-    /*
-        if (role != "Admin") {
-            return null;
-        }
-        */
 
     // These need to be up here. Data is dropped when user is checked {for some reason} <= these fields are cleared when the modal unloads
     const email = event.currentTarget["email"].value;
@@ -77,7 +58,6 @@ export const NewClientButton: React.FC<any> = () => {
     // This checking operation takes about 150 MS
     // Unknown Error - Response time can be 10,000 MS. Usually happens when react is updating. This shouldn't be a problem
 
-    console.log((await Auth.currentSession()).getIdToken().getJwtToken());
     const checkRole = Auth.currentUserInfo();
     const checker = await checkRole.then(function (result) {
       if (result.attributes["custom:userRole"] !== "admin") {
@@ -86,8 +66,6 @@ export const NewClientButton: React.FC<any> = () => {
         return true;
       }
     });
-    //Example
-    //Axios.post("/getUsers", data, headers{Authorization:idToken})
 
     if (!checker) {
       console.log("Error: User does not have permissions to create an account");
@@ -116,8 +94,6 @@ export const NewClientButton: React.FC<any> = () => {
         signUpResult.codeDeliveryDetails
       );
 
-      // console.log(signUpResult.user);
-      // console.log(signUpResult.codeDeliveryDetails);
     } catch (error) {
       console.log("Couldn't sign up: ", error);
     }
@@ -174,8 +150,8 @@ export const NewClientButton: React.FC<any> = () => {
                 placeholder="Client Type"
                 onChange={changeForm}
               >
-                <option value="client">Client</option>
-                <option value="admin">Admin</option>
+                <option value="client" defaultValue="client">Client</option>
+                <option value="admin" defaultValue="admin">Admin</option>
               </Input>
             </FormGroup>
             <FormGroup>
