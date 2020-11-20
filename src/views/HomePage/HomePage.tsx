@@ -28,7 +28,6 @@ interface IProps {
  */
 const HomePage:React.FC<IProps> = (props:IProps) => {
 
-    const [showInterventionModal, setShowInterventionModal] = useState(false);
     const [hasBatches, setHasBatches] = useState(false);
     const [hasSpinner, setSpinner] = useState(false);
  
@@ -129,9 +128,6 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
             </NavBar>
 
             {/* Modal for Requesting an Intervention, will be moved to batch info page */}
-            <button onClick={() => setShowInterventionModal(!showInterventionModal)}>Temporary Test Intervention Modal (Will Go on Batch Info Page)</button>
-            <PlanInterventionModal show={showInterventionModal} setShow={setShowInterventionModal} />
-            
             {hasBatches ?
 
             <Row className="justify-content-between">

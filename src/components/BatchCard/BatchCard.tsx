@@ -21,12 +21,16 @@ export const BatchCard:React.FC<IProps> = (props:IProps) => {
 
     const [batchButtonClicked, setBatchButtonClicked] = useState(false);
 
+    const [batchDetailedInfo, setBatchDetailedInfo] = useState(props);
+
     const goToBatchViewPage = (event:React.MouseEvent<Element, MouseEvent>) => {
         console.log("send this id to the \"batch view page\" to load the right page: " + props.batchId);
         //window.location.href = "/batchView"+props.batchId;
 
         // SET A DETAILED BATCH STATE TO INCLUDE THE DETAILS OF THE BATCH BEING VIEWED
         // This detailed batch state will be displayed when the redirect to "/batch" runs
+        setBatchDetailedInfo(props);
+        console.log(props.batchId);
 
         setBatchButtonClicked(true);
     }

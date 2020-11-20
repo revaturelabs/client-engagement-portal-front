@@ -23,7 +23,9 @@ export const AdminPage: React.FC = () => {
                 </Row> */}
             </Container>
 
-            {/* sticky footer */}
+
+        
+        {/* sticky footer */}
         </>
     )
 }  
