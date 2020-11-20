@@ -56,14 +56,14 @@ export const BatchForms: React.FC = () => {
          <Row className="justify-content-center my-button-row">
                 <Col xs="2" sm="3" lg="5" />   
                 <Col xs="8" sm="6" lg="2">
-                    <button className="batch-form-button" onClick={toggleMap}>Map Batch to Client</button>
+                    <button className="batch-form-button" id='map-batch' onClick={toggleMap}>Map Batch To Client</button>
                 </Col>
                 <Col xs="2" sm="3" lg="5" />    
             </Row>
             <Row className="justify-content-center my-button-row">
                 <Col xs="2" sm="3" lg="5" />   
                 <Col xs="8" sm="6" lg="2">
-                    <button className="batch-form-button" onClick={toggleUnmap}>Unmap Client from Batch</button>
+                    <button className="batch-form-button" id='unmap-batch' onClick={toggleUnmap}>Unmap Batch From Client</button>
                 </Col>
                 <Col xs="2" sm="3" lg="5" />    
             </Row>
@@ -111,7 +111,7 @@ export const BatchForms: React.FC = () => {
 
           {/* Map Modal */}
          <Modal isOpen={mapModal} toggle={toggleMap} className="batch-form-modal">
-            <ModalHeader toggle={toggleMap} className="modal-header">
+            <ModalHeader toggle={toggleMap} className="modal-header" >
               Map Batch to Client
             </ModalHeader>
             <ModalBody>
@@ -122,7 +122,7 @@ export const BatchForms: React.FC = () => {
                             <option>Dummy Client 2</option>
                         </Input>
                         <br/>
-                        <Input type="select">
+                        <Input type="select" id='map-options'>
                             <option disabled selected>Select Batch</option>
                             {batchInfo.map((e:any,i:any) =>
                                 <option key={i} id={e.id} >{e.name}</option>
@@ -135,12 +135,12 @@ export const BatchForms: React.FC = () => {
 
          {/* UnMap Modal */}
          <Modal isOpen={unmapModal} toggle={toggleUnmap} className="batch-form-modal">
-            <ModalHeader toggle={toggleUnmap} className="modal-header">
+            <ModalHeader toggle={toggleUnmap} className="modal-header" >
               Unmap Batch from Client
             </ModalHeader>
             <ModalBody>
             <Form className="modal-batch-form">
-                        <Input type="select">
+                        <Input type="select" id='unmap-options'>
                             <option>Select Client</option>
                             <option>Dummy Client 1</option>
                             <option>Dummy Client 2</option>
