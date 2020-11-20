@@ -1,8 +1,5 @@
 import React from 'react';
 import { Modal, Button, ModalBody, Row } from 'reactstrap';
-// import '../../scss/revature-colors.scss';
-// import '../../scss/app.scss';
-// import '../../scss/batch-card.scss'
 import '../../scss/associate-card.scss';
 import {IAssociate} from '../../_reducers/AssociateReducer'
 
@@ -53,7 +50,7 @@ export const AssociateCardModal:React.FC<IAssociate> = (props:IAssociate) => {
      * then return the average.
      */
     if(techs !== undefined){
-        techMap = techs.map((techs) => <div id="techAndScore"><p>{techs.tech}: {techs.score}%</p><div className="h-divider"></div></div>);
+        techMap = techs.map((e) => <div id="techAndScore"><p>{e.tech}: {e.score}%</p><div className="h-divider"></div></div>);
         for(let tech of techs){
             averageTech += tech.score;
             techWeek++;
@@ -74,43 +71,33 @@ export const AssociateCardModal:React.FC<IAssociate> = (props:IAssociate) => {
 
             >   
                 <ModalBody className="aso-modal-body">
-                {/* div for image and name */}
                 <div>
                     {/* <img className="pic" src={props.profilePic} alt="associate_profile_pic"/> */}
                     <h3>{props.firstName}</h3>
                     <h4>{props.lastName}</h4>
                 </div>
-                {/* div for divider */}
                 <div className="h-divider"></div>
-                {/* div for past assesment scores */}
                 <div className="aso-info">
                     <div>Weekly Assessments</div>
                     <Row>
                         <div className="col-1"/>
-                        {/* div for scroll area */}
                         <div className="aso-scroll col-8">
-                            {/* Week #    grade% */}
                             <div id="testMap">{testMap}</div>
                         </div>
-                        {/* div for average grade */}
                         <div className="aso-average col-1">
                             <h6>Average</h6>
                             <h6 id="avgTest">{averageTest}%</h6>
                         </div>
                     </Row>
                 </div>
-                {/* div for past quiz scores */}
                 <div className="aso-info">
                     <div>Technology Assessments</div>
-                    {/* div for scroll area */}
                     <Row>
                         <div className="col-1"/>
                         <div className="aso-scroll col-8">
-                            {/* Quiz name   grade% */}
                             <div>{techMap}</div>
                         </div>
-                        {/* div for average grade */}
-                        <div className="aso-average col-1" /*style={{ display: "inline-block", marginTop: "10px"}}*/>
+                        <div className="aso-average col-1">
                             <h6>Average</h6>
                             <h6 id="avgTech">{averageTech}%</h6>
                         </div>

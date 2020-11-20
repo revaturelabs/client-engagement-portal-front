@@ -2,7 +2,6 @@ import Axios from 'axios';
 import React from 'react';
 import { AssociateCard } from './AssociateCard';
 import {IAssociate} from '../../_reducers/AssociateReducer'
-import { Button } from 'reactstrap';
 import Carousel from "react-multi-carousel";
 
 interface IProps{
@@ -21,14 +20,7 @@ export const AssociateCardFactory:React.FC<any> = (props:IProps) => {
     //instead of doing a call to get associates
     //we'll get the associates from the batch/id endpoint that was already called
 
-    /**
-     * This state is used to show and hide the associate cards based on a button.
-     */
-    const [isHidden, setHidden] = React.useState(false);
-    /**
-     * The button flips the hidden state of the cards based on the current state.
-     */
-    const handleHide = () => setHidden(!isHidden);
+    
 
 
 
@@ -43,12 +35,17 @@ export const AssociateCardFactory:React.FC<any> = (props:IProps) => {
         associates = await response.data;
     }
 
-    let cards = [];
+    
     /**
      * This field will hold all of the AssociateCards, based on the associates
      * returned from the batch.
      */
-    const content = (() => {
+    let cards = [];
+
+    /**
+     * This anonymous function adds AssociateCards to the cards field.
+     */
+    (() => {
         
         // cards.push(<AssociateCard />);
         cards = [<AssociateCard />,<AssociateCard />,<AssociateCard />,<AssociateCard />,<AssociateCard />, <AssociateCard />, <AssociateCard />];
@@ -99,11 +96,11 @@ export const AssociateCardFactory:React.FC<any> = (props:IProps) => {
      */
     return(
         <>
-            {/* <Button onClick={handleHide}>Associates</Button> */}
+            
             <Carousel responsive={responsive}>              
                 {cards}
             </Carousel>
-            {/* <span id="contentHolder" hidden={isHidden}>{cards}</span> */}
+            
         </>
     )
 

@@ -1,4 +1,3 @@
-import { batch } from "react-redux";
 import { SET_BATCHES, SET_BATCHES_DETAILS } from "../actions/BatchCardActions"
 
 //Batch state is essentially just an array of batch objects

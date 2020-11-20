@@ -73,13 +73,17 @@ export const AssociateCard: React.FC<IAssociate> = (props: IAssociate) => {
 
         let value = 0;
         let i = 0;
-
+        let size = 0;
+        if(props.testScores?.length != undefined){
+            const size = props.testScores.length;
+        }
+        
         /**
          * If there are no test scores, return 0.
          * Otherwise, set the value to be equal to the last test.
          */
         if (props.testScores !== undefined) {
-            for (; props.testScores[i];) {
+            while (i < size) {
                 /**
                 * For each item in test scores, change the value to match.
                 * When it stops iterating, we'll have the last value.
@@ -101,23 +105,18 @@ export const AssociateCard: React.FC<IAssociate> = (props: IAssociate) => {
     return (
         <li>
             <Card className="aso-card">
-                {/* div for name and average */}
                 <div>
                     <h5 id="nameHolder" font-family={"$rev-font"}>{props.firstName} {props.lastName}</h5>
                     <h5 font-family={"$rev-font"}>Average:</h5>
                     <h4 id="averageHolder" font-family={"$rev-font"}>{avg()}%</h4>
                 </div>
-                {/* div for last quiz grade */}
                 <div>
                     <h5 id="scoreHolder">Latest Test Score: {score()}%</h5>
                 </div>
-                {/* div for holding the modal */}
                 <div style={{ display: "block", textAlign: "center", alignContent: "center", justifyContent: "center" }}>
                     <AssociateCardModal {...fakeData} />
                 </div>
-
             </Card>
-
         </li>
     )
 
