@@ -1,0 +1,60 @@
+button.create-account-button {
+    box-sizing: border-box;
+    background-color: #F26925;
+    font-family: futura-pt, sans-serif;
+    border: 3px solid #F26925;
+    border-radius: 15px;
+    font-style: normal;
+    font-weight: bold;
+    width: 100%;
+    transition: all 0.3s ease 0s;
+  }
+  button.create-account-button:hover {
+    background-color:white;
+    border: 3px solid #F26925;
+    box-shadow: none;
+    color: #F26925;
+    font-weight: bold;
+  }
+  button.create-account-button:focus {
+    background-color: #F26925 ;
+    border: 3px solid #F26925 ;
+    box-shadow: none !important;
+    color: white;
+    font-weight: bold;
+  }
+   button.create-account-button:active {
+    background-color: #F26925 ;
+    border: 3px solid #F26925 ;
+    box-shadow: none !important;
+    color: white;
+    font-weight: bold;
+  }
+.create-account-modal-header {
+        color: #F26925;
+        display: flex;
+        justify-content: space-between;
+        margin-right: 50%;
+}
+input.create-account-submit {
+        box-sizing: border-box;
+        margin: auto;
+        background-color: #F26925;
+        color: white;
+        font-family: futura-pt, sans-serif;
+        font-style: normal;
+        font-weight: bold;
+        width: 10rem;
+        border: 3px solid #F26925;
+        border-radius: 15px;
+        font-size: 1.5rem;
+        transition: all 0.3s ease 0s;
+
+}
+input.create-account-submit:hover {
+    background-color:white;
+    border: 3px solid #F26925;
+    box-shadow: none;
+    color: #F26925;
+    font-weight: bold;
+}

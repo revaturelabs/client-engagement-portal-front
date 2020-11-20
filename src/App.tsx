@@ -1,14 +1,15 @@
-import React from 'react';
-import Amplify from 'aws-amplify';
-import awsconfig from './aws-exports';
-import './scss/app.scss';
-import { Provider } from 'react-redux';
-import { store } from './Store';
-import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
-import { LoginPage } from './views/LoginPage/LoginPage';
-import HomePage from './views/HomePage/HomePage';
-import { AdminPage } from './views/AdminPage/AdminPage';
+import React from "react";
+import Amplify from "aws-amplify";
+import awsconfig from "./aws-exports";
+import "./scss/app.scss";
+import { Provider } from "react-redux";
+import { store } from "./Store";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import { LoginPage } from "./views/LoginPage/LoginPage";
+import HomePage from "./views/HomePage/HomePage";
+import { AdminPage } from "./views/AdminPage/AdminPage";
 import { PageNotFound } from "./views/PageNotFound/PageNotFound";
+import { BatchInformationPage } from "./views/BatchInformationPage/BatchInformationPage";
 
 Amplify.configure(awsconfig);
 
@@ -34,6 +35,7 @@ function App(userInfo: IProp) {
                     {userInfo.role === "admin" && (
                         <Route path="/admin" component={AdminPage} />
                     )}
+                    <Route path="/batch" component={BatchInformationPage} />
                     <Route component={PageNotFound} />
                 </Switch>
             </BrowserRouter>
