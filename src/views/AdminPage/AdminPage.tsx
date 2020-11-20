@@ -1,10 +1,23 @@
 import React from "react";
-import { Col, Container, Form, FormGroup, Input, Row } from "reactstrap";
+import { Col, Container, Form, Input, Row } from "reactstrap";
+import { BatchForms } from "../../components/BatchForms/BatchForms";
 import { NavBar } from "../../components/NavBar/NavBar";
 import { NewClientButton } from "../../components/NewClientButton/NewClientButton";
-import "./BatchFormStyle.scss";
 
 export const AdminPage: React.FC = () => {
+<<<<<<< HEAD
+    return (
+        <>
+            <Container
+                style={{
+                    minHeight: "100vh",
+                    maxWidth: "100vw",
+                    backgroundColor: "#E3E3E3",
+                }}
+            >
+                <NavBar />
+                <BatchForms />
+=======
 
   
   return (
@@ -71,8 +84,21 @@ export const AdminPage: React.FC = () => {
                 Footer?
             </Row> */}
       </Container>
+>>>>>>> b0029e68ba9f805b2e3d15bcbcde473bd02ed497
 
-      {/* sticky footer */}
-    </>
-  );
+                <Row style={{ marginTop: "20px" }}>
+                    <Col xs="5" />
+                    <Col>
+                        <NewClientButton />
+                    </Col>
+                    <Col xs="5" />
+                </Row>
+                {/* <Row>
+                    Footer?
+                </Row> */}
+            </Container>
+
+            {/* sticky footer */}
+        </>
+    );
 };
