@@ -2,7 +2,7 @@ import React from 'react';
 import {shallow} from 'enzyme';
 import {AssociateCardModal} from './AssociateCardModal';
 import { IAssociate } from '../../_reducers/AssociateReducer';
-import {Modal} from 'reactstrap';
+import {Button, Modal} from 'reactstrap';
 
 let wrapper: any;
 let fakeData:IAssociate;
@@ -48,6 +48,14 @@ beforeEach(() => {
 });
 
 /**
+ * There should be a Button to open the Modal as well
+ * as a Button to close the Modal.
+ */
+test("Should be two buttons", () => {
+    expect(wrapper.find(Button).length).toBe(2);
+})
+
+/**
  * This test to see if the modal is able to be properly toggeled.
  */
 test("modal can toggle on and off", () => {
@@ -57,6 +65,15 @@ test("modal can toggle on and off", () => {
     wrapper.find("#closeBtn").simulate("click");
     expect(wrapper.find(Modal).prop("isOpen")).toBe(false);
 });
+
+/**
+ * This test to see if the first and last name is rendered
+ * correctly
+ */
+test("First and lasr name should show", () => {
+    expect(wrapper.find("#firstName").render().text().toBe("Bill"));
+    expect(wrapper.find("#lastName").render().text().toBe("Gates"));
+})
 
 /**
  * Usinf our fake data the number of divs should be 

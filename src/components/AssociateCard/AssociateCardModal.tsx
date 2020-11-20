@@ -73,8 +73,8 @@ export const AssociateCardModal:React.FC<IAssociate> = (props:IAssociate) => {
                 <ModalBody className="aso-modal-body">
                 <div>
                     {/* <img className="pic" src={props.profilePic} alt="associate_profile_pic"/> */}
-                    <h3>{props.firstName}</h3>
-                    <h4>{props.lastName}</h4>
+                    <h3 id="firstName">{props.firstName}</h3>
+                    <h4 id="lastName">{props.lastName}</h4>
                 </div>
                 <div className="h-divider"></div>
                 <div className="aso-info">
