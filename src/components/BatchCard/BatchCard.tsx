@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "../../scss/batch-card.scss";
 import javaLogo from '../../assets/java-logo.png';
 import reactReduxLogo from '../../assets/react-redux-logo.png';
@@ -9,6 +9,7 @@ import salesLogo from '../../assets/sales.png';
 import bigData from '../../assets/bigData.png';
 import netLogo from '../../assets/NET.jpg';
 import devOpsLogo from '../../assets/devOps.jpg';
+import { Redirect } from 'react-router-dom';
 
 interface IProps{
     batchId: number,
@@ -18,9 +19,16 @@ interface IProps{
 
 export const BatchCard:React.FC<IProps> = (props:IProps) => {
 
-    const goToBatchViewPage = () => {
+    const [batchButtonClicked, setBatchButtonClicked] = useState(false);
+
+    const goToBatchViewPage = (event:React.MouseEvent<Element, MouseEvent>) => {
         console.log("send this id to the \"batch view page\" to load the right page: " + props.batchId);
         //window.location.href = "/batchView"+props.batchId;
+
+        // SET A DETAILED BATCH STATE TO INCLUDE THE DETAILS OF THE BATCH BEING VIEWED
+        // This detailed batch state will be displayed when the redirect to "/batch" runs
+
+        setBatchButtonClicked(true);
     }
 
     //sets the image of this card to match the specialization
@@ -70,8 +78,9 @@ export const BatchCard:React.FC<IProps> = (props:IProps) => {
             <p className="spec-text">{props.specialization}</p>
             <p>{props.batchName}</p>
             <div className="row justify-content-center">
-                <button onClick={goToBatchViewPage} className="view-btn test1">View</button>
+                <button onClick={(event:React.MouseEvent<Element, MouseEvent>) => goToBatchViewPage(event)} className="view-btn test1">View</button>
             </div>
+            {batchButtonClicked ? <Redirect to="/batch" /> : <></>}
             
         </div>
     )

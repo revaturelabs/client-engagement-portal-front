@@ -180,13 +180,13 @@ export const NewClientButton: React.FC<any> = () => {
               <Label>Confirm Password</Label>
               <Input type="password"></Input>
             </FormGroup>
-        </ModalBody>
+          </ModalBody>
 
         <ModalFooter>
           <input type="submit" className="create-account-submit">
           </input>
         </ModalFooter>
-            </Form>
+        </Form>
       </Modal>
     </>
   );

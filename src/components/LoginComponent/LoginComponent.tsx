@@ -6,9 +6,7 @@ import passThumb from '../../assets/pass-thumb.png';
 import { Auth } from 'aws-amplify';
 import  '../../scss/loginStyles.scss';
 import ceplogo from '../../assets/engagementPortalLogo.svg';
-import ceplogo2 from '../../assets/engagementPortalLogov2.svg'
-
- 
+import ceplogo2 from '../../assets/engagementPortalLogov2.svg';
 
 interface ILoginProps {
     loginType: string
@@ -73,14 +71,14 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
             <>
             {isClient ? <Redirect to="/home" /> : isAdmin ? <Redirect to="/admin" /> :
                 <form onSubmit={handleSubmit} className="login-form">
-                
-                    <div style={{maxHeight: "90%"}}>
-                        <div style={{position: "relative", textAlign: "center"}}>
-                            <div className="login-header">
-                                Client Engagement Portal
-                            </div>
-                            <div className="cep-logo-area">
-                                <img src={ceplogo2} alt="cep-logo" width="200px"/>                                
+
+                <div style={{maxHeight: "90%"}}>
+                    <div style={{position: "relative", textAlign: "center"}}>
+                        <div className="login-header">
+                            Client Engagement Portal
+                        </div>
+                        <div className="cep-logo-area">
+                            <img src={ceplogo2} alt="cep-logo" width="200px"/>
                             </div>
                         </div>
 
@@ -100,11 +98,7 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
                             </div>
                         </div>
 
-                        <button className="test2" type="submit"
-                            style={{ margin: "10px", lineHeight: 2.2, width: "70%", border: "none", backgroundColor: "#F26925", color: "white", fontSize: "20px" }}>
-
-                            Login
-                        </button>
+                        <button className="login-submit" type="submit">Login</button>
                     </div >
                 </form >
             }

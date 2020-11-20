@@ -27,12 +27,14 @@
 
 .view-btn
 {
+    box-sizing: border-box;
     line-height: 1.5;
     width: 70%;
-    border: 2px solid $rev-orange;
+    border: 3px solid $rev-orange;
     background-color: $rev-orange;
     color: white;
     font-size: 20px;
+    transition: all 0.15s ease 0s;
 }
 
 .view-btn:hover
