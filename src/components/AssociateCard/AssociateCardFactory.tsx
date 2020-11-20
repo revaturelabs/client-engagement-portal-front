@@ -3,6 +3,7 @@ import React from 'react';
 import { AssociateCard } from './AssociateCard';
 import {IAssociate} from '../../_reducers/AssociateReducer'
 import { Button } from 'reactstrap';
+import Carousel from "react-multi-carousel";
 
 interface IProps{
     batchID:string,
@@ -49,9 +50,8 @@ export const AssociateCardFactory:React.FC<any> = (props:IProps) => {
      */
     const content = (() => {
         
-        
         // cards.push(<AssociateCard />);
-    cards = [<AssociateCard />,<AssociateCard />,<AssociateCard />,<AssociateCard />,<AssociateCard />];
+    cards = [<AssociateCard />,<AssociateCard />,<AssociateCard />,<AssociateCard />,<AssociateCard />, <AssociateCard />, <AssociateCard />];
         /**
          * For each associate in the batch, create a new AssociateCard,
          * and pass in their information as props.
@@ -65,9 +65,34 @@ export const AssociateCardFactory:React.FC<any> = (props:IProps) => {
         // }
         
         console.log(cards);
-        
     })()
 
+    /**
+     * Configurations for the carousel
+     */
+    const responsive = {
+        superLargeDesktop: {
+          // the naming can be any, depends on you.
+          breakpoint: { max: 4000, min: 1200 },
+          items: 5,
+          slidesToSlide: 5
+        },
+        desktop: {
+          breakpoint: { max: 1200, min: 992 },
+          items: 3,
+          slidesToSlide: 3
+        },
+        tablet: {
+          breakpoint: { max: 992, min: 576 },
+          items: 2,
+          slidesToSlide: 2
+        },
+        mobile: {
+          breakpoint: { max: 576, min: 0 },
+          items: 1,
+          slidesToSlide: 1
+        }
+      };
 
     /**
      * This function returns the TSX element itself.
@@ -75,8 +100,11 @@ export const AssociateCardFactory:React.FC<any> = (props:IProps) => {
      */
     return(
         <>
-            <Button onClick={handleHide}>Associates</Button>
-            <span id="contentHolder" hidden={isHidden}>{cards}</span>            
+            {/* <Button onClick={handleHide}>Associates</Button> */}
+            <Carousel responsive={responsive}>              
+                {cards}
+            </Carousel>
+            {/* <span id="contentHolder" hidden={isHidden}>{cards}</span> */}
         </>
     )
 

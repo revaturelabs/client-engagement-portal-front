@@ -26,18 +26,21 @@
     border-top:1px solid $rev-dgray;
 }
 
+.modal-content{
+    border-radius: 20px !important;
+}
+
 .aso-modal-card{
     background-color: white;
     max-height: 60% !important;
-    max-width: 40% !important;
-    border: 1px solid $rev-orange;
-    border-radius: 20px;
+    min-height: 40% !important;
+    max-width: 30% !important;
+    border: 1px solid $rev-orange !important;
+    border-radius: 20px !important;
 }
 
 .aso-modal-body{
-    display: block;
-    max-height: 40% !important;
-    // height: 100%;
+    height: 100%;
     width: 100%;
     text-align: center;
 }

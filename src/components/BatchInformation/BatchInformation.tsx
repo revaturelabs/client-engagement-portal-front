@@ -80,7 +80,7 @@ export const BatchInformation:React.FC<IBatchInformationProps> = (props:IBatchIn
 
                     <h1>Batch Engineers</h1>
                     
-                    <Carousel responsive={responsive}>
+                    {/* <Carousel responsive={responsive}> */}
                         {/* <Card>
                             <CardHeader>
                                 Alex Orr
@@ -159,7 +159,7 @@ export const BatchInformation:React.FC<IBatchInformationProps> = (props:IBatchIn
                             </CardFooter>
                         </Card> */}
                         <AssociateCardFactory />
-                    </Carousel>
+                    {/* </Carousel> */}
 
                 </div>
              </Col>
