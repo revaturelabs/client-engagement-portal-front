@@ -5,10 +5,10 @@ import { NavBar } from '../../components/NavBar/NavBar';
 
 import RequestBatchCard from '../../components/RequestBatchCard/RequestBatchCard';
 import RequestBatchCardModal from '../../components/RequestBatchCard/RequestBatchCardModal';
-import { IBatchState, initialBatchState } from '../../_reducers/BatchReducer';
+import { IBatchDetailedState, IBatchState, initialBatchState } from '../../_reducers/BatchReducer';
 import { connect, useDispatch } from 'react-redux';
 import Axios from 'axios';
-import { setBatchState } from '../../actions/BatchCardActions';
+import { setBatchDetailsState, setBatchState } from '../../actions/BatchCardActions';
 import PlanInterventionModal from '../../components/PlanInterventionModal/PlanInterventionModal';
 
 interface IProps {
@@ -89,6 +89,11 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
             batches: [],
         };
 
+        //Jordan code lines 93-85
+        let batchDetailedArray:IBatchDetailedState = {
+            batches: []
+        }
+
         //get data from server based on user id that was given
         await Axios.get("https://caliber2-mock.revaturelabs.com/mock/training/batch/current")
         .then((response:any) => {
@@ -100,10 +105,12 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
                 {
                     let batchCardInfo = {  ...response.data[i] }
                     batchArray.batches.push(batchCardInfo);
+                    batchDetailedArray.batches.push(batchCardInfo); //Jordan line
                 }
                 
                 //the "batch state" is set to be whatever was extracted from the db
                 dispatch(setBatchState(batchArray));
+                dispatch(setBatchDetailsState(batchDetailedArray)); //Jordan line
                 
             }
             setSpinner(false);

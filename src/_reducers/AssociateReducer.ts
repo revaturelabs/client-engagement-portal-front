@@ -16,7 +16,7 @@ export interface IAssociatesState{
 }
 
 //will set it up to hold all associates
-const initialState: IAssociatesState = {
+export const initialAssociateState: IAssociatesState = {
     associates: [],
 };
 

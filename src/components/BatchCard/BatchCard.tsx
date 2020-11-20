@@ -10,6 +10,9 @@ import bigData from '../../assets/bigData.png';
 import netLogo from '../../assets/NET.jpg';
 import devOpsLogo from '../../assets/devOps.jpg';
 import { Redirect } from 'react-router-dom';
+import { setBatchDetailsState, SET_BATCHES_DETAILS } from '../../actions/BatchCardActions';
+import { BatchDetailReducer, IBatchDetailedState } from '../../_reducers/BatchReducer';
+import { exit } from 'process';
 
 interface IProps{
     batchId: number,
@@ -21,7 +24,7 @@ export const BatchCard:React.FC<IProps> = (props:IProps) => {
 
     const [batchButtonClicked, setBatchButtonClicked] = useState(false);
 
-    const [batchDetailedInfo, setBatchDetailedInfo] = useState(props);
+    
 
     const goToBatchViewPage = (event:React.MouseEvent<Element, MouseEvent>) => {
         console.log("send this id to the \"batch view page\" to load the right page: " + props.batchId);
@@ -29,8 +32,21 @@ export const BatchCard:React.FC<IProps> = (props:IProps) => {
 
         // SET A DETAILED BATCH STATE TO INCLUDE THE DETAILS OF THE BATCH BEING VIEWED
         // This detailed batch state will be displayed when the redirect to "/batch" runs
-        setBatchDetailedInfo(props);
-        console.log(props.batchId);
+
+        //Jordan code, line 36-49
+        // const allBatchDetails = BatchDetailReducer("");
+        // let batchDetails:IBatchDetailedState = {batches:[]};
+        // let i = 0;
+        // console.log(allBatchDetails.batches[i])
+        // loop: for(;allBatchDetails.batches;){
+        //     if(allBatchDetails.batches[i]?.name === props.batchName){
+        //         batchDetails.batches.push(allBatchDetails.batches[i]);
+        //         break loop;
+        //     }
+        //     i++;
+        // }
+
+        // BatchDetailReducer(SET_BATCHES_DETAILS, batchDetails);
 
         setBatchButtonClicked(true);
     }
