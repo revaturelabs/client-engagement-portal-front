@@ -17,12 +17,12 @@ test("modal toggles on and off", () => {
 
 it("modal should have 5 label fields", () => {
   const labels = wrapper.find(Label);
-  expect(labels.length).toBe(6);
+  expect(labels.length).toBe(5);
 });
 
 it("modal should have 5 input fields", () => {
   const inputs = wrapper.find(Input);
-  expect(inputs.length).toBe(6);
+  expect(inputs.length).toBe(5);
 });
 
 it("submit button should say 'Submit'", () => {

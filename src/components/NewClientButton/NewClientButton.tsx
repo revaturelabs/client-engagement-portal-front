@@ -180,19 +180,19 @@ export const NewClientButton: React.FC<any> = () => {
                 <option value="admin">Admin</option>
               </Input>
             </FormGroup> 
-            {(accountType === "client")? 
+            {(accountType === "client") ? 
             <FormGroup className="isClient">
               <Label>Email</Label>
               <Input type="text" required name="email"></Input>
               <Label>Name</Label>
               <Input type="text" required></Input>
             </FormGroup>
-            {accountType === "client" ? (
+            : (accountType === "admin") ? 
               <FormGroup>
                 <Label>Company Name</Label>
                 <Input type="text"></Input>
               </FormGroup>
-            ) : (
+             : (
                 <></>
               )}
             <FormGroup>

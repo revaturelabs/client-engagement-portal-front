@@ -3,7 +3,6 @@ import axios from 'axios';
 import { Col, Form, Input, Modal, ModalBody, ModalHeader, Row } from 'reactstrap';
 import '../../scss/BatchFormStyle.scss';
 
-
 /**
  * @function BatchForms
  * Renders the Map and Unmap forms on the page.
@@ -15,7 +14,7 @@ export const BatchForms: React.FC = () => {
 
     const toggleMap = () => setMapModal(!mapModal);
     const toggleUnmap = () => setUnmapModal(!unmapModal);
-
+    
     const [batchInfo, setBatchInfo] = useState<any>([]);
 
     /**
@@ -26,47 +25,45 @@ export const BatchForms: React.FC = () => {
      * 
      */
     const getBatches = async () => {
-      const response = await axios.get("https://caliber2-mock.revaturelabs.com/mock/training/batch/current");
-      const tempArray=[];
-      for (const r of response.data)
-      {
-        const id = r.id
-        const name = r.name;
-        tempArray.push({id,name});
-    }
+        const response = await axios.get("https://caliber2-mock.revaturelabs.com/mock/training/batch/current");
+        const tempArray=[];
+        for (const r of response.data)
+        {
+          const id = r.id
+          const name = r.name;
+          tempArray.push({id,name});
+      }
+  
+      /**
+       * @function setBatchInfo
+       * spreading the tempArray and assigning all values to the batchInfo
+       */
+      setBatchInfo([...tempArray]);
+      }
+  
+  
+      /**
+       * @function useEffect
+       * call the getBatches function on load of page 
+       */
+      useEffect(()=>{
+        getBatches();
+      },[]);
 
-    /**
-     * @function setBatchInfo
-     * spreading the tempArray and assigning all values to the batchInfo
-     */
-    setBatchInfo([...tempArray]);
-    }
-    
-
-    /**
-     * @function useEffect
-     * call the getBatches function on load of page 
-     */
-    useEffect(()=>{
-      getBatches();
-    },[]);
-
-
-    
-
+      
     return (
         <>
          <Row className="justify-content-center my-button-row">
                 <Col xs="2" sm="3" lg="5" />   
                 <Col xs="8" sm="6" lg="2">
-                    <button className="batch-form-button" onClick={toggleMap}>Map Batch to Client</button>
+                    <button className="batch-form-button" id='map-batch' onClick={toggleMap}>Map Batch To Client</button>
                 </Col>
                 <Col xs="2" sm="3" lg="5" />    
             </Row>
             <Row className="justify-content-center my-button-row">
                 <Col xs="2" sm="3" lg="5" />   
                 <Col xs="8" sm="6" lg="2">
-                    <button className="batch-form-button" onClick={toggleUnmap}>Unmap Client from Batch</button>
+                    <button className="batch-form-button" id='unmap-batch' onClick={toggleUnmap}>Unmap Batch From Client</button>
                 </Col>
                 <Col xs="2" sm="3" lg="5" />    
             </Row>
@@ -82,12 +79,10 @@ export const BatchForms: React.FC = () => {
                         </Input>
                         <br/>
                         <Input type="select">
-
-                            <option>Select Batch</option>
+                            <option disabled selected>Select Batch:</option>
                             {batchInfo.map((e:any,i:any) =>
-                            <option key={i} id={e.id} >{e.name}</option>
+                                <option key={i} id={e.id} >{e.name}</option>
                             )}
-
                         </Input>    
                         <input className="batch-form-submit" type="submit" value="Submit" ></input>
                     </Form>
@@ -102,9 +97,9 @@ export const BatchForms: React.FC = () => {
                         </Input>
                         <br/>
                         <Input type="select">Select Batch
-                            <option>Select Batch</option>
+                            <option disabled selected>Select Batch:</option>
                             {batchInfo.map((e:any,i:any) =>
-                            <option key={i} id={e.id} value={e.id} >{e.name}</option>
+                                <option key={i} id={e.id} value={e.id} >{e.name}</option>
                             )}
                         </Input>
 
@@ -116,7 +111,7 @@ export const BatchForms: React.FC = () => {
 
           {/* Map Modal */}
          <Modal isOpen={mapModal} toggle={toggleMap} className="batch-form-modal">
-            <ModalHeader toggle={toggleMap} className="modal-header">
+            <ModalHeader toggle={toggleMap} className="modal-header" >
               Map Batch to Client
             </ModalHeader>
             <ModalBody>
@@ -127,12 +122,11 @@ export const BatchForms: React.FC = () => {
                             <option>Dummy Client 2</option>
                         </Input>
                         <br/>
-                        <Input type="select">
-                            <option>Select Batch</option>
+                        <Input type="select" id='map-options'>
+                            <option disabled selected>Select Batch</option>
                             {batchInfo.map((e:any,i:any) =>
-                            <option key={i} id={e.id} >{e.name}</option>
+                                <option key={i} id={e.id} >{e.name}</option>
                             )}
-                            
                         </Input>    
                         <input className="modal-batch-form-submit" type="submit" value="Submit" ></input>
                     </Form>
@@ -141,12 +135,12 @@ export const BatchForms: React.FC = () => {
 
          {/* UnMap Modal */}
          <Modal isOpen={unmapModal} toggle={toggleUnmap} className="batch-form-modal">
-            <ModalHeader toggle={toggleUnmap} className="modal-header">
+            <ModalHeader toggle={toggleUnmap} className="modal-header" >
               Unmap Batch from Client
             </ModalHeader>
             <ModalBody>
             <Form className="modal-batch-form">
-                        <Input type="select">
+                        <Input type="select" id='unmap-options'>
                             <option>Select Client</option>
                             <option>Dummy Client 1</option>
                             <option>Dummy Client 2</option>
