@@ -1,0 +1,30 @@
+
+name: Test Development
+on:
+  pull_request:
+    branches: 
+      - development
+  push:
+    branches:
+      - development
+jobs:
+  sonarcloud:
+    name: SonarCloud
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - name: Get development
+        run: git fetch origin development
+      - name: Install dependencies
+        run:  npm install
+      - name: Install Jest globally
+        run:  sudo npm install -g jest
+      - name: Run Tests
+        run:  npm run test:coverage
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
