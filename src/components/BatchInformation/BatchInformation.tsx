@@ -89,7 +89,6 @@ export const BatchInformation:React.FC<IBatchInformationProps> = (props:IBatchIn
              <button onClick={() => setShowInterventionModal(!showInterventionModal)} className="intervention-button">Request Intervention</button>
             <PlanInterventionModal show={showInterventionModal} setShow={setShowInterventionModal} />
          </Row>
-         <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
         </>
     );
 }
