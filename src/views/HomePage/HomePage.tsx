@@ -13,7 +13,7 @@ import PlanInterventionModal from '../../components/PlanInterventionModal/PlanIn
 
 interface IProps {
     batches: {
-        id: number,
+        batchId: string,
         skill: string,
         name: string
     }[],
