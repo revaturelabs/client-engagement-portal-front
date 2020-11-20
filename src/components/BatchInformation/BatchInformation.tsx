@@ -53,18 +53,18 @@ export const BatchInformation:React.FC<IBatchInformationProps> = (props:IBatchIn
                             <Row>
                                 <Col xs="4" className="logo-container">
                                 <span className="helper"></span>
-                                    <img src={reactReduxLogo} />
-                                    
+                                    <img src={reactReduxLogo} alt="react redux logo" />
+
                                 </Col>
                                 <Col xs="4" className="logo-container">
                                 <span className="helper"></span>
-                                    <img src={javaLogo} />
-                                    
+                                    <img src={javaLogo} alt="java logo" />
+
                                 </Col>
                                 <Col xs="4" className="logo-container">
                                     <span className="helper"></span>
-                                    <img src={springLogo} />
-                                    
+                                    <img src={springLogo} alt="spring logo" />
+
                                 </Col>
                             </Row>
                             <Row style={{textAlign: "center"}}>

@@ -5,6 +5,7 @@ import menuArrow from '../../assets/down-arrow.png';
 import  '../../scss/navStyles.scss';
 import { Turn as Hamburger } from 'hamburger-react'
 import { Link } from 'react-router-dom';
+import { Auth } from 'aws-amplify';
 // interface INavBarProps{
 //     dropDownProps?:React.ComponentType<DropdownItem>[];
 // }
@@ -19,13 +20,19 @@ export const NavBar: React.FC<any> = (props: any) => {
         setHamOpen(!navMenuOpen);
     };
 
+    const LogOut = () => {
+        Auth.signOut()
+            .then(data => console.log(data))
+            .catch(err => console.log(err));
+    }
+
+
     return(
         <Row className="justify-content-around myNav">
             <Col xs="auto" className="justify-content-start logoContainer">
                 <img src={logo} className="myLogo" alt="revature logo"/>
             </Col>
-            
-            <Col className="d-flex align-items-center justify-content-end auto " >
+            <Col className="d-flex align-items-center justify-content-end auto test1" >
                 <ButtonDropdown isOpen={navMenuOpen} toggle={toggle}>
                      {/* Mobile Hamburger Menu */}
                      <DropdownToggle className="" style={{margin:"10px", backgroundColor: "white", border: "none"}}>
@@ -36,14 +43,13 @@ export const NavBar: React.FC<any> = (props: any) => {
                     </DropdownToggle>
                     {/* Desktop Menu */}    
                     <DropdownMenu right>
-                        {/* <Link to="/"><DropdownItem onClick={LogOut}>Logout</DropdownItem></Link> */}
                         {props.children}
+                        <DropdownItem header>Account Options</DropdownItem>
+                        <Link to="/"><DropdownItem onClick={LogOut}>Logout</DropdownItem></Link>
                     </DropdownMenu>
                 </ButtonDropdown>
             </Col>
-
-
-{/* 
+            {/* 
             <Col className="d-flex align-items-center justify-content-end auto" id="myMobileDropdown" >
                 <Dropdown isOpen={navMenuOpen} toggle={toggle}>
                     

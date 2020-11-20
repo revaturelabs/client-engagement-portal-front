@@ -1,7 +1,12 @@
-import React, { useState } from 'react';
-import { Button, Col, Form, FormGroup, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader, Row } from 'reactstrap';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { Col, Form, Input, Modal, ModalBody, ModalHeader, Row } from 'reactstrap';
 import '../../scss/BatchFormStyle.scss';
 
+/**
+ * @function BatchForms
+ * Renders the Map and Unmap forms on the page.
+ */
 export const BatchForms: React.FC = () => {
 
     const [mapModal, setMapModal] = useState(false);
@@ -9,6 +14,43 @@ export const BatchForms: React.FC = () => {
 
     const toggleMap = () => setMapModal(!mapModal);
     const toggleUnmap = () => setUnmapModal(!unmapModal);
+    
+    const [batchInfo, setBatchInfo] = useState<any>([]);
+
+    /**
+     * @function getBatches
+     * loops though batch objects to extract and assign appropriate data 
+     * @async
+     * Creates an axios get call to gather batch information
+     * 
+     */
+    const getBatches = async () => {
+        const response = await axios.get("https://caliber2-mock.revaturelabs.com/mock/training/batch/current");
+        const tempArray=[];
+        for (const r of response.data)
+        {
+          const id = r.id
+          const name = r.name;
+          tempArray.push({id,name});
+      }
+  
+      /**
+       * @function setBatchInfo
+       * spreading the tempArray and assigning all values to the batchInfo
+       */
+      setBatchInfo([...tempArray]);
+      }
+  
+  
+      /**
+       * @function useEffect
+       * call the getBatches function on load of page 
+       */
+      useEffect(()=>{
+        getBatches();
+      },[]);
+
+      
     return (
         <>
          <Row className="justify-content-center my-button-row">
@@ -37,9 +79,10 @@ export const BatchForms: React.FC = () => {
                         </Input>
                         <br/>
                         <Input type="select">
-                            <option>Select Batch</option>
-                            <option>Dummy Batch 1</option>
-                            <option>Dummy Batch 2</option>
+                            <option disabled selected>Select Batch:</option>
+                            {batchInfo.map((e:any,i:any) =>
+                                <option key={i} id={e.id} >{e.name}</option>
+                            )}
                         </Input>    
                         <input className="batch-form-submit" type="submit" value="Submit" ></input>
                     </Form>
@@ -54,9 +97,10 @@ export const BatchForms: React.FC = () => {
                         </Input>
                         <br/>
                         <Input type="select">Select Batch
-                            <option>Select Batch</option>
-                            <option>Dummy Batch 3</option>
-                            <option>Dummy Batch 4</option>
+                            <option disabled selected>Select Batch:</option>
+                            {batchInfo.map((e:any,i:any) =>
+                                <option key={i} id={e.id} value={e.id} >{e.name}</option>
+                            )}
                         </Input>
 
                         <input className="batch-form-submit" type="submit" value="Submit"></input>
@@ -79,9 +123,10 @@ export const BatchForms: React.FC = () => {
                         </Input>
                         <br/>
                         <Input type="select">
-                            <option>Select Batch</option>
-                            <option>Dummy Batch 1</option>
-                            <option>Dummy Batch 2</option>
+                            <option disabled selected>Select Batch</option>
+                            {batchInfo.map((e:any,i:any) =>
+                                <option key={i} id={e.id} >{e.name}</option>
+                            )}
                         </Input>    
                         <input className="modal-batch-form-submit" type="submit" value="Submit" ></input>
                     </Form>
@@ -103,8 +148,9 @@ export const BatchForms: React.FC = () => {
                         <br/>
                         <Input type="select">
                             <option>Select Batch</option>
-                            <option>Dummy Batch 1</option>
-                            <option>Dummy Batch 2</option>
+                            {batchInfo.map((e:any,i:any) =>
+                                <option key={i} id={e.id} >{e.name}</option>
+                            )}
                         </Input>    
                         <input className="modal-batch-form-submit" type="submit" value="Submit"></input>
                     </Form>

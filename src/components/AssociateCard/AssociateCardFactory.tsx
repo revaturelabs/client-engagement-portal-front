@@ -42,7 +42,7 @@ export const AssociateCardFactory:React.FC<any> = (props:IProps) => {
         associates = await response.data;
     }
 
-    let cards;
+    let cards = [];
     /**
      * This field will hold all of the AssociateCards, based on the associates
      * returned from the batch.
@@ -50,7 +50,7 @@ export const AssociateCardFactory:React.FC<any> = (props:IProps) => {
     const content = (() => {
         
         
-        cards = <AssociateCard />;
+        // cards.push(<AssociateCard />);
     cards = [<AssociateCard />,<AssociateCard />,<AssociateCard />,<AssociateCard />,<AssociateCard />];
         /**
          * For each associate in the batch, create a new AssociateCard,
@@ -60,7 +60,7 @@ export const AssociateCardFactory:React.FC<any> = (props:IProps) => {
         //     //do nothing
         // } else{
         //     for(let associate of associates){
-        //         cards += <AssociateCard {...associate} />;
+        //         cards.push(<AssociateCard {...associate} />);
         //     }
         // }
         
