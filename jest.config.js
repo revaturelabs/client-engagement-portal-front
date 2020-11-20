@@ -1,5 +1,12 @@
 module.exports = {
-    transform: { '^.+\\.tsx?$': 'ts-jest' },
-    moduleNameMapper: { '\\.(css|less)$': '<rootDir>/styleMock.js' },
-    setupFiles: ['<rootDir>/jest.config.js'],
-} 
+    "roots": [
+        "<rootDir>/src"
+      ],
+      "testMatch": [
+        "**/__tests__/**/*.+(ts|tsx|js)",
+        "**/?(*.)+(spec|test).+(ts|tsx|js)"
+      ],
+      "transform": {
+        "^.+\\.(ts|tsx)$": "ts-jest"
+      },
+}

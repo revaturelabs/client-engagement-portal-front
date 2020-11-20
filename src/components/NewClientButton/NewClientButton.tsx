@@ -13,8 +13,12 @@ import {
   Row,
   Col,
 } from "reactstrap";
-import "./NewClientButton.scss";
-import Axios from "axios";
+import { isConstructorDeclaration } from "typescript";
+import '../../scss/NewClientButton.scss';
+
+
+//This component includes the button for a new client account
+//This also has a modal form that pops up when the button is clicked
 
 /**
  * @function newClientButton
@@ -32,33 +36,7 @@ export const NewClientButton: React.FC<any> = () => {
   //Below is testing code
 
   //This requires an Async function to parse the current JWT token due to promises
-  const test = async () => {
 
-    //Assigns the current session promise
-    const sessionPromise = (Auth.currentSession());
-
-    //Awaits the promise to fufill, then triggers and axios
-    await sessionPromise.then(function (result) {
-      //Grabs the JWT token from the promise
-      let to = result.getIdToken().getJwtToken();
-      console.log(to);
-      //Makes an Axios with the JWT token in the header
-      Axios.get('http://localhost:9011/admin/', {
-        headers: {
-          'Authorization': `Bearer ${to}`
-        }
-      })
-        .then((res) => {
-          console.log(res.data)
-        })
-        .catch((error) => {
-          console.error(error)
-        })
-
-
-    });
-  }
-  test();
 
 
   /**
@@ -158,33 +136,14 @@ export const NewClientButton: React.FC<any> = () => {
 
   return (
     <>
-      <Button
-        style={{
-          backgroundColor: "#F26925",
-          fontFamily: " futura-pt, sans-serif",
-          fontStyle: "normal",
-          fontWeight: 300,
-          width: "16rem",
-          border: "none",
-        }}
-        onClick={toggle}
-        className={"toggleButton"}
-      >
+      <Button onClick={toggle} className="create-account-button">
         Create Account
       </Button>
 
       <Modal isOpen={modal} toggle={toggle}>
         <Row>
           <Col xs="6">
-            <ModalHeader
-              className="container"
-              style={{
-                color: "#F26925",
-                display: "flex",
-                justifyContent: "space-between",
-                marginRight: "50%",
-              }}
-            >
+            <ModalHeader toggle={toggle} className="container create-account-modal-header">
               Create Account
             </ModalHeader>
           </Col>
@@ -204,11 +163,7 @@ export const NewClientButton: React.FC<any> = () => {
             </Button>
           </Col>
         </Row>
-        <Form
-          onSubmit={(event: React.FormEvent<HTMLFormElement>) =>
-            registerUser(event)
-          }
-        >
+        <Form onSubmit={(event: React.FormEvent<HTMLFormElement>) => registerUser(event)}>
           <ModalBody>
             <FormGroup>
               <Label for="exampleSelect">Account Type</Label>
@@ -255,21 +210,8 @@ export const NewClientButton: React.FC<any> = () => {
           </ModalBody>
 
           <ModalFooter>
-            <Button
-              className="newClientButton"
-              style={{
-                margin: "auto",
-                backgroundColor: "#F26925",
-                fontFamily: " futura-pt, sans-serif",
-                fontStyle: "normal",
-                fontWeight: 300,
-                width: "100%",
-                border: "none",
-                fontSize: "1.5rem",
-              }}
-            >
-              Submit
-            </Button>
+            <input type="submit" className="create-account-submit">
+            </input>
           </ModalFooter>
         </Form>
       </Modal>

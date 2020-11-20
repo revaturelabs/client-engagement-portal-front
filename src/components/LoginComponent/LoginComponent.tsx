@@ -4,7 +4,9 @@ import hands from '../../assets/engagementPortalLogo.svg';
 import userThumb from '../../assets/user-thumb.png';
 import passThumb from '../../assets/pass-thumb.png';
 import { Auth } from 'aws-amplify';
-import Axios from 'axios';
+import '../../scss/loginStyles.scss';
+import ceplogo from '../../assets/engagementPortalLogo.svg';
+import ceplogo2 from '../../assets/engagementPortalLogov2.svg';
 
 interface ILoginProps {
     loginType: string
@@ -70,23 +72,15 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
     return (
         <>
             {isClient ? <Redirect to="/home" /> : isAdmin ? <Redirect to="/admin" /> :
-                <form onSubmit={handleSubmit}
-                    style={{
-                        textAlign: "center", backgroundColor: "white", width: "15vw", height: "32vh", minWidth: "200px", display: "inline-block",
-                        borderRadius: "50px", padding: "10px", border: "1px solid #F26925"
-                    }}>
+                <form onSubmit={handleSubmit} className="login-form">
 
                     <div style={{ maxHeight: "90%" }}>
                         <div style={{ position: "relative", textAlign: "center" }}>
-                            <img src={hands} alt="hands background" style={{ width: "45%", minHeight: "6em", opacity: 0.2 }} />
-                            <div className="logoarea"
-                                style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }} >
-
-                                <div
-                                    style={{ color: "#202430", fontSize: "20px", fontWeight: 500 }}>
-
-                                    Engagement Force
-                                </div>
+                            <div className="login-header">
+                                Client Engagement Portal
+                        </div>
+                            <div className="cep-logo-area">
+                                <img src={ceplogo2} alt="cep-logo" width="200px" />
                             </div>
                         </div>
 
@@ -94,7 +88,7 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
                             <input type="email" required className="form-control" name="email" placeholder="E-mail"
                                 style={new CEPLoginInputStyle()} />
                             <div style={{ position: "absolute", top: "45%", left: "21%", transform: "translate(-50%, -50%)" }}>
-                                <img src={userThumb} alt="email thumbnail" />
+                                <img src={userThumb} alt="email thumbnail" className="userthumbcheck" />
                             </div>
                         </div>
 
@@ -102,11 +96,11 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
                             <input type="password" required className="form-control" name="password" placeholder="Password"
                                 style={new CEPLoginInputStyle()} />
                             <div style={{ position: "absolute", top: "45%", left: "21%", transform: "translate(-50%, -50%)" }}>
-                                <img src={passThumb} alt="password thumbnail" />
+                                <img src={passThumb} alt="password thumbnail" className="passthumbcheck" />
                             </div>
                         </div>
 
-                        <button type="submit"
+                        <button className="test2" type="submit"
                             style={{ margin: "10px", lineHeight: 2.2, width: "70%", border: "none", backgroundColor: "#F26925", color: "white", fontSize: "20px" }}>
 
                             Login
@@ -134,6 +128,6 @@ export class CEPLoginInputStyle implements React.CSSProperties {
         this.margin = "2px";
         this.width = "70%";
         this.display = "inline-block"
-        this.boxShadow = "inset 1px 2px 0 0 #ccc, inset 0 4px 0 0 #ddd, inset 2px 6px 0 0 #eee";
+        this.boxShadow = "inset 1px 2px 0 0 #ddd, inset 0 4px 0 0 #eee, inset 2px 6px 0 0 #fef";
     }
 }

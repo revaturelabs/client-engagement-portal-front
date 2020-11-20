@@ -2,26 +2,19 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { LoginComponent } from '../../components/LoginComponent/LoginComponent';
 import logo from '../../assets/logo.png';
+import "../../scss/loginStyles.scss";
 
 export const LoginPage:React.FC<undefined> = () => {
     return(
-        <table style={{height: "100vh", width: "100vw", backgroundColor:"#E3E3E3"}}>
-            <tbody>
-                <tr>
-                    <td>
-                        <div className="justify-content-center" style={{textAlign:"center"}}>
-                            <Link to="/login"><img src={logo} alt="Logo" style={{opacity: 0.2}} height="100px" /></Link>
-                            <br />
-                            <br />
-                            <LoginComponent loginType="client" />
-                            <br />
-                            <br />
-                            <Link to="/home"><button>Log In As Client</button></Link>
-                            <Link to="/admin"><button>Log In As Admin</button></Link>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div className="login-wrapper">
+            <img src={logo} alt="Logo" className="logo"/>
+            <br />
+            <br />
+            <LoginComponent loginType="client" />
+            <br />
+            <br />
+            <Link to="/home"><button>Log In As Client</button></Link>
+            <Link to="/admin"><button>Log In As Admin</button></Link>
+        </div>
     );
 }
