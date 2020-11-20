@@ -35,11 +35,21 @@ export const NavBar: React.FC<any> = (props: any) => {
                     </DropdownToggle>
                     {/* Desktop Menu */}
                     <DropdownMenu right>
-                        <Link to="/"><DropdownItem onClick={LogOut}>Logout</DropdownItem></Link>
                         {props.children}
+                        <DropdownItem header>Account Options</DropdownItem>
+                        <Link to="/"><DropdownItem onClick={LogOut}>Logout</DropdownItem></Link>
                     </DropdownMenu>
                 </ButtonDropdown>
             </Col>
+            {/* 
+            <Col className="d-flex align-items-center justify-content-end auto" id="myMobileDropdown" >
+                <Dropdown isOpen={navMenuOpen} toggle={toggle}>
+                    
+                    <DropdownMenu right>
+                        <a href="/"><DropdownItem>Logout</DropdownItem></a>
+                    </DropdownMenu>
+                </Dropdown>
+            </Col> */}
         </Row>
     )
 }
