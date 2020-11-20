@@ -8,44 +8,8 @@ export interface INotificationState {
     notifications:INotification[] | null
 }
 
-const initialState:INotificationState = { //!!! REMOVE DUMMY DATA WHEN REAL DATA CAN BE ENTERED
-        notifications: [
-            {
-                clientName: "a",
-                subject: "b",
-                requestDate: "c"
-            },
-            {
-                clientName: "a",
-                subject: "b",
-                requestDate: "c"
-            },
-            {
-                clientName: "a",
-                subject: "b",
-                requestDate: "c"
-            },
-            {
-                clientName: "a",
-                subject: "b",
-                requestDate: "c"
-            },
-            {
-                clientName: "a",
-                subject: "b",
-                requestDate: "c"
-            },
-            {
-                clientName: "a",
-                subject: "b",
-                requestDate: "c"
-            },
-            {
-                clientName: "a",
-                subject: "b",
-                requestDate: "c"
-            },
-        ]
+const initialState:INotificationState = {
+        notifications: []
 }
 
 /**
