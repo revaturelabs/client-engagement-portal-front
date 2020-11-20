@@ -1,12 +1,10 @@
 import { AnyAction, CombinedState, combineReducers, Reducer } from "redux";
 import { BatchReducer, IBatchState } from "./BatchReducer";
 import { IUserState, userReducer } from "./UserReducer";
-import { loginReducer } from "./LoginReducer";
 
 export interface IRootState {
     userState: IUserState;
     batchState: IBatchState;
-    roleState: string | null;
 }
 
 export const rootReducer: Reducer<
@@ -14,7 +12,6 @@ export const rootReducer: Reducer<
     AnyAction
 > = combineReducers<IRootState>({
     userState: userReducer,
-    roleState: loginReducer,
     batchState: BatchReducer,
     //place your state:reducer here
 });
