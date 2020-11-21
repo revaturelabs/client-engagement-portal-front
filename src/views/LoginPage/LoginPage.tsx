@@ -7,7 +7,12 @@ import "../../scss/loginStyles.scss";
 export const LoginPage:React.FC<undefined> = () => {
     return(
         <div className="login-wrapper">
-            <img src={logo} alt="Logo" className="logo"/>
+            <div className="container">
+                <div className="row justify-content-center">
+                    <img src={logo} alt="Logo" className="logo"/>
+                </div>
+            </div>
+            
             <br />
             <br />
             <LoginComponent loginType="client" />

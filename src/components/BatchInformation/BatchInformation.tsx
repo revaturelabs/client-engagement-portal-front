@@ -1,11 +1,14 @@
-import React from 'react';
-import { Card, CardBody, CardFooter, CardHeader, Col, Row } from 'reactstrap';
+import React, { useState } from 'react';
+import { Button, Card, CardBody, CardFooter, CardHeader, Col, Row } from 'reactstrap';
 import "../../scss/BatchInformation.scss"
 import reactReduxLogo from '../../assets/react-redux-logo.png';
 import javaLogo from '../../assets/java-logo.png';
 import springLogo from '../../assets/spring-logo.png';
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import bArrow from "../../assets/whiteBarrow.svg";
+import oArrow from "../../assets/orangeBarrow.svg";
+import { Redirect } from 'react-router';
 
 interface IBatchInformationProps {
     name:string,
@@ -13,6 +16,8 @@ interface IBatchInformationProps {
 
 export const BatchInformation:React.FC<IBatchInformationProps> = (props:IBatchInformationProps) => {
 
+    const [isOrangeBtn, setOrangeBtn] = useState(false);
+    
     const responsive = {
         superLargeDesktop: {
           // the naming can be any, depends on you.
@@ -37,8 +42,21 @@ export const BatchInformation:React.FC<IBatchInformationProps> = (props:IBatchIn
         }
       };
 
+      const goBack = () => {
+          window.location.href = "/home";
+      }
+
     return(
         <>
+        {/* Back button */}
+        <span>
+            <button className="back-btn" onClick={goBack} onMouseOver={() => {setOrangeBtn(true)}}
+            onMouseOut={() => {setOrangeBtn(false)}}>
+                { isOrangeBtn ? <span><img src={oArrow} alt="back arrow" /></span> : 
+                <span><img src={bArrow} alt="back arrow" /></span>}
+                <span>Back</span>
+            </button>
+        </span>
          <Row className="justify-content-center">
              <Col md="1" lg="2"></Col>
              <Col md="10" lg="8">

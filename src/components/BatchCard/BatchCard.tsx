@@ -3,7 +3,6 @@ import "../../scss/batch-card.scss";
 import javaLogo from '../../assets/java-logo.png';
 import reactReduxLogo from '../../assets/react-redux-logo.png';
 import javaAuto from '../../assets/JavaAutoLogo.png';
-// import javaMicro from '../../assets/JavaMicroLogo.jpg';
 import pegaLogo from '../../assets/Pegalogo.jpg';
 import salesLogo from '../../assets/sales.png';
 import bigData from '../../assets/bigData.png';
@@ -12,11 +11,19 @@ import devOpsLogo from '../../assets/devOps.jpg';
 import { Redirect } from 'react-router-dom';
 
 interface IProps{
-    batchId: number,
+    batchId: string,
     specialization:string,
     batchName:string,
 }
 
+/**
+ * This is a "card" which represents one of the different batches that
+ * are mapped to a specific client. The button on this card should send the
+ * user to a page displaying much more detailed information about this specific
+ * batch.
+ * 
+ * @param props The batch information that was passed in from the Home page component. 
+ */
 export const BatchCard:React.FC<IProps> = (props:IProps) => {
 
     const [batchButtonClicked, setBatchButtonClicked] = useState(false);
@@ -31,8 +38,7 @@ export const BatchCard:React.FC<IProps> = (props:IProps) => {
         setBatchButtonClicked(true);
     }
 
-    //sets the image of this card to match the specialization
-    let image = "";
+    let image = "";      //sets the image of this card to match the specialization
     if (props.specialization === "Java/Microservices")
     {
         image = javaLogo;
