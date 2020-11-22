@@ -1,50 +1,93 @@
-import { configure, mount, render, shallow } from 'enzyme';
-import React, { useEffect } from 'react';
+import { configure, mount } from "enzyme";
+import React from "react";
 import Adapter from "enzyme-adapter-react-16";
-import RouterGuard from '../../../components/RouterGuard/RouterGuard';
-import { AdminPage } from '../../../views/AdminPage/AdminPage';
-import { LoginPage } from '../../../views/LoginPage/LoginPage';
-import { Route, Router } from 'react-router';
-import { createBrowserHistory } from 'history';
-import { Auth } from 'aws-amplify';
-import { act } from 'react-dom/test-utils';
+import RouterGuard from "../../../components/RouterGuard/RouterGuard";
+import { Route, Router } from "react-router";
+import { createBrowserHistory } from "history";
+import { Auth } from "aws-amplify";
+import { act } from "react-dom/test-utils";
 
 configure({ adapter: new Adapter() });
 
-describe('Testing endpoint guards', () => {
+const dumbyComponent: React.FC = () => {
+  return <div>{"I'm a dumbyComponent"}</div>;
+};
 
-	// beforeEach(() => {
-	// 	useEffect = jest.spyOn(React, 'useEffect');
-	// })
+describe("Testing endpoint guards", () => {
+  let history;
+  beforeEach(() => {
+    //Allow Route testing
+    history = createBrowserHistory();
+    history.push("/admin");
+  });
+  test("Can access page if correct role", async () => {
+    //mock AWS Amplify Auth
+    Auth.currentUserInfo = jest.fn().mockImplementation(() => {
+      return {
+        attributes: {
+          "custom:userRole": "admin",
+        },
+      };
+    });
 
-	// const mockUseEffect = () => {
-	// 	useEffect.mockImplementation(f => f());
-	// }
+    let wrapper;
+    //Trigger useEffect on first render
+    await act(async () => {
+      wrapper = mount(
+        <Router history={history}>
+          <RouterGuard component={dumbyComponent} redirectPath="/" path="/admin" role={["admin"]} />
+        </Router>
+      );
+    });
+    wrapper.update();
+    wrapper.setProps({}); //trigger rerender
+    // console.log(wrapper.debug());
+    expect(wrapper.find(dumbyComponent)).toHaveLength(1);
+  });
 
-	test('Can\'t access admin page if not admin/logged in',() => {
-		//mock AWS Amplify Auth
-		Auth.currentUserInfo = jest.fn().mockImplementation(() => {return {attributes: {"custom:userRole": null}}});
-		
-		//Trigger useEffect on first render
+  test("Can\t access page if not signed in", async () => {
+    //mock AWS Amplify Auth
+    Auth.currentUserInfo = jest.fn().mockImplementation(() => {
+      return {
+        attributes: {
+          "custom:userRole": "client",
+        },
+      };
+    });
 
-		//Allow Route testing
-		const history = createBrowserHistory();
-		history.push("/admin");
+    let wrapper;
+    //Trigger useEffect on first render
+    await act(async () => {
+      wrapper = mount(
+        <Router history={history}>
+          <RouterGuard component={dumbyComponent} redirectPath="/" path="/admin" role={["admin"]} />
+        </Router>
+      );
+    });
 
-		let wrapper;
-		//wrapper.setState({loaded: true});
-		// wrapper.setProps({});
-		act(() => {
-			wrapper = shallow(
-				<Router history={history}>
-					<RouterGuard component={AdminPage} redirectPath="/" path="/admin" role={["admin"]}/>
-				</Router>
-			)
-		})
-		wrapper.update();
-		wrapper.setProps({});
-		console.log(wrapper.debug());
-		expect(wrapper.find('AdminPage').length).toEqual(0);
-		expect(wrapper.html()).toEqual(true);
-	} );
-})
+    wrapper.update();
+    wrapper.setProps({}); //trigger rerender
+    expect(wrapper.find(dumbyComponent)).toHaveLength(0); //shouldn't render
+  });
+
+  test("Can\t access page if wrong role", async () => {
+    //mock AWS Amplify Auth
+    Auth.currentUserInfo = jest.fn().mockImplementation(() => {
+      return null;
+    });
+
+    let wrapper;
+    //Trigger useEffect on first render
+    await act(async () => {
+      wrapper = mount(
+        <Router history={history}>
+          <RouterGuard component={dumbyComponent} redirectPath="/" path="/admin" role={["admin"]} />
+        </Router>
+      );
+    });
+
+    wrapper.update();
+    wrapper.setProps({}); //trigger rerender
+    expect(wrapper.find(dumbyComponent)).toHaveLength(0); //shouldn't render
+  });
+});

@@ -21,7 +21,7 @@ export const RouterGuard: React.FC<ProtectedRouteProps> = (props) => {
       
       if (userInfo && !props.role.includes(user)) {      // if the current user role is not one of the allowed roles, then redirect
         setRedirect(props.redirectPath);
-        console.log("redirecting");
+        // console.log("redirecting");
       }
       setUserRole(user);                  //set UserRole to be the found user. We know it's fine bec of await.
     }
