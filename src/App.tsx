@@ -26,7 +26,7 @@ function App() {
                             component={() => <Redirect to="/login" />}
                         />
                         <Route path="/login" component={LoginPage} />
-                        <Route path="/home" component={HomePage} />
+                        {/* <Route path="/home" component={HomePage} /> */}
                         <RouterGuard component={HomePage} path="/home" redirectPath="/" role={['client']}/>
                         {/* <Route path="/admin" component={AdminPage}/> */}
                         <Route path="/batch" component={BatchInformationPage} />

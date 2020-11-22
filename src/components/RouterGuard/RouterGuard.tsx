@@ -11,35 +11,34 @@ export interface ProtectedRouteProps extends RouteProps {
 
 export const RouterGuard: React.FC<ProtectedRouteProps> = (props) => {
   const [redirect, setRedirect] = useState<string>("");
-  const [userRole, setUserRole] = useState<string>("");
-  const [loaded, setLoaded] = useState(false);
+  const [userRole, setUserRole] = useState<string>("");       // if not yet loaded (Auth not done yet), then falsy
+  // const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     async function getUser() {
       const userInfo = await Auth.currentUserInfo();    //get current user
-
-      setUserRole(userInfo.attributes["custom:userRole"] || ""); 
+      const user = userInfo?.attributes["custom:userRole"] || "NotSignedIn";
       
-      console.log(userRole);
-      if (!props.role.includes(userRole) && loaded) {      // if the current user role is not one of the allowed roles, then redirect
+      if (userInfo && !props.role.includes(user)) {      // if the current user role is not one of the allowed roles, then redirect
         setRedirect(props.redirectPath);
+        console.log("redirecting");
       }
-      setLoaded(true);
+      setUserRole(user);                  //set UserRole to be the found user. We know it's fine bec of await.
     }
-    !loaded && getUser();    //run only if not yet loaded
+    !userRole && getUser();    //run only if not yet loaded
   });
   
   
 
-  if (loaded) {                                         //If the page is loaded...
-    if (redirect) {                                     //if the user role is not correct, return redirect
+  if (userRole) {                                         //If the page is loaded...
+    if (redirect || userRole === "NotSignedIn") {                                     //if the user role is not correct, return redirect
       const renderComponent = () => <Redirect to={{ pathname: redirect }} />;
       return <Route {...props} component={renderComponent} render={undefined} />;
     } else {                                                //else return route normally
       return <Route {...props} />;
     }
   } else {                                              //else don't load
-    return <div>Loading</div>;
+    return null;
   }
 };
 
