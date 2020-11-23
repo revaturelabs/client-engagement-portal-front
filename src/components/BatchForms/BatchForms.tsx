@@ -137,7 +137,7 @@ export const BatchForms: React.FC = () => {
          </Modal>
 
          {/* UnMap Modal */}
-         <Modal isOpen={unmapModal} toggle={toggleUnmap} className="batch-form-modal">
+         <Modal isOpen={unmapModal} toggle={toggleUnmap} className="batch-form-modal" id="test-unmap">
             <ModalHeader toggle={toggleUnmap} className="modal-header" >
               Unmap Batch from Client
             </ModalHeader>
