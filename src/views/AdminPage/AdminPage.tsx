@@ -1,9 +1,13 @@
 import React from "react";
-import { Col, Container, Form, Input, Row } from "reactstrap";
+import { Col, Container, Row } from "reactstrap";
 import { BatchForms } from "../../components/BatchForms/BatchForms";
 import { NavBar } from "../../components/NavBar/NavBar";
 import { NewClientButton } from "../../components/NewClientButton/NewClientButton";
 
+/**
+ * @function AdminPage
+ * Component showing the page that an admin sees when they log in.
+ */
 export const AdminPage: React.FC = () => {
     return (
         <>

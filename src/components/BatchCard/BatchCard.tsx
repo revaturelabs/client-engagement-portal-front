@@ -17,6 +17,7 @@ export interface IBasicBatchInfo{
 }
 
 /**
+<<<<<<< HEAD
  * This is a "card" which represents one of the different batches that
  * are mapped to a specific client. The button on this card should send the
  * user to a page displaying much more detailed information about this specific
@@ -25,9 +26,24 @@ export interface IBasicBatchInfo{
  * @param props The batch information that was passed in from the Home page component. 
  */
 export const BatchCard:React.FC<IBasicBatchInfo> = (props:IBasicBatchInfo) => {
+=======
+ * @function BatchCard
+ * Displays a summary of a particular batch in a compact card format.
+ *
+ * @param props contains batch information that informs what the bcard will display.
+ * Should be passed in by an ancestor that retrieves this information from the back end.
+ */
+export const BatchCard:React.FC<IProps> = (props:IProps) => {
+>>>>>>> 3a795374ee392df07d240f83451903ecb215b113
 
     const [batchButtonClicked, setBatchButtonClicked] = useState(false);
 
+    /**
+     * @function goToBatchViewPage
+     * Once the "View" button is clicked, this function redirects the user to a page with detailed batch info.
+     *
+     * @param event contains the click event that calls this function.
+     */
     const goToBatchViewPage = (event:React.MouseEvent<Element, MouseEvent>) => {
         console.log("send this id to the \"batch view page\" to load the right page: " + props.batchId);
         //window.location.href = "/batchView/"+props.batchId;
@@ -71,7 +87,6 @@ export const BatchCard:React.FC<IBasicBatchInfo> = (props:IBasicBatchInfo) => {
     {
         image = devOpsLogo;
     }
-    
 
     return(
         <div className="batchcardcomp rev-card justify-content-center text-center">

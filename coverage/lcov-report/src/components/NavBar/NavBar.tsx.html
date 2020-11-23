@@ -102,7 +102,35 @@
 <a name='L43'></a><a href='#L43'>43</a>
 <a name='L44'></a><a href='#L44'>44</a>
 <a name='L45'></a><a href='#L45'>45</a>
-<a name='L46'></a><a href='#L46'>46</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -117,6 +145,10 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -124,6 +156,16 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -155,6 +197,13 @@ import { Turn as Hamburger } from 'hamburger-react';
 import { Link } from 'react-router-dom';
 import { Auth } from 'aws-amplify';
 &nbsp;
+/**
+ * @function NavBar
+ * Displays the header on any page where a user is logged in.
+ * 
+ * @param props contains the child components that are between the opening and closing NavBar tags.
+ * Should consist only of drop-down options.
+ */
 export const NavBar: React.FC&lt;any&gt; = <span class="fstat-no" title="function not covered" >(p</span>rops: any) =&gt; {
     const [navMenuOpen, setNavMenuOpen] = <span class="cstat-no" title="statement not covered" >useState(false);</span>
     const [hamOpen, setHamOpen] = <span class="cstat-no" title="statement not covered" >useState(false);</span>
@@ -162,6 +211,10 @@ export const NavBar: React.FC&lt;any&gt; = <span class="fstat-no" title="functio
     const hamToggle = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >setHamOpen(!hamOpen);</span></span>
     const toggle = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >setNavMenuOpen(!navMenuOpen);</span></span>
 &nbsp;
+    /**
+     * @function LogOut
+     * De-authenticates the user session upon clicking the logout dropdown option.
+     */
     const LogOut = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >        Auth.signOut()</span>
             .then(<span class="fstat-no" title="function not covered" >da</span>ta =&gt; <span class="cstat-no" title="statement not covered" >console.log(data))</span>
@@ -173,7 +226,7 @@ export const NavBar: React.FC&lt;any&gt; = <span class="fstat-no" title="functio
             &lt;Col xs="auto" className="justify-content-start logoContainer"&gt;
                 &lt;img src={logo} className="myLogo" alt="revature logo" /&gt;
             &lt;/Col&gt;
-            &lt;Col className="d-flex align-items-center justify-content-end auto" &gt;
+            &lt;Col className="d-flex align-items-center justify-content-end auto test1" &gt;
                 &lt;ButtonDropdown isOpen={navMenuOpen} toggle={toggle}&gt;
                     {/* Mobile Hamburger Menu */}
                     &lt;DropdownToggle className="" style={{ margin: "10px", backgroundColor: "white", border: "none" }}&gt;
@@ -184,11 +237,21 @@ export const NavBar: React.FC&lt;any&gt; = <span class="fstat-no" title="functio
                     &lt;/DropdownToggle&gt;
                     {/* Desktop Menu */}
                     &lt;DropdownMenu right&gt;
-                        &lt;Link to="/"&gt;&lt;DropdownItem onClick={LogOut}&gt;Logout&lt;/DropdownItem&gt;&lt;/Link&gt;
                         {props.children}
+                        &lt;DropdownItem header&gt;Account Options&lt;/DropdownItem&gt;
+                        &lt;Link to="/"&gt;&lt;DropdownItem onClick={LogOut}&gt;Logout&lt;/DropdownItem&gt;&lt;/Link&gt;
                     &lt;/DropdownMenu&gt;
                 &lt;/ButtonDropdown&gt;
             &lt;/Col&gt;
+            {/* 
+            &lt;Col className="d-flex align-items-center justify-content-end auto" id="myMobileDropdown" &gt;
+                &lt;Dropdown isOpen={navMenuOpen} toggle={toggle}&gt;
+                    
+                    &lt;DropdownMenu right&gt;
+                        &lt;a href="/"&gt;&lt;DropdownItem&gt;Logout&lt;/DropdownItem&gt;&lt;/a&gt;
+                    &lt;/DropdownMenu&gt;
+                &lt;/Dropdown&gt;
+            &lt;/Col&gt; */}
         &lt;/Row&gt;
     )
 }
@@ -199,7 +262,7 @@ export const NavBar: React.FC&lt;any&gt; = <span class="fstat-no" title="functio
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Fri Nov 20 2020 10:08:06 GMT-0600 (Central Standard Time)
+                at Mon Nov 23 2020 09:57:38 GMT-0600 (Central Standard Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>
