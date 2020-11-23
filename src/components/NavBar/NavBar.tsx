@@ -1,29 +1,73 @@
 import React, { useState } from 'react';
-import { Col, Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Row } from 'reactstrap';
+import { Col, DropdownItem, DropdownMenu, DropdownToggle, Row, ButtonDropdown } from 'reactstrap';
 import logo from '../../assets/logo.png';
-import menuArrow from '../../assets/down-arrow.png';
+import '../../scss/navStyles.scss';
+import { Turn as Hamburger } from 'hamburger-react';
 import { Link } from 'react-router-dom';
+import { Auth } from 'aws-amplify';
 
-export const NavBar:React.FC<any> = (props:any) => {
+/**
+ * @function NavBar
+ * Displays the header on any page where a user is logged in.
+ *
+ * @param props contains the child components that are between the opening and closing NavBar tags.
+ * Should consist only of drop-down options.
+ */
+export const NavBar: React.FC<any> = (props: any) => {
     const [navMenuOpen, setNavMenuOpen] = useState(false);
+    const [hamOpen, setHamOpen] = useState(false);
 
-    return(
-        <Row className="justify-content-around" style={{height: "100px", backgroundColor: "white", borderBottom: "3px solid #F26925"}}>
-            <Col xs="auto" className="justify-content-start">
-                <img src={logo} alt="revature logo" style={{marginTop: "15px"}} />
+    const hamToggle = () => setHamOpen(!hamOpen);
+    const toggle = () => setNavMenuOpen(!navMenuOpen);
+
+    /**
+     * @function LogOut
+     * De-authenticates the user session upon clicking the logout dropdown option.
+     */
+    const LogOut = () => {
+        Auth.signOut()
+            .then(data => console.log(data))
+            .catch(err => console.log(err));
+    }
+
+    return (
+        <Row className="justify-content-around myNav">
+            <Col xs="auto" className="justify-content-start logoContainer">
+                <img src={logo} className="myLogo" alt="revature logo" />
             </Col>
             <Col className="d-flex align-items-center justify-content-end auto test1" >
+<<<<<<< HEAD
                 Welcome, Lorem Ipsum
                 <Dropdown isOpen={navMenuOpen} toggle={() => setNavMenuOpen(!navMenuOpen)}>
                     <DropdownToggle style={{margin:"10px", backgroundColor: "white", border: "none"}}>
                         <img src={menuArrow} alt="dropdown menu arrow" height="20px" width="25px" />
+=======
+                <ButtonDropdown isOpen={navMenuOpen} toggle={toggle}>
+                    {/* Mobile Hamburger Menu */}
+                    <DropdownToggle className="" style={{ margin: "10px", backgroundColor: "white", border: "none" }}>
+                        <span className="myDropdown" style={{ margin: "5px", color: "#474C55", backgroundColor: "white", border: "none" }}>Welcome, Lorem Ipsum &#9660;</span>
+                        <span className="myMobileDropdown">
+                            <Hamburger toggled={hamOpen} toggle={hamToggle} color="#474C55"></Hamburger>
+                        </span>
+>>>>>>> 72a8fc8243ed44954d401029a1db8e8afbff3f81
                     </DropdownToggle>
+                    {/* Desktop Menu */}
                     <DropdownMenu right>
-                        <Link to="/"><DropdownItem>Logout</DropdownItem></Link>
-                        { props.children }
+                        {props.children}
+                        <DropdownItem header>Account Options</DropdownItem>
+                        <Link to="/"><DropdownItem onClick={LogOut}>Logout</DropdownItem></Link>
+                    </DropdownMenu>
+                </ButtonDropdown>
+            </Col>
+            {/*
+            <Col className="d-flex align-items-center justify-content-end auto" id="myMobileDropdown" >
+                <Dropdown isOpen={navMenuOpen} toggle={toggle}>
+
+                    <DropdownMenu right>
+                        <a href="/"><DropdownItem>Logout</DropdownItem></a>
                     </DropdownMenu>
                 </Dropdown>
-            </Col>
+            </Col> */}
         </Row>
     )
 }
