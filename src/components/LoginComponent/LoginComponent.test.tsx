@@ -14,14 +14,6 @@ describe('logincomp', () => {
         component = setUp();
     });
 
-    // Simple Test 1
-    it("Should render Engagement Force", () => {
-        const div = component.find('div.test1').text();
-
-        expect(div).toBe("Engagement Force");
-
-    });
-
     // Simple Test 2
     it("Should render Login", () => {
         const div = component.find('button.test2').text();
