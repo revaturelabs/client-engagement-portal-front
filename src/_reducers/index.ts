@@ -7,6 +7,9 @@ export interface IRootState{
     batchState:IBatchState
 }
 
+/**
+ * Combined reducer to be stored in the Redux store for state handling.
+ */
 export const rootReducer:Reducer<CombinedState<IRootState>, AnyAction> = combineReducers<IRootState>(
     {userState: userReducer,
     batchState:BatchReducer,

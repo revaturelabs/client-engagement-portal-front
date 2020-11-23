@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
-import { BatchCard } from "../../../components/BatchCard/BatchCard";
+import { BatchCard } from "./BatchCard";
 
 const setUp =
     (
