@@ -1,20 +1,35 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
-import hands from '../../assets/engagementPortalLogo.svg';
 import userThumb from '../../assets/user-thumb.png';
 import passThumb from '../../assets/pass-thumb.png';
 import { Auth } from 'aws-amplify';
+import  '../../scss/loginStyles.scss';
+import ceplogo2 from '../../assets/engagementPortalLogov2.svg';
 
 interface ILoginProps {
     loginType: string
 }
 
+/**
+ * @function LoginComponent
+ * Component that allows login functionality. Takes in an email and password.
+ *
+ * @param props (DEPRECATED USAGE) Informs whether this component is rendered on the admin login or the client login.
+ */
 export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
 
     const [isClient, setClient] = useState(false);
     const [isAdmin, setAdmin] = useState(false);
 
-    // WHEN THE LOGIN BUTTON IS PRESSED
+    /**
+     * @function handleSubmit
+     * Handles authentication after the user presses the login button.
+     * @async
+     * Makes a call to AWS Cognito to authenticate login details,
+     *  then makes a call to the API gateway to retrieve user info.
+     *
+     * @param event contains the click event that calls this function.
+     */
     const handleSubmit = async (event: any) => {
         event.preventDefault();
         const form = event.currentTarget;
@@ -27,37 +42,23 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
         }
 
         try {
-            // const startTime = Date.now();
+            const user = await Auth.signIn(loginCredentials.email, loginCredentials.password); // user.attributes.email contains the user email
+            
+            
 
-            const user = // !!!EMAIL WILL BE RETURNED IN: user.attributes.email
-                await Auth.signIn(loginCredentials.email, loginCredentials.password);
-            // THIS OPERATION COSTS ~800 MILLISECONDS
-
-
-
-            // Switch statement for assigning what page to redirect to based upon what role the user has
-            switch (user.attributes["custom:userRole"]) {
-                case "client":
-                    setAdmin(false);
-                    setClient(true);
-                    break;
-                case "admin":
-                    setClient(false);
-                    setAdmin(true);
-                    break;
-                default:
-                    setClient(false);
-                    setAdmin(false);
+            switch (user.attributes["custom:userRole"]) { // Assigns what page to redirect to based upon what role the user has
+            case "client":
+                setAdmin(false);
+                setClient(true);
+                break;
+            case "admin":
+                setClient(false);
+                setAdmin(true);
+                break;
+            default:
+                setClient(false);
+                setAdmin(false);
             }
-
-            // await console.log(user.userSession);
-            // const midTime = Date.now();
-
-            // console.log(midTime - startTime);
-
-            // await Auth.signOut();
-
-            // console.log(Date.now() - midTime);
         } catch (error) {
             console.log("Couldn't sign in: ", error);
         }
@@ -67,23 +68,15 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
     return (
         <>
             {isClient ? <Redirect to="/home" /> : isAdmin ? <Redirect to="/admin" /> :
-                <form onSubmit={handleSubmit}
-                    style={{
-                        textAlign: "center", backgroundColor: "white", width: "15vw", height: "32vh", minWidth: "200px", display: "inline-block",
-                        borderRadius: "50px", padding: "10px", border: "1px solid #F26925"
-                    }}>
+                <form onSubmit={handleSubmit} className="login-form">
 
-                    <div style={{ maxHeight: "90%" }}>
-                        <div style={{ position: "relative", textAlign: "center" }}>
-                            <img src={hands} alt="hands background" style={{ width: "45%", minHeight: "6em", opacity: 0.2 }} />
-                            <div className="logoarea"
-                                style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }} >
-
-                                <div
-                                    style={{ color: "#202430", fontSize: "20px", fontWeight: 500 }}>
-
-                                    Engagement Force
-                                </div>
+                <div style={{maxHeight: "90%"}}>
+                    <div style={{position: "relative", textAlign: "center"}}>
+                        <div className="login-header">
+                            Client Engagement Portal
+                        </div>
+                        <div className="cep-logo-area">
+                            <img src={ceplogo2} alt="cep-logo" width="200px"/>
                             </div>
                         </div>
 
@@ -91,7 +84,7 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
                             <input type="email" required className="form-control" name="email" placeholder="E-mail"
                                 style={new CEPLoginInputStyle()} />
                             <div style={{ position: "absolute", top: "45%", left: "21%", transform: "translate(-50%, -50%)" }}>
-                                <img src={userThumb} alt="email thumbnail" />
+                                <img src={userThumb} alt="email thumbnail" className="userthumbcheck" />
                             </div>
                         </div>
 
@@ -99,11 +92,11 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
                             <input type="password" required className="form-control" name="password" placeholder="Password"
                                 style={new CEPLoginInputStyle()} />
                             <div style={{ position: "absolute", top: "45%", left: "21%", transform: "translate(-50%, -50%)" }}>
-                                <img src={passThumb} alt="password thumbnail" />
+                                <img src={passThumb} alt="password thumbnail" className= "passthumbcheck" />
                             </div>
                         </div>
 
-                        <button type="submit"
+                        <button className="test2" type="submit"
                             style={{ margin: "10px", lineHeight: 2.2, width: "70%", border: "none", backgroundColor: "#F26925", color: "white", fontSize: "20px" }}>
 
                             Login
