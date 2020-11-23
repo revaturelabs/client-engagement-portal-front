@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Col, Form, Input, Modal, ModalBody, ModalHeader, Row } from 'reactstrap';
 import '../../scss/BatchFormStyle.scss';
+import { axiosInstance } from '../../util/axiosConfig';
 
 /**
  * @function BatchForms
@@ -25,7 +26,10 @@ export const BatchForms: React.FC = () => {
      * 
      */
     const getBatches = async () => {
-        const response = await axios.get("https://caliber2-mock.revaturelabs.com/mock/training/batch/current");
+        //const response = await axios.get("https://caliber2-mock.revaturelabs.com/mock/training/batch/current");
+        // const response = await axiosInstance.get("admin/batch/allNames")
+        const response = await axios.get("http://ec2-35-174-62-5.compute-1.amazonaws.com:9011/admin/batch/allNames")
+        console.log(response.data)
         const tempArray=[];
         for (const r of response.data)
         {

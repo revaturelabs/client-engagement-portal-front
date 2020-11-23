@@ -3,10 +3,10 @@ import Enzyme,{ EnzymeAdapter, shallow } from "enzyme";
 import Adapter from 'enzyme-adapter-react-16'
 import { BatchForms } from "./BatchForms";
 import axios from 'axios';
+import { promises } from 'dns';
 
 Enzyme.configure({adapter: new Adapter() });
 const wrapper=shallow(<BatchForms/>);
-
 
 /**
  * @function
@@ -33,8 +33,8 @@ describe('BatchForms',()=>{
      * @function
      * testing to find ensure we have options
      */
-    it('should populate select batch options',()=>{
+    it('should find select batch options',()=>{
         const options = wrapper.find('#map-options')
-        expect(options.length).toBeGreaterThan(0);
+        expect(options.length).toBe(1);
     })
 })
