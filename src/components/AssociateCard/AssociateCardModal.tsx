@@ -28,7 +28,7 @@ export const AssociateCardModal:React.FC<IAssociateSingle> = (props:IAssociateSi
     if(props.grades !== undefined){
         let numGrades = 0;
         for(let grade of props.grades){
-            gradeMap = props.grades.map((grade) => <div id="grade"><p>Date {grade.dateReceived}: {grade.score.toFixed(2)}%</p><div className="h-divider"></div></div>);
+            gradeMap = props.grades.map(() => <div id="grade"><p>Date {grade.dateReceived}: {grade.score.toFixed(2)}%</p><div className="h-divider"></div></div>);
             averageGrade += grade.score;
             numGrades++;
         }
@@ -63,7 +63,7 @@ export const AssociateCardModal:React.FC<IAssociateSingle> = (props:IAssociateSi
                         </div>
                         <div className="aso-average col-1">
                             <h6>Average</h6>
-                            <h6 id="avgTest">{averageGrade.toFixed(2)}%</h6>
+                            <h6 id="avgGrade">{averageGrade.toFixed(2)}%</h6>
                         </div>
                     </Row>
                 </div>

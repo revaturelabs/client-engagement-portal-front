@@ -1,8 +1,39 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 import {AssociateCard} from './AssociateCard'
+import { IAssociateSingle } from '../../_reducers/AssociateReducer';
 
 let wrapper:any;
+let fakeData:IAssociateSingle;
+
+/**
+ * This represents associate data to be used in the tests below.
+ */
+beforeAll(() => {
+    fakeData = {
+        firstName: "Bill",
+        lastName: "Gates",
+        grades: [{
+            dateReceived: "2020-10-21",
+            gradeId: 2,
+            score: 90,
+            traineeId: "TR-1111"
+        },
+        {
+            dateReceived: "2020-10-14",
+            gradeId: 1,
+            score: 60,
+            traineeId: "TR-1111"
+        },
+        {
+            dateReceived: "2020-10-28",
+            gradeId: 3,
+            score: 72,
+            traineeId: "TR-1111"
+        }
+        ]
+    };
+});
 
 /**
  * This beforeEach is used to create a new wrapper to render the AssociateCard with.
@@ -13,11 +44,21 @@ beforeEach(() => {
 
 /**
  * This test is used to check that the average test score of an associate
- * is equal to 0% when no associate test information is passed in as a parameter.
+ * is equal to 74.00% when no associate test information is passed in as a parameter.
+ */
+test("average should equal 74.00% with fake tests passed as props",() => {
+    const ac = shallow(<AssociateCard {...fakeData}/>)
+    const average = ac.find("#averageHolder").render().text();
+    expect(average).toBe("74.00%");
+});
+
+/**
+ * This test is used to check that the average test score of an associate
+ * is equal to 0.00% when no associate test information is passed in as a parameter.
  */
 test("average should equal 0 with no tests passed as props",() => {
     const average = wrapper.find("#averageHolder").render().text();
-    expect(average).toBe("0%");
+    expect(average).toBe("0.00%");
 });
 
 /**
@@ -26,7 +67,7 @@ test("average should equal 0 with no tests passed as props",() => {
  */
 test("last test score should equal 0 with no tests passed as props", () => {
     const score = wrapper.find("#scoreHolder").render().text();
-    expect(score).toBe("Latest Test Score: 0%");
+    expect(score).toBe("Latest Test Score: 0.00%");
 });
 
 /**
