@@ -10,7 +10,6 @@ import { Auth } from 'aws-amplify';
 //     dropDownProps?:React.ComponentType<DropdownItem>[];
 // }
 
-
 /**
  * @function NavBar
  * Displays the header on any page where a user is logged in.
@@ -22,7 +21,10 @@ export const NavBar: React.FC<any> = (props: any) => {
     const [navMenuOpen, setNavMenuOpen] = useState(false);
     const [hamOpen, setHamOpen] = useState(false);
 
-    const hamToggle = () => setHamOpen(!hamOpen);
+    /**
+     * @function toggle
+     * toggles the dropdown menu and the orientation of the hamburger menu
+     */
     const toggle = () => {setNavMenuOpen(!navMenuOpen)
         setHamOpen(!navMenuOpen);
     };
@@ -36,12 +38,16 @@ export const NavBar: React.FC<any> = (props: any) => {
             .then(data => console.log(data))
             .catch(err => console.log(err));
     }
-
+    let logoLink="#";
+    if(props.route){
+        logoLink = props.route;
+    }
 
     return(
         <Row className="justify-content-around myNav">
             <Col xs="auto" className="justify-content-start logoContainer">
-                <img src={logo} className="myLogo" alt="revature logo"/>
+                <Link to={logoLink}>
+                <img src={logo} className="myLogo" alt="revature logo"/></Link>
             </Col>
             <Col className="d-flex align-items-center justify-content-end auto test1" >
                 <ButtonDropdown isOpen={navMenuOpen} toggle={toggle}>
@@ -52,7 +58,7 @@ export const NavBar: React.FC<any> = (props: any) => {
                          <Hamburger hideOutline={true} toggled={hamOpen} toggle={setHamOpen} color="#474C55"></Hamburger>
                         </span>
                     </DropdownToggle>
-                    {/* Desktop Menu */}    
+                    {/* Desktop Menu */}
                     <DropdownMenu right>
                         {props.children}
                         <DropdownItem header>Account Options</DropdownItem>

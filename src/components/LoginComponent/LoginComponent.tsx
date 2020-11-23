@@ -65,8 +65,8 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
 
     }
 
-    return (
-        <>
+    return(
+            <>
             {isClient ? <Redirect to="/home" /> : isAdmin ? <Redirect to="/admin" /> :
                 <form onSubmit={handleSubmit} className="login-form">
 
@@ -96,9 +96,7 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
                             </div>
                         </div>
 
-                        <button className="login-btn" type="submit">
-                            Login
-                        </button>
+                        <button className="login-submit" type="submit">Login</button>
                     </div >
                 </form >
             }

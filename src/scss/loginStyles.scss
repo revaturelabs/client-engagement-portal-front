@@ -46,7 +46,7 @@
 }
 
 .login-header {
-    color: #474C55;
+    color: $rev-dgray;
     font-size: 20px;
     font-weight: bold;
     margin: 5px;
@@ -70,7 +70,23 @@
     background-color: white;
     color: $rev-orange;
 }
-
+.login-submit {
+    margin: 10px;
+    line-height: 2.2;
+    width: 70%;
+    background-color: $rev-orange; 
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    box-sizing: border-box;
+    border-radius: 15px;
+    border: 3px solid $rev-orange;
+    transition: all 0.2s ease 0s;
+}
+.login-submit:hover {
+    background-color: white; 
+    color: $rev-orange;
+}
 .cep-logo-area img {
     // width: 100px;
     // height: 60px;

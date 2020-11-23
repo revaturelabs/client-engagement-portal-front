@@ -127,7 +127,7 @@ export const AssociateCard: React.FC<IAssociateSingle> = (props: IAssociateSingl
      * and another component, AssociateCardModal, which takes the associate object as props.
      */
     return (
-        <li>
+        <div  style={{padding: "5px"}}>
             <Card className="aso-card">
                 <div>
                     <h5 id="nameHolder" font-family={"$rev-font"}>{props.firstName} {props.lastName}</h5>
@@ -141,7 +141,8 @@ export const AssociateCard: React.FC<IAssociateSingle> = (props: IAssociateSingl
                     <AssociateCardModal {...props} />
                 </div>
             </Card>
-        </li>
+
+        </div>
     )
 
 }

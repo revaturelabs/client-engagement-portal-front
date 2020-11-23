@@ -73,3 +73,25 @@
 b {
     font-weight: bold !important;
 }
+.intervention-button {
+    box-sizing: border-box;
+    box-shadow: none;
+    background-color: #F26925;
+    color: white;
+    font-weight: bold;
+    border: 3px solid #F26925;
+    border-radius: 5px;
+    margin-top: 20px;
+    padding: 10px;
+    transition: all 0.15s ease 0s;
+}
+.intervention-button:hover {
+    background-color: white;
+    color: #F26925;
+}
+.intervention-button:focus {
+    outline: none;
+}
+.intervention-button:active {
+    outline:none;
+}

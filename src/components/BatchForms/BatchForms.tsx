@@ -8,11 +8,19 @@ import '../../scss/BatchFormStyle.scss';
  * Renders the Map and Unmap forms on the page.
  */
 export const BatchForms: React.FC = () => {
-
+    
     const [mapModal, setMapModal] = useState(false);
     const [unmapModal, setUnmapModal] = useState(false);
 
+    /**
+     * @function toggleMap
+     * toggles the mobile map batch modal 
+     */
     const toggleMap = () => setMapModal(!mapModal);
+    /**
+     * @function toggleUnmap
+     * toggle the mobile unmap batch form
+     */
     const toggleUnmap = () => setUnmapModal(!unmapModal);
 
     const [batchInfo, setBatchInfo] = useState<any>([]);

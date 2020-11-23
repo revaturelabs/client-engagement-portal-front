@@ -1,5 +1,8 @@
 import React from 'react';
-import { Modal, Button, ModalBody, Row } from 'reactstrap';
+import { Modal, Button, ModalBody, Row, ModalHeader } from 'reactstrap';
+// import '../../scss/revature-colors.scss';
+// import '../../scss/app.scss';
+// import '../../scss/batch-card.scss'
 import '../../scss/associate-card.scss';
 import {IAssociateSingle} from '../../_reducers/AssociateReducer'
 
@@ -23,53 +26,92 @@ export const AssociateCardModal:React.FC<IAssociateSingle> = (props:IAssociateSi
      * This will map the grades and date grade was recieved to TSX elements.
      * As well as calculate the average grade.
      */
-    let gradeMap;
-    let averageGrade = 0;
-    if(props.grades !== undefined){
-        let numGrades = 0;
-        for(let grade of props.grades){
-            gradeMap = props.grades.map((grade) => <div id="grade"><p>Date {grade.dateReceived}: {grade.score.toFixed(2)}%</p><div className="h-divider"></div></div>);
-            averageGrade += grade.score;
-            numGrades++;
+    const tests = props.testScores;
+    let testMap;
+    let averageTest = 0;
+    let testWeek = 0;
+    if(tests !== undefined){
+        testMap = tests.map((test) => <div id="weekAndScore"><p>Week {test.week}: {test.score}%</p><div className="h-divider"></div></div>);
+        for(let test of tests){
+            averageTest += test.score;
+            testWeek++;
         }
-        averageGrade = averageGrade/ numGrades;
+        averageTest = averageTest / testWeek;
     }
 
-    return (
-        <body style={{display:"flex", alignContent:"center", margin:"auto"}}>
-            <Button id="openBtn" className="view-btn" onClick={toggle}>View</Button>
-            <Modal
-                isOpen={show}
-                onHide={toggle}
-                size="lg"
-                aria-labelledby="contained-modal-title-vcenter"
-                centered
-                className="aso-modal-card" 
+    /**
+     * This will map the associate's tech and tech score into TSX elements.
+     * As well as calculate the average tech score
+     */
+    const techs = props.techScores;
+    let techMap;
+    let averageTech = 0;
+    let techWeek = 0;
+    /**
+     * If list of techs in empty don't iterate through.
+     * Otherwise calculate the total score and divide by total weeks
+     * then return the average.
+     */
+    if(techs !== undefined){
+        techMap = techs.map((techs) => <div id="techAndScore"><p>{techs.tech}: {techs.score}%</p><div className="h-divider"></div></div>);
+        for(let tech of techs){
+            averageTech += tech.score;
+            techWeek++;
+        } 
+        averageTech = averageTech / techWeek;
+    } 
 
-            >   
-                <ModalBody className="aso-modal-body">
-                <div>
-                    {/* <img className="pic" src={props.profilePic} alt="associate_profile_pic"/> */}
-                    <h3 id="firstName">{props.firstName}</h3>
-                    <h4 id="lastName">{props.lastName}</h4>
-                </div>
-                <div className="h-divider"></div>
-                <div className="aso-info">
-                    <div>Weekly Assessments</div>
+    return (
+            <>
+                <Button id="openBtn" className="view-btn" onClick={toggle}>View</Button>
+                <Modal isOpen={show} toggle={toggle}>
+                    <ModalHeader toggle={toggle}>
+                        <h3>{props.firstName} {props.lastName}</h3>
+                    </ModalHeader>
+                    <ModalBody>
+                    <div className="aso-info">
                     <Row>
-                        <div className="col-1"/>
-                        <div className="aso-scroll col-8">
-                            <div id="testMap">{gradeMap}</div>
+                        {/* div for scroll area */}
+                        <div className="col-9" style={{maxHeight: "180px"}}>
+                        <div>Weekly Assessments</div>
+                        <div className="aso-scroll-container">
+                            <div className="aso-scroll" >
+                            {/* Week #    grade% */}
+                             <div id="testMap">{testMap}</div>
+                            </div>
                         </div>
+                        </div>
+                        {/* div for average grade */}
                         <div className="aso-average col-1">
                             <h6>Average</h6>
-                            <h6 id="avgTest">{averageGrade.toFixed(2)}%</h6>
+                            <h6 id="avgTest">{averageTest}%</h6>
                         </div>
                     </Row>
                 </div>
-                <Button id="closeBtn" className="view-btn" onClick={toggle}>Close</Button>
-                </ModalBody>            
-            </Modal>
-        </body>
+                <div className="aso-info">
+                    {/* div for scroll area */}
+                    <Row>
+                        
+                        <div className="col-9" style={{maxHeight: "180px"}}>
+                        <div>Technology Assessments</div>
+                            <div className=" aso-scroll-container">
+                                <div className="aso-scroll">
+                                    {/* Quiz name grade% */}
+                                    <div>{techMap}</div>
+                                </div>
+                            </div>
+                        </div>
+                        {/* div for average grade */}
+
+                        <div className="aso-average col-1" /*style={{ display: "inline-block", marginTop: "10px"}}*/>
+                            <h6>Average</h6>
+                            <h6 id="avgTech">{averageTech}%</h6>
+                        </div>
+                    </Row>
+                    
+                </div>
+                    </ModalBody>
+                </Modal>
+        </>
     )
 }

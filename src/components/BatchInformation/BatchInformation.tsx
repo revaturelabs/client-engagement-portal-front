@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
+<<<<<<< HEAD
 import { Button, Card, CardBody, CardFooter, CardHeader, Col, Row, Spinner } from 'reactstrap';
+=======
+import { Card, CardBody, CardFooter, CardHeader, Col, Row } from 'reactstrap';
+>>>>>>> ab406d8d67c5aad605eafba638654a0e23dcda2a
 import "../../scss/BatchInformation.scss"
 import reactReduxLogo from '../../assets/react-redux-logo.png';
 import javaLogo from '../../assets/java-logo.png';
@@ -20,6 +24,9 @@ import { setBatchState } from '../../actions/BatchCardActions';
 import { connect } from 'react-redux';
 import { IBasicBatchInfo } from '../BatchCard/BatchCard';
 import { AssociateCardFactory } from '../AssociateCard/AssociateCardFactory';
+import PlanInterventionModalv2 from '../PlanInterventionModal/PlanInterventionModalv2';
+import PlanInterventionModal from '../PlanInterventionModal/PlanInterventionModal';
+
 
 interface IProps{
     batches: [{
@@ -39,7 +46,12 @@ interface IProps{
  * passed into this component. This is needed so that the rest of the 
  * data about that batch can be retrieved.
  */
+<<<<<<< HEAD
 export const BatchInformation:React.FC<IProps> = (props:IProps) => {
+=======
+export const BatchInformation:React.FC<IBatchInformationProps> = (props:IBatchInformationProps) => {
+    const [showInterventionModal, setShowInterventionModal] = useState(false);
+>>>>>>> ab406d8d67c5aad605eafba638654a0e23dcda2a
 
     const [isOrangeBtn, setOrangeBtn] = useState(false);
 
@@ -231,6 +243,9 @@ export const BatchInformation:React.FC<IProps> = (props:IProps) => {
                 </div>
              </Col>
              <Col md="1" lg="2"></Col>
+
+             <PlanInterventionModalv2></PlanInterventionModalv2>
+
          </Row>
         </>
     );

@@ -3,12 +3,22 @@
      background-color: white;
      border-bottom: 3px solid #F26925;
 }
+.myNav a:hover {
+    text-decoration: none;
+}
 .myLogo {
     margin-top: 25px;
 }
+
 .logoContainer {
     padding-left: 25px;
     padding-right: 25px;
+}
+.dropdown-item:active {
+    background-color: #f8f9fa !important;
+    color:black !important;
+    border: none;
+    outline: none;
 }
 @media (max-width: 768px){
     .myLogo {

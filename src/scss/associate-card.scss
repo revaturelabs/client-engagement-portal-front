@@ -4,16 +4,14 @@
 {
     background-color: white !important;
     padding: 15px !important;
-    border: 1px solid $rev-orange !important;
+    border: 1px solid #72A4C2 !important;
     border-radius: 20px !important;
-    margin: auto !important;
-    margin-top: 10px !important;
-    box-shadow: 3px 3px 15px $rev-blue-trans !important;
     width: 100% !important;
     text-align: center !important;
     align-content: center !important;
     display: inline-block !important;
 }
+
 
 
 .h-divider{
@@ -45,16 +43,21 @@
     text-align: center;
 }
 
-.aso-scroll{
-    display: inline-block;
-    max-height: 60px;
-    width: 75%;
-    margin: 10px;
-    border: 1px solid $rev-orange;
-    border-radius: 20px;
+div.aso-scroll{
+    padding-right: 5px;
+    max-height: 100%;
     overflow-y: auto;
 }
-
+div.aso-scroll-container {
+    display: inline-block;
+    max-height: 120px;
+    height: 100%;
+    width: 100%;
+    // margin: 10px;
+    border: 1px solid $rev-orange;
+    padding: 5px 5px 5px 10px;
+    border-radius: 5px;
+}
 .aso-info{
     display: inline-block;
     width: 100%;
@@ -62,23 +65,50 @@
 
 .aso-average{
     display: inline-block;
-    max-height: 40px;
-    width: 15%;
-    margin-top: 10px;
 }
-
 .view-btn
 {
     line-height: 1.5;
     width: 70%;
-    border: 2px solid $rev-orange !important;
+    border: 3px solid $rev-orange !important;
     background-color: $rev-orange !important;
     color: white !important;
     font-size: 20px;
 }
-
 .view-btn:hover
 {
     background-color: white !important;
     color: $rev-orange !important;
 }
+.view-btn:focus {
+    box-shadow: none !important;
+    outline: none;
+}
+.view-btn:active {
+    box-shadow: none !important;
+    outline: none;
+
+}
+.aso-scroll::-webkit-scrollbar {
+    overflow: hidden;
+    width: 5px;
+  }
+  
+  /* Track */
+  .aso-scroll::-webkit-scrollbar-track {
+    padding:10px;
+    max-height: 90%;
+    background: white;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+  
+  /* Handle */
+  .aso-scroll::-webkit-scrollbar-thumb {
+    background: #474C55;
+    border-radius: 5px;
+  }
+  
+  /* Handle on hover */
+//   .aso-scroll::-webkit-scrollbar-thumb:hover {
+//   }
