@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, CardBody, CardFooter, CardHeader, Col, Row } from 'reactstrap';
 import "../../scss/BatchInformation.scss"
 import reactReduxLogo from '../../assets/react-redux-logo.png';
@@ -6,9 +6,12 @@ import javaLogo from '../../assets/java-logo.png';
 import springLogo from '../../assets/spring-logo.png';
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { AssociateCardFactory } from '../AssociateCard/AssociateCardFactory';
+import PlanInterventionModalv2 from '../PlanInterventionModal/PlanInterventionModalv2';
+
 
 interface IBatchInformationProps {
-    name: string,
+    name?: string
 }
 
 /**
@@ -18,6 +21,7 @@ interface IBatchInformationProps {
  * @param props contains the detailed batch data needed to populate the page.
  */
 export const BatchInformation: React.FC<IBatchInformationProps> = (props: IBatchInformationProps) => {
+    const [showInterventionModal, setShowInterventionModal] = useState(false);
 
     const responsive = {
         superLargeDesktop: {
@@ -84,90 +88,13 @@ export const BatchInformation: React.FC<IBatchInformationProps> = (props: IBatch
                         </Card>
 
                         <h1>Batch Engineers</h1>
-
-                        <Carousel responsive={responsive}>
-                            <Card>
-                                <CardHeader>
-                                    Alex Orr
-                            </CardHeader>
-                                <CardBody>
-                                    100%
-                            </CardBody>
-                                <CardFooter>
-                                    <button>View</button>
-                                </CardFooter>
-                            </Card>
-                            <Card>
-                                <CardHeader>
-                                    Earnest Gibbs
-                            </CardHeader>
-                                <CardBody>
-                                    92%
-                            </CardBody>
-                                <CardFooter>
-                                    <button>View</button>
-                                </CardFooter>
-                            </Card>
-                            <Card>
-                                <CardHeader>
-                                    Jordan Hunnicutt
-                            </CardHeader>
-                                <CardBody>
-                                    95%
-                            </CardBody>
-                                <CardFooter>
-                                    <button>View</button>
-                                </CardFooter>
-                            </Card>
-                            <Card>
-                                <CardHeader>
-                                    Nicolas Henandez
-                            </CardHeader>
-                                <CardBody>
-                                    93%
-                            </CardBody>
-                                <CardFooter>
-                                    <button>View</button>
-                                </CardFooter>
-                            </Card>
-                            <Card>
-                                <CardHeader>
-                                    Kyle Aoki
-                            </CardHeader>
-                                <CardBody>
-                                    98%
-                            </CardBody>
-                                <CardFooter>
-                                    <button>View</button>
-                                </CardFooter>
-                            </Card>
-                            <Card>
-                                <CardHeader>
-                                    John Burlison
-                            </CardHeader>
-                                <CardBody>
-                                    99%
-                            </CardBody>
-                                <CardFooter>
-                                    <button>View</button>
-                                </CardFooter>
-                            </Card>
-                            <Card>
-                                <CardHeader>
-                                    Dawit Wondim
-                            </CardHeader>
-                                <CardBody>
-                                    97%
-                            </CardBody>
-                                <CardFooter>
-                                    <button>View</button>
-                                </CardFooter>
-                            </Card>
-                        </Carousel>
-
+                        <AssociateCardFactory />
                     </div>
                 </Col>
                 <Col md="1" lg="2"></Col>
+
+                <PlanInterventionModalv2></PlanInterventionModalv2>
+
             </Row>
         </>
     );

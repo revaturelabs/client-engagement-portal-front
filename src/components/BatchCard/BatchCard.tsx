@@ -27,6 +27,8 @@ export const BatchCard:React.FC<IProps> = (props:IProps) => {
 
     const [batchButtonClicked, setBatchButtonClicked] = useState(false);
 
+    const [batchDetailedInfo, setBatchDetailedInfo] = useState(props);
+
     /**
      * @function goToBatchViewPage
      * Once the "View" button is clicked, this function redirects the user to a page with detailed batch info.
@@ -39,6 +41,8 @@ export const BatchCard:React.FC<IProps> = (props:IProps) => {
 
         // SET A DETAILED BATCH STATE TO INCLUDE THE DETAILS OF THE BATCH BEING VIEWED
         // This detailed batch state will be displayed when the redirect to "/batch" runs
+        setBatchDetailedInfo(props);
+        console.log(props.batchId);
 
         setBatchButtonClicked(true);
     }
