@@ -10,7 +10,7 @@ import { NavBar } from '../../components/NavBar/NavBar';
 import { axiosInstance } from '../../util/axiosConfig';
 import { IBatchState } from '../../_reducers/BatchReducer';
 
-interface IBatchId{
+interface IBatchId {
     batchId: string,
 }
 
@@ -34,13 +34,13 @@ interface IProps extends RouteComponentProps<IBatchId>, IBasicBatchInfo {
                     gradeId: number,
                     dateReceived: string,
                     score: number,
-                }], 
+                }],
             },
         }],
     }],
 }
 
-const BatchInformationPage: React.FC<IProps> = (props:IProps) => {
+const BatchInformationPage: React.FC<IProps> = (props: IProps) => {
 
     const passedInId = props.match.params.batchId;
     console.log(passedInId); //this returns the passed in id
@@ -49,7 +49,7 @@ const BatchInformationPage: React.FC<IProps> = (props:IProps) => {
     const [hasData, setRecievedData] = useState(false);
 
     const dispatch = useDispatch();
-    
+
     /**
      * This function gets all of the batch data from our back end. This
      * includes data about each associate's test / quiz scores.
@@ -59,37 +59,35 @@ const BatchInformationPage: React.FC<IProps> = (props:IProps) => {
      * 
      * @returns This function just changes the batch state to 
      */
-    const getBatchData = (batchId:string) => async (dispatch:any) => {
+    const getBatchData = (batchId: string) => async (dispatch: any) => {
 
         setSpinner(true);
-
-<<<<<<< HEAD
+        
         //array to place batch data into
-        let batchArray:IBatchState = {
+        let batchArray: IBatchState = {
             batches: [],
         };
 
         //get data from server based on user id that was given
-        await Axios.get("http://ec2-35-174-62-5.compute-1.amazonaws.com:9011/client/batch/"+ batchId)
-        .then((response:any) => {
-            console.log(response.data);
+        await Axios.get("http://ec2-35-174-62-5.compute-1.amazonaws.com:9011/client/batch/" + batchId)
+            .then((response: any) => {
+                console.log(response.data);
 
-            if (response != null)
-            {
-                const batchCardInfo = {  ...response.data }
-                batchArray.batches.push(batchCardInfo);
-                
-                console.log(batchArray.batches[0]);
-                //the "batch state" is set to be whatever was extracted from the db
-                dispatch(setBatchState(batchArray));
-                
-            }
-            setSpinner(false);
-        })
-        .catch((error:any) => {
-            console.log(error);
-            setSpinner(false);
-        });
+                if (response != null) {
+                    const batchCardInfo = { ...response.data }
+                    batchArray.batches.push(batchCardInfo);
+
+                    console.log(batchArray.batches[0]);
+                    //the "batch state" is set to be whatever was extracted from the db
+                    dispatch(setBatchState(batchArray));
+
+                }
+                setSpinner(false);
+            })
+            .catch((error: any) => {
+                console.log(error);
+                setSpinner(false);
+            });
 
         setSpinner(false);
     };
@@ -99,21 +97,13 @@ const BatchInformationPage: React.FC<IProps> = (props:IProps) => {
         setRecievedData(true);
     };
 
-    if(hasData == false)
-    {
+    if (hasData == false) {
         getBatchDataNow();
     }
 
-=======
-/**
- * @function BatchInformationPage
- * Page that a client sees when they click the "view" button on a batch card.
- */
-export const BatchInformationPage: React.FC = () => {
->>>>>>> 3a795374ee392df07d240f83451903ecb215b113
     return (
         <>
-            <Container style={{minHeight: "100vh", maxWidth: "100vw", backgroundColor:"#E3E3E3"}}>
+            <Container style={{ minHeight: "100vh", maxWidth: "100vw", backgroundColor: "#E3E3E3" }}>
                 <NavBar>
                     <Link to="/home">
                         <DropdownItem>Return to Client Home</DropdownItem>
@@ -121,24 +111,24 @@ export const BatchInformationPage: React.FC = () => {
                 </NavBar>
 
                 {/* Spinner displays below nav bar */}
-                
-                    { 
+
+                {
                     hasSpinner ?
-                    <div className=" row justify-content-center">
-                    <Spinner color="info" style={{ margin: 70 }} /> 
-                    </div>
-                    : 
-                    <BatchInformation batches={[{
-                        batchId: passedInId,
-                        batchName: props.batches[0].name,
-                        endDate: props.batches[0].endDate,
-                        skill: props.batches[0].skill,
-                        trainer: props.batches[0].employeeAssignments[0].employee.firstName + " " +
-                            props.batches[0].employeeAssignments[0].employee.lastName,
-                        assAssign: props.batches[0].associateAssignments,
-                        }]}/>
-                    }
-                
+                        <div className=" row justify-content-center">
+                            <Spinner color="info" style={{ margin: 70 }} />
+                        </div>
+                        :
+                        <BatchInformation batches={[{
+                            batchId: passedInId,
+                            batchName: props.batches[0].name,
+                            endDate: props.batches[0].endDate,
+                            skill: props.batches[0].skill,
+                            trainer: props.batches[0].employeeAssignments[0].employee.firstName + " " +
+                                props.batches[0].employeeAssignments[0].employee.lastName,
+                            associateAssignments: props.batches[0].associateAssignments,
+                        }]} />
+                }
+
             </Container>
         </>
     );

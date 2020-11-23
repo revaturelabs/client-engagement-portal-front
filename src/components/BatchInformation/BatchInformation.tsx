@@ -19,6 +19,7 @@ import { axiosInstance } from '../../util/axiosConfig';
 import { setBatchState } from '../../actions/BatchCardActions';
 import { connect } from 'react-redux';
 import { IBasicBatchInfo } from '../BatchCard/BatchCard';
+import { AssociateCardFactory } from '../AssociateCard/AssociateCardFactory';
 
 interface IProps{
     batches: [{
@@ -27,7 +28,7 @@ interface IProps{
         endDate: string,
         skill: string,
         trainer: string,
-        assAssign: [{}],
+        associateAssignments: [{}],
     }],
 }
 
@@ -144,9 +145,9 @@ export const BatchInformation:React.FC<IProps> = (props:IProps) => {
                         <CardFooter></CardFooter>
                     </Card>
                     
-                    <h1>Batch Engineers: ({props.batches[0].assAssign.length})</h1>
+                    <h1>Batch Engineers: ({props.batches[0].associateAssignments.length})</h1>
 
-                    <Carousel responsive={responsive}>
+                    {/*</div><Carousel responsive={responsive}>
                         <Card>
                             <CardHeader>
                                 Alex Orr
@@ -223,8 +224,9 @@ export const BatchInformation:React.FC<IProps> = (props:IProps) => {
                             <CardFooter>
                                 <button>View</button>
                             </CardFooter>
-                        </Card>
-                    </Carousel>
+                        </Card> */}
+                        <AssociateCardFactory {...props.batches[0]}/>
+                    {/* </Carousel> */}
 
                 </div>
              </Col>

@@ -1,8 +1,18 @@
+<<<<<<< HEAD
 import React from "react";
 import { Col, Container, Row } from "reactstrap";
 import { BatchForms } from "../../components/BatchForms/BatchForms";
 import { NavBar } from "../../components/NavBar/NavBar";
 import { NewClientButton } from "../../components/NewClientButton/NewClientButton";
+=======
+import React from 'react';
+import { Col, Container, Form, Input, Row } from 'reactstrap';
+import { BatchForms } from '../../components/BatchForms/BatchForms';
+import { NavBar } from '../../components/NavBar/NavBar';
+import { NewClientButton } from '../../components/NewClientButton/NewClientButton';
+
+
+>>>>>>> ba6e766ed5406bc4227ea0e8c818656afb0c14d3
 
 /**
  * @function AdminPage
@@ -33,7 +43,9 @@ export const AdminPage: React.FC = () => {
                 </Row> */}
             </Container>
 
-            {/* sticky footer */}
+
+        
+        {/* sticky footer */}
         </>
     );
 };

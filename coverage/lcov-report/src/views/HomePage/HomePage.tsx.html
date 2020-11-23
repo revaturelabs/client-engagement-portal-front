@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">5% </span>
+                <span class="strong">4.65% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>2/40</span>
+                <span class='fraction'>2/43</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">5.26% </span>
+                <span class="strong">4.88% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>2/38</span>
+                <span class='fraction'>2/41</span>
             </div>
         
             
@@ -252,7 +252,15 @@
 <a name='L193'></a><a href='#L193'>193</a>
 <a name='L194'></a><a href='#L194'>194</a>
 <a name='L195'></a><a href='#L195'>195</a>
-<a name='L196'></a><a href='#L196'>196</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L196'></a><a href='#L196'>196</a>
+<a name='L197'></a><a href='#L197'>197</a>
+<a name='L198'></a><a href='#L198'>198</a>
+<a name='L199'></a><a href='#L199'>199</a>
+<a name='L200'></a><a href='#L200'>200</a>
+<a name='L201'></a><a href='#L201'>201</a>
+<a name='L202'></a><a href='#L202'>202</a>
+<a name='L203'></a><a href='#L203'>203</a>
+<a name='L204'></a><a href='#L204'>204</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -345,15 +353,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -361,13 +362,28 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -454,15 +470,15 @@ import { NavBar } from '../../components/NavBar/NavBar';
 &nbsp;
 import RequestBatchCard from '../../components/RequestBatchCard/RequestBatchCard';
 import RequestBatchCardModal from '../../components/RequestBatchCard/RequestBatchCardModal';
-import { IBatchState, initialBatchState } from '../../_reducers/BatchReducer';
+import { IBatchDetailedState, IBatchState, initialBatchState } from '../../_reducers/BatchReducer';
 import { connect, useDispatch } from 'react-redux';
 import Axios from 'axios';
-import { setBatchState } from '../../actions/BatchCardActions';
+import { setBatchDetailsState, setBatchState } from '../../actions/BatchCardActions';
 import PlanInterventionModal from '../../components/PlanInterventionModal/PlanInterventionModal';
 &nbsp;
 interface IProps {
     batches: {
-        id: number,
+        batchId: string,
         skill: string,
         name: string
     }[],
@@ -473,7 +489,7 @@ interface IProps {
  * batches. In that case, they will be shown a message which assures them that they will be mapped
  * one in the near future and can even notify the admin users with the "request batch" button. 
  * 
- * @param props batch information. Should be pulled from the database whenever this component loads 
+ * @param props Basic batch information. Should be pulled from the database whenever this component loads 
  */
 const HomePage:React.FC&lt;IProps&gt; = <span class="fstat-no" title="function not covered" >(p</span>rops:IProps) =&gt; {
 &nbsp;
@@ -538,7 +554,8 @@ const HomePage:React.FC&lt;IProps&gt; = <span class="fstat-no" title="function n
      * 
      * @param userId The passed in user id (currently does nothing)
      * 
-     * @returns This function just changes the batch state to 
+     * @returns This function just changes the batch state to contain
+     * each currently avaiable batch in the db.
      */
     const getBatchCardData = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(u</span>serId:number) =&gt; <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >as</span>ync (dispatch:any) =&gt; {</span></span>
 &nbsp;
@@ -548,6 +565,11 @@ const HomePage:React.FC&lt;IProps&gt; = <span class="fstat-no" title="function n
         let batchArray:IBatchState = <span class="cstat-no" title="statement not covered" >{</span>
             batches: [],
         };
+&nbsp;
+        /** array that takes in detailed information about a batch */
+        let batchDetailedArray:IBatchDetailedState = <span class="cstat-no" title="statement not covered" >{</span>
+            batches: []
+        }
 &nbsp;
         //get data from server based on user id that was given
 <span class="cstat-no" title="statement not covered" >        await Axios.get("https://caliber2-mock.revaturelabs.com/mock/training/batch/current")</span>
@@ -560,10 +582,12 @@ const HomePage:React.FC&lt;IProps&gt; = <span class="fstat-no" title="function n
                 {
                     let batchCardInfo = <span class="cstat-no" title="statement not covered" >{  ...response.data[i] }</span>
 <span class="cstat-no" title="statement not covered" >                    batchArray.batches.push(batchCardInfo);</span>
+<span class="cstat-no" title="statement not covered" >                    batchDetailedArray.batches.push(batchCardInfo);</span>
                 }
                 
                 //the "batch state" is set to be whatever was extracted from the db
 <span class="cstat-no" title="statement not covered" >                dispatch(setBatchState(batchArray));</span>
+<span class="cstat-no" title="statement not covered" >                dispatch(setBatchDetailsState(batchDetailedArray)); </span>/** as well as the batchDetailsState */
                 
             }
 <span class="cstat-no" title="statement not covered" >            setSpinner(false);</span>
@@ -610,7 +634,7 @@ const HomePage:React.FC&lt;IProps&gt; = <span class="fstat-no" title="function n
                         { 
                             props.batches.map(<span class="fstat-no" title="function not covered" >(e</span>lement,index) =&gt; (
 <span class="cstat-no" title="statement not covered" >                                &lt;Col xl="2" lg="3" md="4" sm="4" xs="6" key={index}&gt;</span>
-                                    &lt;BatchCard batchId={element.id} specialization={element.skill}
+                                    &lt;BatchCard batchId={element.batchId} specialization={element.skill}
                                     batchName={element.name} /&gt;
                                 &lt;/Col&gt;
                                 
@@ -649,7 +673,7 @@ export default connect&lt;IProps&gt;(mapStateToProps)(HomePage);</pre></td></tr>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Mon Nov 23 2020 09:57:38 GMT-0600 (Central Standard Time)
+                at Mon Nov 23 2020 14:47:28 GMT-0500 (Eastern Standard Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

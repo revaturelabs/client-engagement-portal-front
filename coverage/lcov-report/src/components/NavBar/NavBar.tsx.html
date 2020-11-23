@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">8.33% </span>
+                <span class="strong">7.69% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>1/12</span>
+                <span class='fraction'>1/13</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">10% </span>
+                <span class="strong">9.09% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>1/10</span>
+                <span class='fraction'>1/11</span>
             </div>
         
             
@@ -123,7 +123,20 @@
 <a name='L64'></a><a href='#L64'>64</a>
 <a name='L65'></a><a href='#L65'>65</a>
 <a name='L66'></a><a href='#L66'>66</a>
-<a name='L67'></a><a href='#L67'>67</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a>
+<a name='L69'></a><a href='#L69'>69</a>
+<a name='L70'></a><a href='#L70'>70</a>
+<a name='L71'></a><a href='#L71'>71</a>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a>
+<a name='L75'></a><a href='#L75'>75</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -144,6 +157,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -153,6 +168,7 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -190,12 +206,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useState } from 'react';
-import { Col, DropdownItem, DropdownMenu, DropdownToggle, Row, ButtonDropdown } from 'reactstrap';
+import { Col, Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Row, ButtonDropdown } from 'reactstrap';
 import logo from '../../assets/logo.png';
-import '../../scss/navStyles.scss';
-import { Turn as Hamburger } from 'hamburger-react';
+import menuArrow from '../../assets/down-arrow.png';
+import  '../../scss/navStyles.scss';
+import { Turn as Hamburger } from 'hamburger-react'
 import { Link } from 'react-router-dom';
 import { Auth } from 'aws-amplify';
+// interface INavBarProps{
+//     dropDownProps?:React.ComponentType&lt;DropdownItem&gt;[];
+// }
+&nbsp;
 &nbsp;
 /**
  * @function NavBar
@@ -209,7 +230,9 @@ export const NavBar: React.FC&lt;any&gt; = <span class="fstat-no" title="functio
     const [hamOpen, setHamOpen] = <span class="cstat-no" title="statement not covered" >useState(false);</span>
 &nbsp;
     const hamToggle = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >setHamOpen(!hamOpen);</span></span>
-    const toggle = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >setNavMenuOpen(!navMenuOpen);</span></span>
+    const toggle = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; {<span class="cstat-no" title="statement not covered" >setNavMenuOpen(!navMenuOpen)</span></span>
+<span class="cstat-no" title="statement not covered" >        setHamOpen(!navMenuOpen);</span>
+    };
 &nbsp;
     /**
      * @function LogOut
@@ -221,21 +244,22 @@ export const NavBar: React.FC&lt;any&gt; = <span class="fstat-no" title="functio
             .catch(<span class="fstat-no" title="function not covered" >er</span>r =&gt; <span class="cstat-no" title="statement not covered" >console.log(err))</span>;
     }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    return (</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return(</span>
         &lt;Row className="justify-content-around myNav"&gt;
             &lt;Col xs="auto" className="justify-content-start logoContainer"&gt;
-                &lt;img src={logo} className="myLogo" alt="revature logo" /&gt;
+                &lt;img src={logo} className="myLogo" alt="revature logo"/&gt;
             &lt;/Col&gt;
             &lt;Col className="d-flex align-items-center justify-content-end auto test1" &gt;
                 &lt;ButtonDropdown isOpen={navMenuOpen} toggle={toggle}&gt;
-                    {/* Mobile Hamburger Menu */}
-                    &lt;DropdownToggle className="" style={{ margin: "10px", backgroundColor: "white", border: "none" }}&gt;
-                        &lt;span className="myDropdown" style={{ margin: "5px", color: "#474C55", backgroundColor: "white", border: "none" }}&gt;Welcome, Lorem Ipsum &amp;#9660;&lt;/span&gt;
+                     {/* Mobile Hamburger Menu */}
+                     &lt;DropdownToggle className="" style={{margin:"10px", backgroundColor: "white", border: "none"}}&gt;
+                        &lt;span className="myDropdown" style={{margin:"5px",color:"#474C55", backgroundColor: "white", border: "none"}}&gt;Welcome, Lorem Ipsum &amp;#9660;&lt;/span&gt;
                         &lt;span className="myMobileDropdown"&gt;
-                            &lt;Hamburger toggled={hamOpen} toggle={hamToggle} color="#474C55"&gt;&lt;/Hamburger&gt;
+                         &lt;Hamburger hideOutline={true} toggled={hamOpen} toggle={setHamOpen} color="#474C55"&gt;&lt;/Hamburger&gt;
                         &lt;/span&gt;
                     &lt;/DropdownToggle&gt;
-                    {/* Desktop Menu */}
+                    {/* Desktop Menu */}    
                     &lt;DropdownMenu right&gt;
                         {props.children}
                         &lt;DropdownItem header&gt;Account Options&lt;/DropdownItem&gt;
@@ -262,7 +286,7 @@ export const NavBar: React.FC&lt;any&gt; = <span class="fstat-no" title="functio
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Mon Nov 23 2020 09:57:38 GMT-0600 (Central Standard Time)
+                at Mon Nov 23 2020 14:47:28 GMT-0500 (Eastern Standard Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>
