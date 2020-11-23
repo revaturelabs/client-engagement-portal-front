@@ -29,7 +29,7 @@ export const BatchForms: React.FC = () => {
         const tempArray=[];
         for (const r of response.data)
         {
-          const id = r.id
+          const id = r.id;
           const name = r.name;
           tempArray.push({id,name});
       }
@@ -44,7 +44,7 @@ export const BatchForms: React.FC = () => {
   
       /**
        * @function useEffect
-       * call the getBatches function on load of page 
+       * call the getBatches function on load of page
        */
       useEffect(()=>{
         getBatches();

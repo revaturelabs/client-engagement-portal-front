@@ -7,6 +7,9 @@ import { Auth } from 'aws-amplify';
 import  '../../scss/loginStyles.scss';
 import ceplogo from '../../assets/engagementPortalLogo.svg';
 import ceplogo2 from '../../assets/engagementPortalLogov2.svg';
+import { useDispatch } from 'react-redux';
+import { IUserAdmin, IUserClient } from '../../_reducers/UserReducer';
+import { adminLogin, clientLogin } from '../../actions/UserActions';
 
 interface ILoginProps {
     loginType: string
@@ -22,6 +25,8 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
 
     const [isClient, setClient] = useState(false);
     const [isAdmin, setAdmin] = useState(false);
+
+    const dispatch = useDispatch();
 
     /**
      * @function handleSubmit
@@ -45,15 +50,29 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
 
         try {
             const user = await Auth.signIn(loginCredentials.email, loginCredentials.password); // user.attributes.email contains the user email
-            
-            
 
             switch (user.attributes["custom:userRole"]) { // Assigns what page to redirect to based upon what role the user has
             case "client":
+                const statefulClient:IUserClient = {
+                    email: user.attributes.email,
+                    firstName: user.attributes["given_name"],
+                    lastName: user.attributes["family_name"],
+                }
+
+                dispatch(clientLogin(statefulClient));
+
                 setAdmin(false);
                 setClient(true);
                 break;
             case "admin":
+                const statefulAdmin:IUserAdmin = {
+                    email: user.attributes.email,
+                    firstName: user.attributes["given_name"],
+                    lastName: user.attributes["family_name"],
+                }
+
+                dispatch(adminLogin(statefulAdmin));
+            
                 setClient(false);
                 setAdmin(true);
                 break;

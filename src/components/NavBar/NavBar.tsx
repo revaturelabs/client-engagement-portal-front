@@ -5,6 +5,9 @@ import '../../scss/navStyles.scss';
 import { Turn as Hamburger } from 'hamburger-react';
 import { Link } from 'react-router-dom';
 import { Auth } from 'aws-amplify';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../../actions/UserActions';
+import { IRootState } from '../../_reducers';
 
 /**
  * @function NavBar
@@ -20,14 +23,21 @@ export const NavBar: React.FC<any> = (props: any) => {
     const hamToggle = () => setHamOpen(!hamOpen);
     const toggle = () => setNavMenuOpen(!navMenuOpen);
 
+    const dispatch = useDispatch();
+
+    let name = useSelector((state:IRootState) => {return state.userState.user?.firstName + " " + state.userState.user?.lastName});
+    name = " " ? "Lorem Ipsum" : name; // Placeholder for developer logins and (legacy) users without colloquial names
+
     /**
      * @function LogOut
      * De-authenticates the user session upon clicking the logout dropdown option.
      */
     const LogOut = () => {
-        Auth.signOut()
-            .then(data => console.log(data))
-            .catch(err => console.log(err));
+        Auth.signOut() // de-authenticates the user
+        .then(data => console.log(data))
+        .catch(err => console.log(err));
+        
+        dispatch(logout()); // clears the user data from the local state
     }
 
     return (
@@ -39,7 +49,7 @@ export const NavBar: React.FC<any> = (props: any) => {
                 <ButtonDropdown isOpen={navMenuOpen} toggle={toggle}>
                     {/* Mobile Hamburger Menu */}
                     <DropdownToggle className="" style={{ margin: "10px", backgroundColor: "white", border: "none" }}>
-                        <span className="myDropdown" style={{ margin: "5px", color: "#474C55", backgroundColor: "white", border: "none" }}>Welcome, Lorem Ipsum &#9660;</span>
+                        <span className="myDropdown" style={{ margin: "5px", color: "#474C55", backgroundColor: "white", border: "none" }}>Welcome, {name} &#9660;</span>
                         <span className="myMobileDropdown">
                             <Hamburger toggled={hamOpen} toggle={hamToggle} color="#474C55"></Hamburger>
                         </span>
