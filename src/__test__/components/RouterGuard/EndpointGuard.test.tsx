@@ -45,7 +45,7 @@ describe("Testing endpoint guards", () => {
     expect(wrapper.find(dumbyComponent)).toHaveLength(1);
   });
 
-  test("Can\t access page if not signed in", async () => {
+  test("Can't access page if not signed in", async () => {
     //mock AWS Amplify Auth
     Auth.currentUserInfo = jest.fn().mockImplementation(() => {
       return {
@@ -70,7 +70,7 @@ describe("Testing endpoint guards", () => {
     expect(wrapper.find(dumbyComponent)).toHaveLength(0); //shouldn't render
   });
 
-  test("Can\t access page if wrong role", async () => {
+  test("Can't access page if wrong role", async () => {
     //mock AWS Amplify Auth
     Auth.currentUserInfo = jest.fn().mockImplementation(() => {
       return null;
