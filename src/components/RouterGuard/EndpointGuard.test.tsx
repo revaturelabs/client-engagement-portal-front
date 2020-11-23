@@ -1,7 +1,7 @@
 import { configure, mount } from "enzyme";
 import React from "react";
 import Adapter from "enzyme-adapter-react-16";
-import RouterGuard from "../../../components/RouterGuard/RouterGuard";
+import RouterGuard from "../../components/RouterGuard/RouterGuard";
 import { Router } from "react-router";
 import { createBrowserHistory, History, State } from "history";
 import { Auth } from "aws-amplify";

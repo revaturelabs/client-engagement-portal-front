@@ -3,15 +3,15 @@ import { BatchReducer, IBatchState } from "./BatchReducer";
 import { IUserState, userReducer } from "./UserReducer";
 
 export interface IRootState {
-    userState: IUserState;
-    batchState: IBatchState;
+  userState: IUserState;
+  batchState: IBatchState;
 }
 
-export const rootReducer: Reducer<
-    CombinedState<IRootState>,
-    AnyAction
-> = combineReducers<IRootState>({
-    userState: userReducer,
-    batchState: BatchReducer,
-    //place your state:reducer here
+/**
+ * Combined reducer to be stored in the Redux store for state handling.
+ */
+export const rootReducer: Reducer<CombinedState<IRootState>> = combineReducers<IRootState>({
+  userState: userReducer,
+  batchState: BatchReducer,
+  //place your state:reducer here
 });

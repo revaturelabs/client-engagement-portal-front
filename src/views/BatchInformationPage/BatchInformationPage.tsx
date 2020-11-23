@@ -5,7 +5,10 @@ import { BatchInformation } from '../../components/BatchInformation/BatchInforma
 import { NavBar } from '../../components/NavBar/NavBar';
 
 
-
+/**
+ * @function BatchInformationPage
+ * Page that a client sees when they click the "view" button on a batch card.
+ */
 export const BatchInformationPage: React.FC = () => {
     return (
         <>

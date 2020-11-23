@@ -22,35 +22,46 @@ interface IProps {
 /**
  * Will show the batches that were mapped to the logged in client. Unless they were not mapped any
  * batches. In that case, they will be shown a message which assures them that they will be mapped
- * one in the near future and can even notify the admin users with the "request batch" button. 
- * 
- * @param props batch information. Should be pulled from the database whenever this component loads 
+ * one in the near future and can even notify the admin users with the "request batch" button.
+ *
+ * @param props batch information. Should be pulled from the database whenever this component loads
  */
 const HomePage:React.FC<IProps> = (props:IProps) => {
 
     const [showInterventionModal, setShowInterventionModal] = useState(false);
     const [hasBatches, setHasBatches] = useState(false);
     const [hasSpinner, setSpinner] = useState(false);
- 
+
     const dispatch = useDispatch();
 
-    // temporary DEVELOPMENT functions which are called from the nav bar
+    /**
+     * @function getBatches
+     * DEVELOPER function used to retrieve mock data for display
+     */
     const getBatches = () =>
-    {   
+    {
         setHasBatches(true);
 
         //gets batch data from caliber
         dispatch(getBatchCardData(1));
     }
 
+    /**
+     * @function getBatches
+     * DEVELOPER function used to simulate having zero batches
+     */
     const resetBatches = () =>
-    {   
+    {
         setHasBatches(false);
 
         //removes batches' data / resets the batch state
         dispatch(setBatchState(initialBatchState));
     }
 
+    /**
+     * @function getBatches
+     * DEVELOPER function used to simulate having 3 batches
+     */
     const getSimulatedBatches = () =>
     {
         setHasBatches(true);
@@ -75,36 +86,36 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
      * This function gets all of the batch data currently in the Caliber
      *  db. It places all of the data from that endpoint into the "batch
      *  state".
-     * 
+     *
      * @param userId The passed in user id (currently does nothing)
-     * 
-     * @returns This function just changes the batch state to 
+     *
+     * @returns This function just changes the batch state to
      */
-    const getBatchCardData = (userId:number) => async (dispatch:any) => {
+    const getBatchCardData = (userId:number) => async () => {
 
         setSpinner(true);
 
         //array to place batch data into
-        let batchArray:IBatchState = {
+        const batchArray:IBatchState = {
             batches: [],
         };
 
         //get data from server based on user id that was given
         await Axios.get("https://caliber2-mock.revaturelabs.com/mock/training/batch/current")
         .then((response:any) => {
-    
+
             if (response != null)
             {
                 //individual batch info is placed into the array from above
-                for (let i = 0 ; i < response.data.length; i++)
+                for (let i of response.data)
                 {
-                    let batchCardInfo = {  ...response.data[i] }
+                    const batchCardInfo = {  ...response.data[i] }
                     batchArray.batches.push(batchCardInfo);
                 }
-                
+
                 //the "batch state" is set to be whatever was extracted from the db
                 dispatch(setBatchState(batchArray));
-                
+
             }
             setSpinner(false);
         })
@@ -114,10 +125,10 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
         });
 
         setSpinner(false);
-        
+
     };
 
-    
+
 
     return(
         <Container style={{minHeight: "100vh", maxWidth: "100vw", backgroundColor:"#E3E3E3"}}>
@@ -147,13 +158,13 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
                         {/* displays spinner while loading */}
                         { hasSpinner ? <div className="row justify-content-center"><Spinner  color="info" /></div> : <span/> }
                         <Row>
-                        { 
+                        {
                             props.batches.map((element,index) => (
                                 <Col xl="2" lg="3" md="4" sm="4" xs="6" key={index}>
                                     <BatchCard batchId={element.id} specialization={element.skill}
                                     batchName={element.name} />
                                 </Col>
-                                
+
                             ))
                         }
                         </Row>

@@ -4,6 +4,10 @@ import { LoginComponent } from '../../components/LoginComponent/LoginComponent';
 import logo from '../../assets/logo.png';
 import "../../scss/loginStyles.scss";
 
+/**
+ * @function LoginPage
+ * The page the user sees when they arrive onto the site.
+ */
 export const LoginPage:React.FC<undefined> = () => {
     return(
         <div className="login-wrapper">
