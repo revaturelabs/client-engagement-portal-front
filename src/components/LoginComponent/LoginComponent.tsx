@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
-import hands from '../../assets/engagementPortalLogo.svg';
 import userThumb from '../../assets/user-thumb.png';
 import passThumb from '../../assets/pass-thumb.png';
 import { Auth } from 'aws-amplify';
 import '../../scss/loginStyles.scss';
-import ceplogo from '../../assets/engagementPortalLogo.svg';
 import ceplogo2 from '../../assets/engagementPortalLogov2.svg';
 
 interface ILoginProps {

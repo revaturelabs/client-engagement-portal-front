@@ -1,8 +1,7 @@
-import { batch } from "react-redux";
 import { SET_BATCHES } from "../actions/BatchCardActions"
 
 //Batch state is essentially just an array of batch objects
-export interface IBatchState{
+export interface IBatchState {
     batches: {
         id: number,
         skill: string,
@@ -10,8 +9,8 @@ export interface IBatchState{
     }[];
 }
 
-export const initialBatchState:IBatchState = {
-    batches: [{id: 0, skill: "", name: ""}] //empty array to start with
+export const initialBatchState: IBatchState = {
+    batches: [{ id: 0, skill: "", name: "" }] //empty array to start with
 }
 
 /**
@@ -24,11 +23,10 @@ export const initialBatchState:IBatchState = {
  * 
  * @returns Batch state. Basically just updates the batches state
  */
-export const BatchReducer = (batchState:IBatchState = initialBatchState, action:any) => {
-    switch(action.type)
-    {
+export const BatchReducer = (batchState: IBatchState = initialBatchState, action: any) => {
+    switch (action.type) {
         case SET_BATCHES:
-            if(action.payload != null)
+            if (action.payload != null)
                 return batchState = { ...action.payload }  //places batch data into batchCard state
             else
                 return batchState;

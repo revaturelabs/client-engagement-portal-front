@@ -26,8 +26,8 @@ export const NavBar: React.FC<any> = (props: any) => {
      */
     const LogOut = () => {
         Auth.signOut()
-            .then(data => console.log(data))
-            .catch(err => console.log(err));
+            .then(data => data)
+            .catch(err => err);
     }
 
     return (
