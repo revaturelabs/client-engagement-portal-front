@@ -5,12 +5,15 @@ import { BatchInformation } from '../../components/BatchInformation/BatchInforma
 import { NavBar } from '../../components/NavBar/NavBar';
 
 
-
+/**
+ * @function BatchInformationPage
+ * Page that a client sees when they click the "view" button on a batch card.
+ */
 export const BatchInformationPage: React.FC = () => {
     return (
         <>
             <Container style={{minHeight: "100vh", maxWidth: "100vw"}}>
-                <NavBar>
+                <NavBar route="/home">
                     <Link to="/home">
                         <DropdownItem>Return to Client Home</DropdownItem>
                     </Link>

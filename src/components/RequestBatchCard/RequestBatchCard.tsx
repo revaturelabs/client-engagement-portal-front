@@ -1,11 +1,11 @@
 import React from 'react'
 import classes from './RequestBatchCard.module.scss'
 
-interface Props {
-
-}
-
-const RequestBatchCard = (props: Props) => {
+/**
+ * @function RequestBatchCard
+ * Default content to display when the signed-in client has no batches.
+ */
+const RequestBatchCard = () => {
 
     const requestBatchCardText = "No batches have been selected for you just yet. Our administrators will assign you one soon.";
 
