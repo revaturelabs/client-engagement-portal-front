@@ -18,13 +18,9 @@ const setUp =
         }
     ) =>
 {
-<<<<<<< HEAD
-    return shallow(<BatchCard {...props}/>);
-=======
     const component = shallow(<BatchCard batchId={props.batchId} specialization={props.specialization}
     batchName={props.batchName} />);
     return component;
->>>>>>> c5d8aad109a98dd6051b08f8be80a32d8a46993a
 }
 
 describe("Batch Card Component", () => {

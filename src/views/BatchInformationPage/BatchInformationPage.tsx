@@ -103,13 +103,8 @@ const BatchInformationPage: React.FC<IProps> = (props: IProps) => {
 
     return (
         <>
-<<<<<<< HEAD
-            <Container style={{minHeight: "100vh", maxWidth: "100vw"}}>
-                <NavBar route="/home">
-=======
             <Container style={{ minHeight: "100vh", maxWidth: "100vw", backgroundColor: "#E3E3E3" }}>
                 <NavBar>
->>>>>>> c5d8aad109a98dd6051b08f8be80a32d8a46993a
                     <Link to="/home">
                         <DropdownItem>Return to Client Home</DropdownItem>
                     </Link>
