@@ -30,6 +30,7 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
 
     const [showInterventionModal, setShowInterventionModal] = useState(false);
     const [hasBatches, setHasBatches] = useState(false);
+    const [hasData, setRecievedData] = useState(false);
     const [hasSpinner, setSpinner] = useState(false);
  
     const dispatch = useDispatch();
@@ -41,6 +42,7 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
 
         //gets batch data from caliber
         dispatch(getBatchCardData(1));
+        setRecievedData(true);
     }
 
     const resetBatches = () =>
@@ -118,7 +120,10 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
         
     };
 
-    
+    if(hasData == false)
+    {
+        getBatches();
+    }
 
     return(
         <Container style={{minHeight: "100vh", maxWidth: "100vw", backgroundColor:"#E3E3E3"}}>
@@ -129,9 +134,9 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
                 <DropdownItem onClick={() => getBatches()}>Get ALL Mock Batches from Caliber (Requires CORS Extension)</DropdownItem>
             </NavBar>
 
-            {/* Modal for Requesting an Intervention, will be moved to batch info page */}
+            {/* Modal for Requesting an Intervention, will be moved to batch info page 
             <button onClick={() => setShowInterventionModal(!showInterventionModal)}>Temporary Test Intervention Modal (Will Go on Batch Info Page)</button>
-            <PlanInterventionModal show={showInterventionModal} setShow={setShowInterventionModal} />
+            <PlanInterventionModal show={showInterventionModal} setShow={setShowInterventionModal} /> */}
             
             {hasBatches ?
 
