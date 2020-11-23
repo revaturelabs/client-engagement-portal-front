@@ -25,12 +25,11 @@ function App() {
                 <BrowserRouter>
                     <RedirectWhenLoggedIn />
                     <Switch>
-                        <Route exact path="/" component={() => <Redirect to={"/login"} />} />
+                        <Route exact path="/" component={LoadingPage} />
                         <Route path="/login" component={LoginPage} />
                         <Route path="/home" component={HomePage} />
                         <Route path="/admin" component={AdminPage} />
                         <Route path="/batch" component={BatchInformationPage} />
-                        <Route path="/loading" component={LoadingPage} />
                     </Switch>
                 </BrowserRouter>
             </Provider>
