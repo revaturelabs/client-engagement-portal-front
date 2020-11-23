@@ -1,6 +1,5 @@
 import { Auth } from "aws-amplify";
 import React, { useEffect, useState } from "react";
-// import { connect } from 'react-redux';
 import { Redirect, Route, RouteProps } from "react-router";
 
 //Props for RouterGuard. Expected to be in a BrowserRouter Switch, so extends RouteProps
@@ -12,7 +11,6 @@ export interface ProtectedRouteProps extends RouteProps {
 export const RouterGuard: React.FC<ProtectedRouteProps> = (props) => {
   const [redirect, setRedirect] = useState<string>("");
   const [userRole, setUserRole] = useState<string>(""); // if not yet loaded (Auth not done yet), then falsy
-  // const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     async function getUser() {
@@ -22,7 +20,6 @@ export const RouterGuard: React.FC<ProtectedRouteProps> = (props) => {
       if (userInfo && !props.role.includes(user)) {
         // if the current user role is not one of the allowed roles, then redirect
         setRedirect(props.redirectPath);
-        // console.log("redirecting");
       }
       setUserRole(user); //set UserRole to be the found user. We know it's fine bec of await.
     }
