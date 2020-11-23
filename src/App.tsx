@@ -15,34 +15,25 @@ import RouterGuard from "./components/RouterGuard/RouterGuard";
 Amplify.configure(awsconfig);
 
 function App() {
-    return (
-        <div className="App">
-            <Provider store={store}>
-                <BrowserRouter>
-                    <Switch>
-                        <Route
-                            exact
-                            path="/"
-                            component={() => <Redirect to="/login" />}
-                        />
-                        <Route path="/login" component={LoginPage} />
-                        {/* <Route path="/home" component={HomePage} /> */}
-                        <RouterGuard component={HomePage} path="/home" redirectPath="/" role={['client']}/>
-                        {/* <Route path="/admin" component={AdminPage}/> */}
-                        <Route path="/batch" component={BatchInformationPage} />
-
-                        <RouterGuard
-                            component={AdminPage}
-                            path="/admin"
-                            redirectPath="/"
-                            role={["admin"]}
-                        />
-                        <Route component={PageNotFound} />
-                    </Switch>
-                </BrowserRouter>
-            </Provider>
-        </div>
-    );
+  return (
+    <div className="App">
+      <Provider store={store}>
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/" component={() => <Redirect to="/login" />} />
+            <Route path="/login" component={LoginPage} />
+            {/* <Route path="/home" component={HomePage} /> */}
+            <RouterGuard component={HomePage} path="/home" redirectPath="/" role={["client"]} />
+            {/* <Route path="/admin" component={AdminPage}/> */}
+            <Route path="/batch" component={BatchInformationPage} />
+            <Route path="/login-admin" />
+            <RouterGuard component={AdminPage} path="/admin" redirectPath="/" role={["admin"]} />
+            <Route component={PageNotFound} />
+          </Switch>
+        </BrowserRouter>
+      </Provider>
+    </div>
+  );
 }
 
 export default App;
