@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Col, Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Row, ButtonDropdown } from 'reactstrap';
+import { Col, DropdownItem, DropdownMenu, DropdownToggle, Row, ButtonDropdown } from 'reactstrap';
 import logo from '../../assets/logo.png';
-import menuArrow from '../../assets/down-arrow.png';
 import  '../../scss/navStyles.scss';
 import { Turn as Hamburger } from 'hamburger-react'
 import { Link } from 'react-router-dom';
@@ -52,10 +51,10 @@ export const NavBar: React.FC<any> = (props: any) => {
             <Col className="d-flex align-items-center justify-content-end auto test1" >
                 <ButtonDropdown isOpen={navMenuOpen} toggle={toggle}>
                      {/* Mobile Hamburger Menu */}
-                     <DropdownToggle className="" style={{margin:"10px", backgroundColor: "white", border: "none"}}>
-                        <span className="myDropdown" style={{margin:"5px",color:"#474C55", backgroundColor: "white", border: "none"}}>Welcome, Lorem Ipsum &#9660;</span>
+                     <DropdownToggle className="" style={{ margin: "10px", backgroundColor: "white", border: "none" }}>
+                        <span className="myDropdown" style={{ margin: "5px", color: "#474C55", backgroundColor: "white", border: "none" }}>Welcome, Lorem Ipsum &#9660;</span>
                         <span className="myMobileDropdown">
-                         <Hamburger hideOutline={true} toggled={hamOpen} toggle={setHamOpen} color="#474C55"></Hamburger>
+                            <Hamburger hideOutline={true} toggled={hamOpen} toggle={setHamOpen} color="#474C55"></Hamburger>
                         </span>
                     </DropdownToggle>
                     {/* Desktop Menu */}
