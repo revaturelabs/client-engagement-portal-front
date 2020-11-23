@@ -12,12 +12,26 @@ interface ILoginProps {
     loginType: string
 }
 
+/**
+ * @function LoginComponent
+ * Component that allows login functionality. Takes in an email and password.
+ * 
+ * @param props (DEPRECATED USAGE) Informs whether this component is rendered on the admin login or the client login.
+ */
 export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
 
     const [isClient, setClient] = useState(false);
     const [isAdmin, setAdmin] = useState(false);
 
-    // WHEN THE LOGIN BUTTON IS PRESSED
+    /**
+     * @function handleSubmit
+     * Handles authentication after the user presses the login button.
+     * @async
+     * Makes a call to AWS Cognito to authenticate login details,
+     *  then makes a call to the API gateway to retrieve user info.
+     * 
+     * @param event contains the click event that calls this function.
+     */
     const handleSubmit = async (event: any) => {
         event.preventDefault();
         const form = event.currentTarget;
@@ -30,37 +44,23 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
         }
 
         try {
-            // const startTime = Date.now();
+            const user = await Auth.signIn(loginCredentials.email, loginCredentials.password); // user.attributes.email contains the user email
+            
+            
 
-            const user = // !!!EMAIL WILL BE RETURNED IN: user.attributes.email
-                await Auth.signIn(loginCredentials.email, loginCredentials.password);
-            // THIS OPERATION COSTS ~800 MILLISECONDS
-
-
-
-            // Switch statement for assigning what page to redirect to based upon what role the user has
-            switch (user.attributes["custom:userRole"]) {
-                case "client":
-                    setAdmin(false);
-                    setClient(true);
-                    break;
-                case "admin":
-                    setClient(false);
-                    setAdmin(true);
-                    break;
-                default:
-                    setClient(false);
-                    setAdmin(false);
+            switch (user.attributes["custom:userRole"]) { // Assigns what page to redirect to based upon what role the user has
+            case "client":
+                setAdmin(false);
+                setClient(true);
+                break;
+            case "admin":
+                setClient(false);
+                setAdmin(true);
+                break;
+            default:
+                setClient(false);
+                setAdmin(false);
             }
-
-            // await console.log(user.userSession);
-            // const midTime = Date.now();
-
-            // console.log(midTime - startTime);
-
-            // await Auth.signOut();
-
-            // console.log(Date.now() - midTime);
         } catch (error) {
             console.log("Couldn't sign in: ", error);
         }

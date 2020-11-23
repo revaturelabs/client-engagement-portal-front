@@ -6,6 +6,13 @@ import { Turn as Hamburger } from 'hamburger-react';
 import { Link } from 'react-router-dom';
 import { Auth } from 'aws-amplify';
 
+/**
+ * @function NavBar
+ * Displays the header on any page where a user is logged in.
+ * 
+ * @param props contains the child components that are between the opening and closing NavBar tags.
+ * Should consist only of drop-down options.
+ */
 export const NavBar: React.FC<any> = (props: any) => {
     const [navMenuOpen, setNavMenuOpen] = useState(false);
     const [hamOpen, setHamOpen] = useState(false);
@@ -13,6 +20,10 @@ export const NavBar: React.FC<any> = (props: any) => {
     const hamToggle = () => setHamOpen(!hamOpen);
     const toggle = () => setNavMenuOpen(!navMenuOpen);
 
+    /**
+     * @function LogOut
+     * De-authenticates the user session upon clicking the logout dropdown option.
+     */
     const LogOut = () => {
         Auth.signOut()
             .then(data => console.log(data))

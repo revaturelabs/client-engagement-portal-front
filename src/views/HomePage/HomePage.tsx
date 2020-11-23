@@ -34,7 +34,10 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
  
     const dispatch = useDispatch();
 
-    // temporary DEVELOPMENT functions which are called from the nav bar
+    /**
+     * @function getBatches
+     * DEVELOPER function used to retrieve mock data for display
+     */
     const getBatches = () =>
     {   
         setHasBatches(true);
@@ -43,6 +46,10 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
         dispatch(getBatchCardData(1));
     }
 
+    /**
+     * @function getBatches
+     * DEVELOPER function used to simulate having zero batches
+     */
     const resetBatches = () =>
     {   
         setHasBatches(false);
@@ -51,6 +58,10 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
         dispatch(setBatchState(initialBatchState));
     }
 
+    /**
+     * @function getBatches
+     * DEVELOPER function used to simulate having 3 batches
+     */
     const getSimulatedBatches = () =>
     {
         setHasBatches(true);
