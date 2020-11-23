@@ -46,6 +46,7 @@ const BatchInformationPage: React.FC<IProps> = (props:IProps) => {
     console.log(passedInId); //this returns the passed in id
 
     const [hasSpinner, setSpinner] = useState(false);
+    const [hasData, setRecievedData] = useState(false);
 
     const dispatch = useDispatch();
     
@@ -94,7 +95,13 @@ const BatchInformationPage: React.FC<IProps> = (props:IProps) => {
 
     const getBatchDataNow = () => {
         dispatch(getBatchData(passedInId));
+        setRecievedData(true);
     };
+
+    if(hasData == false)
+    {
+        getBatchDataNow();
+    }
 
     return (
         <>
@@ -105,22 +112,25 @@ const BatchInformationPage: React.FC<IProps> = (props:IProps) => {
                     </Link>
                 </NavBar>
 
-                {/* Spinner displays below the main batch card */}
-                <Row>
-                    <div className="justify-content-center">
-                        {hasSpinner ? <Spinner color="info" /> : <span/>}
+                {/* Spinner displays below nav bar */}
+                
+                    { 
+                    hasSpinner ?
+                    <div className=" row justify-content-center">
+                    <Spinner color="info" style={{ margin: 70 }} /> 
                     </div>
-                </Row>
-                <button onClick={getBatchDataNow}>get batch info</button>
-                <BatchInformation batches={[{
-                    batchId: passedInId,
-                    batchName: props.batches[0].name,
-                    endDate: props.batches[0].endDate,
-                    skill: props.batches[0].skill,
-                    trainer: props.batches[0].employeeAssignments[0].employee.firstName + " " +
-                        props.batches[0].employeeAssignments[0].employee.lastName,
-                    assAssign: props.batches[0].associateAssignments,
-                    }]}/>
+                    : 
+                    <BatchInformation batches={[{
+                        batchId: passedInId,
+                        batchName: props.batches[0].name,
+                        endDate: props.batches[0].endDate,
+                        skill: props.batches[0].skill,
+                        trainer: props.batches[0].employeeAssignments[0].employee.firstName + " " +
+                            props.batches[0].employeeAssignments[0].employee.lastName,
+                        assAssign: props.batches[0].associateAssignments,
+                        }]}/>
+                    }
+                
             </Container>
         </>
     );

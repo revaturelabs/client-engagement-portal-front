@@ -3,7 +3,12 @@ import { Button, Card, CardBody, CardFooter, CardHeader, Col, Row, Spinner } fro
 import "../../scss/BatchInformation.scss"
 import reactReduxLogo from '../../assets/react-redux-logo.png';
 import javaLogo from '../../assets/java-logo.png';
-import springLogo from '../../assets/spring-logo.png';
+import javaAuto from '../../assets/JavaAutoLogo.png';
+import pegaLogo from '../../assets/Pegalogo.jpg';
+import salesLogo from '../../assets/sales.png';
+import bigData from '../../assets/bigData.png';
+import netLogo from '../../assets/NET.jpg';
+import devOpsLogo from '../../assets/devOps.jpg';
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import bArrow from "../../assets/whiteBarrow.svg";
@@ -38,6 +43,40 @@ export const BatchInformation:React.FC<IProps> = (props:IProps) => {
     const [isOrangeBtn, setOrangeBtn] = useState(false);
 
     console.log(props.batches[0]);
+
+    let image = "";      //sets the image of this card to match the specialization
+    if (props.batches[0].skill === "Java/Microservices")
+    {
+        image = javaLogo;
+    }
+    else if (props.batches[0].skill === "PEGA")
+    {
+        image = pegaLogo;
+    }
+    else if (props.batches[0].skill === "Java with Automation")
+    {
+        image = javaAuto;
+    }
+    else if (props.batches[0].skill === "Java React")
+    {
+        image = reactReduxLogo;
+    }
+    else if (props.batches[0].skill === "Big Data")
+    {
+        image = bigData;
+    }
+    else if (props.batches[0].skill === "SalesForce")
+    {
+        image = salesLogo;
+    }
+    else if (props.batches[0].skill === ".NET/Microservices")
+    {
+        image = netLogo;
+    }
+    else if (props.batches[0].skill === "Java Devops")
+    {
+        image = devOpsLogo;
+    }
 
     const responsive = {     //for responsive styling on the carousel cards below
         superLargeDesktop: {
@@ -89,15 +128,15 @@ export const BatchInformation:React.FC<IProps> = (props:IProps) => {
                             <h4>{props.batches[0].batchName}</h4>
                         </CardHeader>
                         <CardBody>
-                            <h5><b>Core Technology  Learned:</b></h5>
+                            <h5><b>Core Technology Learned:</b></h5>
                             <Row>
                                 <Col className="logo-container">
                                 <span className="helper"></span>
-                                    <img src={reactReduxLogo} alt="Specialization logo" />
+                                    <img src={image} alt="Specialization logo" />
                                 </Col>
                             </Row>
                             <Row style={{textAlign: "center"}}>
-                                <Col><p>React Redux</p></Col>
+                                <Col><p>{props.batches[0].skill}</p></Col>
                             </Row>
                             <p><b>Trainer:</b> {props.batches[0].trainer}</p>
                             <p><b>Training End Date:</b> {props.batches[0].endDate}</p>
@@ -105,7 +144,7 @@ export const BatchInformation:React.FC<IProps> = (props:IProps) => {
                         <CardFooter></CardFooter>
                     </Card>
                     
-                    <h1>Batch Engineers</h1>
+                    <h1>Batch Engineers: ({props.batches[0].assAssign.length})</h1>
 
                     <Carousel responsive={responsive}>
                         <Card>
