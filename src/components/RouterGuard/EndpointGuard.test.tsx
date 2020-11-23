@@ -9,18 +9,24 @@ import { act } from "react-dom/test-utils";
 
 configure({ adapter: new Adapter() });
 
+//Dumby Component so that we aren't accidentally testing every other component
 const dumbyComponent: React.FC = () => {
   return <div>{"I'm a dumbyComponent"}</div>;
 };
 
-describe("Testing endpoint guards", () => {
+describe("RouterGuard", () => {
   let history: History<State>;
   beforeEach(() => {
     //Allow Route testing
     history = createBrowserHistory();
     history.push("/admin");
   });
-  test("Can access page if correct role", async () => {
+
+  /**
+   * @Test
+   * We can reach the component only if we have the right role given by AWS Cognito
+   */
+  it("Can access page if correct role", async () => {
     //mock AWS Amplify Auth
     Auth.currentUserInfo = jest.fn().mockImplementation(() => {
       return {
@@ -45,7 +51,11 @@ describe("Testing endpoint guards", () => {
     expect(wrapper.find(dumbyComponent)).toHaveLength(1);
   });
 
-  test("Can't access page if not signed in", async () => {
+  /**
+   * @Test
+   * We can't reach the component if we aren't signed in
+   */
+  it("Can't access page if not signed in", async () => {
     //mock AWS Amplify Auth
     Auth.currentUserInfo = jest.fn().mockImplementation(() => {
       return {
@@ -70,7 +80,11 @@ describe("Testing endpoint guards", () => {
     expect(wrapper.find(dumbyComponent)).toHaveLength(0); //shouldn't render
   });
 
-  test("Can't access page if wrong role", async () => {
+  /**
+   * @Test
+   * We can't reach component if we have the wrong role
+   */
+  it("Can't access page if wrong role", async () => {
     //mock AWS Amplify Auth
     Auth.currentUserInfo = jest.fn().mockImplementation(() => {
       return null;
