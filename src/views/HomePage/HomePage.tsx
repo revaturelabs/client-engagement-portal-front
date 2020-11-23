@@ -78,7 +78,8 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
      * 
      * @param userId The passed in user id (currently does nothing)
      * 
-     * @returns This function just changes the batch state to 
+     * @returns This function just changes the batch state to contain
+     * each currently avaiable batch in the db.
      */
     const getBatchCardData = (userId:number) => async (dispatch:any) => {
 

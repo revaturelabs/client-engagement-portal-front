@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Card, CardBody, CardFooter, CardHeader, Col, Row } from 'reactstrap';
+import { Button, Card, CardBody, CardFooter, CardHeader, Col, Row, Spinner } from 'reactstrap';
 import "../../scss/BatchInformation.scss"
 import reactReduxLogo from '../../assets/react-redux-logo.png';
 import javaLogo from '../../assets/java-logo.png';
@@ -8,17 +8,30 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import bArrow from "../../assets/whiteBarrow.svg";
 import oArrow from "../../assets/orangeBarrow.svg";
-import { Redirect } from 'react-router';
+import { Redirect, RouteComponentProps, withRouter } from 'react-router';
+import { IBatchState } from '../../_reducers/BatchReducer';
+import { axiosInstance } from '../../util/axiosConfig';
+import { setBatchState } from '../../actions/BatchCardActions';
+import { connect } from 'react-redux';
+import { IBasicBatchInfo } from '../BatchCard/BatchCard';
 
-interface IBatchInformationProps {
-    name:string,
+interface IProps{
+    batches: [{}],
 }
 
-export const BatchInformation:React.FC<IBatchInformationProps> = (props:IBatchInformationProps) => {
+/**
+ * This component displays a buuunch of data about one specific batch.
+ * 
+ * @param props The batch id from the batch card that was selected is
+ * passed into this component. This is needed so that the rest of the 
+ * data about that batch can be retrieved.
+ */
+export const BatchInformation:React.FC<IProps> = (props:IProps) => {
 
     const [isOrangeBtn, setOrangeBtn] = useState(false);
-    
-    const responsive = {
+    const [hasSpinner, setSpinner] = useState(false);
+
+    const responsive = {     //for responsive styling on the carousel cards below
         superLargeDesktop: {
           // the naming can be any, depends on you.
           breakpoint: { max: 4000, min: 1200 },
@@ -43,9 +56,58 @@ export const BatchInformation:React.FC<IBatchInformationProps> = (props:IBatchIn
       };
 
       const goBack = () => {
-          window.location.href = "/home";
+        window.location.href = "/home";
       }
 
+      const viewBatchId = () => {
+        console.log("this should show the passed in batch id: " + props);
+      }
+
+    /**
+     * This function gets all of the batch data from our back end. This
+     * includes data about each associate's test / quiz scores.
+     * 
+     * @param batchId the batch id passed in from the batch card on the
+     * home page
+     * 
+     * @returns This function just changes the batch state to 
+     */
+    const getBatchData = (batchId:string) => async (dispatch:any) => {
+
+        setSpinner(true);
+
+        //array to place batch data into
+        let batchArray:IBatchState = {
+            batches: [],
+        };
+
+        //get data from server based on user id that was given
+        await axiosInstance.get("")
+        .then((response:any) => {
+    
+            if (response != null)
+            {
+                //individual batch info is placed into the array from above
+                for (let i = 0 ; i < response.data.length; i++)
+                {
+                    let batchCardInfo = {  ...response.data[i] }
+                    batchArray.batches.push(batchCardInfo);
+                }
+                
+                //the "batch state" is set to be whatever was extracted from the db
+                dispatch(setBatchState(batchArray));
+                
+            }
+            setSpinner(false);
+        })
+        .catch((error:any) => {
+            console.log(error);
+            setSpinner(false);
+        });
+
+        setSpinner(false);
+        
+    };
     return(
         <>
         {/* Back button */}
@@ -94,7 +156,13 @@ export const BatchInformation:React.FC<IBatchInformationProps> = (props:IBatchIn
                         </CardBody>
                         <CardFooter></CardFooter>
                     </Card>
-
+                    {/* Spinner displays below the main batch card */}
+                    <Row>
+                        <div className="justify-content-center">
+                            {hasSpinner ? <Spinner color="info" /> : <span/>}
+                        </div>
+                    </Row>
+                    
                     <h1>Batch Engineers</h1>
 
                     <Carousel responsive={responsive}>
@@ -106,7 +174,7 @@ export const BatchInformation:React.FC<IBatchInformationProps> = (props:IBatchIn
                                 100%
                             </CardBody>
                             <CardFooter>
-                                <button>View</button>
+                                <button onClick={viewBatchId}>View</button>
                             </CardFooter>
                         </Card>
                         <Card>

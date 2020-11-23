@@ -10,7 +10,7 @@ import netLogo from '../../assets/NET.jpg';
 import devOpsLogo from '../../assets/devOps.jpg';
 import { Redirect } from 'react-router-dom';
 
-interface IProps{
+export interface IBasicBatchInfo{
     batchId: string,
     specialization:string,
     batchName:string,
@@ -24,13 +24,13 @@ interface IProps{
  * 
  * @param props The batch information that was passed in from the Home page component. 
  */
-export const BatchCard:React.FC<IProps> = (props:IProps) => {
+export const BatchCard:React.FC<IBasicBatchInfo> = (props:IBasicBatchInfo) => {
 
     const [batchButtonClicked, setBatchButtonClicked] = useState(false);
 
     const goToBatchViewPage = (event:React.MouseEvent<Element, MouseEvent>) => {
         console.log("send this id to the \"batch view page\" to load the right page: " + props.batchId);
-        //window.location.href = "/batchView"+props.batchId;
+        //window.location.href = "/batchView/"+props.batchId;
 
         // SET A DETAILED BATCH STATE TO INCLUDE THE DETAILS OF THE BATCH BEING VIEWED
         // This detailed batch state will be displayed when the redirect to "/batch" runs
@@ -86,7 +86,7 @@ export const BatchCard:React.FC<IProps> = (props:IProps) => {
             <div className="row justify-content-center">
                 <button onClick={(event:React.MouseEvent<Element, MouseEvent>) => goToBatchViewPage(event)} className="view-btn test1">View</button>
             </div>
-            {batchButtonClicked ? <Redirect to="/batch" /> : <></>}
+            {batchButtonClicked ? <Redirect to={`/batch/${props.batchId}`} /> : <></>}
             
         </div>
     )
