@@ -36,6 +36,12 @@ export const NavBar: React.FC<any> = (props: any) => {
                 <img src={logo} className="myLogo" alt="revature logo" />
             </Col>
             <Col className="d-flex align-items-center justify-content-end auto test1" >
+<<<<<<< HEAD
+                Welcome, Lorem Ipsum
+                <Dropdown isOpen={navMenuOpen} toggle={() => setNavMenuOpen(!navMenuOpen)}>
+                    <DropdownToggle style={{margin:"10px", backgroundColor: "white", border: "none"}}>
+                        <img src={menuArrow} alt="dropdown menu arrow" height="20px" width="25px" />
+=======
                 <ButtonDropdown isOpen={navMenuOpen} toggle={toggle}>
                     {/* Mobile Hamburger Menu */}
                     <DropdownToggle className="" style={{ margin: "10px", backgroundColor: "white", border: "none" }}>
@@ -43,6 +49,7 @@ export const NavBar: React.FC<any> = (props: any) => {
                         <span className="myMobileDropdown">
                             <Hamburger toggled={hamOpen} toggle={hamToggle} color="#474C55"></Hamburger>
                         </span>
+>>>>>>> 72a8fc8243ed44954d401029a1db8e8afbff3f81
                     </DropdownToggle>
                     {/* Desktop Menu */}
                     <DropdownMenu right>
