@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
-import { LoginComponent } from "../../../components/LoginComponent/LoginComponent";
+import { LoginComponent } from "./LoginComponent";
 
 const setUp = (props={loginType:"client"}) => {
     const component = shallow(<LoginComponent {...props}/>);
@@ -36,7 +36,7 @@ describe('logincomp', () => {
     })
 
       //Simple Test 4
-      it("Should render an image", () => {
+      it("Should render another image", () => {
         const image = component.find('.passthumbcheck');
         expect(image.length).toBe(1);
     })

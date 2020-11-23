@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
-import { NewClientButton } from "../../../components/NewClientButton/NewClientButton";
+import { NewClientButton } from "./NewClientButton";
 import { Label, Modal, Input } from "reactstrap";
 
 let wrapper: any;
