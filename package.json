@@ -20,19 +20,18 @@
     "enzyme-adapter-react-16": "^1.15.5",
     "enzyme-to-json": "^3.6.1",
     "hamburger-react": "^2.3.0",
-    "identity-obj-proxy": "^3.0.0",
     "jest-fetch-mock": "^3.0.3",
     "jest-sonar-reporter": "^2.0.0",
     "jquery": "^3.5.1",
     "node-sass": "^4.14.1",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "react-multi-carousel": "^2.5.5",
     "react-redux": "^7.2.2",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.0",
-    "react-test-renderer": "^17.0.1",
+    "react-test-renderer": "^16.13.1",
     "reactstrap": "^8.7.1",
     "redux": "^4.0.5",
     "redux-mock-store": "^1.5.4",
@@ -89,6 +88,7 @@
     "enzyme": "3.11.0",
     "enzyme-adapter-react-16": "1.15.5",
     "enzyme-to-json": "3.6.1",
+    "identity-obj-proxy": "^3.0.0",
     "jest-fetch-mock": "3.0.3",
     "jest-sonar-reporter": "^2.0.0",
     "ts-jest": "26.4.4"
@@ -127,8 +127,8 @@
       "^react-native$": "react-native-web",
       "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy",
       "src//(.*)$": "<rootDir>/src/$1",
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "identity-obj-proxy",
-      "\\.(s?css|less)$": "identity-obj-proxy"
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(s?css|less)$": "<rootDir>/__mocks__/styleMock.js"
     }
   },
   "jestSonar": {
