@@ -12,8 +12,7 @@ const setUp =
         }
     ) =>
 {
-    const component = shallow(<BatchCard {...props}/>);
-    return component;
+    return shallow(<BatchCard {...props}/>);
 }
 
 

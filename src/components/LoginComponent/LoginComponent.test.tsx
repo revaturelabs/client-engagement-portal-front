@@ -3,8 +3,7 @@ import { shallow } from "enzyme";
 import { LoginComponent } from "./LoginComponent";
 
 const setUp = (props={loginType:"client"}) => {
-    const component = shallow(<LoginComponent {...props}/>);
-    return component;
+    return shallow(<LoginComponent {...props}/>);
 }
 
 describe('logincomp', () => {
