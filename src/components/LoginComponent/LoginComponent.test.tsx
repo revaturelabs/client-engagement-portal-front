@@ -3,8 +3,7 @@ import { shallow } from "enzyme";
 import { LoginComponent } from "./LoginComponent";
 
 const setUp = (props={loginType:"client"}) => {
-    const component = shallow(<LoginComponent {...props}/>);
-    return component;
+    return shallow(<LoginComponent {...props}/>);
 }
 
 describe('logincomp', () => {
@@ -12,14 +11,6 @@ describe('logincomp', () => {
     let component: any;
     beforeEach(() => {
         component = setUp();
-    });
-
-    // Simple Test 1
-    it("Should render Engagement Force", () => {
-        const div = component.find('div.test1').text();
-
-        expect(div).toBe("Engagement Force");
-
     });
 
     // Simple Test 2

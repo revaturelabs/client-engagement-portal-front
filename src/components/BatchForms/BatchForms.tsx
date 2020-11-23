@@ -19,10 +19,10 @@ export const BatchForms: React.FC = () => {
 
     /**
      * @function getBatches
-     * loops though batch objects to extract and assign appropriate data 
+     * loops though batch objects to extract and assign appropriate data
      * @async
      * Creates an axios get call to gather batch information
-     * 
+     *
      */
     const getBatches = async () => {
         const response = await axios.get("https://caliber2-mock.revaturelabs.com/mock/training/batch/current");
@@ -43,11 +43,12 @@ export const BatchForms: React.FC = () => {
 
     /**
      * @function useEffect
-     * call the getBatches function on load of page 
+     * call the getBatches function on load of page
      */
     useEffect(() => {
         getBatches();
     }, []);
+
 
 
     return (

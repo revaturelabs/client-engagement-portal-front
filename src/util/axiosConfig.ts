@@ -16,8 +16,8 @@ const getAxiosHeader = async () => {
 
 
 /**
- * Our Axios Instances need to wait on the token that we get 
- * from the CognitoUserSession.  Once we get the token, 
+ * Our Axios Instances need to wait on the token that we get
+ * from the CognitoUserSession.  Once we get the token,
  * we can proceed to make the requests.  This instance refers
  * to the endpoints / resource server hosted on an AWS EC2.
  * Sample code for achieveing a new instance:
@@ -28,7 +28,7 @@ const getAxiosHeader = async () => {
       })}
  */
 export const axiosInstance = async () => {
-  let token = await getAxiosHeader().then(function (result) { return result });
+  const token = getAxiosHeader().then(function (result) { return result });
   return Axios.create({
     baseURL: process.env.REACT_APP_BACKEND_API,
     headers: { 'Authorization': `Bearer ${token}` },

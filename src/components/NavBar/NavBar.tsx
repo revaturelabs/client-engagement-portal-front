@@ -9,7 +9,7 @@ import { Auth } from 'aws-amplify';
 /**
  * @function NavBar
  * Displays the header on any page where a user is logged in.
- * 
+ *
  * @param props contains the child components that are between the opening and closing NavBar tags.
  * Should consist only of drop-down options.
  */
@@ -52,10 +52,10 @@ export const NavBar: React.FC<any> = (props: any) => {
                     </DropdownMenu>
                 </ButtonDropdown>
             </Col>
-            {/* 
+            {/*
             <Col className="d-flex align-items-center justify-content-end auto" id="myMobileDropdown" >
                 <Dropdown isOpen={navMenuOpen} toggle={toggle}>
-                    
+
                     <DropdownMenu right>
                         <a href="/"><DropdownItem>Logout</DropdownItem></a>
                     </DropdownMenu>
