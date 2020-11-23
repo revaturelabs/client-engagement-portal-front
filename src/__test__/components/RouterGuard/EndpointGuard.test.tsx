@@ -2,8 +2,8 @@ import { configure, mount } from "enzyme";
 import React from "react";
 import Adapter from "enzyme-adapter-react-16";
 import RouterGuard from "../../../components/RouterGuard/RouterGuard";
-import { Route, Router } from "react-router";
-import { createBrowserHistory } from "history";
+import { Router } from "react-router";
+import { createBrowserHistory, History, State } from "history";
 import { Auth } from "aws-amplify";
 import { act } from "react-dom/test-utils";
 
@@ -14,7 +14,7 @@ const dumbyComponent: React.FC = () => {
 };
 
 describe("Testing endpoint guards", () => {
-  let history;
+  let history: History<State>;
   beforeEach(() => {
     //Allow Route testing
     history = createBrowserHistory();
@@ -30,7 +30,7 @@ describe("Testing endpoint guards", () => {
       };
     });
 
-    let wrapper;
+    let wrapper: any;
     //Trigger useEffect on first render
     await act(async () => {
       wrapper = mount(
@@ -55,7 +55,7 @@ describe("Testing endpoint guards", () => {
       };
     });
 
-    let wrapper;
+    let wrapper: any;
     //Trigger useEffect on first render
     await act(async () => {
       wrapper = mount(
@@ -76,7 +76,7 @@ describe("Testing endpoint guards", () => {
       return null;
     });
 
-    let wrapper;
+    let wrapper: any;
     //Trigger useEffect on first render
     await act(async () => {
       wrapper = mount(
