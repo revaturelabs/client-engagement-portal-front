@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`notification component should render the component with the given state 1`] = `
+<div
+  className="notifs-container accordion"
+>
+  <div
+    className="card-header"
+    id="notif-header"
+    onClick={[Function]}
+    variant="link"
+  >
+    Notifications
+  </div>
+  <div
+    className="notifs"
+  >
+    <div
+      aria-expanded={null}
+      className="collapse"
+    >
+      <table
+        className="myTable table table-hover"
+      >
+        <tbody>
+          <tr
+            className="notif-row"
+          >
+            <td>
+              a1
+            </td>
+            <td>
+              a2
+            </td>
+            <td>
+              a3
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+`;

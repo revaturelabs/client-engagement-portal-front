@@ -1,4 +1,10 @@
+import configureStore from 'redux-mock-store'
 import { notificationReducer } from '../../_reducers/NotificationReducer';
+import renderer from 'react-test-renderer'
+import { Provider } from 'react-redux';
+import Notifications from './Notifications';
+import React from 'react';
+import { addNotification, getNotifications, removeNotification } from './NotificationActions';
 
 /**
  * Tests the notificationReducer and most of its functions
@@ -61,5 +67,88 @@ describe('notification reducer', () => {
         ).toEqual({
             notifications: []
         })
+    })
+})
+
+/**
+ * Tests the notification actions
+ */
+describe('notification actions', () => {
+    it('should return an add notification action', () => {
+        expect(
+            addNotification("a", "b", "c")
+        ).toEqual(
+            {
+                type: "ADD_NOTIFICATION",
+                payload: {
+                    clientName: "a",
+                    subject: "b",
+                    requestDate: "c"
+                }
+            }
+        )
+    });
+
+    it('should return a get notifications action', () => {
+        expect(
+            getNotifications("a", "b", "c")
+        ).toEqual(
+            {
+                type: "GET_NOTIFICATIONS",
+                payload: {
+                    clientName: "a",
+                    subject: "b",
+                    requestDate: "c"
+                }
+            }
+        )
+    })
+
+    it('should return a remove notification action', () => {
+        expect(
+            removeNotification("a", "b", "c")
+        ).toEqual(
+            {
+                type: "REMOVE_NOTIFICATION",
+                payload: {
+                    clientName: "a",
+                    subject: "b",
+                    requestDate: "c"
+                }
+            }
+        )
+    })
+})
+
+// Tests that given a state, the notifications will render properly
+describe('notification component', () => {
+
+    const mockStore = configureStore([]);
+
+    let store:any;
+    let component:any;
+
+    beforeEach(() => {
+        store = mockStore({
+            notificationState: {
+                notifications: [
+                    {
+                        clientName: "a1",
+                        subject: "a2",
+                        requestDate: "a3"
+                    }
+                ]
+            }
+        });
+
+        component = renderer.create(
+            <Provider store={store}>
+                <Notifications/>
+            </Provider>
+        )
+    });
+
+    it('should render the component with the given state', () => {
+        expect(component.toJSON()).toMatchSnapshot();
     })
 })

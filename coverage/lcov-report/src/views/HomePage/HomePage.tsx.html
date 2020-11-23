@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">5% </span>
+                <span class="strong">5.13% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>2/40</span>
+                <span class='fraction'>2/39</span>
             </div>
         
             
@@ -252,7 +252,8 @@
 <a name='L193'></a><a href='#L193'>193</a>
 <a name='L194'></a><a href='#L194'>194</a>
 <a name='L195'></a><a href='#L195'>195</a>
-<a name='L196'></a><a href='#L196'>196</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L196'></a><a href='#L196'>196</a>
+<a name='L197'></a><a href='#L197'>197</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -443,6 +444,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -471,16 +473,16 @@ interface IProps {
 /**
  * Will show the batches that were mapped to the logged in client. Unless they were not mapped any
  * batches. In that case, they will be shown a message which assures them that they will be mapped
- * one in the near future and can even notify the admin users with the "request batch" button. 
- * 
- * @param props batch information. Should be pulled from the database whenever this component loads 
+ * one in the near future and can even notify the admin users with the "request batch" button.
+ *
+ * @param props batch information. Should be pulled from the database whenever this component loads
  */
-const HomePage:React.FC&lt;IProps&gt; = <span class="fstat-no" title="function not covered" >(p</span>rops:IProps) =&gt; {
+export const HomePage:React.FC&lt;IProps&gt; = <span class="fstat-no" title="function not covered" >(p</span>rops:IProps) =&gt; {
 &nbsp;
     const [showInterventionModal, setShowInterventionModal] = <span class="cstat-no" title="statement not covered" >useState(false);</span>
     const [hasBatches, setHasBatches] = <span class="cstat-no" title="statement not covered" >useState(false);</span>
     const [hasSpinner, setSpinner] = <span class="cstat-no" title="statement not covered" >useState(false);</span>
- 
+&nbsp;
     const dispatch = <span class="cstat-no" title="statement not covered" >useDispatch();</span>
 &nbsp;
     /**
@@ -488,7 +490,7 @@ const HomePage:React.FC&lt;IProps&gt; = <span class="fstat-no" title="function n
      * DEVELOPER function used to retrieve mock data for display
      */
     const getBatches = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt;</span>
-    {   
+    {
 <span class="cstat-no" title="statement not covered" >        setHasBatches(true);</span>
 &nbsp;
         //gets batch data from caliber
@@ -500,7 +502,7 @@ const HomePage:React.FC&lt;IProps&gt; = <span class="fstat-no" title="function n
      * DEVELOPER function used to simulate having zero batches
      */
     const resetBatches = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt;</span>
-    {   
+    {
 <span class="cstat-no" title="statement not covered" >        setHasBatches(false);</span>
 &nbsp;
         //removes batches' data / resets the batch state
@@ -535,36 +537,36 @@ const HomePage:React.FC&lt;IProps&gt; = <span class="fstat-no" title="function n
      * This function gets all of the batch data currently in the Caliber
      *  db. It places all of the data from that endpoint into the "batch
      *  state".
-     * 
+     *
      * @param userId The passed in user id (currently does nothing)
-     * 
-     * @returns This function just changes the batch state to 
+     *
+     * @returns This function just changes the batch state to
      */
-    const getBatchCardData = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(u</span>serId:number) =&gt; <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >as</span>ync (dispatch:any) =&gt; {</span></span>
+    const getBatchCardData = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(u</span>serId:number) =&gt; <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >as</span>ync () =&gt; {</span></span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >        setSpinner(true);</span>
 &nbsp;
         //array to place batch data into
-        let batchArray:IBatchState = <span class="cstat-no" title="statement not covered" >{</span>
+        const batchArray:IBatchState = <span class="cstat-no" title="statement not covered" >{</span>
             batches: [],
         };
 &nbsp;
         //get data from server based on user id that was given
 <span class="cstat-no" title="statement not covered" >        await Axios.get("https://caliber2-mock.revaturelabs.com/mock/training/batch/current")</span>
         .then(<span class="fstat-no" title="function not covered" >(r</span>esponse:any) =&gt; {
-    
+&nbsp;
 <span class="cstat-no" title="statement not covered" >            if (response != null)</span>
             {
                 //individual batch info is placed into the array from above
-<span class="cstat-no" title="statement not covered" >                for (let i = <span class="cstat-no" title="statement not covered" >0 </span>; i &lt; response.data.length; i++)</span>
+<span class="cstat-no" title="statement not covered" >                for (let i of response.data)</span>
                 {
-                    let batchCardInfo = <span class="cstat-no" title="statement not covered" >{  ...response.data[i] }</span>
+                    const batchCardInfo = <span class="cstat-no" title="statement not covered" >{  ...response.data[i] }</span>
 <span class="cstat-no" title="statement not covered" >                    batchArray.batches.push(batchCardInfo);</span>
                 }
-                
+&nbsp;
                 //the "batch state" is set to be whatever was extracted from the db
 <span class="cstat-no" title="statement not covered" >                dispatch(setBatchState(batchArray));</span>
-                
+&nbsp;
             }
 <span class="cstat-no" title="statement not covered" >            setSpinner(false);</span>
         })
@@ -574,10 +576,10 @@ const HomePage:React.FC&lt;IProps&gt; = <span class="fstat-no" title="function n
         });
 &nbsp;
 <span class="cstat-no" title="statement not covered" >        setSpinner(false);</span>
-        
+&nbsp;
     };
 &nbsp;
-    
+&nbsp;
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    return(</span>
         &lt;Container style={{minHeight: "100vh", maxWidth: "100vw", backgroundColor:"#E3E3E3"}}&gt;
@@ -607,13 +609,13 @@ const HomePage:React.FC&lt;IProps&gt; = <span class="fstat-no" title="function n
                         {/* displays spinner while loading */}
                         { hasSpinner ? &lt;div className="row justify-content-center"&gt;&lt;Spinner  color="info" /&gt;&lt;/div&gt; : &lt;span/&gt; }
                         &lt;Row&gt;
-                        { 
+                        {
                             props.batches.map(<span class="fstat-no" title="function not covered" >(e</span>lement,index) =&gt; (
 <span class="cstat-no" title="statement not covered" >                                &lt;Col xl="2" lg="3" md="4" sm="4" xs="6" key={index}&gt;</span>
                                     &lt;BatchCard batchId={element.id} specialization={element.skill}
                                     batchName={element.name} /&gt;
                                 &lt;/Col&gt;
-                                
+&nbsp;
                             ))
                         }
                         &lt;/Row&gt;
@@ -642,14 +644,15 @@ const mapStateToProps = <span class="fstat-no" title="function not covered" >(s<
     }
 }
 &nbsp;
-export default connect&lt;IProps&gt;(mapStateToProps)(HomePage);</pre></td></tr></table></pre>
+export default connect&lt;IProps&gt;(mapStateToProps)(HomePage);
+&nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Mon Nov 23 2020 09:57:38 GMT-0600 (Central Standard Time)
+                at Mon Nov 23 2020 13:44:52 GMT-0600 (Central Standard Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

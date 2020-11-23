@@ -397,15 +397,15 @@ export const BatchForms: React.FC = <span class="fstat-no" title="function not c
 &nbsp;
     const toggleMap = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >setMapModal(!mapModal);</span></span>
     const toggleUnmap = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >setUnmapModal(!unmapModal);</span></span>
-    
+&nbsp;
     const [batchInfo, setBatchInfo] = <span class="cstat-no" title="statement not covered" >useState&lt;any&gt;([]);</span>
 &nbsp;
     /**
      * @function getBatches
-     * loops though batch objects to extract and assign appropriate data 
+     * loops though batch objects to extract and assign appropriate data
      * @async
      * Creates an axios get call to gather batch information
-     * 
+     *
      */
     const getBatches = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >as</span>ync () =&gt; {</span>
         const response = <span class="cstat-no" title="statement not covered" >await axios.get("https://caliber2-mock.revaturelabs.com/mock/training/batch/current");</span>
@@ -416,39 +416,39 @@ export const BatchForms: React.FC = <span class="fstat-no" title="function not c
           const name = <span class="cstat-no" title="statement not covered" >r.name;</span>
 <span class="cstat-no" title="statement not covered" >          tempArray.push({id,name});</span>
       }
-  
+&nbsp;
       /**
        * @function setBatchInfo
        * spreading the tempArray and assigning all values to the batchInfo
        */
 <span class="cstat-no" title="statement not covered" >      setBatchInfo([...tempArray]);</span>
       }
-  
-  
+&nbsp;
+&nbsp;
       /**
        * @function useEffect
-       * call the getBatches function on load of page 
+       * call the getBatches function on load of page
        */
 <span class="cstat-no" title="statement not covered" >      useEffect(<span class="fstat-no" title="function not covered" >()</span>=&gt;{</span>
 <span class="cstat-no" title="statement not covered" >        getBatches();</span>
       },[]);
 &nbsp;
-      
+&nbsp;
 <span class="cstat-no" title="statement not covered" >    return (</span>
         &lt;&gt;
          &lt;Row className="justify-content-center my-button-row"&gt;
-                &lt;Col xs="2" sm="3" lg="5" /&gt;   
+                &lt;Col xs="2" sm="3" lg="5" /&gt;
                 &lt;Col xs="8" sm="6" lg="2"&gt;
                     &lt;button className="batch-form-button" onClick={toggleMap}&gt;Map Batch to Client&lt;/button&gt;
                 &lt;/Col&gt;
-                &lt;Col xs="2" sm="3" lg="5" /&gt;    
+                &lt;Col xs="2" sm="3" lg="5" /&gt;
             &lt;/Row&gt;
             &lt;Row className="justify-content-center my-button-row"&gt;
-                &lt;Col xs="2" sm="3" lg="5" /&gt;   
+                &lt;Col xs="2" sm="3" lg="5" /&gt;
                 &lt;Col xs="8" sm="6" lg="2"&gt;
                     &lt;button className="batch-form-button" onClick={toggleUnmap}&gt;Unmap Client from Batch&lt;/button&gt;
                 &lt;/Col&gt;
-                &lt;Col xs="2" sm="3" lg="5" /&gt;    
+                &lt;Col xs="2" sm="3" lg="5" /&gt;
             &lt;/Row&gt;
             &lt;Row className="justify-content-between my-form-row"&gt;
                 &lt;Col sm="1" md="1" lg="2" xl="3"&gt;&lt;/Col&gt;
@@ -466,7 +466,7 @@ export const BatchForms: React.FC = <span class="fstat-no" title="function not c
                             {batchInfo.map(<span class="fstat-no" title="function not covered" >(e</span>:any,i:any) =&gt;
 <span class="cstat-no" title="statement not covered" >                                &lt;option key={i} id={e.id} &gt;{e.name}&lt;/option&gt;</span>
                             )}
-                        &lt;/Input&gt;    
+                        &lt;/Input&gt;
                         &lt;input className="batch-form-submit" type="submit" value="Submit" &gt;&lt;/input&gt;
                     &lt;/Form&gt;
                 &lt;/Col&gt;
@@ -510,10 +510,10 @@ export const BatchForms: React.FC = <span class="fstat-no" title="function not c
                             {batchInfo.map(<span class="fstat-no" title="function not covered" >(e</span>:any,i:any) =&gt;
 <span class="cstat-no" title="statement not covered" >                                &lt;option key={i} id={e.id} &gt;{e.name}&lt;/option&gt;</span>
                             )}
-                        &lt;/Input&gt;    
+                        &lt;/Input&gt;
                         &lt;input className="modal-batch-form-submit" type="submit" value="Submit" &gt;&lt;/input&gt;
                     &lt;/Form&gt;
-            &lt;/ModalBody&gt;  
+            &lt;/ModalBody&gt;
          &lt;/Modal&gt;
 &nbsp;
          {/* UnMap Modal */}
@@ -534,10 +534,10 @@ export const BatchForms: React.FC = <span class="fstat-no" title="function not c
                             {batchInfo.map(<span class="fstat-no" title="function not covered" >(e</span>:any,i:any) =&gt;
 <span class="cstat-no" title="statement not covered" >                                &lt;option key={i} id={e.id} &gt;{e.name}&lt;/option&gt;</span>
                             )}
-                        &lt;/Input&gt;    
+                        &lt;/Input&gt;
                         &lt;input className="modal-batch-form-submit" type="submit" value="Submit"&gt;&lt;/input&gt;
                     &lt;/Form&gt;
-            &lt;/ModalBody&gt;  
+            &lt;/ModalBody&gt;
          &lt;/Modal&gt;
         &lt;/&gt;
 &nbsp;
@@ -550,7 +550,7 @@ export const BatchForms: React.FC = <span class="fstat-no" title="function not c
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Mon Nov 23 2020 09:57:38 GMT-0600 (Central Standard Time)
+                at Mon Nov 23 2020 13:44:52 GMT-0600 (Central Standard Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>
