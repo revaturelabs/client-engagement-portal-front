@@ -16,7 +16,14 @@ import { connect } from 'react-redux';
 import { IBasicBatchInfo } from '../BatchCard/BatchCard';
 
 interface IProps{
-    batches: [{}],
+    batches: [{
+        batchId: string,
+        batchName: string,
+        endDate: string,
+        skill: string,
+        trainer: string,
+        assAssign: [{}],
+    }],
 }
 
 /**
@@ -29,7 +36,8 @@ interface IProps{
 export const BatchInformation:React.FC<IProps> = (props:IProps) => {
 
     const [isOrangeBtn, setOrangeBtn] = useState(false);
-    const [hasSpinner, setSpinner] = useState(false);
+
+    console.log(props.batches[0]);
 
     const responsive = {     //for responsive styling on the carousel cards below
         superLargeDesktop: {
@@ -59,55 +67,7 @@ export const BatchInformation:React.FC<IProps> = (props:IProps) => {
         window.location.href = "/home";
       }
 
-      const viewBatchId = () => {
-        console.log("this should show the passed in batch id: " + props);
-      }
 
-    /**
-     * This function gets all of the batch data from our back end. This
-     * includes data about each associate's test / quiz scores.
-     * 
-     * @param batchId the batch id passed in from the batch card on the
-     * home page
-     * 
-     * @returns This function just changes the batch state to 
-     */
-    const getBatchData = (batchId:string) => async (dispatch:any) => {
-
-        setSpinner(true);
-
-        //array to place batch data into
-        let batchArray:IBatchState = {
-            batches: [],
-        };
-
-        //get data from server based on user id that was given
-        await axiosInstance.get("")
-        .then((response:any) => {
-    
-            if (response != null)
-            {
-                //individual batch info is placed into the array from above
-                for (let i = 0 ; i < response.data.length; i++)
-                {
-                    let batchCardInfo = {  ...response.data[i] }
-                    batchArray.batches.push(batchCardInfo);
-                }
-                
-                //the "batch state" is set to be whatever was extracted from the db
-                dispatch(setBatchState(batchArray));
-                
-            }
-            setSpinner(false);
-        })
-        .catch((error:any) => {
-            console.log(error);
-            setSpinner(false);
-        });
-
-        setSpinner(false);
-        
-    };
     return(
         <>
         {/* Back button */}
@@ -125,7 +85,7 @@ export const BatchInformation:React.FC<IProps> = (props:IProps) => {
                 <div id="batch-info-wrapper">
                     <Card className="batch-info-card">
                         <CardHeader>
-                            <h4>2009 Sep 28 Batch</h4>
+                            <h4>{props.batches[0].batchName}</h4>
                         </CardHeader>
                         <CardBody>
                             <h5>Core Technologies  Learned:</h5>
@@ -151,17 +111,11 @@ export const BatchInformation:React.FC<IProps> = (props:IProps) => {
                                 <Col xs="4"><p>Java 8</p></Col>
                                 <Col xs="4"><p>Spring MVC & ORM</p></Col>
                             </Row>
-                            <p><b>Trainer:</b> Robert Connel</p>
-                            <p><b>Training End Date:</b> 12/04/20</p>
+                            <p><b>Trainer:</b> {props.batches[0].trainer}</p>
+                            <p><b>Training End Date:</b> {props.batches[0].endDate}</p>
                         </CardBody>
                         <CardFooter></CardFooter>
                     </Card>
-                    {/* Spinner displays below the main batch card */}
-                    <Row>
-                        <div className="justify-content-center">
-                            {hasSpinner ? <Spinner color="info" /> : <span/>}
-                        </div>
-                    </Row>
                     
                     <h1>Batch Engineers</h1>
 
@@ -174,7 +128,7 @@ export const BatchInformation:React.FC<IProps> = (props:IProps) => {
                                 100%
                             </CardBody>
                             <CardFooter>
-                                <button onClick={viewBatchId}>View</button>
+                                <button>View</button>
                             </CardFooter>
                         </Card>
                         <Card>
