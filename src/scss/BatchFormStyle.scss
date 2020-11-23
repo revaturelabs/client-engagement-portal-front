@@ -7,7 +7,7 @@
     text-align:center;
     color:#F26925;
     border:solid;
-    border-color:black; 
+    border-color:#72A4C2; 
     border-width:1px;
     padding:20px;
     margin: 0px;
@@ -109,10 +109,10 @@ button.close:focus{
 }
 
 @media (max-width: 576px){
-    .my-button-row{
-        display: flex !important;
-    }
-    .my-form-row {
-        display:none !important;
-    }
+.my-button-row{
+    display: flex !important;
+}
+.my-form-row {
+    display:none !important;
+}
 }
