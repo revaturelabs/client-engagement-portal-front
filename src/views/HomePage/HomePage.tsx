@@ -4,12 +4,10 @@ import { BatchCard } from '../../components/BatchCard/BatchCard';
 import { NavBar } from '../../components/NavBar/NavBar';
 
 import RequestBatchCard from '../../components/RequestBatchCard/RequestBatchCard';
-import RequestBatchCardModal from '../../components/RequestBatchCard/RequestBatchCardModal';
 import { IBatchState, initialBatchState } from '../../_reducers/BatchReducer';
 import { connect, useDispatch } from 'react-redux';
 import Axios from 'axios';
 import { setBatchState } from '../../actions/BatchCardActions';
-import PlanInterventionModal from '../../components/PlanInterventionModal/PlanInterventionModal';
 
 interface IProps {
     batches: {
@@ -119,7 +117,7 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
     
 
     return(
-        <Container style={{minHeight: "100vh", maxWidth: "100vw", backgroundColor:"#E3E3E3"}}>
+        <Container style={{minHeight: "100vh", maxWidth: "100vw"}}>
             <NavBar>
                 <DropdownItem header>Development Options</DropdownItem>
                 <DropdownItem onClick={() => resetBatches()}>Simulate no batches</DropdownItem>
@@ -162,7 +160,6 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
                 {/* displays spinner while loading */}
                 { hasSpinner ? <Spinner  color="info" /> : <span/> }
                 <RequestBatchCard />
-                <RequestBatchCardModal />
             </>
             
             }

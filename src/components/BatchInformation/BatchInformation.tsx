@@ -7,7 +7,9 @@ import springLogo from '../../assets/spring-logo.png';
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { AssociateCardFactory } from '../AssociateCard/AssociateCardFactory';
+import PlanInterventionModalv2 from '../PlanInterventionModal/PlanInterventionModalv2';
 import PlanInterventionModal from '../PlanInterventionModal/PlanInterventionModal';
+
 
 interface IBatchInformationProps {
     name?:string,
@@ -86,8 +88,8 @@ export const BatchInformation:React.FC<IBatchInformationProps> = (props:IBatchIn
              </Col>
              <Col md="1" lg="2"></Col>
 
-             <button onClick={() => setShowInterventionModal(!showInterventionModal)} className="intervention-button">Request Intervention</button>
-            <PlanInterventionModal show={showInterventionModal} setShow={setShowInterventionModal} />
+             <PlanInterventionModalv2></PlanInterventionModalv2>
+
          </Row>
         </>
     );

@@ -4,16 +4,14 @@
 {
     background-color: white !important;
     padding: 15px !important;
-    border: 1px solid $rev-orange !important;
+    border: 1px solid #72A4C2 !important;
     border-radius: 20px !important;
-    // margin: auto !important;
-    // margin-top: 10px !important;
-    box-shadow: 3px 3px 15px $rev-blue-trans !important;
     width: 100% !important;
     text-align: center !important;
     align-content: center !important;
     display: inline-block !important;
 }
+
 
 
 .h-divider{
@@ -75,7 +73,6 @@ div.aso-scroll-container {
     border: 3px solid $rev-orange !important;
     background-color: $rev-orange !important;
     color: white !important;
-    font-weight: bold;
     font-size: 20px;
 }
 .view-btn:hover
@@ -85,9 +82,12 @@ div.aso-scroll-container {
 }
 .view-btn:focus {
     box-shadow: none !important;
+    outline: none;
 }
 .view-btn:active {
     box-shadow: none !important;
+    outline: none;
+
 }
 .aso-scroll::-webkit-scrollbar {
     overflow: hidden;

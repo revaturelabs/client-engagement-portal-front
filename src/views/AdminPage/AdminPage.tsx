@@ -7,7 +7,7 @@ import { NewClientButton } from "../../components/NewClientButton/NewClientButto
 export const AdminPage: React.FC = () => {
     return (
         <>
-        <Container style={{minHeight: "100vh", maxWidth: "100vw", backgroundColor:"#E3E3E3"}}>
+        <Container style={{minHeight: "100vh", maxWidth: "100vw"}}>
             <NavBar />
             <BatchForms/>
 
