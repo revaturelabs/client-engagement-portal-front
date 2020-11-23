@@ -70,7 +70,7 @@ export const BatchInformation:React.FC<IProps> = (props:IProps) => {
 
     return(
         <>
-        {/* Back button */}
+        {/* Back button
         <span>
             <button className="back-btn" onClick={goBack} onMouseOver={() => {setOrangeBtn(true)}}
             onMouseOut={() => {setOrangeBtn(false)}}>
@@ -79,6 +79,7 @@ export const BatchInformation:React.FC<IProps> = (props:IProps) => {
                 <span>Back</span>
             </button>
         </span>
+        */}
          <Row className="justify-content-center">
              <Col md="1" lg="2"></Col>
              <Col md="10" lg="8">
@@ -88,28 +89,15 @@ export const BatchInformation:React.FC<IProps> = (props:IProps) => {
                             <h4>{props.batches[0].batchName}</h4>
                         </CardHeader>
                         <CardBody>
-                            <h5>Core Technologies  Learned:</h5>
+                            <h5><b>Core Technology  Learned:</b></h5>
                             <Row>
-                                <Col xs="4" className="logo-container">
+                                <Col className="logo-container">
                                 <span className="helper"></span>
-                                    <img src={reactReduxLogo} alt="react redux logo" />
-
-                                </Col>
-                                <Col xs="4" className="logo-container">
-                                <span className="helper"></span>
-                                    <img src={javaLogo} alt="java logo" />
-
-                                </Col>
-                                <Col xs="4" className="logo-container">
-                                    <span className="helper"></span>
-                                    <img src={springLogo} alt="spring logo" />
-
+                                    <img src={reactReduxLogo} alt="Specialization logo" />
                                 </Col>
                             </Row>
                             <Row style={{textAlign: "center"}}>
-                                <Col xs="4"><p>React Redux</p></Col>
-                                <Col xs="4"><p>Java 8</p></Col>
-                                <Col xs="4"><p>Spring MVC & ORM</p></Col>
+                                <Col><p>React Redux</p></Col>
                             </Row>
                             <p><b>Trainer:</b> {props.batches[0].trainer}</p>
                             <p><b>Training End Date:</b> {props.batches[0].endDate}</p>

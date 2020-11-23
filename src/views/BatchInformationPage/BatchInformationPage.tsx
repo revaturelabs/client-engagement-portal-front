@@ -25,12 +25,16 @@ interface IProps extends RouteComponentProps<IBatchId>, IBasicBatchInfo {
             },
         }],
         skill: string,
-        associateAssignents: [{
+        associateAssignments: [{
             active: boolean,
             associate: {
                 firstName: string,
                 lastName: string,
-                grades: [], //will need to edit this soon
+                grades: [{
+                    gradeId: number,
+                    dateReceived: string,
+                    score: number,
+                }], 
             },
         }],
     }],
@@ -115,7 +119,7 @@ const BatchInformationPage: React.FC<IProps> = (props:IProps) => {
                     skill: props.batches[0].skill,
                     trainer: props.batches[0].employeeAssignments[0].employee.firstName + " " +
                         props.batches[0].employeeAssignments[0].employee.lastName,
-                    assAssign: props.batches[0].associateAssignents,
+                    assAssign: props.batches[0].associateAssignments,
                     }]}/>
             </Container>
         </>
