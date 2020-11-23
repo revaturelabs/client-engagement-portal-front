@@ -5,11 +5,13 @@ import App from './App';
 import { Route } from 'react-router-dom';
 
 // Some trivial tests for now
-it('renders without crashing', () => {
+
+// it.skip() keeps the skipped test from running when Jest checks tests
+it.skip('renders without crashing', () => {
     shallow(<App />);
 });
 
-it("renders Provider", () => {
+it("renders Route", () => {
     const wrapper = shallow(<App />);
 
     const testRoute = <Route path="/login-admin" />;

@@ -17,10 +17,23 @@ interface IProps{
     batchName:string,
 }
 
+/**
+ * @function BatchCard
+ * Displays a summary of a particular batch in a compact card format.
+ * 
+ * @param props contains batch information that informs what the bcard will display.
+ * Should be passed in by an ancestor that retrieves this information from the back end.
+ */
 export const BatchCard:React.FC<IProps> = (props:IProps) => {
 
     const [batchButtonClicked, setBatchButtonClicked] = useState(false);
 
+    /**
+     * @function goToBatchViewPage
+     * Once the "View" button is clicked, this function redirects the user to a page with detailed batch info.
+     * 
+     * @param event contains the click event that calls this function.
+     */
     const goToBatchViewPage = (event:React.MouseEvent<Element, MouseEvent>) => {
         console.log("send this id to the \"batch view page\" to load the right page: " + props.batchId);
         //window.location.href = "/batchView"+props.batchId;
