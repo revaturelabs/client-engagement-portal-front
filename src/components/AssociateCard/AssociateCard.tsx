@@ -2,7 +2,7 @@ import React from 'react';
 import { Card } from 'reactstrap';
 import { AssociateCardModal } from './AssociateCardModal';
 import '../../scss/associate-card.scss'
-import { IAssociate } from '../../_reducers/AssociateReducer'
+import { IAssociateSingle } from '../../_reducers/AssociateReducer'
 
 /**
  * This component shows a card giving some brief information about an associate.
@@ -11,10 +11,11 @@ import { IAssociate } from '../../_reducers/AssociateReducer'
  * 
  * @returns TSX Element to render
  */
-export const AssociateCard: React.FC<IAssociate> = (props: IAssociate) => {
+export const AssociateCard: React.FC<IAssociateSingle> = (props: IAssociateSingle) => {
 
-    
-    const fakeData: IAssociate = { //just for testing purposes
+
+    const fakeData: IAssociateSingle = { //just for testing purposes
+
         firstName: "Bill",
         lastName: "Gates",
         testScores: [{
@@ -40,6 +41,7 @@ export const AssociateCard: React.FC<IAssociate> = (props: IAssociate) => {
             tech: "SQL",
             score: 90
         }]
+
     };
 
     /**
@@ -74,10 +76,10 @@ export const AssociateCard: React.FC<IAssociate> = (props: IAssociate) => {
         let value = 0;
         let i = 0;
         let size = 0;
-        if(props.testScores?.length != undefined){
-            const size = props.testScores.length;
+        if (props.testScores?.length != undefined) {
+            size = props.testScores.length;
         }
-        
+
         /**
          * If there are no test scores, return 0.
          * Otherwise, set the value to be equal to the last test.

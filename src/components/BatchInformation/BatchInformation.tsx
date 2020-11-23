@@ -23,27 +23,17 @@ interface IProps{
         endDate: string,
         skill: string,
         trainer: string,
-        assAssign: [{}],
+        associateAssignments: [{}],
     }],
 }
 
 /**
-<<<<<<< HEAD
- * This component displays a buuunch of data about one specific batch.
- * 
- * @param props The batch id from the batch card that was selected is
- * passed into this component. This is needed so that the rest of the 
- * data about that batch can be retrieved.
- */
-export const BatchInformation:React.FC<IProps> = (props:IProps) => {
-=======
  * @function BatchInformation
  * Displays detailed batch information in its own page.
  * 
  * @param props contains the detailed batch data needed to populate the page.
  */
-export const BatchInformation:React.FC<IBatchInformationProps> = (props:IBatchInformationProps) => {
->>>>>>> a246b39ed54ce234195a3c7d7850f20785a1b40f
+export const BatchInformation:React.FC<IProps> = (props:IProps) => {
 
     const [isOrangeBtn, setOrangeBtn] = useState(false);
 
@@ -207,7 +197,7 @@ export const BatchInformation:React.FC<IBatchInformationProps> = (props:IBatchIn
                                 <button>View</button>
                             </CardFooter>
                         </Card> */}
-                        <AssociateCardFactory />
+                        <AssociateCardFactory {...props.batches[0]}/>
                     {/* </Carousel> */}
 
                 </div>

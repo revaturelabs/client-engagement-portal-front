@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal, Button, ModalBody, Row } from 'reactstrap';
 import '../../scss/associate-card.scss';
-import {IAssociate} from '../../_reducers/AssociateReducer'
+import {IAssociateSingle} from '../../_reducers/AssociateReducer'
 
 
 /**
@@ -11,7 +11,7 @@ import {IAssociate} from '../../_reducers/AssociateReducer'
  * 
  * @returns TSX Element to render
  */
-export const AssociateCardModal:React.FC<IAssociate> = (props:IAssociate) => {
+export const AssociateCardModal:React.FC<IAssociateSingle> = (props:IAssociateSingle) => {
 
     /**
      * This state determines if this modal component is showing.

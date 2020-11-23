@@ -1,11 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
-<<<<<<< HEAD:src/__test__/components/BatchCard/BatchCard.test.tsx
-import { BatchCard } from "../../../components/BatchCard/BatchCard";
 import TestRenderer from "react-test-renderer";
-=======
 import { BatchCard } from "./BatchCard";
->>>>>>> a246b39ed54ce234195a3c7d7850f20785a1b40f:src/components/BatchCard/BatchCard.test.tsx
 
 /**
  * This function sets up a batch card object which has been given fake prop values

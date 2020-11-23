@@ -1,9 +1,38 @@
 /**
- * This interface defines an Associate object.
+ * This interface defines an Associate array object.
  */
 export interface IAssociate {
+    associateAssignments: {
+        associate: {
+            firstName?: string,
+            lastName?: string,
+            grades?: {
+                dateReceived: string,
+                gradeId: number,
+                score: number,
+                traineeId: string
+            }[],
+            testScores?: {
+                week: number,
+                score: number
+            }[],
+            techScores?: {
+                tech: string,
+                score: number
+            }[]
+        }
+    }[]
+}
+
+export interface IAssociateSingle {
     firstName?: string,
     lastName?: string,
+    grades?: {
+        dateReceived: string,
+        gradeId: number,
+        score: number,
+        traineeId: string
+    }[],
     testScores?: {
         week: number,
         score: number
@@ -18,7 +47,7 @@ export interface IAssociate {
  * This interface defines the state of associates.
  * It will hold an array of associates.
  */
-export interface IAssociatesState{
+export interface IAssociatesState {
     associates: IAssociate[];
 }
 
