@@ -3,7 +3,6 @@ import "../../scss/batch-card.scss";
 import javaLogo from '../../assets/java-logo.png';
 import reactReduxLogo from '../../assets/react-redux-logo.png';
 import javaAuto from '../../assets/JavaAutoLogo.png';
-// import javaMicro from '../../assets/JavaMicroLogo.jpg';
 import pegaLogo from '../../assets/Pegalogo.jpg';
 import salesLogo from '../../assets/sales.png';
 import bigData from '../../assets/bigData.png';
@@ -20,7 +19,7 @@ interface IProps{
 /**
  * @function BatchCard
  * Displays a summary of a particular batch in a compact card format.
- * 
+ *
  * @param props contains batch information that informs what the bcard will display.
  * Should be passed in by an ancestor that retrieves this information from the back end.
  */
@@ -31,7 +30,7 @@ export const BatchCard:React.FC<IProps> = (props:IProps) => {
     /**
      * @function goToBatchViewPage
      * Once the "View" button is clicked, this function redirects the user to a page with detailed batch info.
-     * 
+     *
      * @param event contains the click event that calls this function.
      */
     const goToBatchViewPage = (event:React.MouseEvent<Element, MouseEvent>) => {
@@ -78,7 +77,6 @@ export const BatchCard:React.FC<IProps> = (props:IProps) => {
     {
         image = devOpsLogo;
     }
-    
 
     return(
         <div className="batchcardcomp rev-card justify-content-center text-center">

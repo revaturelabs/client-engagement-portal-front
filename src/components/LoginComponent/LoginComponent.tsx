@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
-import hands from '../../assets/engagementPortalLogo.svg';
 import userThumb from '../../assets/user-thumb.png';
 import passThumb from '../../assets/pass-thumb.png';
 import { Auth } from 'aws-amplify';
 import  '../../scss/loginStyles.scss';
-import ceplogo from '../../assets/engagementPortalLogo.svg';
 import ceplogo2 from '../../assets/engagementPortalLogov2.svg';
 
 interface ILoginProps {
@@ -15,7 +13,7 @@ interface ILoginProps {
 /**
  * @function LoginComponent
  * Component that allows login functionality. Takes in an email and password.
- * 
+ *
  * @param props (DEPRECATED USAGE) Informs whether this component is rendered on the admin login or the client login.
  */
 export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
@@ -29,7 +27,7 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
      * @async
      * Makes a call to AWS Cognito to authenticate login details,
      *  then makes a call to the API gateway to retrieve user info.
-     * 
+     *
      * @param event contains the click event that calls this function.
      */
     const handleSubmit = async (event: any) => {

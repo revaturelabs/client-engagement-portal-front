@@ -8,11 +8,11 @@ interface Props {
 
 /**
  * Author: Kyle Aoki
- * 
+ *
  * @function PlanInterventionModal
  * Modal for planning an intervention. Client can give reasons for calling an intervention
  * in a textarea. Client can select a date for intervention.
- * 
+ *
  * @param props contains "show" and "setShow" properties to control whether this component renders.
  */
 const PlanInterventionModal = (props: Props) => {
