@@ -18,6 +18,25 @@ export const AssociateCard: React.FC<IAssociateSingle> = (props: IAssociateSingl
 
         firstName: "Bill",
         lastName: "Gates",
+        grades: [{
+            dateReceived: "2020-10-21",
+            gradeId: 2,
+            score: 90,
+            traineeId: "TR-1111"
+        },
+        {
+            dateReceived: "2020-10-14",
+            gradeId: 1,
+            score: 60,
+            traineeId: "TR-1111"
+        },
+        {
+            dateReceived: "2020-10-28",
+            gradeId: 3,
+            score: 72,
+            traineeId: "TR-1111"
+        }
+        ],
         testScores: [{
             week: 1,
             score: 90
@@ -57,15 +76,15 @@ export const AssociateCard: React.FC<IAssociateSingle> = (props: IAssociateSingl
          * Otherwise, add each test score to a total, divide by the number of scores,
          * and return the average score
          */
-        if (props.testScores !== undefined) {
-            for (let test of props.testScores) {
+        if (props.grades !== undefined) {
+            for (let test of props.grades) {
                 sc += test.score;
                 weeks++;
             }
             sc = sc / weeks;
         }
 
-        return sc;
+        return sc.toFixed(2);
     }
 
     /**
@@ -76,28 +95,31 @@ export const AssociateCard: React.FC<IAssociateSingle> = (props: IAssociateSingl
         let value = 0;
         let i = 0;
         let size = 0;
-        if (props.testScores?.length != undefined) {
-            size = props.testScores.length;
+        let gId = 0;
+        if (props.grades?.length != undefined) {
+            size = props.grades.length;
         }
 
         /**
          * If there are no test scores, return 0.
          * Otherwise, set the value to be equal to the last test.
          */
-        if (props.testScores !== undefined) {
+        if (props.grades !== undefined) {
             while (i < size) {
                 /**
-                * For each item in test scores, change the value to match.
+                * For each item in test scores, if the gradeId is greater than the held one, change the value to match.
                 * When it stops iterating, we'll have the last value.
                 */
-                value = props.testScores[i].score;
+                if (props.grades[i].gradeId > gId) {
+                    value = props.grades[i].score;
+                    gId = props.grades[i].gradeId;
+                }
                 i++;
             }
         }
-        return value;
+        return value.toFixed(2);
     }
 
-    //there is one place here where fake data will be replaced with props
     /**
      * This function returns the TSX element itself.
      * It contains a button to toggle a card,
@@ -116,7 +138,7 @@ export const AssociateCard: React.FC<IAssociateSingle> = (props: IAssociateSingl
                     <h5 id="scoreHolder">Latest Test Score: {score()}%</h5>
                 </div>
                 <div style={{ display: "block", textAlign: "center", alignContent: "center", justifyContent: "center" }}>
-                    <AssociateCardModal {...fakeData} />
+                    <AssociateCardModal {...props} />
                 </div>
             </Card>
         </li>

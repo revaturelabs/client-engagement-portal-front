@@ -20,43 +20,20 @@ export const AssociateCardModal:React.FC<IAssociateSingle> = (props:IAssociateSi
     const toggle = () => setShow(!show);
 
     /**
-     * This will map the associate's test scores into TSX elements.
-     * As well as calculate the average from the scores.
+     * This will map the grades and date grade was recieved to TSX elements.
+     * As well as calculate the average grade.
      */
-    const tests = props.testScores;
-    let testMap;
-    let averageTest = 0;
-    let testWeek = 0;
-    if(tests !== undefined){
-        testMap = tests.map((test) => <div id="weekAndScore"><p>Week {test.week}: {test.score}%</p><div className="h-divider"></div></div>);
-        for(let test of tests){
-            averageTest += test.score;
-            testWeek++;
+    let gradeMap;
+    let averageGrade = 0;
+    if(props.grades !== undefined){
+        let numGrades = 0;
+        for(let grade of props.grades){
+            gradeMap = props.grades.map((grade) => <div id="grade"><p>Date {grade.dateReceived}: {grade.score.toFixed(2)}%</p><div className="h-divider"></div></div>);
+            averageGrade += grade.score;
+            numGrades++;
         }
-        averageTest = averageTest / testWeek;
+        averageGrade = averageGrade/ numGrades;
     }
-
-    /**
-     * This will map the associate's tech and tech score into TSX elements.
-     * As well as calculate the average tech score.
-     */
-    const techs = props.techScores;
-    let techMap;
-    let averageTech = 0;
-    let techWeek = 0;
-    /**
-     * If list of techs in empty don't iterate through.
-     * Otherwise calculate the total score and divide by total weeks
-     * then return the average.
-     */
-    if(techs !== undefined){
-        techMap = techs.map((e) => <div id="techAndScore"><p>{e.tech}: {e.score}%</p><div className="h-divider"></div></div>);
-        for(let tech of techs){
-            averageTech += tech.score;
-            techWeek++;
-        } 
-        averageTech = averageTech / techWeek;
-    } 
 
     return (
         <body style={{display:"flex", alignContent:"center", margin:"auto"}}>
@@ -82,27 +59,13 @@ export const AssociateCardModal:React.FC<IAssociateSingle> = (props:IAssociateSi
                     <Row>
                         <div className="col-1"/>
                         <div className="aso-scroll col-8">
-                            <div id="testMap">{testMap}</div>
+                            <div id="testMap">{gradeMap}</div>
                         </div>
                         <div className="aso-average col-1">
                             <h6>Average</h6>
-                            <h6 id="avgTest">{averageTest}%</h6>
+                            <h6 id="avgTest">{averageGrade.toFixed(2)}%</h6>
                         </div>
                     </Row>
-                </div>
-                <div className="aso-info">
-                    <div>Technology Assessments</div>
-                    <Row>
-                        <div className="col-1"/>
-                        <div className="aso-scroll col-8">
-                            <div>{techMap}</div>
-                        </div>
-                        <div className="aso-average col-1">
-                            <h6>Average</h6>
-                            <h6 id="avgTech">{averageTech}%</h6>
-                        </div>
-                    </Row>
-                    
                 </div>
                 <Button id="closeBtn" className="view-btn" onClick={toggle}>Close</Button>
                 </ModalBody>            

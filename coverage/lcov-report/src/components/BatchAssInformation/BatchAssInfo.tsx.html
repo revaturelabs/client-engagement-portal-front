@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/views/LoginPage/LoginPage.tsx</title>
+    <title>Code coverage report for src/components/BatchAssInformation/BatchAssInfo.tsx</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../prettify.css" />
     <link rel="stylesheet" href="../../../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../index.html">All files</a> / <a href="index.html">src/views/LoginPage</a> LoginPage.tsx</h1>
+        <h1><a href="../../../index.html">All files</a> / <a href="index.html">src/components/BatchAssInformation</a> BatchAssInfo.tsx</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>1/2</span>
+                <span class='fraction'>0/3</span>
             </div>
         
             
@@ -39,14 +39,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>1/2</span>
+                <span class='fraction'>0/3</span>
             </div>
         
             
@@ -55,7 +55,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -85,8 +85,7 @@
 <a name='L26'></a><a href='#L26'>26</a>
 <a name='L27'></a><a href='#L27'>27</a>
 <a name='L28'></a><a href='#L28'>28</a>
-<a name='L29'></a><a href='#L29'>29</a>
-<a name='L30'></a><a href='#L30'>30</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L29'></a><a href='#L29'>29</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -95,8 +94,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -110,41 +113,35 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react';
-import { Link } from 'react-router-dom';
-import { LoginComponent } from '../../components/LoginComponent/LoginComponent';
-import logo from '../../assets/logo.png';
-import "../../scss/loginStyles.scss";
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from "react";
+import { Card, CardBody, CardFooter, CardHeader } from "reactstrap";
+import { isPropertySignature } from "typescript";
 &nbsp;
-/**
- * @function LoginPage
- * The page the user sees when they arrive onto the site.
- */
-export const LoginPage:React.FC&lt;undefined&gt; = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
-<span class="cstat-no" title="statement not covered" >    return(</span>
-        &lt;div className="login-wrapper"&gt;
-            &lt;div className="container"&gt;
-                &lt;div className="row justify-content-center"&gt;
-                    &lt;img src={logo} alt="Logo" className="logo"/&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
-            
-            &lt;br /&gt;
-            &lt;br /&gt;
-            &lt;LoginComponent loginType="client" /&gt;
-            &lt;br /&gt;
-            &lt;br /&gt;
-            &lt;Link to="/home"&gt;&lt;button&gt;Log In As Client&lt;/button&gt;&lt;/Link&gt;
-            &lt;Link to="/admin"&gt;&lt;button&gt;Log In As Admin&lt;/button&gt;&lt;/Link&gt;
-        &lt;/div&gt;
-    );
+interface IProps{
+    name: string,
+    avgScore: number
 }
-&nbsp;</pre></td></tr></table></pre>
+&nbsp;
+export const BatchAssInfoCard: React.FC&lt;IProps&gt; = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(p</span>rops:IProps) =&gt; {</span>
+    
+    const infoModal = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
+&nbsp;
+    }
+    
+<span class="cstat-no" title="statement not covered" >    return(</span>
+        &lt;Card&gt;
+            &lt;CardHeader&gt;
+                {props.name}
+            &lt;/CardHeader&gt;
+            &lt;CardBody&gt;
+                {props.avgScore}
+            &lt;/CardBody&gt;
+            &lt;CardFooter&gt;
+                &lt;button onClick={infoModal}&gt;View&lt;/button&gt;
+            &lt;/CardFooter&gt;
+        &lt;/Card&gt;
+    )
+}</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
