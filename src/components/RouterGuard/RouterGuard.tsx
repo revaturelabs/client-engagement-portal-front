@@ -8,10 +8,28 @@ export interface ProtectedRouteProps extends RouteProps {
   redirectPath: string; //path to redirect to if fail
 }
 
+/**
+ * @function RouterGuard
+ * Component that acts as a router guard for a BrowserRouter switch case.
+ *
+ * @param props
+ * role: an array of allowed roles that can access the route
+ * redirectPath: a string that defines which route to redirect to if not authorized
+ */
 export const RouterGuard: React.FC<ProtectedRouteProps> = (props) => {
   const [redirect, setRedirect] = useState<string>("");
   const [userRole, setUserRole] = useState<string>(""); // if not yet loaded (Auth not done yet), then falsy
 
+  /**
+   * @function getUser
+   * Gets the currently signed in user info
+   *
+   * @async
+   * makes a call to AWS Cognito to get current user info
+   *
+   * @event ComponentDidMount
+   * runs when the component is first loaded.
+   */
   useEffect(() => {
     async function getUser() {
       const userInfo = await Auth.currentUserInfo(); //get current user
