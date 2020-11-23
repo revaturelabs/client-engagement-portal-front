@@ -7,26 +7,11 @@ import Carousel from "react-multi-carousel";
 /**
  * This component is a factory that will display all of the AssociateCards
  * for a particular batch. Takes in props containing the associates' info.
- * @param props - Type: IAssociate
+ * @param props - Type: IAssociate. passed in from BatchInformation.tsx
  * 
  * @returns TSX Element to render
  */
 export const AssociateCardFactory:React.FC<any> = (props:IAssociate) => {
-
-    //this code WILL change
-    //instead of doing a call to get associates
-    //we'll get the associates from the batch/id endpoint that was already called
-
-    /**
-     * This will get all associates from the back-end given the batchID
-     */
-    // const beginningUrl = "http://ec2-35-174-62-5.compute-1.amazonaws.com:9011/";
-    // const url = beginningUrl+"client/batch/"+props.batchID; 
-    // let associates:IAssociate[];
-    // const getAssociates = async () => {
-    //     const response = await Axios.get(url); 
-    //     associates = await response.data;
-    // }
     
     /**
      * This field will hold all of the AssociateCards, based on the associates
@@ -42,7 +27,10 @@ export const AssociateCardFactory:React.FC<any> = (props:IAssociate) => {
        let i = 0;
 
       console.log(props.associateAssignments)
-
+      /**
+       * Loop through the associateAssignments array that was passed in the props
+       * and add them to the cards array.
+       */
       try{
         for(let assoc of props.associateAssignments){
           console.log(assoc)

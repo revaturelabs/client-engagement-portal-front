@@ -16,7 +16,7 @@ export const initialBatchState: IBatchState = {
 /**
  * 
  * This reducer goes through every action type that exists in this program but will 
- *  only respond to the one that's called SET_BATCHES
+ * only respond to the one that's called SET_BATCHES
  * 
  * @param batchState the batch card state in the store is passed in automatically
  * @param action goes through every action in the program 
@@ -26,8 +26,8 @@ export const initialBatchState: IBatchState = {
 export const BatchReducer = (batchState: IBatchState = initialBatchState, action: any) => {
     switch (action.type) {
         case SET_BATCHES:
-            if (action.payload != null)
-                return batchState = { ...action.payload }  //places batch data into batchCard state
+            if(action.payload != null)
+                return batchState = { ...action.payload };  //places batch data into batchCard state
             else
                 return batchState;
         default:
