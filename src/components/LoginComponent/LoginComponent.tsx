@@ -45,8 +45,6 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
         try {
             const user = await Auth.signIn(loginCredentials.email, loginCredentials.password); // user.attributes.email contains the user email
 
-
-
             switch (user.attributes["custom:userRole"]) { // Assigns what page to redirect to based upon what role the user has
                 case "client":
                     setAdmin(false);

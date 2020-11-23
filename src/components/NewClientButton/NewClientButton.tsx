@@ -60,6 +60,7 @@ export const NewClientButton: React.FC<any> = () => {
 
     const checkRole = Auth.currentUserInfo();
     const checker = await checkRole.then(function (result) {
+
       if (result.attributes["custom:userRole"] !== "admin") {
         return false;
       } else {
