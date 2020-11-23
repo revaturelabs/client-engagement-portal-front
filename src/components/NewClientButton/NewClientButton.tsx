@@ -131,30 +131,12 @@ export const NewClientButton: React.FC<any> = () => {
       </Button>
 
       <Modal isOpen={modal} toggle={toggle}>
-        <Row>
-          <Col xs="6">
             <ModalHeader toggle={toggle} className="container create-account-modal-header">
               Create Account
-            </ModalHeader>
-          </Col>
-          <Col xs="6">
-            <Button
-              className="close"
-              style={{
-                backgroundColor: "white",
-                color: "#F26925",
-                border: "none",
-                fontWeight: 800,
-                padding: "15px",
-              }}
-              onClick={toggle}
-            >
-              X
-            </Button>
-          </Col>
-        </Row>
-        <Form onSubmit={(event:React.FormEvent<HTMLFormElement>) => registerUser(event)}>
-          <ModalBody>
+            </ModalHeader>        
+          <Form onSubmit={(event:React.FormEvent<HTMLFormElement>) => registerUser(event)}>
+        <ModalBody>
+          {/* <Form onSubmit={registerUser}> */}
             <FormGroup>
               <Label for="exampleSelect">Account Type</Label>
               <Input

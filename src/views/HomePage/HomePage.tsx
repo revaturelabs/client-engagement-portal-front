@@ -4,12 +4,10 @@ import { BatchCard } from '../../components/BatchCard/BatchCard';
 import { NavBar } from '../../components/NavBar/NavBar';
 
 import RequestBatchCard from '../../components/RequestBatchCard/RequestBatchCard';
-import RequestBatchCardModal from '../../components/RequestBatchCard/RequestBatchCardModal';
 import { IBatchState, initialBatchState } from '../../_reducers/BatchReducer';
 import { connect, useDispatch } from 'react-redux';
 import Axios from 'axios';
 import { setBatchState } from '../../actions/BatchCardActions';
-import PlanInterventionModal from '../../components/PlanInterventionModal/PlanInterventionModal';
 
 interface IProps {
     batches: {
@@ -28,7 +26,6 @@ interface IProps {
  */
 const HomePage:React.FC<IProps> = (props:IProps) => {
 
-    const [showInterventionModal, setShowInterventionModal] = useState(false);
     const [hasBatches, setHasBatches] = useState(false);
     const [hasSpinner, setSpinner] = useState(false);
 
@@ -131,8 +128,8 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
 
 
     return(
-        <Container style={{minHeight: "100vh", maxWidth: "100vw", backgroundColor:"#E3E3E3"}}>
-            <NavBar>
+        <Container style={{minHeight: "100vh", maxWidth: "100vw"}}>
+            <NavBar route="/home">
                 <DropdownItem header>Development Options</DropdownItem>
                 <DropdownItem onClick={() => resetBatches()}>Simulate no batches</DropdownItem>
                 <DropdownItem onClick={() => getSimulatedBatches()}>Simulate 3 batches</DropdownItem>
@@ -140,27 +137,22 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
             </NavBar>
 
             {/* Modal for Requesting an Intervention, will be moved to batch info page */}
-            <button onClick={() => setShowInterventionModal(!showInterventionModal)}>Temporary Test Intervention Modal (Will Go on Batch Info Page)</button>
-            <PlanInterventionModal show={showInterventionModal} setShow={setShowInterventionModal} />
-            
             {hasBatches ?
 
             <Row className="justify-content-between">
-                <Col xs="auto">
+                <Col md="auto">
                 </Col>
-                <Col xs="8" className="text-left" style={{marginTop:"50px"}}>
+                <Col md="8" className="text-left" style={{marginTop:"50px"}}>
                     
                     <h1>Your Batches:</h1>
                     <hr style={{borderTop:"2px solid #474C55"}} />
-                    <p style={{color: "#474C55", fontSize:"1.2em"}}>Click to find out more...</p>
-                    <br />
                     <Container>
                         {/* displays spinner while loading */}
                         { hasSpinner ? <div className="row justify-content-center"><Spinner  color="info" /></div> : <span/> }
                         <Row>
                         {
                             props.batches.map((element,index) => (
-                                <Col xl="2" lg="3" md="4" sm="4" xs="6" key={index}>
+                                <Col xl="3" lg="4" md="5" sm="6" xs="6" key={index}>
                                     <BatchCard batchId={element.id} specialization={element.skill}
                                     batchName={element.name} />
                                 </Col>
@@ -170,7 +162,7 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
                         </Row>
                     </Container>
                 </Col>
-                <Col xs="auto">
+                <Col md="auto">
                     
                 </Col>
             </Row>
@@ -179,7 +171,6 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
                 {/* displays spinner while loading */}
                 { hasSpinner ? <Spinner  color="info" /> : <span/> }
                 <RequestBatchCard />
-                <RequestBatchCardModal />
             </>
             
             }
