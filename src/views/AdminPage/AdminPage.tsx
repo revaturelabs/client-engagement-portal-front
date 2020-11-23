@@ -6,6 +6,10 @@ import { NewClientButton } from '../../components/NewClientButton/NewClientButto
 
 
 
+/**
+ * @function AdminPage
+ * Component showing the page that an admin sees when they log in.
+ */
 export const AdminPage: React.FC = () => {
     return (
         <>

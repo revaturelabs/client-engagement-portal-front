@@ -58,6 +58,7 @@ const BatchInformationPage: React.FC<IProps> = (props:IProps) => {
 
         setSpinner(true);
 
+<<<<<<< HEAD
         //array to place batch data into
         let batchArray:IBatchState = {
             batches: [],
@@ -92,6 +93,13 @@ const BatchInformationPage: React.FC<IProps> = (props:IProps) => {
         dispatch(getBatchData(passedInId));
     };
 
+=======
+/**
+ * @function BatchInformationPage
+ * Page that a client sees when they click the "view" button on a batch card.
+ */
+export const BatchInformationPage: React.FC = () => {
+>>>>>>> a246b39ed54ce234195a3c7d7850f20785a1b40f
     return (
         <>
             <Container style={{minHeight: "100vh", maxWidth: "100vw", backgroundColor:"#E3E3E3"}}>

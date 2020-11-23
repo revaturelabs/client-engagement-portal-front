@@ -16,7 +16,11 @@
     "babel-polyfill": "^6.26.0",
     "bootstrap": "^4.5.3",
     "hamburger-react": "^2.3.0",
+<<<<<<< HEAD
     "identity-obj-proxy": "^3.0.0",
+=======
+    "jest-fetch-mock": "^3.0.3",
+>>>>>>> a246b39ed54ce234195a3c7d7850f20785a1b40f
     "jest-sonar-reporter": "^2.0.0",
     "jquery": "^3.5.1",
     "node-sass": "^4.14.1",
@@ -83,6 +87,7 @@
     "enzyme": "3.11.0",
     "enzyme-adapter-react-16": "1.15.5",
     "enzyme-to-json": "3.6.1",
+    "identity-obj-proxy": "^3.0.0",
     "jest-fetch-mock": "3.0.3",
     "jest-sonar-reporter": "^2.0.0",
     "ts-jest": "26.4.4"

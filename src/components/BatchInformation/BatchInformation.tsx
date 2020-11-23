@@ -28,6 +28,7 @@ interface IProps{
 }
 
 /**
+<<<<<<< HEAD
  * This component displays a buuunch of data about one specific batch.
  * 
  * @param props The batch id from the batch card that was selected is
@@ -35,6 +36,14 @@ interface IProps{
  * data about that batch can be retrieved.
  */
 export const BatchInformation:React.FC<IProps> = (props:IProps) => {
+=======
+ * @function BatchInformation
+ * Displays detailed batch information in its own page.
+ * 
+ * @param props contains the detailed batch data needed to populate the page.
+ */
+export const BatchInformation:React.FC<IBatchInformationProps> = (props:IBatchInformationProps) => {
+>>>>>>> a246b39ed54ce234195a3c7d7850f20785a1b40f
 
     const [isOrangeBtn, setOrangeBtn] = useState(false);
 
