@@ -13,7 +13,7 @@ import PlanInterventionModal from '../../components/PlanInterventionModal/PlanIn
 
 interface IProps {
     batches: {
-        id: number,
+        batchId: string,
         skill: string,
         name: string
     }[],
@@ -24,7 +24,7 @@ interface IProps {
  * batches. In that case, they will be shown a message which assures them that they will be mapped
  * one in the near future and can even notify the admin users with the "request batch" button. 
  * 
- * @param props batch information. Should be pulled from the database whenever this component loads 
+ * @param props Basic batch information. Should be pulled from the database whenever this component loads 
  */
 const HomePage:React.FC<IProps> = (props:IProps) => {
 
@@ -78,7 +78,8 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
      * 
      * @param userId The passed in user id (currently does nothing)
      * 
-     * @returns This function just changes the batch state to 
+     * @returns This function just changes the batch state to contain
+     * each currently avaiable batch in the db.
      */
     const getBatchCardData = (userId:number) => async (dispatch:any) => {
 
@@ -157,7 +158,7 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
                         { 
                             props.batches.map((element,index) => (
                                 <Col xl="2" lg="3" md="4" sm="4" xs="6" key={index}>
-                                    <BatchCard batchId={element.id} specialization={element.skill}
+                                    <BatchCard batchId={element.batchId} specialization={element.skill}
                                     batchName={element.name} />
                                 </Col>
                                 

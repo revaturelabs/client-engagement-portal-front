@@ -1,22 +1,46 @@
-import React from 'react';
-import { Card, CardBody, CardFooter, CardHeader, Col, Row } from 'reactstrap';
+import React, { useState } from 'react';
+import { Button, Card, CardBody, CardFooter, CardHeader, Col, Row, Spinner } from 'reactstrap';
 import "../../scss/BatchInformation.scss"
 import reactReduxLogo from '../../assets/react-redux-logo.png';
 import javaLogo from '../../assets/java-logo.png';
 import springLogo from '../../assets/spring-logo.png';
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import bArrow from "../../assets/whiteBarrow.svg";
+import oArrow from "../../assets/orangeBarrow.svg";
+import { Redirect, RouteComponentProps, withRouter } from 'react-router';
+import { IBatchState } from '../../_reducers/BatchReducer';
+import { axiosInstance } from '../../util/axiosConfig';
+import { setBatchState } from '../../actions/BatchCardActions';
+import { connect } from 'react-redux';
+import { IBasicBatchInfo } from '../BatchCard/BatchCard';
 import { AssociateCardFactory } from '../AssociateCard/AssociateCardFactory';
-import { BatchDetailReducer } from '../../_reducers/BatchReducer';
-import { IAssociate, IAssociatesState, } from '../../_reducers/AssociateReducer';
 
-interface IBatchInformationProps {
-    name?:string,
+interface IProps{
+    batches: [{
+        batchId: string,
+        batchName: string,
+        endDate: string,
+        skill: string,
+        trainer: string,
+        assAssign: [{}],
+    }],
 }
 
-export const BatchInformation:React.FC<IBatchInformationProps> = (props:IBatchInformationProps) => {
+/**
+ * This component displays a buuunch of data about one specific batch.
+ * 
+ * @param props The batch id from the batch card that was selected is
+ * passed into this component. This is needed so that the rest of the 
+ * data about that batch can be retrieved.
+ */
+export const BatchInformation:React.FC<IProps> = (props:IProps) => {
 
-    const responsive = {
+    const [isOrangeBtn, setOrangeBtn] = useState(false);
+
+    console.log(props.batches[0]);
+
+    const responsive = {     //for responsive styling on the carousel cards below
         superLargeDesktop: {
           // the naming can be any, depends on you.
           breakpoint: { max: 4000, min: 1200 },
@@ -40,30 +64,29 @@ export const BatchInformation:React.FC<IBatchInformationProps> = (props:IBatchIn
         }
       };
 
-      /**
-       * Gets the state of the batch detail reducer. The commented code is for pulling information out of the batch
-       * and into associates. Might be deprecated, but keeping until new endpoint is received.
-       */
-       const bDetails = BatchDetailReducer("");
-    /*   let aDetails:IAssociatesState = initialAssociateState;
-    //   let i = 0;
-    //   for(;bDetails.batches.associateAssignments;){
-    //       let first = bDetails.batches.associateAssignments[i].associate.firstName;
-    //       let last = bDetails.batches.associateAssignments[i].associate.lastName;
-    //       aDetails.associates.push({firstName:first,lastName:last})
-       } */
+      const goBack = () => {
+        window.location.href = "/home";
+      }
 
 
     return(
         <>
+        {/* Back button */}
+        <span>
+            <button className="back-btn" onClick={goBack} onMouseOver={() => {setOrangeBtn(true)}}
+            onMouseOut={() => {setOrangeBtn(false)}}>
+                { isOrangeBtn ? <span><img src={oArrow} alt="back arrow" /></span> : 
+                <span><img src={bArrow} alt="back arrow" /></span>}
+                <span>Back</span>
+            </button>
+        </span>
          <Row className="justify-content-center">
              <Col md="1" lg="2"></Col>
              <Col md="10" lg="8">
                 <div id="batch-info-wrapper">
                     <Card className="batch-info-card">
                         <CardHeader>
-                            {/* <h4>2009 Sep 28 Batch</h4> */}
-                            <h4>{bDetails.batches[0].name}</h4>
+                            <h4>{props.batches[0].batchName}</h4>
                         </CardHeader>
                         <CardBody>
                             <h5>Core Technologies  Learned:</h5>
@@ -88,15 +111,13 @@ export const BatchInformation:React.FC<IBatchInformationProps> = (props:IBatchIn
                                 <Col xs="4"><p>React Redux</p></Col>
                                 <Col xs="4"><p>Java 8</p></Col>
                                 <Col xs="4"><p>Spring MVC & ORM</p></Col>
-                                <Col xs="4"><p>{bDetails.batches[0].skill}</p></Col>
                             </Row>
-                            <p><b>Trainer:</b> Robert Connel</p>
-                            {/* <p><b>Trainer:</b> {bDetails.batches[0].employeeAssignments.employee.firstName} {bDetails.batches[0].employeeAssignments.employee.lastName}</p> */}
-                            <p><b>Training End Date:</b> 12/04/20</p>
+                            <p><b>Trainer:</b> {props.batches[0].trainer}</p>
+                            <p><b>Training End Date:</b> {props.batches[0].endDate}</p>
                         </CardBody>
                         <CardFooter></CardFooter>
                     </Card>
-
+                    
                     <h1>Batch Engineers</h1>
                     
                     {/* <Carousel responsive={responsive}> */}

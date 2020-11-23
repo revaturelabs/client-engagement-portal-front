@@ -3,7 +3,6 @@ import "../../scss/batch-card.scss";
 import javaLogo from '../../assets/java-logo.png';
 import reactReduxLogo from '../../assets/react-redux-logo.png';
 import javaAuto from '../../assets/JavaAutoLogo.png';
-// import javaMicro from '../../assets/JavaMicroLogo.jpg';
 import pegaLogo from '../../assets/Pegalogo.jpg';
 import salesLogo from '../../assets/sales.png';
 import bigData from '../../assets/bigData.png';
@@ -14,13 +13,21 @@ import { setBatchDetailsState, SET_BATCHES_DETAILS } from '../../actions/BatchCa
 import { BatchDetailReducer, IBatchDetailedState } from '../../_reducers/BatchReducer';
 import { exit } from 'process';
 
-interface IProps{
-    batchId: number,
+export interface IBasicBatchInfo{
+    batchId: string,
     specialization:string,
     batchName:string,
 }
 
-export const BatchCard:React.FC<IProps> = (props:IProps) => {
+/**
+ * This is a "card" which represents one of the different batches that
+ * are mapped to a specific client. The button on this card should send the
+ * user to a page displaying much more detailed information about this specific
+ * batch.
+ * 
+ * @param props The batch information that was passed in from the Home page component. 
+ */
+export const BatchCard:React.FC<IBasicBatchInfo> = (props:IBasicBatchInfo) => {
 
     const [batchButtonClicked, setBatchButtonClicked] = useState(false);
 
@@ -28,7 +35,7 @@ export const BatchCard:React.FC<IProps> = (props:IProps) => {
 
     const goToBatchViewPage = (event:React.MouseEvent<Element, MouseEvent>) => {
         console.log("send this id to the \"batch view page\" to load the right page: " + props.batchId);
-        //window.location.href = "/batchView"+props.batchId;
+        //window.location.href = "/batchView/"+props.batchId;
 
         // SET A DETAILED BATCH STATE TO INCLUDE THE DETAILS OF THE BATCH BEING VIEWED
         // This detailed batch state will be displayed when the redirect to "/batch" runs
@@ -58,8 +65,7 @@ export const BatchCard:React.FC<IProps> = (props:IProps) => {
         setBatchButtonClicked(true);
     }
 
-    //sets the image of this card to match the specialization
-    let image = "";
+    let image = "";      //sets the image of this card to match the specialization
     if (props.specialization === "Java/Microservices")
     {
         image = javaLogo;
@@ -107,7 +113,7 @@ export const BatchCard:React.FC<IProps> = (props:IProps) => {
             <div className="row justify-content-center">
                 <button onClick={(event:React.MouseEvent<Element, MouseEvent>) => goToBatchViewPage(event)} className="view-btn test1">View</button>
             </div>
-            {batchButtonClicked ? <Redirect to="/batch" /> : <></>}
+            {batchButtonClicked ? <Redirect to={`/batch/${props.batchId}`} /> : <></>}
             
         </div>
     )
