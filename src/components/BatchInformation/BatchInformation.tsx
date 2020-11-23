@@ -4,11 +4,8 @@ import "../../scss/BatchInformation.scss"
 import reactReduxLogo from '../../assets/react-redux-logo.png';
 import javaLogo from '../../assets/java-logo.png';
 import springLogo from '../../assets/spring-logo.png';
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
 import { AssociateCardFactory } from '../AssociateCard/AssociateCardFactory';
 import PlanInterventionModalv2 from '../PlanInterventionModal/PlanInterventionModalv2';
-import PlanInterventionModal from '../PlanInterventionModal/PlanInterventionModal';
 
 
 interface IBatchInformationProps {
