@@ -1,11 +1,11 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-import {AssociateCardModal} from '../../../components/AssociateCard/AssociateCardModal';
-import { IAssociate } from '../../../_reducers/AssociateReducer';
+import {AssociateCardModal} from './AssociateCardModal';
+import { IAssociateSingle } from '../../_reducers/AssociateReducer';
 import {Modal} from 'reactstrap';
 
 let wrapper: any;
-let fakeData:IAssociate;
+let fakeData:IAssociateSingle;
 
 beforeAll(() => {
     fakeData = {

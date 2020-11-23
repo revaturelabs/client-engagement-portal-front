@@ -76,9 +76,9 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
                             Client Engagement Portal
                         </div>
                         <div className="cep-logo-area">
-                            <img src={ceplogo2} alt="cep-logo" width="200px"/>
-                            </div>
+                            <img src={ceplogo2} alt="cep-logo" className="cep-logo" />
                         </div>
+                    </div>
 
                         <div style={{ position: "relative" }}>
                             <input type="email" required className="form-control" name="email" placeholder="E-mail"
@@ -96,7 +96,9 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
                             </div>
                         </div>
 
-                        <button className="login-submit" type="submit">Login</button>
+                        <button className="login-btn" type="submit">
+                            Login
+                        </button>
                     </div >
                 </form >
             }

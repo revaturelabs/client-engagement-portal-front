@@ -1,3 +1,5 @@
+@import "revature-colors.scss";
+
 .login-wrapper {
     margin: 0;
     position: absolute;
@@ -18,26 +20,57 @@
 .login-form {
     text-align: center;
     background-color: white;
-    width: 350px;
-    height: 350px;
+    width: auto;
+    height: auto;
     min-width: 200px;
     display: inline-block;
     border-radius: 50px;
-    padding: 10px;
-    border: 1px solid #F26925;
+    padding: 30px;
+    border: 1px solid $rev-orange;
+    box-shadow: 3px 3px 15px $rev-blue-trans;
 }
+
 .logo {
     height: 80px;
     width: auto;
+    margin: 5px;
 }
+
 .cep-logo-area {
-    margin: auto;
+    margin: 5px;
 }
+
+.cep-logo {
+    max-width: 140px;
+    max-height: 140px;
+}
+
 .login-header {
     color: #474C55;
     font-size: 20px;
     font-weight: bold;
+    margin: 5px;
 }
+
+.login-btn
+{
+    line-height: 1.5;
+    width: 70%;
+    border: 4px solid $rev-orange;
+    border-radius: 5px;
+    background-color: $rev-orange;
+    color: white;
+    font-size: 20px;
+    padding: 8px;
+    margin: 10px;
+}
+
+.login-btn:hover
+{
+    background-color: white;
+    color: $rev-orange;
+}
+<<<<<<< HEAD
 .login-submit {
     margin: 10px;
     line-height: 2.2;
@@ -55,6 +88,9 @@
     background-color: white; 
     color: #F26925;
 }
+=======
+
+>>>>>>> c5d8aad109a98dd6051b08f8be80a32d8a46993a
 .cep-logo-area img {
     // width: 100px;
     // height: 60px;

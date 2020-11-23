@@ -1,6 +1,6 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-import {AssociateCardFactory} from '../../../components/AssociateCard/AssociateCardFactory'
+import {AssociateCardFactory} from './AssociateCardFactory'
 
 let wrapper:any;
 
