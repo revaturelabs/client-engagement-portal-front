@@ -11,6 +11,12 @@ interface IBatchInformationProps {
     name:string,
 }
 
+/**
+ * @function BatchInformation
+ * Displays detailed batch information in its own page.
+ * 
+ * @param props contains the detailed batch data needed to populate the page.
+ */
 export const BatchInformation:React.FC<IBatchInformationProps> = (props:IBatchInformationProps) => {
 
     const responsive = {
