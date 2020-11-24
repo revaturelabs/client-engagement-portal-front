@@ -28,7 +28,7 @@ interface IProps {
  * 
  * @param props Basic batch information. Should be pulled from the database whenever this component loads 
  */
-const HomePage:React.FC<IProps> = (props:IProps) => {
+const HomePage: React.FC<IProps> = (props: IProps) => {
 
     const [hasBatches, setHasBatches] = useState(false);
     const [hasData, setRecievedData] = useState(false);
@@ -52,8 +52,7 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
      * @function getBatches
      * DEVELOPER function used to simulate having zero batches
      */
-    const resetBatches = () =>
-    {
+    const resetBatches = () => {
         setHasBatches(false);
 
         //removes batches' data / resets the batch state
@@ -64,8 +63,7 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
      * @function getBatches
      * DEVELOPER function used to simulate having 3 batches
      */
-    const getSimulatedBatches = () =>
-    {
+    const getSimulatedBatches = () => {
         setHasBatches(true);
 
         //displays simulated batch data
@@ -73,9 +71,9 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
 
         const fakeBatchArray:IBatchState = {
             batches: [
-                {id: 1, skill: "Java React", name: "The Batchelors"},
-                {id: 2, skill: "SalesForce", name: "Ala-batch-ter"},
-                {id: 3, skill: ".NET/Microservices", name: "Some of a Batch"},
+                { id: 1, skill: "Java React", name: "The Batchelors" },
+                { id: 2, skill: "SalesForce", name: "Ala-batch-ter" },
+                { id: 3, skill: ".NET/Microservices", name: "Some of a Batch" },
             ]
         };
 
@@ -162,8 +160,8 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
         getEmail();
     }
 
-    return(
-        <Container style={{minHeight: "100vh", maxWidth: "100vw"}}>
+    return (
+        <Container style={{ minHeight: "100vh", maxWidth: "100vw" }}>
             <NavBar route="/home">
                 <DropdownItem header>Development Options</DropdownItem>
                 <DropdownItem onClick={() => resetBatches()}>Simulate no batches</DropdownItem>

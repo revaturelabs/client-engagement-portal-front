@@ -15,7 +15,7 @@ import { AssociateCardFactory } from '../AssociateCard/AssociateCardFactory';
 import PlanInterventionModalv2 from '../PlanInterventionModal/PlanInterventionModalv2';
 
 
-interface IProps{
+interface IProps {
     batches: [{
         batchId: string,
         batchName: string,
@@ -33,7 +33,7 @@ interface IProps{
  * passed into this component. This is needed so that the rest of the 
  * data about that batch can be retrieved.
  */
-export const BatchInformation:React.FC<IProps> = (props:IProps) => {
+export const BatchInformation: React.FC<IProps> = (props: IProps) => {
 
     const [showInterventionModal, setShowInterventionModal] = useState(false);
     const [isOrangeBtn, setOrangeBtn] = useState(false);
@@ -41,36 +41,28 @@ export const BatchInformation:React.FC<IProps> = (props:IProps) => {
     console.log(props.batches[0]);
 
     let image = "";      //sets the image of this card to match the specialization
-    if (props.batches[0].skill === "Java/Microservices")
-    {
+    if (props.batches[0].skill === "Java/Microservices") {
         image = javaLogo;
     }
-    else if (props.batches[0].skill === "PEGA")
-    {
+    else if (props.batches[0].skill === "PEGA") {
         image = pegaLogo;
     }
-    else if (props.batches[0].skill === "Java with Automation")
-    {
+    else if (props.batches[0].skill === "Java with Automation") {
         image = javaAuto;
     }
-    else if (props.batches[0].skill === "Java React")
-    {
+    else if (props.batches[0].skill === "Java React") {
         image = reactReduxLogo;
     }
-    else if (props.batches[0].skill === "Big Data")
-    {
+    else if (props.batches[0].skill === "Big Data") {
         image = bigData;
     }
-    else if (props.batches[0].skill === "SalesForce")
-    {
+    else if (props.batches[0].skill === "SalesForce") {
         image = salesLogo;
     }
-    else if (props.batches[0].skill === ".NET/Microservices")
-    {
+    else if (props.batches[0].skill === ".NET/Microservices") {
         image = netLogo;
     }
-    else if (props.batches[0].skill === "Java Devops")
-    {
+    else if (props.batches[0].skill === "Java Devops") {
         image = devOpsLogo;
     }
 
@@ -104,13 +96,13 @@ export const BatchInformation:React.FC<IProps> = (props:IProps) => {
                     <h1>Batch Engineers: ({props.batches[0].associateAssignments.length})</h1>
                         <AssociateCardFactory {...props.batches[0]}/>
 
-                </div>
-             </Col>
-             <Col md="1" lg="2"></Col>
+                    </div>
+                </Col>
+                <Col md="1" lg="2"></Col>
 
-             <PlanInterventionModalv2 />
+                <PlanInterventionModalv2 />
 
-         </Row>
+            </Row>
         </>
     );
 }
