@@ -1,8 +1,10 @@
-import React from "react";
-import { Col, Container, Row } from "reactstrap";
-import { BatchForms } from "../../components/BatchForms/BatchForms";
-import { NavBar } from "../../components/NavBar/NavBar";
-import { NewClientButton } from "../../components/NewClientButton/NewClientButton";
+import React from 'react';
+import { Col, Container, Form, Input, Row } from 'reactstrap';
+import { BatchForms } from '../../components/BatchForms/BatchForms';
+import { NavBar } from '../../components/NavBar/NavBar';
+import { NewClientButton } from '../../components/NewClientButton/NewClientButton';
+
+
 
 /**
  * @function AdminPage
@@ -11,9 +13,15 @@ import { NewClientButton } from "../../components/NewClientButton/NewClientButto
 export const AdminPage: React.FC = () => {
     return (
         <>
-        <Container style={{minHeight: "100vh", maxWidth: "100vw"}}>
-            <NavBar route="/admin"/>
-            <BatchForms/>
+            <Container
+                style={{
+                    minHeight: "100vh",
+                    maxWidth: "100vw",
+                    backgroundColor: "#E3E3E3",
+                }}
+            >
+                <NavBar />
+                <BatchForms />
 
                 <Row style={{ marginTop: "20px" }}>
                     <Col xs="2" sm="3" md="4" lg="4" xl="5" />
@@ -31,5 +39,5 @@ export const AdminPage: React.FC = () => {
         
         {/* sticky footer */}
         </>
-    )
-}  
+    );
+};
