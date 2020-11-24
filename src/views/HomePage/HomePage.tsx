@@ -10,6 +10,8 @@ import { connect, useDispatch } from 'react-redux';
 import Axios from 'axios';
 import { setBatchDetailsState, setBatchState } from '../../actions/BatchCardActions';
 import PlanInterventionModal from '../../components/PlanInterventionModal/PlanInterventionModal';
+import { Auth } from 'aws-amplify';
+import { axiosInstance } from '../../util/axiosConfig';
 
 interface IProps {
     batches: {
@@ -38,13 +40,12 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
      * @function getBatches
      * DEVELOPER function used to retrieve mock data for display
      */
-    const getBatches = () =>
+    const getBatches = (userEmail:string) =>
     {
         setHasBatches(true);
 
         //gets batch data from caliber
-        dispatch(getBatchCardData(1));
-        setRecievedData(true);
+        dispatch(getBatchCardData(userEmail));
     }
 
     /**
@@ -70,7 +71,7 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
         //displays simulated batch data
         setSpinner(true);
 
-        const batchArray:IBatchState = {
+        const fakeBatchArray:IBatchState = {
             batches: [
                 {id: 1, skill: "Java React", name: "The Batchelors"},
                 {id: 2, skill: "SalesForce", name: "Ala-batch-ter"},
@@ -78,10 +79,15 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
             ]
         };
 
-        dispatch(setBatchState(batchArray));
+        dispatch(setBatchState(fakeBatchArray));
 
         setSpinner(false);
     }
+
+    /** array to place batch data into */
+    const batchArray:IBatchState = {
+        batches: [],
+    };
 
     /**
      * This function gets all of the batch data currently in the Caliber
@@ -93,37 +99,29 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
      * @returns This function just changes the batch state to contain
      * each currently avaiable batch in the db.
      */
-    const getBatchCardData = (userId:number) => async () => {
+    const getBatchCardData = (userEmail:string) => async () => {
 
         setSpinner(true);
 
-        //array to place batch data into
-        const batchArray:IBatchState = {
-            batches: [],
-        };
-
-        /** array that takes in detailed information about a batch */
-        let batchDetailedArray:IBatchDetailedState = {
-            batches: []
-        }
-
         //get data from server based on user id that was given
-        await Axios.get("https://caliber2-mock.revaturelabs.com/mock/training/batch/current")
-        .then((response:any) => {
+
+        await axiosInstance().then((result) => {
+            result.get("/client/batch/email/" + userEmail)
+            .then((response:any) => {
 
             if (response != null)
             {
+                console.log(response);
+                console.log(response.data);
                 //individual batch info is placed into the array from above
-                for (let i of response.data)
+                for (let batchData of response.data)
                 {
-                    const batchCardInfo = {  ...response.data[i] }
+                    const batchCardInfo = {  ...batchData };
                     batchArray.batches.push(batchCardInfo);
-                    batchDetailedArray.batches.push(batchCardInfo);
                 }
 
                 //the "batch state" is set to be whatever was extracted from the db
                 dispatch(setBatchState(batchArray));
-                dispatch(setBatchDetailsState(batchDetailedArray)); /** as well as the batchDetailsState */
                 
             }
             setSpinner(false);
@@ -132,14 +130,36 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
             console.log(error);
             setSpinner(false);
         });
+        })
 
-        setSpinner(false);
+        //setSpinner(false);
 
     };
 
+    /** gets user info*/
+    const getEmail = async () => {
+
+        setSpinner(true);
+
+        const checkRole = Auth.currentUserInfo();
+
+        const checker = await checkRole.then((result) => {
+            console.log(result.attributes["email"]);
+
+            if(result.attributes["email"] != null)
+            {
+                getBatches(result.attributes["email"]);
+            }
+                
+            return result.attributes["email"];
+        })
+            
+    }
+
     if(hasData == false)
     {
-        getBatches();
+        setRecievedData(true);
+        getEmail();
     }
 
     return(
@@ -148,7 +168,6 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
                 <DropdownItem header>Development Options</DropdownItem>
                 <DropdownItem onClick={() => resetBatches()}>Simulate no batches</DropdownItem>
                 <DropdownItem onClick={() => getSimulatedBatches()}>Simulate 3 batches</DropdownItem>
-                <DropdownItem onClick={() => getBatches()}>Get ALL Mock Batches from Caliber (Requires CORS Extension)</DropdownItem>
             </NavBar>
 
             {/* Modal for Requesting an Intervention, will be moved to batch info page */}
@@ -163,7 +182,11 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
                     <hr style={{borderTop:"2px solid #474C55"}} />
                     <Container>
                         {/* displays spinner while loading */}
-                        { hasSpinner ? <div className="row justify-content-center"><Spinner  color="info" /></div> : <span/> }
+                        { hasSpinner ? 
+                        <div className="row justify-content-center">
+                            <Spinner  color="info" style={{ margin: 20 }}/>
+                        </div> 
+                        :
                         <Row>
                         {
                             props.batches.map((element,index) => (
@@ -175,6 +198,7 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
                             ))
                         }
                         </Row>
+                    }
                     </Container>
                 </Col>
                 <Col md="auto">
@@ -184,8 +208,15 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
             :
             <>
                 {/* displays spinner while loading */}
-                { hasSpinner ? <Spinner  color="info" /> : <span/> }
-                <RequestBatchCard />
+                {
+                hasSpinner ?
+                <div className="row justify-content-center">
+                    <Spinner  color="info" style={{ margin: 20 }}/>
+                </div>  
+                :
+                <RequestBatchCard /> 
+                }
+                
             </>
             
             }

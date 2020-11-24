@@ -26,22 +26,22 @@ export const AssociateCardFactory:React.FC<any> = (props:IAssociate) => {
         
        let i = 0;
 
-      console.log(props.associateAssignments)
+      //console.log(props.associateAssignments)
       /**
        * Loop through the associateAssignments array that was passed in the props
        * and add them to the cards array.
        */
       try{
         for(let assoc of props.associateAssignments){
-          console.log(assoc)
-          cards.push(<AssociateCard {...assoc.associate}/>);
+          //console.log(assoc)
+          cards.push(<AssociateCard key={i} {...assoc.associate}/>);
           i++;
          }
       } catch (error){
-        console.log("no associate found")
+        //console.log("no associate found")
       }
        
-       console.log("factory ran")
+       //console.log("factory ran")
         
     })();
 

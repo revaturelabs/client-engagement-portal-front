@@ -45,6 +45,27 @@ const BatchInformationPage: React.FC<IProps> = (props: IProps) => {
     const passedInId = props.match.params.batchId;
     console.log(passedInId); //this returns the passed in id
 
+    let givenTrainer:string;
+    if(props.batches[0].employeeAssignments != null)
+    {
+        givenTrainer = props.batches[0].employeeAssignments[0].employee.firstName + " " +
+        props.batches[0].employeeAssignments[0].employee.lastName;
+    }
+    else
+    {
+        givenTrainer = "N/A";
+    }
+
+    let associateArray:any;
+    if(props.batches[0].employeeAssignments != null)
+    {
+        associateArray = props.batches[0].associateAssignments;
+    }
+    else
+    {
+        associateArray = [{}];
+    }
+
     const [hasSpinner, setSpinner] = useState(false);
     const [hasData, setRecievedData] = useState(false);
 
@@ -69,7 +90,8 @@ const BatchInformationPage: React.FC<IProps> = (props: IProps) => {
         };
 
         //get data from server based on user id that was given
-        await Axios.get("http://ec2-35-174-62-5.compute-1.amazonaws.com:9011/client/batch/" + batchId)
+        await axiosInstance().then((result) => {
+            result.get("/client/batch/" + batchId)
             .then((response: any) => {
                 console.log(response.data);
 
@@ -88,8 +110,9 @@ const BatchInformationPage: React.FC<IProps> = (props: IProps) => {
                 console.log(error);
                 setSpinner(false);
             });
+        })
 
-        setSpinner(false);
+        //setSpinner(false);
     };
 
     const getBatchDataNow = () => {
@@ -123,9 +146,8 @@ const BatchInformationPage: React.FC<IProps> = (props: IProps) => {
                             batchName: props.batches[0].name,
                             endDate: props.batches[0].endDate,
                             skill: props.batches[0].skill,
-                            trainer: props.batches[0].employeeAssignments[0].employee.firstName + " " +
-                                props.batches[0].employeeAssignments[0].employee.lastName,
-                            associateAssignments: props.batches[0].associateAssignments,
+                            trainer: givenTrainer,
+                            associateAssignments: associateArray,
                         }]} />
                 }
 
