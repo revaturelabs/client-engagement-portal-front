@@ -54,15 +54,11 @@ export const BatchForms: React.FC = () => {
       setBatchInfo([...tempArray]);
       }
 
-<<<<<<< HEAD
       const getMappedBatches = async ()=>{
           const response = await axios.get("http://ec2-35-174-62-5.compute-1.amazonaws.com:9011/admin/batch/allNames")
       }
   
   
-=======
-
->>>>>>> 9ec81d97ba1ff45c6759f86bea283e4bfca58be4
       /**
        * @function useEffect
        * call the getBatches function on load of page
@@ -73,7 +69,6 @@ export const BatchForms: React.FC = () => {
       },[]);
 
 
-<<<<<<< HEAD
       /**
        * 
        * @param event 
@@ -147,8 +142,6 @@ export const BatchForms: React.FC = () => {
     // } 
 
       
-=======
->>>>>>> 9ec81d97ba1ff45c6759f86bea283e4bfca58be4
     return (
         <>
          <Row className="justify-content-center my-button-row">
@@ -255,12 +248,8 @@ export const BatchForms: React.FC = () => {
                             {unmapBatchInfo.map((e:any,i:any) =>
                             <option key={i} value={e.id} >{e.name}</option>
                             )}
-<<<<<<< HEAD
                             
                         </Input>    
-=======
-                        </Input>
->>>>>>> 9ec81d97ba1ff45c6759f86bea283e4bfca58be4
                         <input className="modal-batch-form-submit" type="submit" value="Submit"></input>
                     </Form>
             </ModalBody>

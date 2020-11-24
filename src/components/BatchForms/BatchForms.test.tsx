@@ -10,12 +10,17 @@ const wrapper = shallow(<BatchForms />);
 
 /**
  * @field
- * mockAxiosGet is mocking axios get request so it does not call the request 
+ * mockAxiosGet is mocking axios get request so it does not call the request from the application
  */
 const mockAxiosGet = jest.spyOn(axios,"get");
 /**
+ * @field
+ * mockAxiosPut is mocking axios put request so it does not call the request form the application 
+ */
+const mockAxiosPut = jest.spyOn(axios,"put");
+/**
  * @function beforeEach
- * before each test give the mocked axios instance information
+ * before each test give the mocked axios request with the information provided
  */
 beforeEach(()=>{
 
@@ -26,7 +31,16 @@ beforeEach(()=>{
                 { id: "Test 2", name: "Mock Batch 2" },
             ],
         });
-    })
+    });
+
+    mockAxiosPut.mockImplementation(()=>{
+      return Promise.resolve({
+        data:[
+          {id:"Test 3", name:"Mock Batch 3"},
+          {id:"Test 4", name:"Mock Batch 4"},
+        ]
+      });
+    });
 })
     
 /**
@@ -114,4 +128,6 @@ describe("BatchForms", () => {
     console.log(wrapper2.debug());
     expect(wrapper2.find("#map-options").at(1).text()).toContain("Mock Batch 1");
   });
+
+
 });
