@@ -12,17 +12,25 @@ export const BatchForms: React.FC = () => {
     const [mapModal, setMapModal] = useState(false);
     const [unmapModal, setUnmapModal] = useState(false);
 
+    /**
+     * @function toggleMap
+     * toggles the mobile map batch modal 
+     */
     const toggleMap = () => setMapModal(!mapModal);
+    /**
+     * @function toggleUnmap
+     * toggle the mobile unmap batch form
+     */
     const toggleUnmap = () => setUnmapModal(!unmapModal);
-    
+
     const [batchInfo, setBatchInfo] = useState<any>([]);
 
     /**
      * @function getBatches
-     * loops though batch objects to extract and assign appropriate data 
+     * loops though batch objects to extract and assign appropriate data
      * @async
      * Creates an axios get call to gather batch information
-     * 
+     *
      */
     const getBatches = async () => {
         const response = await axios.get("https://caliber2-mock.revaturelabs.com/mock/training/batch/current");
@@ -40,8 +48,8 @@ export const BatchForms: React.FC = () => {
        */
       setBatchInfo([...tempArray]);
       }
-  
-  
+
+
       /**
        * @function useEffect
        * call the getBatches function on load of page
@@ -50,22 +58,22 @@ export const BatchForms: React.FC = () => {
         getBatches();
       },[]);
 
-      
+
     return (
         <>
          <Row className="justify-content-center my-button-row">
-                <Col xs="2" sm="3" lg="5" />   
+                <Col xs="2" sm="3" lg="5" />
                 <Col xs="8" sm="6" lg="2">
                     <button className="batch-form-button" onClick={toggleMap}>Map Batch to Client</button>
                 </Col>
-                <Col xs="2" sm="3" lg="5" />    
+                <Col xs="2" sm="3" lg="5" />
             </Row>
             <Row className="justify-content-center my-button-row">
-                <Col xs="2" sm="3" lg="5" />   
+                <Col xs="2" sm="3" lg="5" />
                 <Col xs="8" sm="6" lg="2">
                     <button className="batch-form-button" onClick={toggleUnmap}>Unmap Client from Batch</button>
                 </Col>
-                <Col xs="2" sm="3" lg="5" />    
+                <Col xs="2" sm="3" lg="5" />
             </Row>
             <Row className="justify-content-between my-form-row">
                 <Col sm="1" md="1" lg="2" xl="3"></Col>
@@ -83,7 +91,7 @@ export const BatchForms: React.FC = () => {
                             {batchInfo.map((e:any,i:any) =>
                                 <option key={i} id={e.id} >{e.name}</option>
                             )}
-                        </Input>    
+                        </Input>
                         <input className="batch-form-submit" type="submit" value="Submit" ></input>
                     </Form>
                 </Col>
@@ -127,10 +135,10 @@ export const BatchForms: React.FC = () => {
                             {batchInfo.map((e:any,i:any) =>
                                 <option key={i} id={e.id} >{e.name}</option>
                             )}
-                        </Input>    
+                        </Input>
                         <input className="modal-batch-form-submit" type="submit" value="Submit" ></input>
                     </Form>
-            </ModalBody>  
+            </ModalBody>
          </Modal>
 
          {/* UnMap Modal */}
@@ -151,10 +159,10 @@ export const BatchForms: React.FC = () => {
                             {batchInfo.map((e:any,i:any) =>
                                 <option key={i} id={e.id} >{e.name}</option>
                             )}
-                        </Input>    
+                        </Input>
                         <input className="modal-batch-form-submit" type="submit" value="Submit"></input>
                     </Form>
-            </ModalBody>  
+            </ModalBody>
          </Modal>
         </>
 

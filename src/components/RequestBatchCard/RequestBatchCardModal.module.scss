@@ -16,6 +16,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     position: absolute;
     margin-left: 300px;
     border: 1px solid #F26925;
@@ -31,4 +32,8 @@
     cursor: pointer;
     background-color: white;
     color: #F26925;
+}
+
+.XButton:active {
+    transform: scale(.97);
 }

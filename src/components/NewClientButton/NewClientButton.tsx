@@ -14,9 +14,7 @@ import {
   Col,
   Container,
 } from "reactstrap";
-import { isConstructorDeclaration } from "typescript";
 import  '../../scss/NewClientButton.scss';
-import { cpuUsage } from "process";
 import { axiosInstance } from "../../util/axiosConfig";
 import { useDispatch } from "react-redux";
 import { logout } from "../../actions/UserActions";
@@ -161,28 +159,9 @@ export const NewClientButton: React.FC<any> = () => {
       </Button>
 
       <Modal isOpen={modal} toggle={toggle}>
-        <Row>
-          <Col xs="6">
-            <ModalHeader toggle={toggle} className="container create-account-modal-header">
-              Create Account
-            </ModalHeader>
-          </Col>
-          <Col xs="6">
-            <Button
-              className="close"
-              style={{
-                backgroundColor: "white",
-                color: "#F26925",
-                border: "none",
-                fontWeight: 800,
-                padding: "15px",
-              }}
-              onClick={toggle}
-            >
-              X
-            </Button>
-          </Col>
-        </Row>
+        <ModalHeader toggle={toggle} className="container create-account-modal-header">
+          Create Account
+        </ModalHeader>
         <Form onSubmit={(event:React.FormEvent<HTMLFormElement>) => registerUser(event)}>
           <ModalBody>
             <FormGroup>

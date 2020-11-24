@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
-import hands from '../../assets/engagementPortalLogo.svg';
 import userThumb from '../../assets/user-thumb.png';
 import passThumb from '../../assets/pass-thumb.png';
 import { Auth } from 'aws-amplify';
 import  '../../scss/loginStyles.scss';
-import ceplogo from '../../assets/engagementPortalLogo.svg';
 import ceplogo2 from '../../assets/engagementPortalLogov2.svg';
 import { useDispatch } from 'react-redux';
 import { IUserAdmin, IUserClient } from '../../_reducers/UserReducer';
@@ -18,7 +16,7 @@ interface ILoginProps {
 /**
  * @function LoginComponent
  * Component that allows login functionality. Takes in an email and password.
- * 
+ *
  * @param props (DEPRECATED USAGE) Informs whether this component is rendered on the admin login or the client login.
  */
 export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
@@ -34,7 +32,7 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
      * @async
      * Makes a call to AWS Cognito to authenticate login details,
      *  then makes a call to the API gateway to retrieve user info.
-     * 
+     *
      * @param event contains the click event that calls this function.
      */
     const handleSubmit = async (event: any) => {
@@ -86,7 +84,7 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
 
     }
 
-    return (
+    return(
         <>
             {isClient ? <Redirect to="/home" /> : isAdmin ? <Redirect to="/admin" /> :
                 <form onSubmit={handleSubmit} className="login-form">
@@ -117,11 +115,7 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
                             </div>
                         </div>
 
-                        <button className="test2" type="submit"
-                            style={{ margin: "10px", lineHeight: 2.2, width: "70%", border: "none", backgroundColor: "#F26925", color: "white", fontSize: "20px" }}>
-
-                            Login
-                        </button>
+                        <button className="test2 login-submit" type="submit">Login</button>
                     </div >
                 </form >
             }

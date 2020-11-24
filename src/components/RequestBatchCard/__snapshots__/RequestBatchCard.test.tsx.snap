@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RequestBatchCard Component Should Match the Snapshot 1`] = `
+<div
+  className="RequestBatchCard"
+>
+  <div
+    className="RequestBatchCardText"
+  >
+    No batches have been selected for you just yet. Our administrators will assign you one soon. In the meantime, you’re welcome to click the button below to notify one of our administrators.
+  </div>
+  <div
+    className="RequestBatchButton"
+  >
+    Request Batch
+  </div>
+</div>
+`;
