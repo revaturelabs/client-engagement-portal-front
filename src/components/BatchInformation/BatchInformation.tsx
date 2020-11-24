@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Card, CardBody, CardFooter, CardHeader, Col, Row, Spinner } from 'reactstrap';
 import "../../scss/BatchInformation.scss"
 import reactReduxLogo from '../../assets/react-redux-logo.png';
@@ -34,6 +34,9 @@ interface IProps{
  * data about that batch can be retrieved.
  */
 export const BatchInformation:React.FC<IProps> = (props:IProps) => {
+
+    const [showInterventionModal, setShowInterventionModal] = useState(false);
+    const [isOrangeBtn, setOrangeBtn] = useState(false);
 
     console.log(props.batches[0]);
 
@@ -99,15 +102,13 @@ export const BatchInformation:React.FC<IProps> = (props:IProps) => {
                     </Card>
                     
                     <h1>Batch Engineers: ({props.batches[0].associateAssignments.length})</h1>
-
                         <AssociateCardFactory {...props.batches[0]}/>
-                    {/* </Carousel> */}
 
                 </div>
              </Col>
              <Col md="1" lg="2"></Col>
 
-             <PlanInterventionModalv2></PlanInterventionModalv2>
+             <PlanInterventionModalv2 />
 
          </Row>
         </>

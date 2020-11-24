@@ -1,21 +1,21 @@
 @import "revature-colors.scss";
 
 .login-wrapper {
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    max-width: 100%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    text-align: center;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  max-width: 100%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
 }
-.login-wrapper .logo{
-    display:block;
-    position:relative;
-    left:0;
-    right:0;
-    margin:auto;
+.login-wrapper .logo {
+  display: block;
+  position: relative;
+  left: 0;
+  right: 0;
+  margin: auto;
 }
 .login-form {
     text-align: center;
@@ -34,6 +34,23 @@
     height: 80px;
     width: auto;
     margin: 5px;
+}
+.login-submit {
+    margin: 10px;
+    line-height: 2.2;
+    width: 70%;
+    background-color: #F26925; 
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    box-sizing: border-box;
+    border-radius: 15px;
+    border: 3px solid #F26925;
+    transition: all 0.2s ease 0s;
+}
+.login-submit:hover {
+    background-color: white; 
+    color: #F26925;
 }
 
 .cep-logo-area {
@@ -88,6 +105,12 @@
     color: $rev-orange;
 }
 .cep-logo-area img {
-    // width: 100px;
-    // height: 60px;
+  // width: 100px;
+  // height: 60px;
+  font-weight: 400;// does nothing except for keeping the compiler from whining
+}
+.spinner {
+  position: absolute;
+  right: 5px;
+  top: 15%;
 }

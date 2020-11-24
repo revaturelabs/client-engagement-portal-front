@@ -12,8 +12,12 @@ import {
   Input,
   Row,
   Col,
+  Container,
 } from "reactstrap";
 import  '../../scss/NewClientButton.scss';
+import { axiosInstance } from "../../util/axiosConfig";
+import { useDispatch } from "react-redux";
+import { logout } from "../../actions/UserActions";
 
 
 //This component includes the button for a new client account
@@ -27,6 +31,8 @@ import  '../../scss/NewClientButton.scss';
  */
 export const NewClientButton: React.FC<any> = () => {
   const [modal, setModal] = useState(false);
+
+  const dispatch = useDispatch();
 
   /**
    * @function toggle
@@ -62,6 +68,8 @@ export const NewClientButton: React.FC<any> = () => {
     const email = event.currentTarget["email"].value;
     const password = event.currentTarget["password"].value;
     const role = event.currentTarget["select"].value;
+    const firstName = event.currentTarget["firstName"].value;
+    const lastName = event.currentTarget["lastName"].value;
 
     // Checks cognito if they have the admin role in the current session  for security. If not exit out
     // This checking operation takes about 150 MS
@@ -71,6 +79,7 @@ export const NewClientButton: React.FC<any> = () => {
     const checkRole = Auth.currentUserInfo();
     const checker = await checkRole.then(function (result) {
       if (result.attributes["custom:userRole"] !== "admin") {
+        dispatch(logout());
         return false;
       } else {
         return true;
@@ -92,6 +101,8 @@ export const NewClientButton: React.FC<any> = () => {
         password: password,
         attributes: {
           "custom:userRole": role, // custom role for assigning user to admin or client role
+          "given_name": firstName,
+          "family_name": lastName
         },
       });
 
@@ -106,10 +117,27 @@ export const NewClientButton: React.FC<any> = () => {
         signUpResult.codeDeliveryDetails
       );
 
+      if(role === "client"){
+        (await axiosInstance()).post("/client/", { // Client does not have firstName and lastName; this must be retrieved from Cognito upon login
+          clientBatches: [],
+          clientId: 0,
+          companyName: event.currentTarget["companyName"].value,
+          email: email,
+          phoneNumber: event.currentTarget["phoneNumber"].value,
+        });
+      } else if(role === "admin") {
+        (await axiosInstance()).post("/admin/new", { // Should also retrieve Admin firstName and lastName from Cognito; it saves a database request
+          adminId: 0,
+          email: email,
+          firstName: firstName,
+          lastName: lastName
+        })
+      }
+
       // console.log(signUpResult.user);
       // console.log(signUpResult.codeDeliveryDetails);
     } catch (error) {
-      console.log("Couldn't sign up: ", error);
+      console.log("Couldn't complete signup: ", error);
     }
   };
 
@@ -154,15 +182,32 @@ export const NewClientButton: React.FC<any> = () => {
               <Label>Email</Label>
               <Input type="text" required name="email"></Input>
             </FormGroup>
-            <FormGroup>
-              <Label>Name</Label>
-              <Input type="text" required></Input>
-            </FormGroup>
-            {accountType === "client" ? (
+            <Container>
+              <Row>
+                <Col>
+                  <FormGroup>
+                    <Label>First Name</Label>
+                    <Input type="text" required name="firstName"></Input>
+                  </FormGroup>
+                </Col>
+                <Col>
+                  <FormGroup>
+                    <Label>Last Name</Label>
+                    <Input type="text" required name="lastName"></Input>
+                  </FormGroup>
+                </Col>
+              </Row>
+            </Container>
+            {accountType === "client" ? (<>
               <FormGroup>
                 <Label>Company Name</Label>
-                <Input type="text"></Input>
+                <Input type="text" required name="companyName"></Input>
               </FormGroup>
+              <FormGroup>
+                <Label>Phone Number</Label>
+                <Input type="tel" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required name="phoneNumber"></Input>
+              </FormGroup>
+              </>
             ) : (
                 <></>
               )}
@@ -177,7 +222,7 @@ export const NewClientButton: React.FC<any> = () => {
             </FormGroup>
             <FormGroup>
               <Label>Confirm Password</Label>
-              <Input type="password"></Input>
+              <Input type="password" name="confirmation"></Input>
             </FormGroup>
           </ModalBody>
 

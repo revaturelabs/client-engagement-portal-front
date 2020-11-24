@@ -14,10 +14,10 @@ export const initialBatchState: IBatchState = {
 }
 
 /**
- *
- * This reducer goes through every action type that exists in this program but will
- *  only respond to the one that's called SET_BATCHES
- *
+ * 
+ * This reducer goes through every action type that exists in this program but will 
+ * only respond to the one that's called SET_BATCHES
+ * 
  * @param batchState the batch card state in the store is passed in automatically
  * @param action goes through every action in the program
  *

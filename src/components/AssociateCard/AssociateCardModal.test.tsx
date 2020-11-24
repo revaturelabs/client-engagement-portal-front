@@ -1,11 +1,11 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 import {AssociateCardModal} from './AssociateCardModal';
-import { IAssociate } from '../../_reducers/AssociateReducer';
+import { IAssociateSingle } from '../../_reducers/AssociateReducer';
 import {Button, Modal} from 'reactstrap';
 
 let wrapper: any;
-let fakeData:IAssociate;
+let fakeData:IAssociateSingle;
 
 /**
  * This represents associate data to be used in the tests below.
@@ -14,29 +14,25 @@ beforeAll(() => {
     fakeData = {
         firstName: "Bill",
         lastName: "Gates",
-        testScores: [{
-            week: 1,
-            score: 90
-        }, {
-            week: 2,
-            score: 80
-        }, {
-            week: 3,
-            score: 70
-        }, {
-            week: 4,
-            score: 50
-        }],
-        techScores: [{
-            tech: "Java",
-            score: 80
-        }, {
-            tech: "React",
-            score: 70
-        }, {
-            tech: "SQL",
-            score: 90
-        }]
+        grades: [{
+            dateReceived: "2020-10-21",
+            gradeId: 2,
+            score: 90,
+            traineeId: "TR-1111"
+        },
+        {
+            dateReceived: "2020-10-14",
+            gradeId: 1,
+            score: 60,
+            traineeId: "TR-1111"
+        },
+        {
+            dateReceived: "2020-10-28",
+            gradeId: 3,
+            score: 72,
+            traineeId: "TR-1111"
+        }
+        ]
     };
 });
 
@@ -70,41 +66,24 @@ test("modal can toggle on and off", () => {
  * This test to see if the first and last name is rendered
  * correctly
  */
-test("First and lasr name should show", () => {
-    expect(wrapper.find("#firstName").render().text().toBe("Bill"));
-    expect(wrapper.find("#lastName").render().text().toBe("Gates"));
+test("First and last name should show", () => {
+    expect(wrapper.find("#firstName").render().text()).toBe("Bill");
+    expect(wrapper.find("#lastName").render().text()).toBe("Gates");
 })
 
 /**
- * Usinf our fake data the number of divs should be 
- * equal to the number of weeks, which is 4 in this case.
+ * Using our fake data the number of divs should be 
+ * equal to the number of grades, which is 3 in this case.
  */
-test("testMap should have 4 divs", () => {
-    const divs = wrapper.find("#weekAndScore");
-    expect(divs.length).toBe(4);
+test("gradeMap should have 4 divs", () => {
+    const divs = wrapper.find("#grade");
+    expect(divs.length).toBe(3);
 })
 
 /**
  * The average test score should equal to the sum of all the weekly scores
  * divided by the number of weeks.
  */
-test("test average should be 72.5%", () => {
-    expect(wrapper.find("#avgTest").render().text()).toBe("72.5%");
-})
-
-/**
- * Using our fake data the number of divs should be
- * equal to the number of tech, which is 3 in this case.
- */
-test("techMap should have 3 divs", () => {
-    const divs = wrapper.find("#techAndScore");
-    expect(divs.length).toBe(3);
-})
-
-/**
- * The average tech score should equal to the sum of all the tech scores
- * divided by the number of tech.
- */
-test("tech average should be 80%", () => {
-    expect(wrapper.find("#avgTech").render().text()).toBe("80%");
+test("grade average should be 74.00%", () => {
+    expect(wrapper.find("#avgGrade").render().text()).toBe("74.00%");
 })

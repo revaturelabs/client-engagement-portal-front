@@ -13,30 +13,10 @@ import { IAssociateSingle } from '../../_reducers/AssociateReducer'
  */
 export const AssociateCard: React.FC<IAssociateSingle> = (props: IAssociateSingle) => {
 
-
-    const fakeData: IAssociateSingle = { //just for testing purposes
-
+    //just for testing purposes
+    const fakeData: IAssociateSingle = {
         firstName: "Bill",
         lastName: "Gates",
-        grades: [{
-            dateReceived: "2020-10-21",
-            gradeId: 2,
-            score: 90,
-            traineeId: "TR-1111"
-        },
-        {
-            dateReceived: "2020-10-14",
-            gradeId: 1,
-            score: 60,
-            traineeId: "TR-1111"
-        },
-        {
-            dateReceived: "2020-10-28",
-            gradeId: 3,
-            score: 72,
-            traineeId: "TR-1111"
-        }
-        ],
         testScores: [{
             week: 1,
             score: 90
@@ -60,9 +40,7 @@ export const AssociateCard: React.FC<IAssociateSingle> = (props: IAssociateSingl
             tech: "SQL",
             score: 90
         }]
-
     };
-
     /**
      * This field will calculate the average test score of the associate.
      */
@@ -129,20 +107,28 @@ export const AssociateCard: React.FC<IAssociateSingle> = (props: IAssociateSingl
     return (
         <div  style={{padding: "5px"}}>
             <Card className="aso-card">
+                {/* div for name and average */}
                 <div>
                     <h5 id="nameHolder" font-family={"$rev-font"}>{props.firstName} {props.lastName}</h5>
                     <h5 font-family={"$rev-font"}>Average:</h5>
                     <h4 id="averageHolder" font-family={"$rev-font"}>{avg()}%</h4>
                 </div>
+                {/* div for last quiz grade */}
                 <div>
                     <h5 id="scoreHolder">Latest Test Score: {score()}%</h5>
                 </div>
+                {/* div for holding the modal */}
                 <div style={{ display: "block", textAlign: "center", alignContent: "center", justifyContent: "center" }}>
                     <AssociateCardModal {...props} />
                 </div>
             </Card>
 
         </div>
+<<<<<<< HEAD
     )
 
 }
+=======
+    );
+}
+>>>>>>> 44afed6996272cf09071bf858f5298e5c300dfd0
