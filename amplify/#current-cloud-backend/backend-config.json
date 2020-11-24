@@ -1,0 +1,10 @@
+{
+  "auth": {
+    "clientengagementport34947651": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}

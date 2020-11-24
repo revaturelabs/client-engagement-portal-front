@@ -8,7 +8,7 @@ import '../../scss/BatchFormStyle.scss';
  * Renders the Map and Unmap forms on the page.
  */
 export const BatchForms: React.FC = () => {
-    
+
     const [mapModal, setMapModal] = useState(false);
     const [unmapModal, setUnmapModal] = useState(false);
 
@@ -36,7 +36,7 @@ export const BatchForms: React.FC = () => {
         const response = await axios.get("https://caliber2-mock.revaturelabs.com/mock/training/batch/current");
         const tempArray = [];
         for (const r of response.data) {
-            const id = r.id
+            const id = r.id;
             const name = r.name;
             tempArray.push({ id, name });
         }

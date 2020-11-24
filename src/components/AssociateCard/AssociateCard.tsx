@@ -2,7 +2,7 @@ import React from 'react';
 import { Card } from 'reactstrap';
 import { AssociateCardModal } from './AssociateCardModal';
 import '../../scss/associate-card.scss'
-import { IAssociate } from '../../_reducers/AssociateReducer'
+import { IAssociateSingle } from '../../_reducers/AssociateReducer'
 
 /**
  * This component shows a card giving some brief information about an associate.
@@ -11,10 +11,10 @@ import { IAssociate } from '../../_reducers/AssociateReducer'
  * 
  * @returns TSX Element to render
  */
-export const AssociateCard: React.FC<IAssociate> = (props: IAssociate) => {
+export const AssociateCard: React.FC<IAssociateSingle> = (props: IAssociateSingle) => {
 
     //just for testing purposes
-    const fakeData: IAssociate = {
+    const fakeData: IAssociateSingle = {
         firstName: "Bill",
         lastName: "Gates",
         testScores: [{
@@ -41,7 +41,6 @@ export const AssociateCard: React.FC<IAssociate> = (props: IAssociate) => {
             score: 90
         }]
     };
-
     /**
      * This field will calculate the average test score of the associate.
      */
@@ -55,15 +54,15 @@ export const AssociateCard: React.FC<IAssociate> = (props: IAssociate) => {
          * Otherwise, add each test score to a total, divide by the number of scores,
          * and return the average score
          */
-        if (props.testScores !== undefined) {
-            for (let test of props.testScores) {
+        if (props.grades !== undefined) {
+            for (let test of props.grades) {
                 sc += test.score;
                 weeks++;
             }
             sc = sc / weeks;
         }
 
-        return sc;
+        return sc.toFixed(2);
     }
 
     /**
@@ -73,25 +72,32 @@ export const AssociateCard: React.FC<IAssociate> = (props: IAssociate) => {
 
         let value = 0;
         let i = 0;
+        let size = 0;
+        let gId = 0;
+        if (props.grades?.length != undefined) {
+            size = props.grades.length;
+        }
 
         /**
          * If there are no test scores, return 0.
          * Otherwise, set the value to be equal to the last test.
          */
-        if (props.testScores !== undefined) {
-            for (; props.testScores[i];) {
+        if (props.grades !== undefined) {
+            while (i < size) {
                 /**
-                * For each item in test scores, change the value to match.
+                * For each item in test scores, if the gradeId is greater than the held one, change the value to match.
                 * When it stops iterating, we'll have the last value.
                 */
-                value = props.testScores[i].score;
+                if (props.grades[i].gradeId > gId) {
+                    value = props.grades[i].score;
+                    gId = props.grades[i].gradeId;
+                }
                 i++;
             }
         }
-        return value;
+        return value.toFixed(2);
     }
 
-    //there are four places here where fake data will be replaced with props
     /**
      * This function returns the TSX element itself.
      * It contains a button to toggle a card,
@@ -113,12 +119,10 @@ export const AssociateCard: React.FC<IAssociate> = (props: IAssociate) => {
                 </div>
                 {/* div for holding the modal */}
                 <div style={{ display: "block", textAlign: "center", alignContent: "center", justifyContent: "center" }}>
-                    <AssociateCardModal {...fakeData} />
+                    <AssociateCardModal {...props} />
                 </div>
-
             </Card>
 
         </div>
-    )
-
+    );
 }

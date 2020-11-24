@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
-import userThumb from '../../assets/user-thumb.png';
-import passThumb from '../../assets/pass-thumb.png';
-import { Auth } from 'aws-amplify';
-import '../../scss/loginStyles.scss';
-import ceplogo2 from '../../assets/engagementPortalLogov2.svg';
+import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
+import userThumb from "../../assets/user-thumb.png";
+import passThumb from "../../assets/pass-thumb.png";
+import { Auth } from "aws-amplify";
+import "../../scss/loginStyles.scss";
+import ceplogo2 from "../../assets/engagementPortalLogov2.svg";
+import { Spinner } from "reactstrap";
+import { IUserAdmin, IUserClient } from "../../_reducers/UserReducer";
+import { useDispatch } from 'react-redux';
+import { adminLogin, clientLogin } from '../../actions/UserActions';
 
 interface ILoginProps {
-    loginType: string
+    loginType?: string;
 }
 
 /**
@@ -21,6 +25,10 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
 
     const [isClient, setClient] = useState(false);
     const [isAdmin, setAdmin] = useState(false);
+    const [spinner, setSpinner] = useState(false);
+    const [loginMsg, setLoginMsg] = useState<String>("");
+
+    const dispatch = useDispatch();
 
     /**
      * @function handleSubmit
@@ -33,6 +41,7 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
      */
     const handleSubmit = async (event: any) => {
         event.preventDefault();
+        setSpinner(true);
         const form = event.currentTarget;
         if (form.checkValidity() === false)
             event.stopPropagation();
@@ -47,10 +56,26 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
 
             switch (user.attributes["custom:userRole"]) { // Assigns what page to redirect to based upon what role the user has
                 case "client":
+                    const statefulClient: IUserClient = {
+                        email: user.attributes.email,
+                        firstName: user.attributes["given_name"],
+                        lastName: user.attributes["family_name"],
+                    }
+
+                    dispatch(clientLogin(statefulClient));
+
                     setAdmin(false);
                     setClient(true);
                     break;
                 case "admin":
+                    const statefulAdmin: IUserAdmin = {
+                        email: user.attributes.email,
+                        firstName: user.attributes["given_name"],
+                        lastName: user.attributes["family_name"],
+                    }
+
+                    dispatch(adminLogin(statefulAdmin));
+
                     setClient(false);
                     setAdmin(true);
                     break;
@@ -58,49 +83,58 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
                     setClient(false);
                     setAdmin(false);
             }
+
+            setSpinner(false);
         } catch (error) {
             console.log("Couldn't sign in: ", error);
+            setSpinner(false);
+            setLoginMsg(error.message);
         }
-
     }
+};
 
-    return(
-        <>
-            {isClient ? <Redirect to="/home" /> : isAdmin ? <Redirect to="/admin" /> :
-                <form onSubmit={handleSubmit} className="login-form">
+return (
+    <>
+        {isClient ? <Redirect to="/home" /> : isAdmin ? <Redirect to="/admin" /> :
+            <form onSubmit={handleSubmit} className="login-form">
 
-                    <div style={{ maxHeight: "90%" }}>
-                        <div style={{ position: "relative", textAlign: "center" }}>
-                            <div className="login-header">
-                                Client Engagement Portal
+                <div style={{ maxHeight: "90%" }}>
+                    <div style={{ position: "relative", textAlign: "center" }}>
+                        <div className="login-header">
+                            Client Engagement Portal
                         </div>
-                            <div className="cep-logo-area">
-                                <img src={ceplogo2} alt="cep-logo" width="200px" />
-                            </div>
+                        <div className="cep-logo-area">
+                            <img src={ceplogo2} alt="cep-logo" className="cep-logo" />
                         </div>
+                    </div>
 
-                        <div style={{ position: "relative" }}>
-                            <input type="email" required className="form-control" name="email" placeholder="E-mail"
-                                style={new CEPLoginInputStyle()} />
-                            <div style={{ position: "absolute", top: "45%", left: "21%", transform: "translate(-50%, -50%)" }}>
-                                <img src={userThumb} alt="email thumbnail" className="userthumbcheck" />
-                            </div>
+                    <div style={{ color: "#FF0000" }}>{loginMsg}</div>
+
+                    <div style={{ position: "relative" }}>
+                        <input type="email" required className="form-control" name="email" placeholder="E-mail"
+                            style={new CEPLoginInputStyle()} />
+                        <div style={{ position: "absolute", top: "45%", left: "21%", transform: "translate(-50%, -50%)" }}>
+                            <img src={userThumb} alt="email thumbnail" className="userthumbcheck" />
                         </div>
+                    </div>
 
-                        <div style={{ position: "relative" }}>
-                            <input type="password" required className="form-control" name="password" placeholder="Password"
-                                style={new CEPLoginInputStyle()} />
-                            <div style={{ position: "absolute", top: "45%", left: "21%", transform: "translate(-50%, -50%)" }}>
-                                <img src={passThumb} alt="password thumbnail" className="passthumbcheck" />
-                            </div>
+                    <div style={{ position: "relative" }}>
+                        <input type="password" required className="form-control" name="password" placeholder="Password"
+                            style={new CEPLoginInputStyle()} />
+                        <div style={{ position: "absolute", top: "45%", left: "21%", transform: "translate(-50%, -50%)" }}>
+                            <img src={passThumb} alt="password thumbnail" className="passthumbcheck" />
                         </div>
+                    </div>
 
-                        <button className="login-submit" type="submit">Login</button>
-                    </div >
-                </form >
-            }
-        </>
-    );
+                    <button className="test2 login-btn login-submit" type="submit">
+                        Login
+                            {spinner ? <Spinner color="info" className="spinner" /> : <span />}
+                    </button>
+                </div >
+            </form >
+        }
+    </>
+);
 }
 
 export class CEPLoginInputStyle implements React.CSSProperties {
@@ -118,7 +152,7 @@ export class CEPLoginInputStyle implements React.CSSProperties {
         this.borderRadius = "5px";
         this.margin = "2px";
         this.width = "70%";
-        this.display = "inline-block"
+        this.display = "inline-block";
         this.boxShadow = "inset 1px 2px 0 0 #ddd, inset 0 4px 0 0 #eee, inset 2px 6px 0 0 #fef";
     }
 }

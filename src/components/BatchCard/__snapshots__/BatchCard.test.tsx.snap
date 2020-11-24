@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Batch Card Component Should render batch card with the information given 1`] = `
+<div
+  className="batchcardcomp rev-card justify-content-center text-center"
+>
+  <div
+    className="row justify-content-center"
+  >
+    <img
+      alt="Java/Microservices thumbnail"
+      className="pic logoimg"
+      src={null}
+    />
+  </div>
+  <br />
+  <p
+    className="spec-text"
+  >
+    Java/Microservices
+  </p>
+  <p>
+    Dummy Batch
+  </p>
+  <div
+    className="row justify-content-center"
+  >
+    <button
+      className="view-btn test1"
+      onClick={[Function]}
+    >
+      View
+    </button>
+  </div>
+</div>
+`;

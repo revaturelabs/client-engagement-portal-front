@@ -5,6 +5,10 @@ import '../../scss/navStyles.scss';
 import { Turn as Hamburger } from 'hamburger-react'
 import { Link } from 'react-router-dom';
 import { Auth } from 'aws-amplify';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../../actions/UserActions';
+import { IRootState } from '../../_reducers';
+
 // interface INavBarProps{
 //     dropDownProps?:React.ComponentType<DropdownItem>[];
 // }
@@ -29,14 +33,26 @@ export const NavBar: React.FC<any> = (props: any) => {
         setHamOpen(!navMenuOpen);
     };
 
+    const dispatch = useDispatch();
+
+    let name = useSelector((state: IRootState) => { return state.userState.user?.firstName + " " + state.userState.user?.lastName });
+    name = " " ? "Lorem Ipsum" : name; // Placeholder for developer logins and (legacy) users without colloquial names
+
     /**
      * @function LogOut
      * De-authenticates the user session upon clicking the logout dropdown option.
      */
     const LogOut = () => {
-        Auth.signOut()
-            .then(data => data)
-            .catch(err => err);
+        Auth.signOut() // de-authenticates the user
+            .then(data => console.log(data))
+            .catch(err => console.log(err));
+
+        dispatch(logout()); // clears the user data from the local state
+    }
+
+    let logoLink = "#";
+    if (props.route) {
+        logoLink = props.route;
     }
     let logoLink = "#";
     if (props.route) {
@@ -47,13 +63,14 @@ export const NavBar: React.FC<any> = (props: any) => {
         <Row className="justify-content-around myNav">
             <Col xs="auto" className="justify-content-start logoContainer">
                 <Link to={logoLink}>
-                    <img src={logo} className="myLogo" alt="revature logo" /></Link>
+                    <img src={logo} className="myLogo" alt="revature logo" />
+                </Link>
             </Col>
             <Col className="d-flex align-items-center justify-content-end auto test1" >
                 <ButtonDropdown isOpen={navMenuOpen} toggle={toggle}>
                     {/* Mobile Hamburger Menu */}
                     <DropdownToggle className="" style={{ margin: "10px", backgroundColor: "white", border: "none" }}>
-                        <span className="myDropdown" style={{ margin: "5px", color: "#474C55", backgroundColor: "white", border: "none" }}>Welcome, Lorem Ipsum &#9660;</span>
+                        <span className="myDropdown" style={{ margin: "5px", color: "#474C55", backgroundColor: "white", border: "none" }}>Welcome, {name} &#9660;</span>
                         <span className="myMobileDropdown">
                             <Hamburger hideOutline={true} toggled={hamOpen} toggle={setHamOpen} color="#474C55"></Hamburger>
                         </span>
