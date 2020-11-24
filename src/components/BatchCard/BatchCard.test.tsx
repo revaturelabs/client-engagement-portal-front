@@ -2,6 +2,8 @@ import React from "react";
 import { shallow } from "enzyme";
 import TestRenderer from "react-test-renderer";
 import { BatchCard } from "./BatchCard";
+import { Provider } from "react-redux";
+import { store } from "../../Store";
 
 /**
  * This function sets up a batch card object which has been given fake prop values
@@ -18,8 +20,10 @@ const setUp =
         }
     ) =>
 {
-    const component = shallow(<BatchCard batchId={props.batchId} specialization={props.specialization}
-    batchName={props.batchName} />);
+    const component = shallow(<Provider store={store}>
+        <BatchCard batchId={props.batchId} 
+        specialization={props.specialization} batchName={props.batchName} />
+        </Provider>);
     return component;
 }
 
