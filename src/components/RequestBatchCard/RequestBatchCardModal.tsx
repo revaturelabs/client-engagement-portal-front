@@ -1,11 +1,11 @@
 import React from 'react'
 import classes from './RequestBatchCardModal.module.scss'
 
-interface Props {
-
-}
-
-const RequestBatchCardModal = (props: Props) => {
+/**
+ * @function RequestBatchCardModal
+ * Component to display when the client requests a new batch.
+ */
+const RequestBatchCardModal = () => {
     return (
         <div className={classes.RequestBatchCardModal}>
             <div>Request Sent Successfully</div>
