@@ -8,11 +8,11 @@ test('Component Should Render', ()=> {
 })
 
 test('Button Text is \'X\'', ()=>{
-
+    
     const component = shallow(<RequestBatchCardModal />);
-
+    
     expect(component.text().includes('X')).toBe(true);
-
+    
 });
 
 test('Modal Text is \'Request Sent Successfully\'', ()=> {

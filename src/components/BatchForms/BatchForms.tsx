@@ -41,7 +41,7 @@ export const BatchForms: React.FC = () => {
           const name = r.name;
           tempArray.push({id,name});
       }
-  
+
       /**
        * @function setBatchInfo
        * spreading the tempArray and assigning all values to the batchInfo
