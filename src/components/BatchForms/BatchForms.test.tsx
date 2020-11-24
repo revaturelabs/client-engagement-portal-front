@@ -4,6 +4,7 @@ import Adapter from "enzyme-adapter-react-16";
 import { BatchForms } from "./BatchForms";
 import axios from "axios";
 import { act } from "react-dom/test-utils";
+import { button } from "aws-amplify";
 
 Enzyme.configure({ adapter: new Adapter() });
 const wrapper = shallow(<BatchForms />);
@@ -34,12 +35,7 @@ beforeEach(()=>{
     });
 
     mockAxiosPut.mockImplementation(()=>{
-      return Promise.resolve({
-        data:[
-          {id:"Test 3", name:"Mock Batch 3"},
-          {id:"Test 4", name:"Mock Batch 4"},
-        ]
-      });
+      return Promise.resolve("information sent")
     });
 })
     
@@ -125,8 +121,32 @@ describe("BatchForms", () => {
     button.simulate("click");
     wrapper2.update();
     wrapper2.setProps({});
-    console.log(wrapper2.debug());
     expect(wrapper2.find("#map-options").at(1).text()).toContain("Mock Batch 1");
+  });
+
+  it("should test that submit button is sending the information",async ()=>{
+    let wrapper2:any;
+    await act(async ()=>{
+      wrapper2 = mount(<BatchForms/>);
+    })
+    wrapper2.update();
+    wrapper2.setProps({});
+    const button = wrapper2.find("#test-submit-map");
+    button.simulate('click');
+    expect(wrapper2.find("#map-client-to-batch")).toBe({});
+  });
+
+  it("should test axios call getClientsToBatches", async () => {
+    let wrapper2: any;
+    await act(async () => {
+      wrapper2 = mount(<BatchForms />);
+    });
+    const button = wrapper2.find("#map-client-to-batch");
+    button.at(1).simulate("click");
+    wrapper2.update();
+    wrapper2.setProps({});
+    console.log(wrapper2.debug());
+    expect(wrapper2.find("#map-client-to-batch").children().length).toBeGreaterThan(1);
   });
 
 
