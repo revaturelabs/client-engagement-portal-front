@@ -2,7 +2,7 @@ import React from 'react';
 import Amplify from 'aws-amplify';
 import awsconfig from './aws-exports';
 import './scss/app.scss';
-import './scss/batch-card.scss'
+import './scss.batch-card.scss';
 import { Provider } from 'react-redux';
 import { store } from './Store';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';

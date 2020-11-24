@@ -9,9 +9,8 @@ import bigData from '../../assets/bigData.png';
 import netLogo from '../../assets/NET.jpg';
 import devOpsLogo from '../../assets/devOps.jpg';
 import { Redirect } from 'react-router-dom';
-import { setBatchDetailsState, SET_BATCHES_DETAILS } from '../../actions/BatchCardActions';
+import { SET_BATCHES_DETAILS } from '../../actions/BatchCardActions';
 import { BatchDetailReducer, IBatchDetailedState } from '../../_reducers/BatchReducer';
-import { exit } from 'process';
 
 export interface IBasicBatchInfo{
     batchId: string,
@@ -30,6 +29,8 @@ export const BatchCard:React.FC<IBasicBatchInfo> = (props:IBasicBatchInfo) => {
 
     const [batchButtonClicked, setBatchButtonClicked] = useState(false);
 
+    const [batchDetailedInfo, setBatchDetailedInfo] = useState(props);
+
     /**
      * @function goToBatchViewPage
      * Once the "View" button is clicked, this function redirects the user to a page with detailed batch info.
@@ -42,6 +43,30 @@ export const BatchCard:React.FC<IBasicBatchInfo> = (props:IBasicBatchInfo) => {
 
         // SET A DETAILED BATCH STATE TO INCLUDE THE DETAILS OF THE BATCH BEING VIEWED
         // This detailed batch state will be displayed when the redirect to "/batch" runs
+        setBatchDetailedInfo(props);
+        console.log(props.batchId);
+
+        /**
+         * The fields here are used to grab data on all of the batches from
+         * a state. Then, we iterate through those batches until we find
+         * a batch name that matches the props of this component. Finally,
+         * we reset the state to only include the one batch, which we can return
+         * on the batch information page.
+         */
+        const allBatchDetails = BatchDetailReducer("");
+        const justBatches = allBatchDetails.batches; //list of batches
+        let batchDetails:IBatchDetailedState = {batches:[]};
+        let i = 0;
+        for(;justBatches[i];){
+            let oneBatch = justBatches[i] //specific batch
+            let bName = oneBatch.name //batch name
+            if(bName === props.batchName){
+                batchDetails.batches.push(oneBatch);
+                break;
+            }
+            i++;
+        }
+        BatchDetailReducer(SET_BATCHES_DETAILS, batchDetails);
 
         /**
          * The fields here are used to grab data on all of the batches from
@@ -68,36 +93,37 @@ export const BatchCard:React.FC<IBasicBatchInfo> = (props:IBasicBatchInfo) => {
         setBatchButtonClicked(true);
     }
 
-    let image = "";      //sets the image of this card to match the specialization
-    if (props.specialization === "Java/Microservices")
+    
+    let image = ""; //sets the image of this card to match the specialization
+    if (props.specialization == "Java/Microservices")
     {
         image = javaLogo;
     }
-    else if (props.specialization === "PEGA")
+    else if (props.specialization == "PEGA")
     {
         image = pegaLogo;
     }
-    else if (props.specialization === "Java with Automation")
+    else if (props.specialization == "Java with Automation")
     {
         image = javaAuto;
     }
-    else if (props.specialization === "Java React")
+    else if (props.specialization == "Java React")
     {
         image = reactReduxLogo;
     }
-    else if (props.specialization === "Big Data")
+    else if (props.specialization == "Big Data")
     {
         image = bigData;
     }
-    else if (props.specialization === "SalesForce")
+    else if (props.specialization == "SalesForce")
     {
         image = salesLogo;
     }
-    else if (props.specialization === ".NET/Microservices")
+    else if (props.specialization == ".NET/Microservices")
     {
         image = netLogo;
     }
-    else if (props.specialization === "Java Devops")
+    else if (props.specialization == "Java Devops")
     {
         image = devOpsLogo;
     }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Card, CardBody, CardFooter, CardHeader, Col, Row, Spinner } from 'reactstrap';
+import { Card, CardBody, CardFooter, CardHeader, Col, Row } from 'reactstrap';
 import "../../scss/BatchInformation.scss"
 import reactReduxLogo from '../../assets/react-redux-logo.png';
 import javaLogo from '../../assets/java-logo.png';
@@ -42,6 +42,7 @@ interface IProps{
  */
 export const BatchInformation:React.FC<IProps> = (props:IProps) => {
 
+    const [showInterventionModal, setShowInterventionModal] = useState(false);
     const [isOrangeBtn, setOrangeBtn] = useState(false);
 
     console.log(props.batches[0]);
@@ -153,7 +154,7 @@ export const BatchInformation:React.FC<IProps> = (props:IProps) => {
              </Col>
              <Col md="1" lg="2"></Col>
 
-             <PlanInterventionModalv2></PlanInterventionModalv2>
+             <PlanInterventionModalv2 />
 
          </Row>
         </>

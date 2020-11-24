@@ -6,9 +6,12 @@ import { Auth } from "aws-amplify";
 import "../../scss/loginStyles.scss";
 import ceplogo2 from "../../assets/engagementPortalLogov2.svg";
 import { Spinner } from "reactstrap";
+import { IUserAdmin, IUserClient } from "../../_reducers/UserReducer";
+import { useDispatch } from 'react-redux';
+import { adminLogin, clientLogin } from '../../actions/UserActions';
 
 interface ILoginProps {
-  loginType: string;
+  loginType?: string;
 }
 
 /**
@@ -18,54 +21,74 @@ interface ILoginProps {
  * @param props (DEPRECATED USAGE) Informs whether this component is rendered on the admin login or the client login.
  */
 export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
-  const [isClient, setClient] = useState(false);
-  const [isAdmin, setAdmin] = useState(false);
-  const [spinner, setSpinner] = useState(false);
-  const [loginMsg, setLoginMsg] = useState<String>("");
 
-  /**
-   * @function handleSubmit
-   * Handles authentication after the user presses the login button.
-   * @async
-   * Makes a call to AWS Cognito to authenticate login details,
-   *  then makes a call to the API gateway to retrieve user info.
-   *
-   * @param event contains the click event that calls this function.
-   */
-  const handleSubmit = async (event: any) => {
-    setSpinner(true);
-    event.preventDefault();
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) event.stopPropagation();
+    const [isClient, setClient] = useState(false);
+    const [isAdmin, setAdmin] = useState(false);
+    const [spinner, setSpinner] = useState(false);
+    const [loginMsg, setLoginMsg] = useState<String>("");
 
-    const loginCredentials = {
-      email: form["email"].value,
-      password: form["password"].value,
-    };
+    const dispatch = useDispatch();
 
-    try {
-      const user = await Auth.signIn(loginCredentials.email, loginCredentials.password); // user.attributes.email contains the user email
+    /**
+     * @function handleSubmit
+     * Handles authentication after the user presses the login button.
+     * @async
+     * Makes a call to AWS Cognito to authenticate login details,
+     *  then makes a call to the API gateway to retrieve user info.
+     *
+     * @param event contains the click event that calls this function.
+     */
+    const handleSubmit = async (event: any) => {
+        event.preventDefault();
+        setSpinner(true);
+        const form = event.currentTarget;
+        if (form.checkValidity() === false)
+            event.stopPropagation();
 
-      switch (
-        user.attributes["custom:userRole"] // Assigns what page to redirect to based upon what role the user has
-      ) {
-        case "client":
-          setAdmin(false);
-          setClient(true);
-          break;
-        case "admin":
-          setClient(false);
-          setAdmin(true);
-          break;
-        default:
-          setClient(false);
-          setAdmin(false);
-      }
-      setSpinner(false);
-    } catch (error) {
-      console.log("Couldn't sign in: ", error);
-      setSpinner(false);
-      setLoginMsg(error.message);
+        const loginCredentials = {
+            email: form["email"].value,
+            password: form["password"].value
+        }
+
+        try {
+            const user = await Auth.signIn(loginCredentials.email, loginCredentials.password); // user.attributes.email contains the user email
+
+            switch (user.attributes["custom:userRole"]) { // Assigns what page to redirect to based upon what role the user has
+            case "client":
+                const statefulClient:IUserClient = {
+                    email: user.attributes.email,
+                    firstName: user.attributes["given_name"],
+                    lastName: user.attributes["family_name"],
+                }
+
+                dispatch(clientLogin(statefulClient));
+
+                setAdmin(false);
+                setClient(true);
+                break;
+            case "admin":
+                const statefulAdmin:IUserAdmin = {
+                    email: user.attributes.email,
+                    firstName: user.attributes["given_name"],
+                    lastName: user.attributes["family_name"],
+                }
+
+                dispatch(adminLogin(statefulAdmin));
+            
+                setClient(false);
+                setAdmin(true);
+                break;
+            default:
+                setClient(false);
+                setAdmin(false);
+            }
+
+            setSpinner(false);
+        } catch (error) {
+            console.log("Couldn't sign in: ", error);
+            setSpinner(false);
+            setLoginMsg(error.message);
+        }
     }
   };
 
@@ -102,7 +125,7 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
                             </div>
                         </div>
 
-                        <button className="login-btn login-submit" type="submit">
+                        <button className="test2 login-btn login-submit" type="submit">
                             Login
                             {spinner ? <Spinner color="info" className="spinner" /> : <span />}
                         </button>

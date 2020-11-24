@@ -13,6 +13,34 @@ import { IAssociateSingle } from '../../_reducers/AssociateReducer'
  */
 export const AssociateCard: React.FC<IAssociateSingle> = (props: IAssociateSingle) => {
 
+    //just for testing purposes
+    const fakeData: IAssociateSingle = {
+        firstName: "Bill",
+        lastName: "Gates",
+        testScores: [{
+            week: 1,
+            score: 90
+        }, {
+            week: 2,
+            score: 80
+        }, {
+            week: 3,
+            score: 70
+        }, {
+            week: 4,
+            score: 50
+        }],
+        techScores: [{
+            tech: "Java",
+            score: 80
+        }, {
+            tech: "React",
+            score: 70
+        }, {
+            tech: "SQL",
+            score: 90
+        }]
+    };
     /**
      * This field will calculate the average test score of the associate.
      */
@@ -79,20 +107,22 @@ export const AssociateCard: React.FC<IAssociateSingle> = (props: IAssociateSingl
     return (
         <div  style={{padding: "5px"}}>
             <Card className="aso-card">
+                {/* div for name and average */}
                 <div>
                     <h5 id="nameHolder" font-family={"$rev-font"}>{props.firstName} {props.lastName}</h5>
                     <h5 font-family={"$rev-font"}>Average:</h5>
                     <h4 id="averageHolder" font-family={"$rev-font"}>{avg()}%</h4>
                 </div>
+                {/* div for last quiz grade */}
                 <div>
                     <h5 id="scoreHolder">Latest Test Score: {score()}%</h5>
                 </div>
+                {/* div for holding the modal */}
                 <div style={{ display: "block", textAlign: "center", alignContent: "center", justifyContent: "center" }}>
                     <AssociateCardModal {...props} />
                 </div>
             </Card>
 
         </div>
-    )
-
+    );
 }
