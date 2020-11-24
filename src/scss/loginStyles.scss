@@ -1,61 +1,67 @@
 .login-wrapper {
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    max-width: 100%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    text-align: center;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  max-width: 100%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
 }
-.login-wrapper .logo{
-    display:block;
-    position:relative;
-    left:0;
-    right:0;
-    margin:auto;
+.login-wrapper .logo {
+  display: block;
+  position: relative;
+  left: 0;
+  right: 0;
+  margin: auto;
 }
 .login-form {
-    text-align: center;
-    background-color: white;
-    width: 350px;
-    height: 350px;
-    min-width: 200px;
-    display: inline-block;
-    border-radius: 50px;
-    padding: 10px;
-    border: 1px solid #F26925;
+  text-align: center;
+  background-color: white;
+  width: 350px;
+  height: 350px;
+  min-width: 200px;
+  display: inline-block;
+  border-radius: 50px;
+  padding: 10px;
+  border: 1px solid #f26925;
 }
 .logo {
-    height: 80px;
-    width: auto;
+  height: 80px;
+  width: auto;
 }
 .cep-logo-area {
-    margin: auto;
+  margin: auto;
 }
 .login-header {
-    color: #474C55;
-    font-size: 20px;
-    font-weight: bold;
+  color: #474c55;
+  font-size: 20px;
+  font-weight: bold;
 }
 .login-submit {
-    margin: 10px;
-    line-height: 2.2;
-    width: 70%;
-    background-color: #F26925; 
-    color: white;
-    font-size: 20px;
-    font-weight: bold;
-    box-sizing: border-box;
-    border-radius: 15px;
-    border: 3px solid #F26925;
-    transition: all 0.2s ease 0s;
+  margin: 10px;
+  line-height: 2.2;
+  width: 70%;
+  background-color: #f26925;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  box-sizing: border-box;
+  border-radius: 15px;
+  border: 3px solid #f26925;
+  transition: all 0.2s ease 0s;
+  position: relative;
 }
 .login-submit:hover {
-    background-color: white; 
-    color: #F26925;
+  background-color: white;
+  color: #f26925;
 }
 .cep-logo-area img {
-    // width: 100px;
-    // height: 60px;
+  // width: 100px;
+  // height: 60px;
+}
+.spinner {
+  position: absolute;
+  right: 5px;
+  top: 15%;
 }
