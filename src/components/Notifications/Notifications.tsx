@@ -2,8 +2,10 @@ import React from 'react';
 import { Accordion, Card } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Table } from 'reactstrap';
+import { axiosInstance } from '../../util/axiosConfig';
 import { IRootState } from '../../_reducers';
 import { INotificationState } from '../../_reducers/NotificationReducer';
+import { addNotification } from './NotificationActions';
 import './Notifications.scss';
 
 /**
@@ -16,29 +18,51 @@ import './Notifications.scss';
  */
 const Notifications:React.FC<INotificationState> = (props:INotificationState) => {
 
+    // axiosInstance().then((axios) => {
+    //     return axios.get("/intervention/")
+    // }).then((result) => {
+    //     for(let intervention of result.data) {
+            
+    //     }
+    // })
+
     return (
         <Accordion className="notifs-container">
                 <Accordion.Toggle as={Card.Header} variant="link" eventKey="0" id="notif-header">
                     Notifications
                 </Accordion.Toggle>
 
-                <div className="notifs">
-                    {props.notifications?.map(
-                            (e, i) =>
-                            <Accordion.Collapse eventKey="0" key={i}>
-                                <Table className="myTable" hover>
-                                    <tbody>
-                                        <tr className="notif-row">
-                                            <td>{e.clientName}</td>
-                                            <td>{e.subject}</td>
-                                            <td>{e.requestDate}</td>
-                                        </tr>
-                                    </tbody>
-                                </Table>
-                            </Accordion.Collapse>
-                        )
-                    }
-                </div>
+                <Accordion.Collapse eventKey="0">
+                    <Accordion className="notifs">
+                        {props.notifications?.map(
+                                (e, i) =>
+                                <>
+                                    <Accordion.Toggle as={Card.Header} variant="link" eventKey={i.toString()} id="notif-toggle">
+                                        <Table className="notif-table" hover>
+                                            <tbody>
+                                                <tr className="notif-row">
+                                                    <td>{e.client.companyName}</td>
+                                                    <td>{e.requestType}</td>
+                                                    <td>{e.requestedDate}</td>
+                                                </tr>
+                                            </tbody>
+                                        </Table>
+                                    </Accordion.Toggle>
+
+                                    <Accordion.Collapse eventKey={i.toString()} key={i}>
+                                        <div>
+                                            Status: {e.status}
+                                            <br/>
+                                            Client Email: {e.client.email}
+                                            <br/>
+                                            Client Phone Number: {e.client.phoneNumber}
+                                        </div>
+                                    </Accordion.Collapse>
+                                </>
+                            )
+                        }
+                    </Accordion>
+                </Accordion.Collapse>
         </Accordion>
     )
 }

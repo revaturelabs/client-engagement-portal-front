@@ -30,10 +30,15 @@
     font-weight: bold;
 }
 
-.myTable {
+.notif-table {
     text-align: center;
-    margin-bottom: 0px !important;
+    margin: 0px !important;
     font-family: $rev-font;
     font-style: $rev-font-style;
     font-weight: $rev-font-weight;
+}
+
+#notif-toggle {
+    padding: 0;
+    text-align: left !important;
 }

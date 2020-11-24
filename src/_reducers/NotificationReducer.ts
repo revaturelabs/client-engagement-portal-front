@@ -1,7 +1,15 @@
 export interface INotification { //basic structure of the notifications
-    clientName:string
-    subject:string
-    requestDate:string
+    requestId:number
+    requestType:string
+    status:string
+    requestedDate:string
+    message:string
+    client: {
+        clientId:number,
+        email:string,
+        companyName:string,
+        phoneNumber:string
+    }
 }
 
 export interface INotificationState {
@@ -9,7 +17,47 @@ export interface INotificationState {
 }
 
 const initialState:INotificationState = {
-        notifications: []
+        notifications: [
+            {
+                requestId:0,
+                requestType:"yabba",
+                status:"PENDING",
+                requestedDate:"Tuesday",
+                message:"Do it now",
+                client: {
+                    clientId:0,
+                    email:"yabba@yabba.com",
+                    companyName:"Google",
+                    phoneNumber:"192192192"
+                }
+            },
+            {
+                requestId:0,
+                requestType:"yabba",
+                status:"PENDING",
+                requestedDate:"Tuesday",
+                message:"Do it now",
+                client: {
+                    clientId:0,
+                    email:"yabba@yabba.com",
+                    companyName:"Google",
+                    phoneNumber:"192192192"
+                }
+            },
+            {
+                requestId:0,
+                requestType:"yabba",
+                status:"PENDING",
+                requestedDate:"Tuesday",
+                message:"Do it now",
+                client: {
+                    clientId:0,
+                    email:"yabba@yabba.com",
+                    companyName:"Google",
+                    phoneNumber:"192192192"
+                }
+            },
+        ]
 }
 
 /**
