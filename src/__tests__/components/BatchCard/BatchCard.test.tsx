@@ -19,7 +19,7 @@ const setUp =
 
 
 describe('batchcardcomp', () => {
-
+   
     let component: any;
     beforeEach(() => {
         component = setUp();
@@ -31,11 +31,11 @@ describe('batchcardcomp', () => {
 
         expect(button).toBe("View");
     });
-
+   
     //Simple Test 2
     it("Should render without errors", () => {
         const wrapper = component.find('.batchcardcomp');
-
+    
         expect(wrapper.length).toBe(1);
     });
 
@@ -44,4 +44,6 @@ describe('batchcardcomp', () => {
         const image = component.find('.logoimg');
         expect(image.length).toBe(1);
     })
-});
+})
+
+

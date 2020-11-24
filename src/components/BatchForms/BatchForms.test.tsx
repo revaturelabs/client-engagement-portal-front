@@ -4,18 +4,24 @@ import Adapter from "enzyme-adapter-react-16";
 import { BatchForms } from "./BatchForms";
 import axios from "axios";
 import { act } from "react-dom/test-utils";
+import { button } from "aws-amplify";
 
 Enzyme.configure({ adapter: new Adapter() });
 const wrapper = shallow(<BatchForms />);
 
 /**
  * @field
- * mockAxiosGet is mocking axios get request so it does not call the request 
+ * mockAxiosGet is mocking axios get request so it does not call the request from the application
  */
 const mockAxiosGet = jest.spyOn(axios,"get");
 /**
+ * @field
+ * mockAxiosPut is mocking axios put request so it does not call the request form the application 
+ */
+const mockAxiosPut = jest.spyOn(axios,"put");
+/**
  * @function beforeEach
- * before each test give the mocked axios instance information
+ * before each test give the mocked axios request with the information provided
  */
 beforeEach(()=>{
 
@@ -26,7 +32,11 @@ beforeEach(()=>{
                 { id: "Test 2", name: "Mock Batch 2" },
             ],
         });
-    })
+    });
+
+    mockAxiosPut.mockImplementation(()=>{
+      return Promise.resolve("information sent")
+    });
 })
     
 /**
@@ -111,7 +121,33 @@ describe("BatchForms", () => {
     button.simulate("click");
     wrapper2.update();
     wrapper2.setProps({});
-    console.log(wrapper2.debug());
     expect(wrapper2.find("#map-options").at(1).text()).toContain("Mock Batch 1");
   });
+
+  it("should test that submit button is sending the information",async ()=>{
+    let wrapper2:any;
+    await act(async ()=>{
+      wrapper2 = mount(<BatchForms/>);
+    })
+    wrapper2.update();
+    wrapper2.setProps({});
+    const button = wrapper2.find("#test-submit-map");
+    button.simulate('click');
+    expect(wrapper2.find("#map-client-to-batch")).toBe({});
+  });
+
+  it("should test axios call getClientsToBatches", async () => {
+    let wrapper2: any;
+    await act(async () => {
+      wrapper2 = mount(<BatchForms />);
+    });
+    const button = wrapper2.find("#map-client-to-batch");
+    button.at(1).simulate("click");
+    wrapper2.update();
+    wrapper2.setProps({});
+    console.log(wrapper2.debug());
+    expect(wrapper2.find("#map-client-to-batch").children().length).toBeGreaterThan(1);
+  });
+
+
 });
