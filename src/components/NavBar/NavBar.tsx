@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Col, DropdownItem, DropdownMenu, DropdownToggle, Row, ButtonDropdown } from 'reactstrap';
 import logo from '../../assets/logo.png';
-import  '../../scss/navStyles.scss';
+import '../../scss/navStyles.scss';
 import { Turn as Hamburger } from 'hamburger-react'
 import { Link } from 'react-router-dom';
 import { Auth } from 'aws-amplify';
@@ -35,7 +35,7 @@ export const NavBar: React.FC<any> = (props: any) => {
 
     const dispatch = useDispatch();
 
-    let name = useSelector((state:IRootState) => {return state.userState.user?.firstName + " " + state.userState.user?.lastName});
+    let name = useSelector((state: IRootState) => { return state.userState.user?.firstName + " " + state.userState.user?.lastName });
     name = " " ? "Lorem Ipsum" : name; // Placeholder for developer logins and (legacy) users without colloquial names
 
     /**
@@ -44,26 +44,22 @@ export const NavBar: React.FC<any> = (props: any) => {
      */
     const LogOut = () => {
         Auth.signOut() // de-authenticates the user
-        .then(data => console.log(data))
-        .catch(err => console.log(err));
-        
+            .then(data => console.log(data))
+            .catch(err => console.log(err));
+
         dispatch(logout()); // clears the user data from the local state
     }
 
-    let logoLink="#";
-    if(props.route){
-        logoLink = props.route;
-    }
-    let logoLink="#";
-    if(props.route){
+    let logoLink = "#";
+    if (props.route) {
         logoLink = props.route;
     }
 
-    return(
+    return (
         <Row className="justify-content-around myNav">
             <Col xs="auto" className="justify-content-start logoContainer">
                 <Link to={logoLink}>
-                    <img src={logo} className="myLogo" alt="revature logo"/>
+                    <img src={logo} className="myLogo" alt="revature logo" />
                 </Link>
             </Col>
             <Col className="d-flex align-items-center justify-content-end auto test1" >

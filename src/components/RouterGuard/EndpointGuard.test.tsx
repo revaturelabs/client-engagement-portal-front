@@ -3,7 +3,7 @@ import React from "react";
 import Adapter from "enzyme-adapter-react-16";
 import RouterGuard from "../../components/RouterGuard/RouterGuard";
 import { Router } from "react-router";
-import { createBrowserHistory, History, State } from "history";
+import { createBrowserHistory, History } from "history";
 import { Auth } from "aws-amplify";
 import { act } from "react-dom/test-utils";
 
@@ -15,7 +15,7 @@ const dumbyComponent: React.FC = () => {
 };
 
 describe("RouterGuard", () => {
-  let history: History<State>;
+  let history: History;
   beforeEach(() => {
     //Allow Route testing
     history = createBrowserHistory();
