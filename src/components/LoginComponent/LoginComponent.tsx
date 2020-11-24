@@ -4,7 +4,7 @@ import userThumb from "../../assets/user-thumb.png";
 import passThumb from "../../assets/pass-thumb.png";
 import { Auth } from "aws-amplify";
 import "../../scss/loginStyles.scss";
-import ceplogo2 from "../../assets/engagementPortalLogov2.svg";
+import ceplogo2 from "../../assets/engagementPortalLogo.svg";
 import { Spinner } from "reactstrap";
 import { IUserAdmin, IUserClient } from "../../_reducers/UserReducer";
 import { useDispatch } from 'react-redux';
@@ -95,7 +95,12 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
 
     return (
         <>
-            {isClient ? <Redirect to="/home" /> : isAdmin ? <Redirect to="/admin" /> :
+            {isClient ? 
+            <Redirect to="/home" /> 
+            : 
+            isAdmin ? 
+            <Redirect to="/admin" /> 
+            :
                 <form onSubmit={handleSubmit} className="login-form">
 
                     <div style={{ maxHeight: "90%" }}>
