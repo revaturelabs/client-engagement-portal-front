@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
-import userThumb from '../../assets/user-thumb.png';
-import passThumb from '../../assets/pass-thumb.png';
-import { Auth } from 'aws-amplify';
-import  '../../scss/loginStyles.scss';
-import ceplogo2 from '../../assets/engagementPortalLogov2.svg';
+import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
+import userThumb from "../../assets/user-thumb.png";
+import passThumb from "../../assets/pass-thumb.png";
+import { Auth } from "aws-amplify";
+import "../../scss/loginStyles.scss";
+import ceplogo2 from "../../assets/engagementPortalLogov2.svg";
+import { Spinner } from "reactstrap";
 
 interface ILoginProps {
-    loginType: string
+  loginType: string;
 }
 
 /**
@@ -17,53 +18,56 @@ interface ILoginProps {
  * @param props (DEPRECATED USAGE) Informs whether this component is rendered on the admin login or the client login.
  */
 export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
+  const [isClient, setClient] = useState(false);
+  const [isAdmin, setAdmin] = useState(false);
+  const [spinner, setSpinner] = useState(false);
+  const [loginMsg, setLoginMsg] = useState<String>("");
 
-    const [isClient, setClient] = useState(false);
-    const [isAdmin, setAdmin] = useState(false);
+  /**
+   * @function handleSubmit
+   * Handles authentication after the user presses the login button.
+   * @async
+   * Makes a call to AWS Cognito to authenticate login details,
+   *  then makes a call to the API gateway to retrieve user info.
+   *
+   * @param event contains the click event that calls this function.
+   */
+  const handleSubmit = async (event: any) => {
+    setSpinner(true);
+    event.preventDefault();
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) event.stopPropagation();
 
-    /**
-     * @function handleSubmit
-     * Handles authentication after the user presses the login button.
-     * @async
-     * Makes a call to AWS Cognito to authenticate login details,
-     *  then makes a call to the API gateway to retrieve user info.
-     *
-     * @param event contains the click event that calls this function.
-     */
-    const handleSubmit = async (event: any) => {
-        event.preventDefault();
-        const form = event.currentTarget;
-        if (form.checkValidity() === false)
-            event.stopPropagation();
+    const loginCredentials = {
+      email: form["email"].value,
+      password: form["password"].value,
+    };
 
-        const loginCredentials = {
-            email: form["email"].value,
-            password: form["password"].value
-        }
+    try {
+      const user = await Auth.signIn(loginCredentials.email, loginCredentials.password); // user.attributes.email contains the user email
 
-        try {
-            const user = await Auth.signIn(loginCredentials.email, loginCredentials.password); // user.attributes.email contains the user email
-            
-            
-
-            switch (user.attributes["custom:userRole"]) { // Assigns what page to redirect to based upon what role the user has
-            case "client":
-                setAdmin(false);
-                setClient(true);
-                break;
-            case "admin":
-                setClient(false);
-                setAdmin(true);
-                break;
-            default:
-                setClient(false);
-                setAdmin(false);
-            }
-        } catch (error) {
-            console.log("Couldn't sign in: ", error);
-        }
-
+      switch (
+        user.attributes["custom:userRole"] // Assigns what page to redirect to based upon what role the user has
+      ) {
+        case "client":
+          setAdmin(false);
+          setClient(true);
+          break;
+        case "admin":
+          setClient(false);
+          setAdmin(true);
+          break;
+        default:
+          setClient(false);
+          setAdmin(false);
+      }
+      setSpinner(false);
+    } catch (error) {
+      console.log("Couldn't sign in: ", error);
+      setSpinner(false);
+      setLoginMsg(error.message);
     }
+  };
 
     return(
         <>
@@ -79,6 +83,8 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
                             <img src={ceplogo2} alt="cep-logo" className="cep-logo" />
                         </div>
                     </div>
+                    
+                    <div style={{ color: "#FF0000" }}>{loginMsg}</div>
 
                         <div style={{ position: "relative" }}>
                             <input type="email" required className="form-control" name="email" placeholder="E-mail"
@@ -96,8 +102,9 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
                             </div>
                         </div>
 
-                        <button className="login-btn" type="submit">
+                        <button className="login-btn login-submit" type="submit">
                             Login
+                            {spinner ? <Spinner color="info" className="spinner" /> : <span />}
                         </button>
                     </div >
                 </form >
@@ -107,21 +114,21 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
 }
 
 export class CEPLoginInputStyle implements React.CSSProperties {
-    lineHeight: number;
-    paddingLeft: string;
-    borderRadius: string;
-    margin: string;
-    width: string;
-    display: string;
-    boxShadow: string;
+  lineHeight: number;
+  paddingLeft: string;
+  borderRadius: string;
+  margin: string;
+  width: string;
+  display: string;
+  boxShadow: string;
 
-    constructor() {
-        this.lineHeight = 2.2;
-        this.paddingLeft = "30px";
-        this.borderRadius = "5px";
-        this.margin = "2px";
-        this.width = "70%";
-        this.display = "inline-block"
-        this.boxShadow = "inset 1px 2px 0 0 #ddd, inset 0 4px 0 0 #eee, inset 2px 6px 0 0 #fef";
-    }
+  constructor() {
+    this.lineHeight = 2.2;
+    this.paddingLeft = "30px";
+    this.borderRadius = "5px";
+    this.margin = "2px";
+    this.width = "70%";
+    this.display = "inline-block";
+    this.boxShadow = "inset 1px 2px 0 0 #ddd, inset 0 4px 0 0 #eee, inset 2px 6px 0 0 #fef";
+  }
 }
