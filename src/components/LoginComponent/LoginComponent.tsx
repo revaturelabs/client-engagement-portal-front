@@ -90,6 +90,7 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
             setLoginMsg(error.message);
         }
     }
+  };
 
     return(
         <>

@@ -41,7 +41,6 @@ export const AssociateCard: React.FC<IAssociateSingle> = (props: IAssociateSingl
             score: 90
         }]
     };
-
     /**
      * This field will calculate the average test score of the associate.
      */
@@ -125,6 +124,5 @@ export const AssociateCard: React.FC<IAssociateSingle> = (props: IAssociateSingl
             </Card>
 
         </div>
-    )
-
+    );
 }

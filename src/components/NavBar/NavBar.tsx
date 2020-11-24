@@ -54,6 +54,10 @@ export const NavBar: React.FC<any> = (props: any) => {
     if(props.route){
         logoLink = props.route;
     }
+    let logoLink="#";
+    if(props.route){
+        logoLink = props.route;
+    }
 
     return(
         <Row className="justify-content-around myNav">
