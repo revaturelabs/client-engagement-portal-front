@@ -93,7 +93,7 @@ div.aso-scroll-container {
     overflow: hidden;
     width: 5px;
   }
-
+  
   /* Track */
   .aso-scroll::-webkit-scrollbar-track {
     padding:10px;
@@ -102,13 +102,13 @@ div.aso-scroll-container {
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
   }
-
+  
   /* Handle */
   .aso-scroll::-webkit-scrollbar-thumb {
     background: #474C55;
     border-radius: 5px;
   }
-
+  
   /* Handle on hover */
 //   .aso-scroll::-webkit-scrollbar-thumb:hover {
 //   }

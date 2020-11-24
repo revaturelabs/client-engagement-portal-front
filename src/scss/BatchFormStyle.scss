@@ -109,10 +109,10 @@ button.close:focus{
 }
 
 @media (max-width: 576px){
-    .my-button-row{
-        display: flex !important;
-    }
-    .my-form-row {
-        display:none !important;
-    }
+.my-button-row{
+    display: flex !important;
+}
+.my-form-row {
+    display:none !important;
+}
 }

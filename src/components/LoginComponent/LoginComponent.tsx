@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
-import userThumb from '../../assets/user-thumb.png';
-import passThumb from '../../assets/pass-thumb.png';
-import { Auth } from 'aws-amplify';
-import  '../../scss/loginStyles.scss';
-import ceplogo2 from '../../assets/engagementPortalLogov2.svg';
+import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
+import userThumb from "../../assets/user-thumb.png";
+import passThumb from "../../assets/pass-thumb.png";
+import { Auth } from "aws-amplify";
+import "../../scss/loginStyles.scss";
+import ceplogo2 from "../../assets/engagementPortalLogov2.svg";
+import { Spinner } from "reactstrap";
+import { IUserAdmin, IUserClient } from "../../_reducers/UserReducer";
 import { useDispatch } from 'react-redux';
-import { IUserAdmin, IUserClient } from '../../_reducers/UserReducer';
 import { adminLogin, clientLogin } from '../../actions/UserActions';
 
 interface ILoginProps {
-    loginType: string
+  loginType?: string;
 }
 
 /**
@@ -23,6 +24,8 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
 
     const [isClient, setClient] = useState(false);
     const [isAdmin, setAdmin] = useState(false);
+    const [spinner, setSpinner] = useState(false);
+    const [loginMsg, setLoginMsg] = useState<String>("");
 
     const dispatch = useDispatch();
 
@@ -37,6 +40,7 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
      */
     const handleSubmit = async (event: any) => {
         event.preventDefault();
+        setSpinner(true);
         const form = event.currentTarget;
         if (form.checkValidity() === false)
             event.stopPropagation();
@@ -78,10 +82,13 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
                 setClient(false);
                 setAdmin(false);
             }
+
+            setSpinner(false);
         } catch (error) {
             console.log("Couldn't sign in: ", error);
+            setSpinner(false);
+            setLoginMsg(error.message);
         }
-
     }
 
     return(
@@ -95,9 +102,11 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
                             Client Engagement Portal
                         </div>
                         <div className="cep-logo-area">
-                            <img src={ceplogo2} alt="cep-logo" width="200px"/>
-                            </div>
+                            <img src={ceplogo2} alt="cep-logo" className="cep-logo" />
                         </div>
+                    </div>
+                    
+                    <div style={{ color: "#FF0000" }}>{loginMsg}</div>
 
                         <div style={{ position: "relative" }}>
                             <input type="email" required className="form-control" name="email" placeholder="E-mail"
@@ -115,7 +124,10 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
                             </div>
                         </div>
 
-                        <button className="test2 login-submit" type="submit">Login</button>
+                        <button className="test2 login-btn login-submit" type="submit">
+                            Login
+                            {spinner ? <Spinner color="info" className="spinner" /> : <span />}
+                        </button>
                     </div >
                 </form >
             }
@@ -124,21 +136,21 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
 }
 
 export class CEPLoginInputStyle implements React.CSSProperties {
-    lineHeight: number;
-    paddingLeft: string;
-    borderRadius: string;
-    margin: string;
-    width: string;
-    display: string;
-    boxShadow: string;
+  lineHeight: number;
+  paddingLeft: string;
+  borderRadius: string;
+  margin: string;
+  width: string;
+  display: string;
+  boxShadow: string;
 
-    constructor() {
-        this.lineHeight = 2.2;
-        this.paddingLeft = "30px";
-        this.borderRadius = "5px";
-        this.margin = "2px";
-        this.width = "70%";
-        this.display = "inline-block"
-        this.boxShadow = "inset 1px 2px 0 0 #ddd, inset 0 4px 0 0 #eee, inset 2px 6px 0 0 #fef";
-    }
+  constructor() {
+    this.lineHeight = 2.2;
+    this.paddingLeft = "30px";
+    this.borderRadius = "5px";
+    this.margin = "2px";
+    this.width = "70%";
+    this.display = "inline-block";
+    this.boxShadow = "inset 1px 2px 0 0 #ddd, inset 0 4px 0 0 #eee, inset 2px 6px 0 0 #fef";
+  }
 }

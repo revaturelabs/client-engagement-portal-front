@@ -159,11 +159,12 @@ export const NewClientButton: React.FC<any> = () => {
       </Button>
 
       <Modal isOpen={modal} toggle={toggle}>
-        <ModalHeader toggle={toggle} className="container create-account-modal-header">
-          Create Account
-        </ModalHeader>
-        <Form onSubmit={(event:React.FormEvent<HTMLFormElement>) => registerUser(event)}>
-          <ModalBody>
+            <ModalHeader toggle={toggle} className="container create-account-modal-header">
+              Create Account
+            </ModalHeader>        
+          <Form onSubmit={(event:React.FormEvent<HTMLFormElement>) => registerUser(event)}>
+        <ModalBody>
+          {/* <Form onSubmit={registerUser}> */}
             <FormGroup>
               <Label for="exampleSelect">Account Type</Label>
               <Input

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Col, DropdownItem, DropdownMenu, DropdownToggle, Row, ButtonDropdown } from 'reactstrap';
 import logo from '../../assets/logo.png';
-import '../../scss/navStyles.scss';
-import { Turn as Hamburger } from 'hamburger-react';
+import  '../../scss/navStyles.scss';
+import { Turn as Hamburger } from 'hamburger-react'
 import { Link } from 'react-router-dom';
 import { Auth } from 'aws-amplify';
 import { useDispatch, useSelector } from 'react-redux';
@@ -28,7 +28,10 @@ export const NavBar: React.FC<any> = (props: any) => {
      * @function toggle
      * toggles the dropdown menu and the orientation of the hamburger menu
      */
-    const toggle = () => setNavMenuOpen(!navMenuOpen);
+    const toggle = () => {
+        setNavMenuOpen(!navMenuOpen)
+        setHamOpen(!navMenuOpen);
+    };
 
     const dispatch = useDispatch();
 
@@ -60,12 +63,6 @@ export const NavBar: React.FC<any> = (props: any) => {
                 </Link>
             </Col>
             <Col className="d-flex align-items-center justify-content-end auto test1" >
-<<<<<<< HEAD
-                Welcome, Lorem Ipsum
-                <Dropdown isOpen={navMenuOpen} toggle={() => setNavMenuOpen(!navMenuOpen)}>
-                    <DropdownToggle style={{margin:"10px", backgroundColor: "white", border: "none"}}>
-                        <img src={menuArrow} alt="dropdown menu arrow" height="20px" width="25px" />
-=======
                 <ButtonDropdown isOpen={navMenuOpen} toggle={toggle}>
                     {/* Mobile Hamburger Menu */}
                     <DropdownToggle className="" style={{ margin: "10px", backgroundColor: "white", border: "none" }}>
@@ -73,7 +70,6 @@ export const NavBar: React.FC<any> = (props: any) => {
                         <span className="myMobileDropdown">
                             <Hamburger hideOutline={true} toggled={hamOpen} toggle={setHamOpen} color="#474C55"></Hamburger>
                         </span>
->>>>>>> 72a8fc8243ed44954d401029a1db8e8afbff3f81
                     </DropdownToggle>
                     {/* Desktop Menu */}
                     <DropdownMenu right>
