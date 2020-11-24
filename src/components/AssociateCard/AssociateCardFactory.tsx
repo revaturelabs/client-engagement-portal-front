@@ -75,9 +75,11 @@ export const AssociateCardFactory:React.FC<any> = (props:IAssociate) => {
     return(
         <>
             
+            {/* <Button onClick={handleHide}>Associates</Button> */}
             <Carousel className="holderCarousel" responsive={responsive}>              
                 {cards}
             </Carousel>
+            {/* <span id="contentHolder" hidden={isHidden}>{cards}</span> */}
             
         </>
     )

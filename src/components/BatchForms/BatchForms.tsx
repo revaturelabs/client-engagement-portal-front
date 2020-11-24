@@ -9,7 +9,7 @@ import { axiosInstance } from '../../util/axiosConfig';
  * Renders the Map and Unmap forms on the page.
  */
 export const BatchForms: React.FC = () => {
-    
+
     const [mapModal, setMapModal] = useState(false);
     const [unmapModal, setUnmapModal] = useState(false);
 
@@ -126,7 +126,7 @@ export const BatchForms: React.FC = () => {
       
     return (
         <>
-         <Row className="justify-content-center my-button-row">
+            <Row className="justify-content-center my-button-row">
                 <Col xs="2" sm="3" lg="5" />
                 <Col xs="8" sm="6" lg="2">
                     <button className="batch-form-button" id='map-batch' onClick={toggleMap}>Map Batch To Client</button>
@@ -182,7 +182,7 @@ export const BatchForms: React.FC = () => {
                         <input className="batch-form-submit" type="submit" value="Submit" id="test-submit-unmap"></input>
                     </Form>
                 </Col>
-                <Col sm="1" md="1"  lg="2" xl="3"></Col>
+                <Col sm="1" md="1" lg="2" xl="3"></Col>
             </Row>
 
           {/* Map Modal */}
@@ -208,8 +208,8 @@ export const BatchForms: React.FC = () => {
                         </Input>
                         <input className="modal-batch-form-submit" type="submit" value="Submit" ></input>
                     </Form>
-            </ModalBody>
-         </Modal>
+                </ModalBody>
+            </Modal>
 
          {/* UnMap Modal */}
          <Modal isOpen={unmapModal} toggle={toggleUnmap} className="batch-form-modal" id="test-unmap">
@@ -234,8 +234,8 @@ export const BatchForms: React.FC = () => {
                         </Input>    
                         <input className="modal-batch-form-submit" type="submit" value="Submit"></input>
                     </Form>
-            </ModalBody>
-         </Modal>
+                </ModalBody>
+            </Modal>
         </>
 
     );
