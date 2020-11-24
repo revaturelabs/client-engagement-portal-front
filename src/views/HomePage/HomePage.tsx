@@ -37,26 +37,32 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
     // temporary DEVELOPMENT functions which are called from the nav bar
     const getBatches = () =>
     {   
+        setHasBatches(true);
+
         //gets batch data from caliber
         dispatch(getBatchCardData(1));
     }
 
     const resetBatches = () =>
     {   
-        //removes caliber data / resets the batch state
+        setHasBatches(false);
+
+        //removes batches' data / resets the batch state
         dispatch(setBatchState(initialBatchState));
     }
 
     const getSimulatedBatches = () =>
     {
+        setHasBatches(true);
+
         //displays simulated batch data
         setSpinner(true);
 
         const batchArray:IBatchState = {
             batches: [
-                {id: 1, skill: "Java React", name: "Some of a Batch"},
-                {id: 2, skill: "SalesForce", name: "The Batchelors"},
-                {id: 3, skill: ".NET/Microservices", name: "Ala-batch-ter"},
+                {id: 1, skill: "Java React", name: "The Batchelors"},
+                {id: 2, skill: "SalesForce", name: "Ala-batch-ter"},
+                {id: 3, skill: ".NET/Microservices", name: "Some of a Batch"},
             ]
         };
 
@@ -111,13 +117,15 @@ const HomePage:React.FC<IProps> = (props:IProps) => {
         
     };
 
+    
+
     return(
         <Container style={{minHeight: "100vh", maxWidth: "100vw", backgroundColor:"#E3E3E3"}}>
             <NavBar>
                 <DropdownItem header>Development Options</DropdownItem>
-                <DropdownItem onClick={() => {setHasBatches(false); resetBatches();}}>Simulate no batches</DropdownItem>
-                <DropdownItem onClick={() => {setHasBatches(true); getSimulatedBatches();}}>Simulate 3 batches</DropdownItem>
-                <DropdownItem onClick={() => {setHasBatches(true); getBatches();} }>Get ALL Mock Batches from the Caliber Database</DropdownItem>
+                <DropdownItem onClick={() => resetBatches()}>Simulate no batches</DropdownItem>
+                <DropdownItem onClick={() => getSimulatedBatches()}>Simulate 3 batches</DropdownItem>
+                <DropdownItem onClick={() => getBatches()}>Get ALL Mock Batches from Caliber (Requires CORS Extension)</DropdownItem>
             </NavBar>
 
             {/* Modal for Requesting an Intervention, will be moved to batch info page */}

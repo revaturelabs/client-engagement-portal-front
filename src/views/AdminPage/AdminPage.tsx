@@ -18,11 +18,11 @@ export const AdminPage: React.FC = () => {
                 <BatchForms />
 
                 <Row style={{ marginTop: "20px" }}>
-                    <Col xs="5" />
-                    <Col>
+                    <Col xs="2" sm="3" md="4" lg="4" xl="5"/>
+                    <Col xs="8" sm="6" md="4" lg="4" xl="2">
                         <NewClientButton />
                     </Col>
-                    <Col xs="5" />
+                    <Col xs="2" sm="3" md="4" lg="4" xl="5"/>
                 </Row>
                 {/* <Row>
                     Footer?

@@ -9,26 +9,27 @@ import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import { LoginPage } from './views/LoginPage/LoginPage';
 import HomePage from './views/HomePage/HomePage';
 import { AdminPage } from './views/AdminPage/AdminPage';
+import { BatchInformationPage } from './views/BatchInformationPage/BatchInformationPage';
 
 Amplify.configure(awsconfig);
 
 function App() {
-
-  return (
-    <div className="App">
-      <Provider store={store}>
-        <BrowserRouter>
-          <Switch>
-            <Route exact path="/" component={() => <Redirect to="/login" />}/>
-            <Route path="/login" component={LoginPage}/>
-            <Route path="/login-admin" />
-            <Route path="/home" component={HomePage}/>
-            <Route path="/admin" component={AdminPage}/>
-          </Switch>
-        </BrowserRouter>
-      </Provider>
-    </div>
-  );
+    return (
+        <div className="App">
+            <Provider store={store}>
+                <BrowserRouter>
+                    <Switch>
+                        <Route exact path="/" component={() => <Redirect to="/login" />} />
+                        <Route path="/login" component={LoginPage} />
+                        <Route path="/login-admin" />
+                        <Route path="/home" component={HomePage} />
+                        <Route path="/admin" component={AdminPage} />
+                        <Route path="/batch" component={BatchInformationPage}/>
+                    </Switch>
+                </BrowserRouter>
+            </Provider>
+        </div>
+    );
 }
 
 export default App;
