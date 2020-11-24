@@ -11,7 +11,7 @@ import { useDispatch } from 'react-redux';
 import { adminLogin, clientLogin } from '../../actions/UserActions';
 
 interface ILoginProps {
-  loginType?: string;
+    loginType?: string;
 }
 
 /**
@@ -21,6 +21,7 @@ interface ILoginProps {
  * @param props (DEPRECATED USAGE) Informs whether this component is rendered on the admin login or the client login.
  */
 export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
+
 
     const [isClient, setClient] = useState(false);
     const [isAdmin, setAdmin] = useState(false);
@@ -54,33 +55,33 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
             const user = await Auth.signIn(loginCredentials.email, loginCredentials.password); // user.attributes.email contains the user email
 
             switch (user.attributes["custom:userRole"]) { // Assigns what page to redirect to based upon what role the user has
-            case "client":
-                const statefulClient:IUserClient = {
-                    email: user.attributes.email,
-                    firstName: user.attributes["given_name"],
-                    lastName: user.attributes["family_name"],
-                }
+                case "client":
+                    const statefulClient: IUserClient = {
+                        email: user.attributes.email,
+                        firstName: user.attributes["given_name"],
+                        lastName: user.attributes["family_name"],
+                    }
 
-                dispatch(clientLogin(statefulClient));
+                    dispatch(clientLogin(statefulClient));
 
-                setAdmin(false);
-                setClient(true);
-                break;
-            case "admin":
-                const statefulAdmin:IUserAdmin = {
-                    email: user.attributes.email,
-                    firstName: user.attributes["given_name"],
-                    lastName: user.attributes["family_name"],
-                }
+                    setAdmin(false);
+                    setClient(true);
+                    break;
+                case "admin":
+                    const statefulAdmin: IUserAdmin = {
+                        email: user.attributes.email,
+                        firstName: user.attributes["given_name"],
+                        lastName: user.attributes["family_name"],
+                    }
 
-                dispatch(adminLogin(statefulAdmin));
-            
-                setClient(false);
-                setAdmin(true);
-                break;
-            default:
-                setClient(false);
-                setAdmin(false);
+                    dispatch(adminLogin(statefulAdmin));
+
+                    setClient(false);
+                    setAdmin(true);
+                    break;
+                default:
+                    setClient(false);
+                    setAdmin(false);
             }
 
             setSpinner(false);
@@ -90,24 +91,24 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
             setLoginMsg(error.message);
         }
     }
-  };
 
-    return(
+
+    return (
         <>
             {isClient ? <Redirect to="/home" /> : isAdmin ? <Redirect to="/admin" /> :
                 <form onSubmit={handleSubmit} className="login-form">
 
-                <div style={{maxHeight: "90%"}}>
-                    <div style={{position: "relative", textAlign: "center"}}>
-                        <div className="login-header">
-                            Client Engagement Portal
+                    <div style={{ maxHeight: "90%" }}>
+                        <div style={{ position: "relative", textAlign: "center" }}>
+                            <div className="login-header">
+                                Client Engagement Portal
                         </div>
-                        <div className="cep-logo-area">
-                            <img src={ceplogo2} alt="cep-logo" className="cep-logo" />
+                            <div className="cep-logo-area">
+                                <img src={ceplogo2} alt="cep-logo" className="cep-logo" />
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div style={{ color: "#FF0000" }}>{loginMsg}</div>
+
+                        <div style={{ color: "#FF0000" }}>{loginMsg}</div>
 
                         <div style={{ position: "relative" }}>
                             <input type="email" required className="form-control" name="email" placeholder="E-mail"
@@ -121,7 +122,7 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
                             <input type="password" required className="form-control" name="password" placeholder="Password"
                                 style={new CEPLoginInputStyle()} />
                             <div style={{ position: "absolute", top: "45%", left: "21%", transform: "translate(-50%, -50%)" }}>
-                                <img src={passThumb} alt="password thumbnail" className= "passthumbcheck" />
+                                <img src={passThumb} alt="password thumbnail" className="passthumbcheck" />
                             </div>
                         </div>
 
@@ -134,24 +135,25 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
             }
         </>
     );
-}
+};
+
 
 export class CEPLoginInputStyle implements React.CSSProperties {
-  lineHeight: number;
-  paddingLeft: string;
-  borderRadius: string;
-  margin: string;
-  width: string;
-  display: string;
-  boxShadow: string;
+    lineHeight: number;
+    paddingLeft: string;
+    borderRadius: string;
+    margin: string;
+    width: string;
+    display: string;
+    boxShadow: string;
 
-  constructor() {
-    this.lineHeight = 2.2;
-    this.paddingLeft = "30px";
-    this.borderRadius = "5px";
-    this.margin = "2px";
-    this.width = "70%";
-    this.display = "inline-block";
-    this.boxShadow = "inset 1px 2px 0 0 #ddd, inset 0 4px 0 0 #eee, inset 2px 6px 0 0 #fef";
-  }
+    constructor() {
+        this.lineHeight = 2.2;
+        this.paddingLeft = "30px";
+        this.borderRadius = "5px";
+        this.margin = "2px";
+        this.width = "70%";
+        this.display = "inline-block";
+        this.boxShadow = "inset 1px 2px 0 0 #ddd, inset 0 4px 0 0 #eee, inset 2px 6px 0 0 #fef";
+    }
 }

@@ -8,7 +8,7 @@ import '../../scss/BatchFormStyle.scss';
  * Renders the Map and Unmap forms on the page.
  */
 export const BatchForms: React.FC = () => {
-    
+
     const [mapModal, setMapModal] = useState(false);
     const [unmapModal, setUnmapModal] = useState(false);
 
@@ -34,34 +34,34 @@ export const BatchForms: React.FC = () => {
      */
     const getBatches = async () => {
         const response = await axios.get("https://caliber2-mock.revaturelabs.com/mock/training/batch/current");
-        const tempArray=[];
-        for (const r of response.data)
-        {
-          const id = r.id;
-          const name = r.name;
-          tempArray.push({id,name});
-      }
+        const tempArray = [];
+        for (const r of response.data) {
+            const id = r.id;
+            const name = r.name;
+            tempArray.push({ id, name });
+        }
 
-      /**
-       * @function setBatchInfo
-       * spreading the tempArray and assigning all values to the batchInfo
-       */
-      setBatchInfo([...tempArray]);
-      }
+        /**
+         * @function setBatchInfo
+         * spreading the tempArray and assigning all values to the batchInfo
+         */
+        setBatchInfo([...tempArray]);
+    }
 
 
-      /**
-       * @function useEffect
-       * call the getBatches function on load of page
-       */
-      useEffect(()=>{
+    /**
+     * @function useEffect
+     * call the getBatches function on load of page
+     */
+    useEffect(() => {
         getBatches();
-      },[]);
+    }, []);
+
 
 
     return (
         <>
-         <Row className="justify-content-center my-button-row">
+            <Row className="justify-content-center my-button-row">
                 <Col xs="2" sm="3" lg="5" />
                 <Col xs="8" sm="6" lg="2">
                     <button className="batch-form-button" onClick={toggleMap}>Map Batch to Client</button>
@@ -77,36 +77,36 @@ export const BatchForms: React.FC = () => {
             </Row>
             <Row className="justify-content-between my-form-row">
                 <Col sm="1" md="1" lg="2" xl="3"></Col>
-                <Col sm="5" md="5" lg="4" xl="3" className="text-left" style={{marginTop:"50px"}}>
-                    <Form className="batch-form" onSubmit={(e:React.FormEvent<HTMLFormElement>) => e.preventDefault()}>
+                <Col sm="5" md="5" lg="4" xl="3" className="text-left" style={{ marginTop: "50px" }}>
+                    <Form className="batch-form" onSubmit={(e: React.FormEvent<HTMLFormElement>) => e.preventDefault()}>
                         <h5>Map Batch To Client</h5>
-                        <Input type="select">
+                        <Input type="select" >
                             <option>Select Client</option>
                             <option>Dummy Client 1</option>
                             <option>Dummy Client 2</option>
                         </Input>
-                        <br/>
+                        <br />
                         <Input type="select">
                             <option disabled selected>Select Batch:</option>
-                            {batchInfo.map((e:any,i:any) =>
+                            {batchInfo.map((e: any, i: any) =>
                                 <option key={i} id={e.id} >{e.name}</option>
                             )}
                         </Input>
                         <input className="batch-form-submit" type="submit" value="Submit" ></input>
                     </Form>
                 </Col>
-                <Col sm="5" md="5" lg="4" xl="3" className="text-right" style={{marginTop:"50px"}}>
-                    <Form className="batch-form" onSubmit={(e:React.FormEvent<HTMLFormElement>) => e.preventDefault()}>
+                <Col sm="5" md="5" lg="4" xl="3" className="text-right" style={{ marginTop: "50px" }}>
+                    <Form className="batch-form" onSubmit={(e: React.FormEvent<HTMLFormElement>) => e.preventDefault()}>
                         <h5>Unmap Batch From Client</h5>
                         <Input type="select">
                             <option>Select Client</option>
                             <option>Dummy Client 1</option>
                             <option>Dummy Client 2</option>
                         </Input>
-                        <br/>
+                        <br />
                         <Input type="select">Select Batch
                             <option disabled selected>Select Batch:</option>
-                            {batchInfo.map((e:any,i:any) =>
+                            {batchInfo.map((e: any, i: any) =>
                                 <option key={i} id={e.id} value={e.id} >{e.name}</option>
                             )}
                         </Input>
@@ -114,56 +114,56 @@ export const BatchForms: React.FC = () => {
                         <input className="batch-form-submit" type="submit" value="Submit"></input>
                     </Form>
                 </Col>
-                <Col sm="1" md="1"  lg="2" xl="3"></Col>
+                <Col sm="1" md="1" lg="2" xl="3"></Col>
             </Row>
 
-          {/* Map Modal */}
-         <Modal isOpen={mapModal} toggle={toggleMap} className="batch-form-modal">
-            <ModalHeader toggle={toggleMap} className="modal-header">
-              Map Batch to Client
+            {/* Map Modal */}
+            <Modal isOpen={mapModal} toggle={toggleMap} className="batch-form-modal">
+                <ModalHeader toggle={toggleMap} className="modal-header">
+                    Map Batch to Client
             </ModalHeader>
-            <ModalBody>
-            <Form className="modal-batch-form">
+                <ModalBody>
+                    <Form className="modal-batch-form">
                         <Input type="select">
                             <option>Select Client</option>
                             <option>Dummy Client 1</option>
                             <option>Dummy Client 2</option>
                         </Input>
-                        <br/>
+                        <br />
                         <Input type="select">
                             <option disabled selected>Select Batch</option>
-                            {batchInfo.map((e:any,i:any) =>
+                            {batchInfo.map((e: any, i: any) =>
                                 <option key={i} id={e.id} >{e.name}</option>
                             )}
                         </Input>
                         <input className="modal-batch-form-submit" type="submit" value="Submit" ></input>
                     </Form>
-            </ModalBody>
-         </Modal>
+                </ModalBody>
+            </Modal>
 
-         {/* UnMap Modal */}
-         <Modal isOpen={unmapModal} toggle={toggleUnmap} className="batch-form-modal">
-            <ModalHeader toggle={toggleUnmap} className="modal-header">
-              Unmap Batch from Client
+            {/* UnMap Modal */}
+            <Modal isOpen={unmapModal} toggle={toggleUnmap} className="batch-form-modal">
+                <ModalHeader toggle={toggleUnmap} className="modal-header">
+                    Unmap Batch from Client
             </ModalHeader>
-            <ModalBody>
-            <Form className="modal-batch-form">
+                <ModalBody>
+                    <Form className="modal-batch-form">
                         <Input type="select">
                             <option>Select Client</option>
                             <option>Dummy Client 1</option>
                             <option>Dummy Client 2</option>
                         </Input>
-                        <br/>
+                        <br />
                         <Input type="select">
                             <option>Select Batch</option>
-                            {batchInfo.map((e:any,i:any) =>
+                            {batchInfo.map((e: any, i: any) =>
                                 <option key={i} id={e.id} >{e.name}</option>
                             )}
                         </Input>
                         <input className="modal-batch-form-submit" type="submit" value="Submit"></input>
                     </Form>
-            </ModalBody>
-         </Modal>
+                </ModalBody>
+            </Modal>
         </>
 
     );
