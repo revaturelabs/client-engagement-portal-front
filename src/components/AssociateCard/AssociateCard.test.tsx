@@ -85,7 +85,7 @@ test("associate's name field should be empty with no name passed as props", () =
  * the second div contains the associate's last test score,
  * and the last div holds the button that allows the modal to appear.
  */
-test("there should be 3 divs in each associate card", () => {
+test("there should be 4 divs in each associate card", () => {
     const divs = wrapper.find("div");
-    expect(divs.length).toBe(3);
+    expect(divs.length).toBe(4);
 });
