@@ -131,18 +131,18 @@ export const BatchInformation:React.FC<IProps> = (props:IProps) => {
                             <h4>{props.batches[0].batchName}</h4>
                         </CardHeader>
                         <CardBody>
-                            <h5><b>Core Technology Learned:</b></h5>
+                            <h5><b className = 'readctl'>Core Technology Learned:</b></h5>
                             <Row>
                                 <Col className="logo-container">
                                 <span className="helper"></span>
-                                    <img src={image} alt="Specialization logo" />
+                                    <img src={image} alt="Specialization logo" className='speclogo' />
                                 </Col>
                             </Row>
                             <Row style={{textAlign: "center"}}>
                                 <Col><p>{props.batches[0].skill}</p></Col>
                             </Row>
-                            <p><b>Trainer:</b> {props.batches[0].trainer}</p>
-                            <p><b>Training End Date:</b> {props.batches[0].endDate}</p>
+                            <p><b className ='readtrainer'>Trainer:</b> {props.batches[0].trainer}</p>
+                            <p><b className = 'readted'>Training End Date:</b> {props.batches[0].endDate}</p>
                         </CardBody>
                         <CardFooter></CardFooter>
                     </Card>
