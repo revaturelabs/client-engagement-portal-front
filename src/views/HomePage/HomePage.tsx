@@ -42,8 +42,6 @@ const HomePage: React.FC<IProps> = (props: IProps) => {
      */
     const getBatches = (userEmail:string) =>
     {
-        setHasBatches(true);
-
         //gets batch data from caliber
         dispatch(getBatchCardData(userEmail));
     }
@@ -118,7 +116,11 @@ const HomePage: React.FC<IProps> = (props: IProps) => {
                     batchArray.batches.push(batchCardInfo);
                 }
 
-                //the "batch state" is set to be whatever was extracted from the db
+                if (batchArray.batches.length != 0)
+                {
+                    setHasBatches(true);
+                    //the "batch state" is set to be whatever was extracted from the db
+                }
                 dispatch(setBatchState(batchArray));
                 
             }
@@ -129,8 +131,6 @@ const HomePage: React.FC<IProps> = (props: IProps) => {
             setSpinner(false);
         });
         })
-
-        //setSpinner(false);
 
     };
 
@@ -187,6 +187,7 @@ const HomePage: React.FC<IProps> = (props: IProps) => {
                         :
                         <Row>
                         {
+                            /* displays all of the batch cards that are mapped to the client */
                             props.batches.map((element,index) => (
                                 <Col xl="3" lg="4" md="5" sm="6" xs="6" key={index}>
                                     <BatchCard batchId={element.batchId} specialization={element.skill}

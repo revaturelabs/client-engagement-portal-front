@@ -124,11 +124,5 @@ export const AssociateCard: React.FC<IAssociateSingle> = (props: IAssociateSingl
             </Card>
 
         </div>
-<<<<<<< HEAD
-    )
-
-}
-=======
     );
 }
->>>>>>> 44afed6996272cf09071bf858f5298e5c300dfd0
