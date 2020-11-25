@@ -27,6 +27,7 @@ const setUp =
     return component;
 }
 
+/** collection of tests for the batch card component */
 describe("Batch Card Component", () => {
 
     let component: any;
@@ -34,20 +35,20 @@ describe("Batch Card Component", () => {
         component = setUp();
     });
 
-    it("Should render View", () => {
-        const button = component.find('button.test1').text();
+    it("Should render view button", () => {
+        const button = component.find(".test1").render().text();
 
         expect(button).toBe("View");
     });
 
     it("Should render without errors", () => {
-        const wrapper = component.find('.batchcardcomp');
+        const wrapper = component.find('.batchcardcomp').render().text();
 
         expect(wrapper.length).toBe(1);
     });
 
     it("Should render an image", () => {
-        const image = component.find('.logoimg');
+        const image = component.find('.logoimg').render().text();
         expect(image.length).toBe(1);
     })
 
