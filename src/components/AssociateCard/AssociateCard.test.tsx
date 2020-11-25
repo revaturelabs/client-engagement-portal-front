@@ -10,12 +10,12 @@ beforeEach(() => {
 
 test("average should equal 0 with no tests passed as props",() => {
     const average = wrapper.find("#averageHolder").render().text();
-    expect(average).toBe("0%");
+    expect(average).toBe("0.00%");
 });
 
 test("last test score should equal 0 with no tests passed as props", () => {
     const score = wrapper.find("#scoreHolder").render().text();
-    expect(score).toBe("Latest Test Score: 0%");
+    expect(score).toBe("Latest Test Score: 0.00%");
 });
 
 test("associate's name field should be empty with no name passed as props", () => {

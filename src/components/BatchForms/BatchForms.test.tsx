@@ -133,7 +133,7 @@ describe("BatchForms", () => {
     wrapper2.setProps({});
     const button = wrapper2.find("#test-submit-map");
     button.simulate('click');
-    expect(wrapper2.find("#map-client-to-batch")).toBe({});
+    expect(wrapper2.find("#map-client-to-batch")).toEqual({});
   });
 
   it("should test axios call getClientsToBatches", async () => {
