@@ -13,34 +13,6 @@ import { IAssociateSingle } from '../../_reducers/AssociateReducer'
  */
 export const AssociateCard: React.FC<IAssociateSingle> = (props: IAssociateSingle) => {
 
-    //just for testing purposes
-    const fakeData: IAssociateSingle = {
-        firstName: "Bill",
-        lastName: "Gates",
-        testScores: [{
-            week: 1,
-            score: 90
-        }, {
-            week: 2,
-            score: 80
-        }, {
-            week: 3,
-            score: 70
-        }, {
-            week: 4,
-            score: 50
-        }],
-        techScores: [{
-            tech: "Java",
-            score: 80
-        }, {
-            tech: "React",
-            score: 70
-        }, {
-            tech: "SQL",
-            score: 90
-        }]
-    };
     /**
      * This field will calculate the average test score of the associate.
      */
