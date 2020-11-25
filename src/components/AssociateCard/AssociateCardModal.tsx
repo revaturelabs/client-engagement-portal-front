@@ -27,12 +27,13 @@ export const AssociateCardModal:React.FC<IAssociateSingle> = (props:IAssociateSi
     let averageGrade = 0;
     if(props.grades !== undefined){
         let numGrades = 0;
+        gradeMap = props.grades.map((g) => <div id="grade"><p>Date {g.dateReceived}: {g.score.toFixed(2)}%</p><div className="h-divider"></div></div>);
         for(let grade of props.grades){
-            gradeMap = props.grades.map(() => <div id="grade"><p>Date {grade.dateReceived}: {grade.score.toFixed(2)}%</p><div className="h-divider"></div></div>);
+            
             averageGrade += grade.score;
             numGrades++;
         }
-        averageGrade = averageGrade/ numGrades;
+        //averageTest = averageTest / testWeek;
     }
 
     return (
@@ -40,7 +41,7 @@ export const AssociateCardModal:React.FC<IAssociateSingle> = (props:IAssociateSi
                 <Button id="openBtn" className="view-btn" onClick={toggle}>View</Button>
                 <Modal isOpen={show} toggle={toggle}>
                     <ModalHeader toggle={toggle}>
-                        <h3>{props.firstName} {props.lastName}</h3>
+                        <h3 id="associateName">{props.firstName} {props.lastName}</h3>
                     </ModalHeader>
                     <ModalBody>
                     <div className="aso-info">
@@ -51,7 +52,7 @@ export const AssociateCardModal:React.FC<IAssociateSingle> = (props:IAssociateSi
                         <div className="aso-scroll-container">
                             <div className="aso-scroll" >
                             {/* Week #    grade% */}
-                             <div id="testMap">{gradeMap}</div>
+                             <div id="gradeMap">{gradeMap}</div>
                             </div>
                         </div>
                         </div>
@@ -61,6 +62,7 @@ export const AssociateCardModal:React.FC<IAssociateSingle> = (props:IAssociateSi
                             <h6 id="avgTest">{averageGrade.toFixed(2)}%</h6>
                         </div>
                     </Row>
+                    
                 </div>
                     </ModalBody>
                 </Modal>

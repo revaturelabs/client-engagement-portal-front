@@ -1,5 +1,5 @@
-import React, { ChangeEvent, useState } from "react";
 import { Auth } from "aws-amplify";
+import React, { ChangeEvent, SyntheticEvent, useState } from "react";
 import {
   Button,
   Modal,
@@ -34,9 +34,7 @@ export const NewClientButton: React.FC<any> = () => {
 
   /**
    * @function toggle
-   *
    * When the create account button is clicked it opens the modal.
-   *
    * When clicking anywhere outside of the form on the "x" it hides the modal
    */
   const toggle = () => setModal(!modal);
@@ -62,6 +60,8 @@ export const NewClientButton: React.FC<any> = () => {
     const role = event.currentTarget["select"].value;
     const firstName = event.currentTarget["firstName"].value;
     const lastName = event.currentTarget["lastName"].value;
+    const companyName = event.currentTarget["companyName"].value;
+    const phoneNumber = event.currentTarget["phoneNumber"].value
 
     // Checks cognito if they have the admin role in the current session  for security. If not exit out
     // This checking operation takes about 150 MS
@@ -111,9 +111,9 @@ export const NewClientButton: React.FC<any> = () => {
         (await axiosInstance()).post("/client/", { // Client does not have firstName and lastName; this must be retrieved from Cognito upon login
           clientBatches: [],
           clientId: 0,
-          companyName: event.currentTarget["companyName"].value,
+          companyName: companyName,
           email: email,
-          phoneNumber: event.currentTarget["phoneNumber"].value,
+          phoneNumber: phoneNumber,
         });
       } else if (role === "admin") {
         (await axiosInstance()).post("/admin/new", { // Should also retrieve Admin firstName and lastName from Cognito; it saves a database request
@@ -167,38 +167,24 @@ export const NewClientButton: React.FC<any> = () => {
                 <option value="client" defaultValue="client">Client</option>
                 <option value="admin" defaultValue="admin">Admin</option>
               </Input>
-            </FormGroup>
-            <FormGroup>
+            </FormGroup> 
+            {(accountType === "client") ? 
+            <FormGroup className="isClient">
               <Label>Email</Label>
               <Input type="text" required name="email"></Input>
+              <Label>Name</Label>
+              <Input type="text" required></Input>
             </FormGroup>
-            <Container>
-              <Row>
-                <Col>
+            : (accountType === "admin") ? 
+              <><FormGroup>
+                  <Label>Company Name</Label>
+                  <Input type="text" required name="companyName"></Input>
+                </FormGroup>
                   <FormGroup>
-                    <Label>First Name</Label>
-                    <Input type="text" required name="firstName"></Input>
-                  </FormGroup>
-                </Col>
-                <Col>
-                  <FormGroup>
-                    <Label>Last Name</Label>
-                    <Input type="text" required name="lastName"></Input>
-                  </FormGroup>
-                </Col>
-              </Row>
-            </Container>
-            {accountType === "client" ? (<>
-              <FormGroup>
-                <Label>Company Name</Label>
-                <Input type="text" required name="companyName"></Input>
-              </FormGroup>
-              <FormGroup>
-                <Label>Phone Number</Label>
-                <Input type="tel" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required name="phoneNumber"></Input>
-              </FormGroup>
-            </>
-            ) : (
+                    <Label>Phone Number</Label>
+                    <Input type="tel" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required name="phoneNumber"></Input>
+                  </FormGroup></>
+             : (
                 <></>
               )}
             <FormGroup>
@@ -217,8 +203,8 @@ export const NewClientButton: React.FC<any> = () => {
           </ModalBody>
 
           <ModalFooter>
-            <input type="submit" className="create-account-submit">
-            </input>
+            <input type="submit" value="Submit" className="create-account-submit"/>
+            
           </ModalFooter>
         </Form>
       </Modal>
