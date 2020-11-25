@@ -47,7 +47,7 @@ export const AssociateCardModal:React.FC<IAssociateSingle> = (props:IAssociateSi
                     <div className="aso-info">
                     <Row>
                         {/* div for scroll area */}
-                        <div className="col-9" style={{maxHeight: "180px"}}>
+                        <div className="col-9" style={{maxHeight: "400px"}}>
                         <div>Weekly Assessments</div>
                         <div className="aso-scroll-container">
                             <div className="aso-scroll" >
@@ -59,7 +59,7 @@ export const AssociateCardModal:React.FC<IAssociateSingle> = (props:IAssociateSi
                         {/* div for average grade */}
                         <div className="aso-average col-1">
                             <h6>Average</h6>
-                            <h6 id="avgGrade">{averageGrade.toFixed(2)}%</h6>
+                            <h6 id="avgTest">{averageGrade.toFixed(2)}%</h6>
                         </div>
                     </Row>
                     
