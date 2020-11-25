@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Button, ModalBody, Row } from 'reactstrap';
+import { Modal, Button, ModalBody, Row, ModalHeader } from 'reactstrap';
 import '../../scss/associate-card.scss';
 import {IAssociateSingle} from '../../_reducers/AssociateReducer'
 
@@ -27,48 +27,45 @@ export const AssociateCardModal:React.FC<IAssociateSingle> = (props:IAssociateSi
     let averageGrade = 0;
     if(props.grades !== undefined){
         let numGrades = 0;
+        gradeMap = props.grades.map((g) => <div id="grade"><p>Date {g.dateReceived}: {g.score.toFixed(2)}%</p><div className="h-divider"></div></div>);
         for(let grade of props.grades){
-            gradeMap = props.grades.map(() => <div id="grade"><p>Date {grade.dateReceived}: {grade.score.toFixed(2)}%</p><div className="h-divider"></div></div>);
+            
             averageGrade += grade.score;
             numGrades++;
         }
-        averageGrade = averageGrade/ numGrades;
+        //averageTest = averageTest / testWeek;
     }
 
     return (
-        <body style={{display:"flex", alignContent:"center", margin:"auto"}}>
-            <Button id="openBtn" className="view-btn" onClick={toggle}>View</Button>
-            <Modal
-                isOpen={show}
-                onHide={toggle}
-                size="lg"
-                aria-labelledby="contained-modal-title-vcenter"
-                centered
-                className="aso-modal-card" 
-
-            >   
-                <ModalBody className="aso-modal-body">
-                <div>
-                    {/* <img className="pic" src={props.profilePic} alt="associate_profile_pic"/> */}
-                    <h3 id="firstName">{props.firstName}</h3>
-                    <h4 id="lastName">{props.lastName}</h4>
-                </div>
-                <div className="h-divider"></div>
-                <div className="aso-info">
-                    <div>Weekly Assessments</div>
+        <>
+                <Button id="openBtn" className="view-btn" onClick={toggle}>View</Button>
+                <Modal isOpen={show} toggle={toggle}>
+                    <ModalHeader toggle={toggle}>
+                        <h3 id="associateName">{props.firstName} {props.lastName}</h3>
+                    </ModalHeader>
+                    <ModalBody>
+                    <div className="aso-info">
                     <Row>
-                        <div className="col-1"/>
-                        <div className="aso-scroll col-8">
-                            <div id="testMap">{gradeMap}</div>
+                        {/* div for scroll area */}
+                        <div className="col-9" style={{maxHeight: "180px"}}>
+                        <div>Weekly Assessments</div>
+                        <div className="aso-scroll-container">
+                            <div className="aso-scroll" >
+                            {/* Week #    grade% */}
+                             <div id="gradeMap">{gradeMap}</div>
+                            </div>
                         </div>
+                        </div>
+                        {/* div for average grade */}
                         <div className="aso-average col-1">
                             <h6>Average</h6>
                             <h6 id="avgGrade">{averageGrade.toFixed(2)}%</h6>
                         </div>
                     </Row>
+                    
                 </div>
                     </ModalBody>
                 </Modal>
-        </body>
+        </>
     )
 }

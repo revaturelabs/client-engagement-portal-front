@@ -21,13 +21,13 @@ describe('logincomp', () => {
     })
 
       //Simple Test 3
-      it("Should render an image", () => {
+      it("Should render user thumbnail", () => {
         const image = component.find('.userthumbcheck');
         expect(image.length).toBe(1);
     })
 
       //Simple Test 4
-      it("Should render another image", () => {
+      it("Should render password thumbnail", () => {
         const image = component.find('.passthumbcheck');
         expect(image.length).toBe(1);
     })
