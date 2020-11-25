@@ -31,24 +31,6 @@ const PlanInterventionModalv2:React.FC = () => {
                     </div>
                 </ModalBody>
             </Modal>
-            {/* <Modal isOpen={show} toggle={toggle}>
-                <ModalHeader toggle={toggle}>
-                    <h4>Request Intervention</h4>
-                </ModalHeader>
-                <ModalBody>
-                    <div className="TextAreaContainer">
-                        <div className="TextAreaLabel">Reason For Intervention: </div>
-                        <textarea className="TextAreaInput" />
-                    </div>
-                    <div className="DatePickerContainer">
-                        <div className="DatePickerLabel">Schedule An Intervention Date: </div>
-                        <input type="date" className="DatePicker"/>
-                    </div>
-                    <div className="SubmitButtonContainer">
-                        <button className="SubmitButton">Submit</button>
-                    </div>
-                </ModalBody>
-            </Modal> */}
         </>
     );
 }
