@@ -32,7 +32,7 @@ export const AssociateCardModal:React.FC<IAssociateSingle> = (props:IAssociateSi
             averageGrade += grade.score;
             numGrades++;
         }
-        averageGrade = averageGrade/ numGrades;
+        //averageTest = averageTest / testWeek;
     }
 
     return (
@@ -61,6 +61,7 @@ export const AssociateCardModal:React.FC<IAssociateSingle> = (props:IAssociateSi
                             <h6 id="avgTest">{averageGrade.toFixed(2)}%</h6>
                         </div>
                     </Row>
+                    
                 </div>
                     </ModalBody>
                 </Modal>
