@@ -32,7 +32,7 @@ export const AssociateCardModal:React.FC<IAssociateSingle> = (props:IAssociateSi
             averageGrade += grade.score;
             numGrades++;
         }
-        averageGrade = averageGrade/ numGrades;
+        //averageTest = averageTest / testWeek;
     }
 
     return (
@@ -61,11 +61,13 @@ export const AssociateCardModal:React.FC<IAssociateSingle> = (props:IAssociateSi
                         <div className="aso-scroll col-8">
                             <div id="testMap">{gradeMap}</div>
                         </div>
+                        {/* div for average grade */}
                         <div className="aso-average col-1">
                             <h6>Average</h6>
                             <h6 id="avgGrade">{averageGrade.toFixed(2)}%</h6>
                         </div>
                     </Row>
+                    
                 </div>
                     </ModalBody>
                 </Modal>
