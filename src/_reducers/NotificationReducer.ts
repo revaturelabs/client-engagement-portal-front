@@ -2,7 +2,7 @@ export interface INotification { //basic structure of the notifications
     requestId:number
     requestType:string
     status:string
-    requestedDate:string
+    createdDate:Date
     message:string
     client: {
         clientId:number,
@@ -22,7 +22,7 @@ const initialState:INotificationState = {
                 requestId:0,
                 requestType:"yabba",
                 status:"PENDING",
-                requestedDate:"Tuesday",
+                createdDate: new Date(Date.UTC(2020, 11, 24)),
                 message:"Do it now",
                 client: {
                     clientId:0,
@@ -35,7 +35,7 @@ const initialState:INotificationState = {
                 requestId:0,
                 requestType:"yabba",
                 status:"PENDING",
-                requestedDate:"Tuesday",
+                createdDate: new Date(Date.UTC(2020, 11, 24)),
                 message:"Do it now",
                 client: {
                     clientId:0,
@@ -43,12 +43,11 @@ const initialState:INotificationState = {
                     companyName:"Google",
                     phoneNumber:"192192192"
                 }
-            },
-            {
+            },{
                 requestId:0,
                 requestType:"yabba",
                 status:"PENDING",
-                requestedDate:"Tuesday",
+                createdDate: new Date(Date.UTC(2020, 11, 24)),
                 message:"Do it now",
                 client: {
                     clientId:0,

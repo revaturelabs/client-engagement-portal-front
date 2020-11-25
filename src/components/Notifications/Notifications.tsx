@@ -1,3 +1,4 @@
+import Axios from 'axios';
 import React from 'react';
 import { Accordion, Card } from 'react-bootstrap';
 import { connect } from 'react-redux';
@@ -25,6 +26,7 @@ const Notifications:React.FC<INotificationState> = (props:INotificationState) =>
             
     //     }
     // })
+    Axios.get("localhost:9011/")
 
     return (
         <Accordion className="notifs-container">
@@ -32,37 +34,49 @@ const Notifications:React.FC<INotificationState> = (props:INotificationState) =>
                     Notifications
                 </Accordion.Toggle>
 
+                
                 <Accordion.Collapse eventKey="0">
-                    <Accordion className="notifs">
-                        {props.notifications?.map(
-                                (e, i) =>
-                                <>
-                                    <Accordion.Toggle as={Card.Header} variant="link" eventKey={i.toString()} id="notif-toggle">
-                                        <Table className="notif-table" hover>
-                                            <tbody>
-                                                <tr className="notif-row">
-                                                    <td>{e.client.companyName}</td>
-                                                    <td>{e.requestType}</td>
-                                                    <td>{e.requestedDate}</td>
-                                                </tr>
-                                            </tbody>
-                                        </Table>
-                                    </Accordion.Toggle>
+                        <div>
+                            {/* <Table id="notif-head">
+                                <thead>
+                                    <tr>
+                                        <th>Client Name</th>
+                                        <th>Message</th>
+                                        <th>Date of Request</th>
+                                    </tr>
+                                </thead>
+                            </Table> */}
+                            <Accordion className="notifs">
+                                {props.notifications?.map(
+                                        (e, i) =>
+                                        <>
+                                            <Accordion.Toggle as={Card.Header} variant="link" eventKey={i.toString()} id="notif-toggle">
+                                                <Table className="notif-table" hover>
+                                                    <tbody>
+                                                        <tr className="notif-row">
+                                                            <td>{e.client.companyName}</td>
+                                                            <td>{e.requestType}</td>
+                                                            <td>{e.createdDate.getMonth()}/{e.createdDate.getDate()}/{e.createdDate.getFullYear()}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </Table>
+                                            </Accordion.Toggle>
 
-                                    <Accordion.Collapse eventKey={i.toString()} key={i}>
-                                        <div>
-                                            Status: {e.status}
-                                            <br/>
-                                            Client Email: {e.client.email}
-                                            <br/>
-                                            Client Phone Number: {e.client.phoneNumber}
-                                        </div>
-                                    </Accordion.Collapse>
-                                </>
-                            )
-                        }
-                    </Accordion>
-                </Accordion.Collapse>
+                                            <Accordion.Collapse eventKey={i.toString()} key={i}>
+                                                <div>
+                                                    Status: {e.status}
+                                                    <br/>
+                                                    Client Email: {e.client.email}
+                                                    <br/>
+                                                    Client Phone Number: {e.client.phoneNumber}
+                                                </div>
+                                            </Accordion.Collapse>
+                                        </>
+                                    )
+                                }
+                            </Accordion>
+                        </div>
+                    </Accordion.Collapse>
         </Accordion>
     )
 }
