@@ -23,7 +23,14 @@ test("associate's name field should be empty with no name passed as props", () =
     expect(name).toBe(" ");
 });
 
-test("there should be 3 divs in each associate card", () => {
+/**
+ * This test is used to check that the card is rendering properly.
+ * The first div contains the associate's name and average test score,
+ * the second div contains the associate's last test score,
+ * and the last div holds the button that allows the modal to appear.
+ */
+test("there should be 4 divs in each associate card", () => {
     const divs = wrapper.find("div");
-    expect(divs.length).toBe(3);
+    expect(divs.length).toBe(4);
 });
+
