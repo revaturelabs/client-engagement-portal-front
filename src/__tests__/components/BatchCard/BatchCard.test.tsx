@@ -4,38 +4,37 @@ import { BatchCard } from "../../../components/BatchCard/BatchCard";
 
 const setUp =
     (
-        props=
-        {
-            batchId: 1,
-            specialization: "Java/Microservices",
-            batchName: "Dummy Batch"
-        }
-    ) =>
-{
-    const component = shallow(<BatchCard {...props}/>);
-    return component;
-}
+        props =
+            {
+                batchId: 1,
+                specialization: "Java/Microservices",
+                batchName: "Dummy Batch"
+            }
+    ) => {
+        const component = shallow(<BatchCard {...props} />);
+        return component;
+    }
 
 
 
 describe('batchcardcomp', () => {
-   
+
     let component: any;
     beforeEach(() => {
         component = setUp();
     });
 
-   // Simple Test 1
+    // Simple Test 1
     it("Should render View", () => {
         const button = component.find('button.test1').text();
 
         expect(button).toBe("View");
     });
-   
+
     //Simple Test 2
     it("Should render without errors", () => {
         const wrapper = component.find('.batchcardcomp');
-    
+
         expect(wrapper.length).toBe(1);
     });
 
