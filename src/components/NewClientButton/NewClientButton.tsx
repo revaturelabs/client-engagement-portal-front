@@ -1,5 +1,5 @@
-import React, { ChangeEvent, useState } from "react";
 import { Auth } from "aws-amplify";
+import React, { ChangeEvent, SyntheticEvent, useState } from "react";
 import {
   Button,
   Modal,
@@ -14,21 +14,19 @@ import {
   Col,
   Container,
 } from "reactstrap";
-import  '../../scss/NewClientButton.scss';
+import '../../scss/NewClientButton.scss';
 import { axiosInstance } from "../../util/axiosConfig";
 import { useDispatch } from "react-redux";
 import { logout } from "../../actions/UserActions";
 
-
-//This component includes the button for a new client account
-//This also has a modal form that pops up when the button is clicked
 
 /**
  * @function newClientButton
  * This component includes the button for a new client account
  *
  * This also has a modal form that pops up when the button is clicked
- */
+ *
+  */
 export const NewClientButton: React.FC<any> = () => {
   const [modal, setModal] = useState(false);
 
@@ -36,9 +34,7 @@ export const NewClientButton: React.FC<any> = () => {
 
   /**
    * @function toggle
-   *
    * When the create account button is clicked it opens the modal.
-   *
    * When clicking anywhere outside of the form on the "x" it hides the modal
    */
   const toggle = () => setModal(!modal);
@@ -57,12 +53,6 @@ export const NewClientButton: React.FC<any> = () => {
   const registerUser = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // Check database if they have the admin role and their current session token matches for security. If not, exit out
-    /*
-        if (role != "Admin") {
-            return null;
-        }
-        */
 
     // These need to be up here. Data is dropped when user is checked {for some reason} <= these fields are cleared when the modal unloads
     const email = event.currentTarget["email"].value;
@@ -75,9 +65,9 @@ export const NewClientButton: React.FC<any> = () => {
     // This checking operation takes about 150 MS
     // Unknown Error - Response time can be 10,000 MS. Usually happens when react is updating. This shouldn't be a problem
 
-    console.log((await Auth.currentSession()).getAccessToken().getJwtToken());
     const checkRole = Auth.currentUserInfo();
     const checker = await checkRole.then(function (result) {
+
       if (result.attributes["custom:userRole"] !== "admin") {
         dispatch(logout());
         return false;
@@ -85,8 +75,6 @@ export const NewClientButton: React.FC<any> = () => {
         return true;
       }
     });
-    //Example
-    //Axios.post("/getUsers", data, headers{Authorization:idToken})
 
     if (!checker) {
       console.log("Error: User does not have permissions to create an account");
@@ -117,7 +105,7 @@ export const NewClientButton: React.FC<any> = () => {
         signUpResult.codeDeliveryDetails
       );
 
-      if(role === "client"){
+      if (role === "client") {
         (await axiosInstance()).post("/client/", { // Client does not have firstName and lastName; this must be retrieved from Cognito upon login
           clientBatches: [],
           clientId: 0,
@@ -125,7 +113,7 @@ export const NewClientButton: React.FC<any> = () => {
           email: email,
           phoneNumber: event.currentTarget["phoneNumber"].value,
         });
-      } else if(role === "admin") {
+      } else if (role === "admin") {
         (await axiosInstance()).post("/admin/new", { // Should also retrieve Admin firstName and lastName from Cognito; it saves a database request
           adminId: 0,
           email: email,
@@ -159,12 +147,12 @@ export const NewClientButton: React.FC<any> = () => {
       </Button>
 
       <Modal isOpen={modal} toggle={toggle}>
-            <ModalHeader toggle={toggle} className="container create-account-modal-header">
-              Create Account
-            </ModalHeader>        
-          <Form onSubmit={(event:React.FormEvent<HTMLFormElement>) => registerUser(event)}>
-        <ModalBody>
-          {/* <Form onSubmit={registerUser}> */}
+        <ModalHeader toggle={toggle} className="container create-account-modal-header">
+          Create Account
+            </ModalHeader>
+        <Form onSubmit={(event: React.FormEvent<HTMLFormElement>) => registerUser(event)}>
+          <ModalBody>
+            {/* <Form onSubmit={registerUser}> */}
             <FormGroup>
               <Label for="exampleSelect">Account Type</Label>
               <Input
@@ -174,41 +162,27 @@ export const NewClientButton: React.FC<any> = () => {
                 placeholder="Client Type"
                 onChange={changeForm}
               >
-                <option value="client">Client</option>
-                <option value="admin">Admin</option>
+                <option value="client" defaultValue="client">Client</option>
+                <option value="admin" defaultValue="admin">Admin</option>
               </Input>
-            </FormGroup>
-            <FormGroup>
+            </FormGroup> 
+            {(accountType === "client") ? 
+            <FormGroup className="isClient">
               <Label>Email</Label>
               <Input type="text" required name="email"></Input>
+              <Label>Name</Label>
+              <Input type="text" required></Input>
             </FormGroup>
-            <Container>
-              <Row>
-                <Col>
+            : (accountType === "admin") ? 
+              <><FormGroup>
+                  <Label>Company Name</Label>
+                  <Input type="text" required name="companyName"></Input>
+                </FormGroup>
                   <FormGroup>
-                    <Label>First Name</Label>
-                    <Input type="text" required name="firstName"></Input>
-                  </FormGroup>
-                </Col>
-                <Col>
-                  <FormGroup>
-                    <Label>Last Name</Label>
-                    <Input type="text" required name="lastName"></Input>
-                  </FormGroup>
-                </Col>
-              </Row>
-            </Container>
-            {accountType === "client" ? (<>
-              <FormGroup>
-                <Label>Company Name</Label>
-                <Input type="text" required name="companyName"></Input>
-              </FormGroup>
-              <FormGroup>
-                <Label>Phone Number</Label>
-                <Input type="tel" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required name="phoneNumber"></Input>
-              </FormGroup>
-              </>
-            ) : (
+                    <Label>Phone Number</Label>
+                    <Input type="tel" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required name="phoneNumber"></Input>
+                  </FormGroup></>
+             : (
                 <></>
               )}
             <FormGroup>
@@ -226,10 +200,10 @@ export const NewClientButton: React.FC<any> = () => {
             </FormGroup>
           </ModalBody>
 
-        <ModalFooter>
-          <input type="submit" className="create-account-submit">
-          </input>
-        </ModalFooter>
+          <ModalFooter>
+            <input type="submit" className="create-account-submit">
+            </input>
+          </ModalFooter>
         </Form>
       </Modal>
     </>
