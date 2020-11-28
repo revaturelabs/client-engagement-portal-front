@@ -22,7 +22,7 @@ interface IProps {
         endDate: string,
         skill: string,
         trainer: string,
-        associateAssignments: [{}],
+        associateAssignments?: [{}],
     }],
 }
 
@@ -92,9 +92,15 @@ export const BatchInformation: React.FC<IProps> = (props: IProps) => {
                         </CardBody>
                         <CardFooter></CardFooter>
                     </Card>
-                    
-                    <h1>Batch Engineers: ({props.batches[0].associateAssignments.length})</h1>
+                    { props.batches[0].associateAssignments != undefined ?
+                    <>
+                        <h1>Batch Engineers: ({props.batches[0].associateAssignments.length})</h1>
                         <AssociateCardFactory {...props.batches[0]}/>
+                    </>
+                        :
+                        <span/>
+                    }
+                    
 
                     </div>
                 </Col>

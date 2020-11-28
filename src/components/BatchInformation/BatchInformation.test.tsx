@@ -2,8 +2,15 @@ import React from "react";
 import { shallow } from "enzyme";
 import { BatchInformation } from "./BatchInformation";
 
-const setUp = (props={loginType:"client"}) => {
-    return shallow(<BatchInformation {...props}/>);
+const setUp = (props={
+    batchId: "TR-6969",
+    batchName: "Mock Batch 69",
+    endDate: "tomorrow",
+    skill: "nunchuck skills",
+    trainer: "batman",
+    associateAssignments: undefined,
+}) => {
+    return shallow(<BatchInformation batches={[{...props}]}/>);
 }
 
 describe('batchinfocomp', () => {

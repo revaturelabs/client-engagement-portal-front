@@ -34,3 +34,283 @@ exports[`Batch Card Component Should render batch card with the information give
   </div>
 </div>
 `;
+
+exports[`Batch Card Component Should render each batch card with the proper photo 1`] = `
+<div
+  className="batchcardcomp rev-card justify-content-center text-center"
+>
+  <div
+    className="row justify-content-center"
+  >
+    <img
+      alt="Java/Microservices thumbnail"
+      className="pic logoimg"
+      src={null}
+    />
+  </div>
+  <br />
+  <p
+    className="spec-text"
+  >
+    Java/Microservices
+  </p>
+  <p>
+    Dummy Batch
+  </p>
+  <div
+    className="row justify-content-center"
+  >
+    <button
+      className="view-btn test1"
+      onClick={[Function]}
+    >
+      View
+    </button>
+  </div>
+</div>
+`;
+
+exports[`Batch Card Component Should render each batch card with the proper photo 2`] = `
+<div
+  className="batchcardcomp rev-card justify-content-center text-center"
+>
+  <div
+    className="row justify-content-center"
+  >
+    <img
+      alt="PEGA thumbnail"
+      className="pic logoimg"
+      src={null}
+    />
+  </div>
+  <br />
+  <p
+    className="spec-text"
+  >
+    PEGA
+  </p>
+  <p>
+    Dummy Batch
+  </p>
+  <div
+    className="row justify-content-center"
+  >
+    <button
+      className="view-btn test1"
+      onClick={[Function]}
+    >
+      View
+    </button>
+  </div>
+</div>
+`;
+
+exports[`Batch Card Component Should render each batch card with the proper photo 3`] = `
+<div
+  className="batchcardcomp rev-card justify-content-center text-center"
+>
+  <div
+    className="row justify-content-center"
+  >
+    <img
+      alt="Java with Automation thumbnail"
+      className="pic logoimg"
+      src={null}
+    />
+  </div>
+  <br />
+  <p
+    className="spec-text"
+  >
+    Java with Automation
+  </p>
+  <p>
+    Dummy Batch
+  </p>
+  <div
+    className="row justify-content-center"
+  >
+    <button
+      className="view-btn test1"
+      onClick={[Function]}
+    >
+      View
+    </button>
+  </div>
+</div>
+`;
+
+exports[`Batch Card Component Should render each batch card with the proper photo 4`] = `
+<div
+  className="batchcardcomp rev-card justify-content-center text-center"
+>
+  <div
+    className="row justify-content-center"
+  >
+    <img
+      alt="Java React thumbnail"
+      className="pic logoimg"
+      src={null}
+    />
+  </div>
+  <br />
+  <p
+    className="spec-text"
+  >
+    Java React
+  </p>
+  <p>
+    Dummy Batch
+  </p>
+  <div
+    className="row justify-content-center"
+  >
+    <button
+      className="view-btn test1"
+      onClick={[Function]}
+    >
+      View
+    </button>
+  </div>
+</div>
+`;
+
+exports[`Batch Card Component Should render each batch card with the proper photo 5`] = `
+<div
+  className="batchcardcomp rev-card justify-content-center text-center"
+>
+  <div
+    className="row justify-content-center"
+  >
+    <img
+      alt="Big Data thumbnail"
+      className="pic logoimg"
+      src={null}
+    />
+  </div>
+  <br />
+  <p
+    className="spec-text"
+  >
+    Big Data
+  </p>
+  <p>
+    Dummy Batch
+  </p>
+  <div
+    className="row justify-content-center"
+  >
+    <button
+      className="view-btn test1"
+      onClick={[Function]}
+    >
+      View
+    </button>
+  </div>
+</div>
+`;
+
+exports[`Batch Card Component Should render each batch card with the proper photo 6`] = `
+<div
+  className="batchcardcomp rev-card justify-content-center text-center"
+>
+  <div
+    className="row justify-content-center"
+  >
+    <img
+      alt="SalesForce thumbnail"
+      className="pic logoimg"
+      src={null}
+    />
+  </div>
+  <br />
+  <p
+    className="spec-text"
+  >
+    SalesForce
+  </p>
+  <p>
+    Dummy Batch
+  </p>
+  <div
+    className="row justify-content-center"
+  >
+    <button
+      className="view-btn test1"
+      onClick={[Function]}
+    >
+      View
+    </button>
+  </div>
+</div>
+`;
+
+exports[`Batch Card Component Should render each batch card with the proper photo 7`] = `
+<div
+  className="batchcardcomp rev-card justify-content-center text-center"
+>
+  <div
+    className="row justify-content-center"
+  >
+    <img
+      alt=".NET/Microservices thumbnail"
+      className="pic logoimg"
+      src={null}
+    />
+  </div>
+  <br />
+  <p
+    className="spec-text"
+  >
+    .NET/Microservices
+  </p>
+  <p>
+    Dummy Batch
+  </p>
+  <div
+    className="row justify-content-center"
+  >
+    <button
+      className="view-btn test1"
+      onClick={[Function]}
+    >
+      View
+    </button>
+  </div>
+</div>
+`;
+
+exports[`Batch Card Component Should render each batch card with the proper photo 8`] = `
+<div
+  className="batchcardcomp rev-card justify-content-center text-center"
+>
+  <div
+    className="row justify-content-center"
+  >
+    <img
+      alt="Java Devops thumbnail"
+      className="pic logoimg"
+      src={null}
+    />
+  </div>
+  <br />
+  <p
+    className="spec-text"
+  >
+    Java Devops
+  </p>
+  <p>
+    Dummy Batch
+  </p>
+  <div
+    className="row justify-content-center"
+  >
+    <button
+      className="view-btn test1"
+      onClick={[Function]}
+    >
+      View
+    </button>
+  </div>
+</div>
+`;
