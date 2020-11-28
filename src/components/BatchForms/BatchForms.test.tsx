@@ -15,11 +15,6 @@ const wrapper = shallow(<BatchForms />);
  */
 const mockAxiosGet = jest.spyOn(axios,"get");
 /**
- * @field
- * mockAxiosPut is mocking axios put request so it does not call the request form the application 
- */
-const mockAxiosPut = jest.spyOn(axios,"put");
-/**
  * @function beforeEach
  * before each test give the mocked axios request with the information provided
  */
@@ -28,15 +23,12 @@ beforeEach(()=>{
     mockAxiosGet.mockImplementation(()=>{
         return Promise.resolve({
             data:[
-                { id: "Test 1", name: "Mock Batch 1" },
-                { id: "Test 2", name: "Mock Batch 2" },
+                { id: "Test 1", name: "Mock Batch 1" ,email:"test@email"},
+                { id: "Test 2", name: "Mock Batch 2" ,email:"test2@email"},
             ],
         });
     });
 
-    mockAxiosPut.mockImplementation(()=>{
-      return Promise.resolve("information sent")
-    });
 })
     
 /**
@@ -121,32 +113,28 @@ describe("BatchForms", () => {
     button.simulate("click");
     wrapper2.update();
     wrapper2.setProps({});
-    expect(wrapper2.find("#map-options").at(1).text()).toContain("Mock Batch 1");
+    expect(wrapper2.find("#map-options").at(1).text()).toContain("Mock Batch 1")
   });
 
-  it("should test that submit button is sending the information",async ()=>{
-    let wrapper2:any;
-    await act(async ()=>{
-      wrapper2 = mount(<BatchForms/>);
-    })
-    wrapper2.update();
-    wrapper2.setProps({});
-    const button = wrapper2.find("#test-submit-map");
-    button.simulate('click');
-    expect(wrapper2.find("#map-client-to-batch")).toBe({});
-  });
+  /**
+   * @function
+   * testing that the input is being updated with the additional information
+   */
 
   it("should test axios call getClientsToBatches", async () => {
     let wrapper2: any;
     await act(async () => {
       wrapper2 = mount(<BatchForms />);
+      
     });
-    const button = wrapper2.find("#map-client-to-batch");
-    button.at(1).simulate("click");
     wrapper2.update();
     wrapper2.setProps({});
-    console.log(wrapper2.debug());
-    expect(wrapper2.find("#map-client-to-batch").children().length).toBeGreaterThan(1);
+    const button = wrapper2.find("#map-client-to-batch");
+    await act( async ()=>{
+      button.at(0).find("select").simulate("change");
+    })
+    expect(button.find("select").children().length).toBeGreaterThan(1);
+
   });
 
 

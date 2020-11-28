@@ -62,8 +62,6 @@ export const NewClientButton: React.FC<any> = () => {
     const role = event.currentTarget["select"].value;
     const firstName = event.currentTarget["firstName"].value;
     const lastName = event.currentTarget["lastName"].value;
-    const companyName = event.currentTarget["companyName"].value;
-    const phoneNumber = event.currentTarget["phoneNumber"].value
 
     // Checks cognito if they have the admin role in the current session  for security. If not exit out
     // This checking operation takes about 150 MS
@@ -113,9 +111,9 @@ export const NewClientButton: React.FC<any> = () => {
         (await axiosInstance()).post("/client/", { // Client does not have firstName and lastName; this must be retrieved from Cognito upon login
           clientBatches: [],
           clientId: 0,
-          companyName: companyName,
+          companyName: event.currentTarget["companyName"].value,
           email: email,
-          phoneNumber: phoneNumber,
+          phoneNumber: event.currentTarget["phoneNumber"].value,
         });
       } else if (role === "admin") {
         (await axiosInstance()).post("/admin/new", { // Should also retrieve Admin firstName and lastName from Cognito; it saves a database request
