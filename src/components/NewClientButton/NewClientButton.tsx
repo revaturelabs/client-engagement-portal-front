@@ -60,8 +60,13 @@ export const NewClientButton: React.FC<any> = () => {
     const role = event.currentTarget["select"].value;
     const firstName = event.currentTarget["firstName"].value;
     const lastName = event.currentTarget["lastName"].value;
-    const companyName = event.currentTarget["companyName"].value;
-    const phoneNumber = event.currentTarget["phoneNumber"].value
+    let companyName;
+    let phoneNumber;
+
+    if(role==='client') {
+      companyName = event.currentTarget["companyName"].value;
+      phoneNumber = event.currentTarget["phoneNumber"].value;
+    }
 
     // Checks cognito if they have the admin role in the current session  for security. If not exit out
     // This checking operation takes about 150 MS
@@ -167,24 +172,38 @@ export const NewClientButton: React.FC<any> = () => {
                 <option value="client" defaultValue="client">Client</option>
                 <option value="admin" defaultValue="admin">Admin</option>
               </Input>
-            </FormGroup> 
-            {(accountType === "client") ? 
-            <FormGroup className="isClient">
+            </FormGroup>
+            <FormGroup>
               <Label>Email</Label>
               <Input type="text" required name="email"></Input>
-              <Label>Name</Label>
-              <Input type="text" required></Input>
             </FormGroup>
-            : (accountType === "admin") ? 
-              <><FormGroup>
-                  <Label>Company Name</Label>
-                  <Input type="text" required name="companyName"></Input>
-                </FormGroup>
+            <Container>
+              <Row>
+                <Col>
                   <FormGroup>
-                    <Label>Phone Number</Label>
-                    <Input type="tel" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required name="phoneNumber"></Input>
-                  </FormGroup></>
-             : (
+                    <Label>First Name</Label>
+                    <Input type="text" required name="firstName"></Input>
+                  </FormGroup>
+                </Col>
+                <Col>
+                  <FormGroup>
+                    <Label>Last Name</Label>
+                    <Input type="text" required name="lastName"></Input>
+                  </FormGroup>
+                </Col>
+              </Row>
+            </Container>
+            {accountType === "client" ? (<>
+              <FormGroup>
+                <Label>Company Name</Label>
+                <Input type="text" required name="companyName"></Input>
+              </FormGroup>
+              <FormGroup>
+                <Label>Phone Number</Label>
+                <Input type="tel" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required name="phoneNumber"></Input>
+              </FormGroup>
+            </>
+            ) : (
                 <></>
               )}
             <FormGroup>

@@ -112,11 +112,13 @@ const BatchInformationPage: React.FC<IProps> = (props: IProps) => {
             });
         })
 
-        //setSpinner(false);
     };
 
     const getBatchDataNow = () => {
-        dispatch(getBatchData(passedInId));
+        if (passedInId != null)
+        {
+            dispatch(getBatchData(passedInId));
+        }
         setRecievedData(true);
     };
 

@@ -87,7 +87,9 @@
     background-color: white;
     color: $rev-orange;
 }
+
 .login-submit {
+    position: relative;
     margin: 10px;
     line-height: 2.2;
     width: 70%;

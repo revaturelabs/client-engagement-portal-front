@@ -1,26 +1,58 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 import { AssociateCard } from './AssociateCard';
+import { IAssociateSingle } from '../../_reducers/AssociateReducer';
 
 let wrapper:any;
+let fakeData:IAssociateSingle;
+
+/**
+ * This represents associate data to be used in the tests below.
+ */
+beforeAll(() => {
+    fakeData = {
+        firstName: "Bill",
+        lastName: "Gates",
+        grades: [{
+            dateReceived: "2020-10-21",
+            gradeId: 2,
+            score: 90,
+            traineeId: "TR-1111"
+        },
+        {
+            dateReceived: "2020-10-14",
+            gradeId: 1,
+            score: 60,
+            traineeId: "TR-1111"
+        },
+        {
+            dateReceived: "2020-10-28",
+            gradeId: 3,
+            score: 72,
+            traineeId: "TR-1111"
+        }
+        ]
+    };
+});
+
 
 beforeEach(() => {
-    wrapper = shallow(<AssociateCard />)
+    wrapper = shallow(<AssociateCard {...fakeData}/>)
 });
 
-test("average should equal 0 with no tests passed as props",() => {
+test("average should equal 74 with 3 fake grades passed as props",() => {
     const average = wrapper.find("#averageHolder").render().text();
-    expect(average).toBe("0.00%");
+    expect(average).toBe("74.00%");
 });
 
-test("last test score should equal 0 with no tests passed as props", () => {
+test("last test score should equal 72 with 3 fake grades passed as props", () => {
     const score = wrapper.find("#scoreHolder").render().text();
-    expect(score).toBe("Latest Test Score: 0.00%");
+    expect(score).toBe("Latest Test Score: 72.00%");
 });
 
-test("associate's name field should be empty with no name passed as props", () => {
+test("associate's name field should be filled out with a fake name passed as props", () => {
     const name = wrapper.find("#nameHolder").render().text();
-    expect(name).toBe(" ");
+    expect(name).toBe("Bill Gates");
 });
 
 /**

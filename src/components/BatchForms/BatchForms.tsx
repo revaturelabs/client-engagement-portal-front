@@ -36,8 +36,7 @@ export const BatchForms: React.FC = () => {
      *
      */
     const getBatches = async () => {
-        // const response = await axiosInstance.get("admin/batch/allNames")
-        const response = await axios.get("http://ec2-35-174-62-5.compute-1.amazonaws.com:9011/admin/batch/allNames")
+        const response = await(await axiosInstance()).get("admin/batch/allNames")
         const tempArray=[];
         for (const r of response.data)
         {
@@ -65,31 +64,34 @@ export const BatchForms: React.FC = () => {
 
       /**
        * 
-       * @param event 
+       * @param event
+       * Sending the  mappedClientEmail and the mappedBatchId to the backend though a put request parameter to map a client to a batch
        */
     const mapBatches = async (event: React.FormEvent<HTMLFormElement>)=>{
         event.preventDefault();
         const clientEmail=event.currentTarget["mappedClientEmail"].value;
         const batchId = event.currentTarget["mappedBatchId"].value;
-        const response = await axios.put("http://ec2-35-174-62-5.compute-1.amazonaws.com:9011/admin/mapBatchToClient?batchId="+batchId+"&email="+clientEmail);
+        (await axiosInstance()).put("admin/mapBatchToClient?batchId="+batchId+"&email="+clientEmail);
     }
 
     /**
      * 
-     * @param event 
+     * @param event
+     * Sending the  unmappedClientEmail and the unmappedBatchId to the backend though a put request parameter to unmap a client form a batch
      */
     const unmapBatches = async (event: React.FormEvent<HTMLFormElement>)=>{
         event.preventDefault();
         const clientEmail=event.currentTarget["unmappingClientEmail"].value;
         const batchId = event.currentTarget["unmappingBatchId"].value;
-        const response = await axios.put("http://ec2-35-174-62-5.compute-1.amazonaws.com:9011/admin/unmapBatchFromClient?batchId="+batchId+"&email="+clientEmail);
+        (await axiosInstance()).put("admin/unmapBatchFromClient?batchId="+batchId+"&email="+clientEmail);
     }
 
     /**
-     * 
+     * @function getClients
+     * Pull the information of all the clients to the backend to populate our client buttons
      */
     const getClients = async () =>{
-        const response = await axios.get("http://ec2-35-174-62-5.compute-1.amazonaws.com:9011/client/")
+        const response = await(await axiosInstance()).get("client/")
         const tempArray=[];
         for (const r of response.data)
         {
@@ -109,11 +111,12 @@ export const BatchForms: React.FC = () => {
 
     /**
      * 
-     * @param event 
+     * @param event
+     * On the client unmapping form this is used to when a client is selected, it sends an axios call to get all the clients mapped batches.
      */
     const getClientsToBatches = async(event: React.ChangeEvent<HTMLInputElement>)=>{
         const clientEmail=event.target.value;
-        const response = await axios.get('http://ec2-35-174-62-5.compute-1.amazonaws.com:9011/client/batch/email/'+clientEmail);
+        const response = await (await axiosInstance()).get('client/batch/email/'+clientEmail);
         const tempArray=[];
         for (const r of response.data)
         {
