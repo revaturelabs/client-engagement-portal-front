@@ -29,14 +29,13 @@ export const NavBar: React.FC<any> = (props: any) => {
         setNavMenuOpen(!navMenuOpen)
         setHamOpen(!navMenuOpen);
     };
-    
+
     const dispatch = useDispatch();
 
     let name = useSelector((state: IRootState) => {
         return `${state.userState.user?.firstName} ${state.userState.user?.lastName}`
     });
-
-    name = (name === "undefined undefined" ? "Developer User" : name); // Placeholder for developer logins and (legacy) users without colloquial names
+    name = (name === "undefined undefined") ? "Developer User" : name; // Placeholder for developer logins and (legacy) users without colloquial names
     
     /**
      * @function LogOut
