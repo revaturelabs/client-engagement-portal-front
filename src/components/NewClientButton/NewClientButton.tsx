@@ -1,5 +1,5 @@
 import { Auth } from "aws-amplify";
-import React, { ChangeEvent, SyntheticEvent, useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import {
   Button,
   Modal,
@@ -91,7 +91,7 @@ export const NewClientButton: React.FC<any> = () => {
     setModal(!modal);
 
     try {
-      const signUpResult = await Auth.signUp({
+      await Auth.signUp({
         username: email,
         password: password,
         attributes: {
@@ -100,17 +100,6 @@ export const NewClientButton: React.FC<any> = () => {
           "family_name": lastName
         },
       });
-
-      console.log(
-        "Cognito User: " +
-        signUpResult.user +
-        "\nUserConfirmed: " +
-        signUpResult.userConfirmed +
-        "\nUserSub: " +
-        signUpResult.userSub +
-        "\nCode delivery details: " +
-        signUpResult.codeDeliveryDetails
-      );
 
       if (role === "client") {
         (await axiosInstance()).post("/client/", { // Client does not have firstName and lastName; this must be retrieved from Cognito upon login
@@ -133,7 +122,11 @@ export const NewClientButton: React.FC<any> = () => {
       // console.log(signUpResult.codeDeliveryDetails);
     } catch (error) {
       console.log("Couldn't complete signup: ", error);
+
+      return false;
     }
+
+    return true;
   };
 
   const [accountType, setAccountType] = useState("client");

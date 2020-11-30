@@ -1,8 +1,7 @@
-import Axios from 'axios';
 import React, { useState } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
-import { Container, DropdownItem, Row, Spinner } from 'reactstrap';
+import { Container, DropdownItem, Spinner } from 'reactstrap';
 import { setBatchState } from '../../actions/BatchCardActions';
 import { IBasicBatchInfo } from '../../components/BatchCard/BatchCard';
 import { BatchInformation } from '../../components/BatchInformation/BatchInformation';
@@ -48,8 +47,9 @@ const BatchInformationPage: React.FC<IProps> = (props: IProps) => {
     let givenTrainer:string;
     if(props.batches[0].employeeAssignments != null)
     {
-        givenTrainer = props.batches[0].employeeAssignments[0].employee.firstName + " " +
-        props.batches[0].employeeAssignments[0].employee.lastName;
+        givenTrainer = `${props.batches[0].employeeAssignments[0].employee.firstName} ${props.batches[0].employeeAssignments[0].employee.lastName}`;
+        // props.batches[0].employeeAssignments[0].employee.firstName + " " +
+        // props.batches[0].employeeAssignments[0].employee.lastName
     }
     else
     {
@@ -74,18 +74,18 @@ const BatchInformationPage: React.FC<IProps> = (props: IProps) => {
     /**
      * This function gets all of the batch data from our back end. This
      * includes data about each associate's test / quiz scores.
-     * 
+     *
      * @param batchId the batch id passed in from the batch card on the
      * home page
-     * 
-     * @returns This function just changes the batch state to 
+     *
+     * @returns This function just changes the batch state to
      */
-    const getBatchData = (batchId: string) => async (dispatch: any) => {
+    const getBatchData = (batchId: string) => async () => {
 
         setSpinner(true);
-        
+
         //array to place batch data into
-        let batchArray: IBatchState = {
+        const batchArray: IBatchState = {
             batches: [],
         };
 
@@ -122,7 +122,7 @@ const BatchInformationPage: React.FC<IProps> = (props: IProps) => {
         setRecievedData(true);
     };
 
-    if (hasData == false) {
+    if (hasData) {
         getBatchDataNow();
     }
 
