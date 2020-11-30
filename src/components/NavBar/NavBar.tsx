@@ -9,9 +9,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../actions/UserActions';
 import { IRootState } from '../../_reducers';
 
-// interface INavBarProps{
-//     dropDownProps?:React.ComponentType<DropdownItem>[];
-// }
 
 /**
  * @function NavBar
@@ -32,12 +29,12 @@ export const NavBar: React.FC<any> = (props: any) => {
         setNavMenuOpen(!navMenuOpen)
         setHamOpen(!navMenuOpen);
     };
-
+    
     const dispatch = useDispatch();
-
+    
     let name = useSelector((state: IRootState) => { return state.userState.user?.firstName + " " + state.userState.user?.lastName });
     name = (name === "undefined undefined") ? "Developer User" : name; // Placeholder for developer logins and (legacy) users without colloquial names
-
+    
     /**
      * @function LogOut
      * De-authenticates the user session upon clicking the logout dropdown option.
@@ -74,7 +71,7 @@ export const NavBar: React.FC<any> = (props: any) => {
                     {/* Desktop Menu */}
                     <DropdownMenu right>
                         {props.children}
-                        {/* DEVELOPER separator when there are other types of options 
+                        {/* DEVELOPER separator when there are other types of options
                         <DropdownItem header>Account Options</DropdownItem> */}
                         <Link to="/login"><DropdownItem onClick={LogOut}>Logout</DropdownItem></Link>
                     </DropdownMenu>

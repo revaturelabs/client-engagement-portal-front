@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Button, Card, CardBody, CardFooter, CardHeader, Col, Row, Spinner } from 'reactstrap';
+import React from 'react';
+import { Card, CardBody, CardFooter, CardHeader, Col, Row } from 'reactstrap';
 import "../../scss/BatchInformation.scss"
 import reactReduxLogo from '../../assets/react-redux-logo.png';
 import javaLogo from '../../assets/java-logo.png';
@@ -27,9 +27,9 @@ interface IProps {
 
 /**
  * This component displays a buuunch of data about one specific batch.
- * 
+ *
  * @param props The batch id from the batch card that was selected is
- * passed into this component. This is needed so that the rest of the 
+ * passed into this component. This is needed so that the rest of the
  * data about that batch can be retrieved.
  */
 export const BatchInformation: React.FC<IProps> = (props: IProps) => {
@@ -90,7 +90,7 @@ export const BatchInformation: React.FC<IProps> = (props: IProps) => {
                         </CardBody>
                         <CardFooter></CardFooter>
                     </Card>
-                    { props.batches[0].associateAssignments != undefined ?
+                    { props.batches[0].associateAssignments !== undefined ?
                     <>
                         {/* Cards which provide detailed info. on the batch associates */}
                         <h1>Batch Engineers: ({props.batches[0].associateAssignments.length})</h1>
@@ -99,7 +99,7 @@ export const BatchInformation: React.FC<IProps> = (props: IProps) => {
                         :
                         <span id="test-noAss"/>
                     }
-                    
+
 
                     </div>
                 </Col>
