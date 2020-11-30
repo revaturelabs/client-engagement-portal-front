@@ -91,7 +91,7 @@ export const NewClientButton: React.FC<any> = () => {
     setModal(!modal);
 
     try {
-      const signUpResult = await Auth.signUp({
+      await Auth.signUp({
         username: email,
         password: password,
         attributes: {

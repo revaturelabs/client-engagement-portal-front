@@ -8,16 +8,16 @@ export const RedirectWhenLoggedIn: React.FC = () => {
     const [link, setLink] = useState("/");
     const redirectWhenLoggedIn = async () => {
         const session = await Auth.currentSession()
-        .then(function (val) { 
-            return val 
-        }).catch(function (val) { 
-            return val 
+        .then(function (val) {
+            return val
+        }).catch(function (val) {
+            return val
         });
 
         if (session !== "No current user") {
             const userRole = await Auth.currentUserInfo()
-            .then(function (result) { 
-                return result.attributes["custom:userRole"] 
+            .then(function (result) {
+                return result.attributes["custom:userRole"]
             })
             if (userRole === "admin") {
                 return "/admin"
