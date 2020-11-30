@@ -74,20 +74,12 @@ export const NavBar: React.FC<any> = (props: any) => {
                     {/* Desktop Menu */}
                     <DropdownMenu right>
                         {props.children}
-                        <DropdownItem header>Account Options</DropdownItem>
+                        {/* DEVELOPER separator when there are other types of options 
+                        <DropdownItem header>Account Options</DropdownItem> */}
                         <Link to="/login"><DropdownItem onClick={LogOut}>Logout</DropdownItem></Link>
                     </DropdownMenu>
                 </ButtonDropdown>
             </Col>
-            {/*
-            <Col className="d-flex align-items-center justify-content-end auto" id="myMobileDropdown" >
-                <Dropdown isOpen={navMenuOpen} toggle={toggle}>
-
-                    <DropdownMenu right>
-                        <a href="/"><DropdownItem>Logout</DropdownItem></a>
-                    </DropdownMenu>
-                </Dropdown>
-            </Col> */}
         </Row>
     )
 }
