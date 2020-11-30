@@ -33,7 +33,6 @@ export const BatchForms: React.FC = () => {
      * loops though batch objects to extract and assign appropriate data
      * @async
      * Creates an axios get call to gather batch information
-     *
      */
     const getBatches = async () => {
         const response = await(await axiosInstance()).get("admin/batch/allNames")
@@ -63,7 +62,6 @@ export const BatchForms: React.FC = () => {
 
 
       /**
-       * 
        * @param event
        * Sending the  mappedClientEmail and the mappedBatchId to the backend though a put request parameter to map a client to a batch
        */
@@ -75,7 +73,6 @@ export const BatchForms: React.FC = () => {
     }
 
     /**
-     * 
      * @param event
      * Sending the  unmappedClientEmail and the unmappedBatchId to the backend though a put request parameter to unmap a client form a batch
      */
@@ -110,7 +107,6 @@ export const BatchForms: React.FC = () => {
     }
 
     /**
-     * 
      * @param event
      * On the client unmapping form this is used to when a client is selected, it sends an axios call to get all the clients mapped batches.
      */

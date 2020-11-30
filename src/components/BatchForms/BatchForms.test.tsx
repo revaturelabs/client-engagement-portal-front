@@ -4,7 +4,6 @@ import Adapter from "enzyme-adapter-react-16";
 import { BatchForms } from "./BatchForms";
 import axios from "axios";
 import { act } from "react-dom/test-utils";
-import { button } from "aws-amplify";
 
 Enzyme.configure({ adapter: new Adapter() });
 const wrapper = shallow(<BatchForms />);
@@ -13,12 +12,17 @@ const wrapper = shallow(<BatchForms />);
  * @field
  * mockAxiosGet is mocking axios get request so it does not call the request from the application
  */
-const mockAxiosGet = jest.spyOn(axios,"get");
+const mockAxiosGet = jest.spyOn(axios,"get")
+
 /**
  * @function beforeEach
- * before each test give the mocked axios request with the information provided
+ * before each test create a variable ax to mock the function axiosInstance and have it return axios.
+ * Then it will mock the return information and give you dummy data.
  */
 beforeEach(()=>{
+  const ax = require('../../util/axiosConfig')
+    ax.axiosInstance = jest.fn(() => {return axios})
+
 
     mockAxiosGet.mockImplementation(()=>{
         return Promise.resolve({
