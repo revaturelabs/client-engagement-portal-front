@@ -9,9 +9,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../actions/UserActions';
 import { IRootState } from '../../_reducers';
 
-// interface INavBarProps{
-//     dropDownProps?:React.ComponentType<DropdownItem>[];
-// }
 
 /**
  * @function NavBar
@@ -35,7 +32,7 @@ export const NavBar: React.FC<any> = (props: any) => {
 
     const dispatch = useDispatch();
 
-    let name = useSelector((state: IRootState) => { return state.userState.user?.firstName + " " + state.userState.user?.lastName });
+    let name = useSelector((state: IRootState) => { return `${state.userState.user?.firstName} ${state.userState.user?.lastName}` });
     name = " " ? "Lorem Ipsum" : name; // Placeholder for developer logins and (legacy) users without colloquial names
 
     /**
@@ -74,20 +71,12 @@ export const NavBar: React.FC<any> = (props: any) => {
                     {/* Desktop Menu */}
                     <DropdownMenu right>
                         {props.children}
-                        <DropdownItem header>Account Options</DropdownItem>
+                        {/* DEVELOPER separator when there are other types of options
+                        <DropdownItem header>Account Options</DropdownItem> */}
                         <Link to="/login"><DropdownItem onClick={LogOut}>Logout</DropdownItem></Link>
                     </DropdownMenu>
                 </ButtonDropdown>
             </Col>
-            {/*
-            <Col className="d-flex align-items-center justify-content-end auto" id="myMobileDropdown" >
-                <Dropdown isOpen={navMenuOpen} toggle={toggle}>
-
-                    <DropdownMenu right>
-                        <a href="/"><DropdownItem>Logout</DropdownItem></a>
-                    </DropdownMenu>
-                </Dropdown>
-            </Col> */}
         </Row>
     )
 }

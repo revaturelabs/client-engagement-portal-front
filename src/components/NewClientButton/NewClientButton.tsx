@@ -1,5 +1,5 @@
-import React, { ChangeEvent, useState } from "react";
 import { Auth } from "aws-amplify";
+import React, { ChangeEvent, useState } from "react";
 import {
   Button,
   Modal,
@@ -34,9 +34,7 @@ export const NewClientButton: React.FC<any> = () => {
 
   /**
    * @function toggle
-   *
    * When the create account button is clicked it opens the modal.
-   *
    * When clicking anywhere outside of the form on the "x" it hides the modal
    */
   const toggle = () => setModal(!modal);
@@ -62,6 +60,13 @@ export const NewClientButton: React.FC<any> = () => {
     const role = event.currentTarget["select"].value;
     const firstName = event.currentTarget["firstName"].value;
     const lastName = event.currentTarget["lastName"].value;
+    let companyName;
+    let phoneNumber;
+
+    if(role==='client') {
+      companyName = event.currentTarget["companyName"].value;
+      phoneNumber = event.currentTarget["phoneNumber"].value;
+    }
 
     // Checks cognito if they have the admin role in the current session  for security. If not exit out
     // This checking operation takes about 150 MS
@@ -96,24 +101,13 @@ export const NewClientButton: React.FC<any> = () => {
         },
       });
 
-      console.log(
-        "Cognito User: " +
-        signUpResult.user +
-        "\nUserConfirmed: " +
-        signUpResult.userConfirmed +
-        "\nUserSub: " +
-        signUpResult.userSub +
-        "\nCode delivery details: " +
-        signUpResult.codeDeliveryDetails
-      );
-
       if (role === "client") {
         (await axiosInstance()).post("/client/", { // Client does not have firstName and lastName; this must be retrieved from Cognito upon login
           clientBatches: [],
           clientId: 0,
-          companyName: event.currentTarget["companyName"].value,
+          companyName: companyName,
           email: email,
-          phoneNumber: event.currentTarget["phoneNumber"].value,
+          phoneNumber: phoneNumber,
         });
       } else if (role === "admin") {
         (await axiosInstance()).post("/admin/new", { // Should also retrieve Admin firstName and lastName from Cognito; it saves a database request
@@ -128,7 +122,11 @@ export const NewClientButton: React.FC<any> = () => {
       // console.log(signUpResult.codeDeliveryDetails);
     } catch (error) {
       console.log("Couldn't complete signup: ", error);
+
+      return false;
     }
+
+    return true;
   };
 
   const [accountType, setAccountType] = useState("client");

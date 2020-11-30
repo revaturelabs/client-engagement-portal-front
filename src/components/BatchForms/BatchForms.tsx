@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { Col, Form, Input, Modal, ModalBody, ModalHeader, Row } from 'reactstrap';
 import '../../scss/BatchFormStyle.scss';
 import { axiosInstance } from '../../util/axiosConfig';
@@ -15,7 +14,7 @@ export const BatchForms: React.FC = () => {
 
     /**
      * @function toggleMap
-     * toggles the mobile map batch modal 
+     * toggles the mobile map batch modal
      */
     const toggleMap = () => setMapModal(!mapModal);
     /**
@@ -33,7 +32,6 @@ export const BatchForms: React.FC = () => {
      * loops though batch objects to extract and assign appropriate data
      * @async
      * Creates an axios get call to gather batch information
-     *
      */
     const getBatches = async () => {
         const response = await(await axiosInstance()).get("admin/batch/allNames")
@@ -51,7 +49,7 @@ export const BatchForms: React.FC = () => {
        */
       setBatchInfo([...tempArray]);
       }
-  
+
       /**
        * @function useEffect
        * call the getBatches function on load of page
@@ -63,7 +61,6 @@ export const BatchForms: React.FC = () => {
 
 
       /**
-       * 
        * @param event
        * Sending the  mappedClientEmail and the mappedBatchId to the backend though a put request parameter to map a client to a batch
        */
@@ -71,11 +68,11 @@ export const BatchForms: React.FC = () => {
         event.preventDefault();
         const clientEmail=event.currentTarget["mappedClientEmail"].value;
         const batchId = event.currentTarget["mappedBatchId"].value;
-        (await axiosInstance()).put("admin/mapBatchToClient?batchId="+batchId+"&email="+clientEmail);
+        (await axiosInstance()).put(`admin/mapBatchToClient?batchId=${batchId}&email=${clientEmail}`);
+        //"admin/mapBatchToClient?batchId="+batchId+"&email="+clientEmail
     }
 
     /**
-     * 
      * @param event
      * Sending the  unmappedClientEmail and the unmappedBatchId to the backend though a put request parameter to unmap a client form a batch
      */
@@ -83,7 +80,8 @@ export const BatchForms: React.FC = () => {
         event.preventDefault();
         const clientEmail=event.currentTarget["unmappingClientEmail"].value;
         const batchId = event.currentTarget["unmappingBatchId"].value;
-        (await axiosInstance()).put("admin/unmapBatchFromClient?batchId="+batchId+"&email="+clientEmail);
+        (await axiosInstance()).put(`"admin/unmapBatchFromClient?batchId=${batchId}&email=${clientEmail}`);
+        //"admin/unmapBatchFromClient?batchId="+batchId+"&email="+clientEmail
     }
 
     /**
@@ -100,7 +98,7 @@ export const BatchForms: React.FC = () => {
           const email=r.email
           tempArray.push({id,name,email});
       }
-  
+
       /**
        * @function setBatchInfo
        * spreading the tempArray and assigning all values to the clientInfo
@@ -110,7 +108,6 @@ export const BatchForms: React.FC = () => {
     }
 
     /**
-     * 
      * @param event
      * On the client unmapping form this is used to when a client is selected, it sends an axios call to get all the clients mapped batches.
      */
@@ -126,7 +123,7 @@ export const BatchForms: React.FC = () => {
       }
       setUnmapBatchInfo([...tempArray]);
     }
-      
+
     return (
         <>
             <Row className="justify-content-center my-button-row">
@@ -153,7 +150,7 @@ export const BatchForms: React.FC = () => {
                             {clientInfo.map((e:any,i:any)=>
                                 <option key={i} id={e.id} value={e.email}>{e.name}</option>
                             )}
-                            
+
                         </Input>
                         <br/>
                         <Input type="select" name="mappedBatchId">
@@ -200,7 +197,7 @@ export const BatchForms: React.FC = () => {
                             {clientInfo.map((e:any,i:any)=>
                                 <option key={i} id={e.id} value={e.email}>{e.name}</option>
                             )}
-                            
+
                         </Input>
                         <br/>
                         <Input type="select" id='map-options' name="mappedBatchId" >
@@ -233,8 +230,8 @@ export const BatchForms: React.FC = () => {
                             {unmapBatchInfo.map((e:any,i:any) =>
                             <option key={i} value={e.id} >{e.name}</option>
                             )}
-                            
-                        </Input>    
+
+                        </Input>
                         <input className="modal-batch-form-submit" type="submit" value="Submit"></input>
                     </Form>
                 </ModalBody>
