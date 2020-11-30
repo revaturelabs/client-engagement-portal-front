@@ -33,7 +33,7 @@ export const AssociateCardModal:React.FC<IAssociateSingle> = (props:IAssociateSi
             averageGrade += grade.score;
             numGrades++;
         }
-
+        averageGrade = averageGrade / numGrades;
     }
 
     return (

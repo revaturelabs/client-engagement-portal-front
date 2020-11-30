@@ -29,7 +29,7 @@ export const NavBar: React.FC<any> = (props: any) => {
         setNavMenuOpen(!navMenuOpen)
         setHamOpen(!navMenuOpen);
     };
-    
+
     const dispatch = useDispatch();
 
     let name = useSelector((state: IRootState) => {
