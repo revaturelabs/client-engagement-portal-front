@@ -28,8 +28,8 @@ const getAxiosHeader = async () => {
       })}
  */
 export const axiosInstance = async () => {
-  const token = await getAxiosHeader().then(function (result) { 
-    return result 
+  const token = await getAxiosHeader().then(function (result) {
+    return result
   });
 
   return Axios.create({
