@@ -97,6 +97,7 @@ export const BatchForms: React.FC = () => {
             await (await axiosInstance()).put("admin/unmapBatchFromClient?batchId="+batchId+"&email="+clientEmail);
             setUnmapNotice("Batch has been removed");
         } catch (Error){
+            
             setUnmapNotice("something went wrong")
         }
     }
