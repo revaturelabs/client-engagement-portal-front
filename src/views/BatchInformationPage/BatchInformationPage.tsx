@@ -45,7 +45,7 @@ const BatchInformationPage: React.FC<IProps> = (props: IProps) => {
     console.log(passedInId); //this returns the passed in id
 
     let givenTrainer:string;
-    if(props.batches[0].employeeAssignments != null)
+    if(props.batches && props.batches[0].employeeAssignments != null)
     {
         givenTrainer = `${props.batches[0].employeeAssignments[0].employee.firstName} ${props.batches[0].employeeAssignments[0].employee.lastName}`;
         // props.batches[0].employeeAssignments[0].employee.firstName + " " +
@@ -57,7 +57,7 @@ const BatchInformationPage: React.FC<IProps> = (props: IProps) => {
     }
 
     let associateArray:any;
-    if(props.batches[0].employeeAssignments != null)
+    if(props.batches && props.batches[0].employeeAssignments != null)
     {
         associateArray = props.batches[0].associateAssignments;
     }
@@ -122,7 +122,7 @@ const BatchInformationPage: React.FC<IProps> = (props: IProps) => {
         setRecievedData(true);
     };
 
-    if (hasData) {
+    if (!hasData) {
         getBatchDataNow();
     }
 
