@@ -79,7 +79,7 @@ export const BatchForms: React.FC = () => {
             (await axiosInstance()).put(`admin/mapBatchToClient?batchId=${batchId}&email=${clientEmail}`);
             //"admin/mapBatchToClient?batchId="+batchId+"&email="+clientEmail
             setMapNotice("Batch has been mapped");
-        } catch(Error){
+        } catch(error){
             setMapNotice("Something went wrong");
         }
 
@@ -98,7 +98,7 @@ export const BatchForms: React.FC = () => {
             (await axiosInstance()).put(`"admin/unmapBatchFromClient?batchId=${batchId}&email=${clientEmail}`);
             //"admin/unmapBatchFromClient?batchId="+batchId+"&email="+clientEmail
             setUnmapNotice("Batch has been removed");
-        } catch (Error){
+        } catch (error){
 
             setUnmapNotice("something went wrong")
         }
