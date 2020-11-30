@@ -82,7 +82,7 @@ export const BatchForms: React.FC = () => {
         } catch(Error){
             setMapNotice("Something went wrong");
         }
-        
+
     }
 
     /**
@@ -99,10 +99,10 @@ export const BatchForms: React.FC = () => {
             //"admin/unmapBatchFromClient?batchId="+batchId+"&email="+clientEmail
             setUnmapNotice("Batch has been removed");
         } catch (Error){
-            
+
             setUnmapNotice("something went wrong")
         }
-        
+
     }
 
     /**
@@ -202,7 +202,7 @@ export const BatchForms: React.FC = () => {
                                 <option key={i} value={e.id} >{e.name}</option>
                             )}
                         </Input>
-                        <span>{unmapNotice}</span> 
+                        <span>{unmapNotice}</span>
                         <input className="batch-form-submit" type="submit" value="Submit" id="test-submit-unmap" disabled={selectDisabled}></input>
                     </Form>
                 </Col>
@@ -255,9 +255,9 @@ export const BatchForms: React.FC = () => {
                             {unmapBatchInfo.map((e:any,i:any) =>
                             <option key={i} value={e.id} >{e.name}</option>
                             )}
-                            
+
                         </Input>
-                            <span>{unmapNotice}</span>    
+                            <span>{unmapNotice}</span>
                         <input className="modal-batch-form-submit" type="submit" value="Submit" disabled={selectDisabled}></input>
                     </Form>
                 </ModalBody>
