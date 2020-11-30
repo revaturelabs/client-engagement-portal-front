@@ -61,7 +61,8 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
                         firstName: user.attributes["given_name"],
                         lastName: user.attributes["family_name"],
                     }
-
+                    
+                    console.log(user);
                     dispatch(clientLogin(statefulClient));
 
                     setAdmin(false);
@@ -131,7 +132,7 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
                             </div>
                         </div>
 
-                        <button className="test2 login-btn login-submit" type="submit">
+                        <button className="test2 login-submit" type="submit">
                             Login
                             {spinner ? <Spinner color="info" className="spinner" /> : <span />}
                         </button>

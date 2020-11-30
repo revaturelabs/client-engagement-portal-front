@@ -107,8 +107,6 @@ const HomePage: React.FC<IProps> = (props: IProps) => {
 
             if (response != null)
             {
-                console.log(response);
-                console.log(response.data);
                 //individual batch info is placed into the array from above
                 for (let batchData of response.data)
                 {
@@ -116,11 +114,14 @@ const HomePage: React.FC<IProps> = (props: IProps) => {
                     batchArray.batches.push(batchCardInfo);
                 }
 
+                //if there were no batches found, then don't show any batch card data
                 if (batchArray.batches.length != 0)
                 {
                     setHasBatches(true);
-                    //the "batch state" is set to be whatever was extracted from the db
+                    
                 }
+
+                //the "batch state" is set to be whatever was extracted from the db
                 dispatch(setBatchState(batchArray));
                 
             }
@@ -134,7 +135,7 @@ const HomePage: React.FC<IProps> = (props: IProps) => {
 
     };
 
-    /** gets user info*/
+    /** gets the user's email */
     const getEmail = async () => {
 
         setSpinner(true);
@@ -142,21 +143,34 @@ const HomePage: React.FC<IProps> = (props: IProps) => {
         const checkRole = Auth.currentUserInfo();
 
         const checker = await checkRole.then((result) => {
-            console.log(result.attributes["email"]);
-
-            if(result.attributes["email"] != null)
+            
+            //if there is no AWS cognito token information at all, then redirect to the login page
+            if(result != null)
             {
-                getBatches(result.attributes["email"]);
+                //if the AWS congito token contains an email value, check for batches associated
+                // with that email address
+                if(result.attributes["email"] != null)
+                {
+                    getBatches(result.attributes["email"]);
+                }
+                else
+                {
+                    setSpinner(false);
+                }
             }
-                
-            return result.attributes["email"];
+            else
+            {
+                window.location.href="/";  //redirects to login page
+            }
+
         })
             
     }
 
+    //should run on page load only once
     if(hasData == false)
     {
-        setRecievedData(true);
+        setRecievedData(true);  //prevents an infinite loop
         getEmail();
     }
 
