@@ -137,7 +137,6 @@ const HomePage: React.FC<IProps> = (props: IProps) => {
   /** gets the user's email */
   const getEmail = async () => {
     setSpinner(true);
-
     const checkRole = Auth.currentUserInfo();
 
     await checkRole.then((result) => {
@@ -157,7 +156,7 @@ const HomePage: React.FC<IProps> = (props: IProps) => {
   };
 
   //should run on page load only once
-  if (hasData) {
+  if (!hasData) {
     setRecievedData(true); //prevents an infinite loop
     getEmail();
   }
@@ -185,7 +184,7 @@ const HomePage: React.FC<IProps> = (props: IProps) => {
             <hr style={{ borderTop: "2px solid #474C55" }} />
             <Container>
               {/* displays spinner while loading */}
-              ({hasSpinner ? (
+              {hasSpinner ? (
                 <div className="row justify-content-center">
                   <Spinner color="info" style={{ margin: 20 }} />
                 </div>
@@ -193,7 +192,7 @@ const HomePage: React.FC<IProps> = (props: IProps) => {
                 <Row>
                   {
                     /* displays all of the batch cards that are mapped to the client */
-                    props.batches.map((element, index) => (
+                    props.batches?.map((element, index) => (
                       <Col xl="3" lg="4" md="5" sm="6" xs="6" key={index}>
                         <BatchCard
                           batchId={element.batchId}
@@ -204,7 +203,7 @@ const HomePage: React.FC<IProps> = (props: IProps) => {
                     ))
                   }
                 </Row>
-              )})
+              )}
             </Container>
           </Col>
           <Col md="auto"></Col>
@@ -212,13 +211,13 @@ const HomePage: React.FC<IProps> = (props: IProps) => {
       ) : (
         <>
           {/* displays spinner while loading */}
-          ({hasSpinner ? (
+          {hasSpinner ? (
             <div className="row justify-content-center">
               <Spinner color="info" style={{ margin: 20 }} />
             </div>
           ) : (
             <RequestBatchCard />
-          )})
+          )}
         </>
       )}
     </Container>

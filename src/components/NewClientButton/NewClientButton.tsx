@@ -91,7 +91,7 @@ export const NewClientButton: React.FC<any> = () => {
     setModal(!modal);
 
     try {
-      const signUpResult = await Auth.signUp({
+      await Auth.signUp({
         username: email,
         password: password,
         attributes: {
@@ -168,7 +168,7 @@ export const NewClientButton: React.FC<any> = () => {
             </FormGroup>
             <FormGroup>
               <Label>Email</Label>
-              <Input type="text" required name="email"></Input>
+              <Input type="email" required name="email"></Input>
             </FormGroup>
             <Container>
               <Row>
