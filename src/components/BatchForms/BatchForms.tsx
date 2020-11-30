@@ -74,18 +74,15 @@ export const BatchForms: React.FC = () => {
         event.preventDefault();
         const clientEmail=event.currentTarget["mappedClientEmail"].value;
         const batchId = event.currentTarget["mappedBatchId"].value;
-<<<<<<< HEAD
         setMapNotice("Loading")
         try{
-            await (await axiosInstance()).put("admin/mapBatchToClient?batchId="+batchId+"&email="+clientEmail);
+            (await axiosInstance()).put(`admin/mapBatchToClient?batchId=${batchId}&email=${clientEmail}`);
+            //"admin/mapBatchToClient?batchId="+batchId+"&email="+clientEmail
             setMapNotice("Batch has been mapped");
         } catch(Error){
             setMapNotice("Something went wrong");
         }
-=======
-        (await axiosInstance()).put(`admin/mapBatchToClient?batchId=${batchId}&email=${clientEmail}`);
-        //"admin/mapBatchToClient?batchId="+batchId+"&email="+clientEmail
->>>>>>> f9ad91f8ddf651cddf4102cad9652f99f2e6a5cf
+        
     }
 
     /**
@@ -96,19 +93,16 @@ export const BatchForms: React.FC = () => {
         event.preventDefault();
         const clientEmail=event.currentTarget["unmappingClientEmail"].value;
         const batchId = event.currentTarget["unmappingBatchId"].value;
-<<<<<<< HEAD
         setUnmapNotice("Loading");
         try{
-            await (await axiosInstance()).put("admin/unmapBatchFromClient?batchId="+batchId+"&email="+clientEmail);
+            (await axiosInstance()).put(`"admin/unmapBatchFromClient?batchId=${batchId}&email=${clientEmail}`);
+            //"admin/unmapBatchFromClient?batchId="+batchId+"&email="+clientEmail
             setUnmapNotice("Batch has been removed");
         } catch (Error){
             
             setUnmapNotice("something went wrong")
         }
-=======
-        (await axiosInstance()).put(`"admin/unmapBatchFromClient?batchId=${batchId}&email=${clientEmail}`);
-        //"admin/unmapBatchFromClient?batchId="+batchId+"&email="+clientEmail
->>>>>>> f9ad91f8ddf651cddf4102cad9652f99f2e6a5cf
+        
     }
 
     /**
@@ -261,16 +255,10 @@ export const BatchForms: React.FC = () => {
                             {unmapBatchInfo.map((e:any,i:any) =>
                             <option key={i} value={e.id} >{e.name}</option>
                             )}
-<<<<<<< HEAD
                             
                         </Input>
                             <span>{unmapNotice}</span>    
                         <input className="modal-batch-form-submit" type="submit" value="Submit" disabled={selectDisabled}></input>
-=======
-
-                        </Input>
-                        <input className="modal-batch-form-submit" type="submit" value="Submit"></input>
->>>>>>> f9ad91f8ddf651cddf4102cad9652f99f2e6a5cf
                     </Form>
                 </ModalBody>
             </Modal>
