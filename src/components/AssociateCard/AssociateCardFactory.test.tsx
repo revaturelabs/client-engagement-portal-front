@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import { shallow } from 'enzyme';
 import { AssociateCardFactory } from './AssociateCardFactory';
 import { IAssociate } from '../../_reducers/AssociateReducer';
 
@@ -42,9 +42,9 @@ beforeAll(() => {
     };
 })
 
-    /**
-     * This method creates an associate card factory before each test
-     */
+/**
+ * This method creates an associate card factory before each test
+ */
 beforeEach(() => {
     wrapper = shallow(<AssociateCardFactory />);
 });
@@ -60,7 +60,7 @@ test("content is empty without any batch information given", () => {
  * this test inserts data into the cards variable. Due to how shallow works, no content is displayed in contentText, but the branch is tested.
  */
 test("cards is filled with data when the dactory is provided data. the text of content is still falsy due to how shallow works", () => {
-    wrapper = shallow(<AssociateCardFactory {...fakeData}/>);
+    wrapper = shallow(<AssociateCardFactory {...fakeData} />);
     const contentText = wrapper.find(".holderCarousel").render().text();
     expect(contentText).toBeFalsy();
 });

@@ -8,7 +8,7 @@ import {IAssociateSingle} from '../../_reducers/AssociateReducer'
  * This component shows a modal that gives information about an associate.
  * Takes in props containing information about the associate.
  * @param props - Type: IAssociate {firstName, lastName, testScores, techScores}
- * 
+ *
  * @returns TSX Element to render
  */
 export const AssociateCardModal:React.FC<IAssociateSingle> = (props:IAssociateSingle) => {
@@ -28,12 +28,12 @@ export const AssociateCardModal:React.FC<IAssociateSingle> = (props:IAssociateSi
     if(props.grades !== undefined){
         let numGrades = 0;
         gradeMap = props.grades.map((g) => <div id="grade"><p>Date {g.dateReceived}: {g.score.toFixed(2)}%</p><div className="h-divider"></div></div>);
-        for(let grade of props.grades){
-            
+        for(const grade of props.grades){
+
             averageGrade += grade.score;
             numGrades++;
         }
-        //averageTest = averageTest / testWeek;
+
     }
 
     return (
@@ -62,7 +62,7 @@ export const AssociateCardModal:React.FC<IAssociateSingle> = (props:IAssociateSi
                             <h6 id="avgTest">{averageGrade.toFixed(2)}%</h6>
                         </div>
                     </Row>
-                    
+
                 </div>
                     </ModalBody>
                 </Modal>

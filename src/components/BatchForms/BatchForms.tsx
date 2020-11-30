@@ -20,7 +20,7 @@ export const BatchForms: React.FC = () => {
 
     /**
      * @function toggleMap
-     * toggles the mobile map batch modal 
+     * toggles the mobile map batch modal
      */
     const toggleMap = () => setMapModal(!mapModal);
     /**
@@ -55,7 +55,7 @@ export const BatchForms: React.FC = () => {
        */
       setBatchInfo([...tempArray]);
       }
-  
+
       /**
        * @function useEffect
        * call the getBatches function on load of page
@@ -74,6 +74,7 @@ export const BatchForms: React.FC = () => {
         event.preventDefault();
         const clientEmail=event.currentTarget["mappedClientEmail"].value;
         const batchId = event.currentTarget["mappedBatchId"].value;
+<<<<<<< HEAD
         setMapNotice("Loading")
         try{
             await (await axiosInstance()).put("admin/mapBatchToClient?batchId="+batchId+"&email="+clientEmail);
@@ -81,6 +82,10 @@ export const BatchForms: React.FC = () => {
         } catch(Error){
             setMapNotice("Something went wrong");
         }
+=======
+        (await axiosInstance()).put(`admin/mapBatchToClient?batchId=${batchId}&email=${clientEmail}`);
+        //"admin/mapBatchToClient?batchId="+batchId+"&email="+clientEmail
+>>>>>>> f9ad91f8ddf651cddf4102cad9652f99f2e6a5cf
     }
 
     /**
@@ -91,6 +96,7 @@ export const BatchForms: React.FC = () => {
         event.preventDefault();
         const clientEmail=event.currentTarget["unmappingClientEmail"].value;
         const batchId = event.currentTarget["unmappingBatchId"].value;
+<<<<<<< HEAD
         setUnmapNotice("Loading");
         try{
             await (await axiosInstance()).put("admin/unmapBatchFromClient?batchId="+batchId+"&email="+clientEmail);
@@ -99,6 +105,10 @@ export const BatchForms: React.FC = () => {
             
             setUnmapNotice("something went wrong")
         }
+=======
+        (await axiosInstance()).put(`"admin/unmapBatchFromClient?batchId=${batchId}&email=${clientEmail}`);
+        //"admin/unmapBatchFromClient?batchId="+batchId+"&email="+clientEmail
+>>>>>>> f9ad91f8ddf651cddf4102cad9652f99f2e6a5cf
     }
 
     /**
@@ -115,7 +125,7 @@ export const BatchForms: React.FC = () => {
           const email=r.email
           tempArray.push({id,name,email});
       }
-  
+
       /**
        * @function setBatchInfo
        * spreading the tempArray and assigning all values to the clientInfo
@@ -142,7 +152,7 @@ export const BatchForms: React.FC = () => {
       setSelectDisabled(false);
       setUnmapBatchInfo([...tempArray]);
     }
-      
+
     return (
         <>
             <Row className="justify-content-center my-button-row">
@@ -169,7 +179,7 @@ export const BatchForms: React.FC = () => {
                             {clientInfo.map((e:any,i:any)=>
                                 <option key={i} id={e.id} value={e.email}>{e.name}</option>
                             )}
-                            
+
                         </Input>
                         <br/>
                         <Input type="select" name="mappedBatchId">
@@ -217,7 +227,7 @@ export const BatchForms: React.FC = () => {
                             {clientInfo.map((e:any,i:any)=>
                                 <option key={i} id={e.id} value={e.email}>{e.name}</option>
                             )}
-                            
+
                         </Input>
                         <br/>
                         <Input type="select" id='map-options' name="mappedBatchId" >
@@ -251,10 +261,16 @@ export const BatchForms: React.FC = () => {
                             {unmapBatchInfo.map((e:any,i:any) =>
                             <option key={i} value={e.id} >{e.name}</option>
                             )}
+<<<<<<< HEAD
                             
                         </Input>
                             <span>{unmapNotice}</span>    
                         <input className="modal-batch-form-submit" type="submit" value="Submit" disabled={selectDisabled}></input>
+=======
+
+                        </Input>
+                        <input className="modal-batch-form-submit" type="submit" value="Submit"></input>
+>>>>>>> f9ad91f8ddf651cddf4102cad9652f99f2e6a5cf
                     </Form>
                 </ModalBody>
             </Modal>
