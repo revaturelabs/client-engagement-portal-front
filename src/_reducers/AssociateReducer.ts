@@ -48,12 +48,3 @@ export interface IAssociateSingle {
  * @param state will defualt to initialinitialAssociatesState.
  * @param action this is an associateAction. which holds type of action and the payload.
  */
-// export const associateReducer = (state = initialAssociatesState, action:{type:string, payload:IAssociate}): IAssociatesState => {
-//     switch(action.type) {
-//         case associateTypes.GET_ALL_ASSOCIATES:
-//             return {
-//                     associates: [...state.associates, action.payload],
-//             };
-//     }
-//     return state;
-// }

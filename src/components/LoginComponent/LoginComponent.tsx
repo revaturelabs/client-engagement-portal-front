@@ -26,7 +26,7 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
     const [isClient, setClient] = useState(false);
     const [isAdmin, setAdmin] = useState(false);
     const [spinner, setSpinner] = useState(false);
-    const [loginMsg, setLoginMsg] = useState<String>("");
+    const [loginMsg, setLoginMsg] = useState<string>("");
 
     const dispatch = useDispatch();
 
@@ -96,11 +96,11 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
 
     return (
         <>
-            {isClient ? 
-            <Redirect to="/home" /> 
-            : 
-            isAdmin ? 
-            <Redirect to="/admin" /> 
+            {isClient ?
+            <Redirect to="/home" />
+            :
+            (isAdmin ?
+            <Redirect to="/admin" />
             :
                 <form onSubmit={handleSubmit} className="login-form">
 
@@ -137,7 +137,7 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
                             {spinner ? <Spinner color="info" className="spinner" /> : <span />}
                         </button>
                     </div >
-                </form >
+                </form >)
             }
         </>
     );
