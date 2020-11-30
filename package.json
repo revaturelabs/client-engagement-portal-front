@@ -105,7 +105,8 @@
       "./src/index.tsx",
       "./src/serviceWorker.ts",
       "/node_modules/",
-      "/__test__/"
+      "/__test__/",
+      "./src/reportWebVitals.ts"
     ],
     "coverageReporters": [
       "json",

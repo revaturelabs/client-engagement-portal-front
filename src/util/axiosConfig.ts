@@ -9,7 +9,8 @@ const getAxiosHeader = async () => {
   //Awaits the promise to fufill, then triggers and axios
   return await sessionPromise.then(function (result) {
     //Grabs the JWT token from the promise
-    return result.getIdToken().getJwtToken();
+    let token = result.getIdToken().getJwtToken();
+    return token;
   });
 }
 
@@ -28,7 +29,7 @@ const getAxiosHeader = async () => {
       })}
  */
 export const axiosInstance = async () => {
-  const token = getAxiosHeader().then(function (result) { return result });
+  const token = await getAxiosHeader().then(function (result) { return result });
   return Axios.create({
     baseURL: process.env.REACT_APP_BACKEND_API,
     headers: { 'Authorization': `Bearer ${token}` },

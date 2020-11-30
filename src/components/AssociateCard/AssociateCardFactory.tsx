@@ -23,7 +23,6 @@ export const AssociateCardFactory:React.FC<any> = (props:IAssociate) => {
      * This anonymous function adds AssociateCards to the cards field.
      */
     (() => {
-
        let i = 0;
 
       /**
@@ -38,7 +37,6 @@ export const AssociateCardFactory:React.FC<any> = (props:IAssociate) => {
       } catch (error){
         // console.log("no associate found")
       }
-
     })();
 
     /**

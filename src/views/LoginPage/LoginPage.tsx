@@ -11,14 +11,17 @@ import "../../scss/loginStyles.scss";
 export const LoginPage:React.FC<undefined> = () => {
     return(
         <div className="login-wrapper">
-            <img src={logo} alt="Logo" className="logo"/>
+            <div className="container">
+                <div className="row justify-content-center">
+                    <img src={logo} alt="Logo" className="logo"/>
+                </div>
+            </div>
+            
             <br />
             <br />
             <LoginComponent loginType="client" />
             <br />
             <br />
-            <Link to="/home"><button>Log In As Client</button></Link>
-            <Link to="/admin"><button>Log In As Admin</button></Link>
         </div>
     );
 }

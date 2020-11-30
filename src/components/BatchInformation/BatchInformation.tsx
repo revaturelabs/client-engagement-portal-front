@@ -1,47 +1,64 @@
-import React from 'react';
-import { Card, CardBody, CardFooter, CardHeader, Col, Row } from 'reactstrap';
+import React, { useState } from 'react';
+import { Button, Card, CardBody, CardFooter, CardHeader, Col, Row, Spinner } from 'reactstrap';
 import "../../scss/BatchInformation.scss"
 import reactReduxLogo from '../../assets/react-redux-logo.png';
 import javaLogo from '../../assets/java-logo.png';
-import springLogo from '../../assets/spring-logo.png';
-import Carousel from "react-multi-carousel";
+import javaAuto from '../../assets/JavaAutoLogo.png';
+import pegaLogo from '../../assets/Pegalogo.jpg';
+import salesLogo from '../../assets/sales.png';
+import bigData from '../../assets/bigData.png';
+import netLogo from '../../assets/NET.jpg';
+import devOpsLogo from '../../assets/devOps.jpg';
 import "react-multi-carousel/lib/styles.css";
+import { AssociateCardFactory } from '../AssociateCard/AssociateCardFactory';
+import PlanInterventionModalv2 from '../PlanInterventionModal/PlanInterventionModalv2';
 
-interface IBatchInformationProps {
-    name:string,
+
+interface IProps {
+    batches: [{
+        batchId: string,
+        batchName: string,
+        endDate: string,
+        skill: string,
+        trainer: string,
+        associateAssignments?: [{}],
+    }],
 }
 
 /**
- * @function BatchInformation
- * Displays detailed batch information in its own page.
- *
- * @param props contains the detailed batch data needed to populate the page.
+ * This component displays a buuunch of data about one specific batch.
+ * 
+ * @param props The batch id from the batch card that was selected is
+ * passed into this component. This is needed so that the rest of the 
+ * data about that batch can be retrieved.
  */
-export const BatchInformation:React.FC<IBatchInformationProps> = (props:IBatchInformationProps) => {
+export const BatchInformation: React.FC<IProps> = (props: IProps) => {
 
-    const responsive = {
-        superLargeDesktop: {
-          // the naming can be any, depends on you.
-          breakpoint: { max: 4000, min: 1200 },
-          items: 5,
-          slidesToSlide: 5
-        },
-        desktop: {
-          breakpoint: { max: 1200, min: 992 },
-          items: 3,
-          slidesToSlide: 3
-        },
-        tablet: {
-          breakpoint: { max: 992, min: 576 },
-          items: 2,
-          slidesToSlide: 2
-        },
-        mobile: {
-          breakpoint: { max: 576, min: 0 },
-          items: 1,
-          slidesToSlide: 1
-        }
-      };
+    let image = "";      //sets the image of this component to match the specialization
+    if (props.batches[0].skill === "Java/Microservices") {
+        image = javaLogo;
+    }
+    else if (props.batches[0].skill === "PEGA") {
+        image = pegaLogo;
+    }
+    else if (props.batches[0].skill === "Java with Automation") {
+        image = javaAuto;
+    }
+    else if (props.batches[0].skill === "Java React") {
+        image = reactReduxLogo;
+    }
+    else if (props.batches[0].skill === "Big Data") {
+        image = bigData;
+    }
+    else if (props.batches[0].skill === "SalesForce") {
+        image = salesLogo;
+    }
+    else if (props.batches[0].skill === ".NET/Microservices") {
+        image = netLogo;
+    }
+    else if (props.batches[0].skill === "Java Devops") {
+        image = devOpsLogo;
+    }
 
     return(
         <>
@@ -50,125 +67,47 @@ export const BatchInformation:React.FC<IBatchInformationProps> = (props:IBatchIn
              <Col md="10" lg="8">
                 <div id="batch-info-wrapper">
                     <Card className="batch-info-card">
+                        {/* Batch name header */}
                         <CardHeader>
-                            <h4>2009 Sep 28 Batch</h4>
+                            <h4>{props.batches[0].batchName}</h4>
                         </CardHeader>
                         <CardBody>
-                            <h5>Core Technologies  Learned:</h5>
+                            {/* Core tech. label and image */}
+                            <h5><b className = 'readctl'>Core Technology Learned:</b></h5>
                             <Row>
-                                <Col xs="4" className="logo-container">
+                                <Col className="logo-container">
                                 <span className="helper"></span>
-                                    <img src={reactReduxLogo} alt="react redux logo" />
-
-                                </Col>
-                                <Col xs="4" className="logo-container">
-                                <span className="helper"></span>
-                                    <img src={javaLogo} alt="java logo" />
-
-                                </Col>
-                                <Col xs="4" className="logo-container">
-                                    <span className="helper"></span>
-                                    <img src={springLogo} alt="spring logo" />
-
+                                    <img src={image} alt="Specialization logo" className='speclogo' />
                                 </Col>
                             </Row>
+                            {/* Specialization text underneeth image */}
                             <Row style={{textAlign: "center"}}>
-                                <Col xs="4"><p>React Redux</p></Col>
-                                <Col xs="4"><p>Java 8</p></Col>
-                                <Col xs="4"><p>Spring MVC & ORM</p></Col>
+                                <Col><p id="test-skill">{props.batches[0].skill}</p></Col>
                             </Row>
-                            <p><b>Trainer:</b> Robert Connel</p>
-                            <p><b>Training End Date:</b> 12/04/20</p>
+                            {/* Trainer and end date text */}
+                            <p id="test-train"><b className ='readtrainer'>Trainer:</b> {props.batches[0].trainer}</p>
+                            <p id="test-end-date"><b className = 'readted'>Training End Date:</b> {props.batches[0].endDate}</p>
                         </CardBody>
                         <CardFooter></CardFooter>
                     </Card>
+                    { props.batches[0].associateAssignments != undefined ?
+                    <>
+                        {/* Cards which provide detailed info. on the batch associates */}
+                        <h1>Batch Engineers: ({props.batches[0].associateAssignments.length})</h1>
+                        <AssociateCardFactory {...props.batches[0]}/>
+                    </>
+                        :
+                        <span id="test-noAss"/>
+                    }
+                    
 
-                    <h1>Batch Engineers</h1>
+                    </div>
+                </Col>
+                <Col md="1" lg="2"></Col>
 
-                    <Carousel responsive={responsive}>
-                        <Card>
-                            <CardHeader>
-                                Alex Orr
-                            </CardHeader>
-                            <CardBody>
-                                100%
-                            </CardBody>
-                            <CardFooter>
-                                <button>View</button>
-                            </CardFooter>
-                        </Card>
-                        <Card>
-                            <CardHeader>
-                                Earnest Gibbs
-                            </CardHeader>
-                            <CardBody>
-                                92%
-                            </CardBody>
-                            <CardFooter>
-                                <button>View</button>
-                            </CardFooter>
-                        </Card>
-                        <Card>
-                            <CardHeader>
-                                Jordan Hunnicutt
-                            </CardHeader>
-                            <CardBody>
-                                95%
-                            </CardBody>
-                            <CardFooter>
-                                <button>View</button>
-                            </CardFooter>
-                        </Card>
-                        <Card>
-                            <CardHeader>
-                                Nicolas Henandez
-                            </CardHeader>
-                            <CardBody>
-                                93%
-                            </CardBody>
-                            <CardFooter>
-                                <button>View</button>
-                            </CardFooter>
-                        </Card>
-                        <Card>
-                            <CardHeader>
-                                Kyle Aoki
-                            </CardHeader>
-                            <CardBody>
-                                98%
-                            </CardBody>
-                            <CardFooter>
-                                <button>View</button>
-                            </CardFooter>
-                        </Card>
-                        <Card>
-                            <CardHeader>
-                                John Burlison
-                            </CardHeader>
-                            <CardBody>
-                                99%
-                            </CardBody>
-                            <CardFooter>
-                                <button>View</button>
-                            </CardFooter>
-                        </Card>
-                        <Card>
-                            <CardHeader>
-                                Dawit Wondim
-                            </CardHeader>
-                            <CardBody>
-                                97%
-                            </CardBody>
-                            <CardFooter>
-                                <button>View</button>
-                            </CardFooter>
-                        </Card>
-                    </Carousel>
+                <PlanInterventionModalv2 />
 
-                </div>
-             </Col>
-             <Col md="1" lg="2"></Col>
-         </Row>
+            </Row>
         </>
     );
 }
