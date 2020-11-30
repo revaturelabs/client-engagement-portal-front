@@ -1,4 +1,4 @@
-import { SET_BATCHES } from "../actions/BatchCardActions"
+import { SET_BATCHES, SET_BATCHES_DETAILS } from "../actions/BatchCardActions"
 
 //Batch state is essentially just an array of batch objects
 export interface IBatchState{
@@ -16,28 +16,16 @@ export const initialBatchState:IBatchState = {
 /**
  *
  * This reducer goes through every action type that exists in this program but will
-<<<<<<< Updated upstream
- *  only respond to the one that's called SET_BATCHES
-=======
  * only respond to the one that's called SET_BATCHES
->>>>>>> Stashed changes
  *
  * @param batchState the batch card state in the store is passed in automatically
  * @param action goes through every action in the program
  *
  * @returns Batch state. Basically just updates the batches state
  */
-<<<<<<< Updated upstream
-export const BatchReducer = (batchState:IBatchState = initialBatchState, action:any) => {
-    switch(action.type)
-    {
-        case SET_BATCHES:
-            if(action.payload != null) {
-=======
 export const BatchReducer = (action: any, batchState: IBatchState = initialBatchState,) => {
         if (action.type === SET_BATCHES) {
             if (action.payload != null) {
->>>>>>> Stashed changes
                 return { ...action.payload }  //places batch data into batchCard state
             }
             else {
@@ -48,9 +36,6 @@ export const BatchReducer = (action: any, batchState: IBatchState = initialBatch
             return batchState;
         }
     }
-<<<<<<< Updated upstream
-}
-=======
 
 
 /**
@@ -124,4 +109,3 @@ export const BatchDetailReducer = (action: any, batchDetailedState: IBatchDetail
         return batchDetailedState;
     }
 }
->>>>>>> Stashed changes

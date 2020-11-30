@@ -4,8 +4,6 @@ export const setBatchState = (batchData: any) => ({
     type: SET_BATCHES,
     payload: batchData
 });
-<<<<<<< Updated upstream
-=======
 
 
 /**
@@ -21,4 +19,3 @@ export const setBatchDetailsState = (batchDetailData: any) => ({
     type: SET_BATCHES_DETAILS,
     payload: batchDetailData
 })
->>>>>>> Stashed changes
