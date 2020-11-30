@@ -101,6 +101,7 @@ export const NewClientButton: React.FC<any> = () => {
         },
       });
 
+      // !!! This should be removed at the end
       console.log(
         "Cognito User: " +
         signUpResult.user +
@@ -175,7 +176,7 @@ export const NewClientButton: React.FC<any> = () => {
             </FormGroup>
             <FormGroup>
               <Label>Email</Label>
-              <Input type="text" required name="email"></Input>
+              <Input type="text" required name="email" id="email"></Input>
             </FormGroup>
             <Container>
               <Row>
@@ -222,8 +223,8 @@ export const NewClientButton: React.FC<any> = () => {
           </ModalBody>
 
           <ModalFooter>
-            <input type="submit" className="create-account-submit">
-            </input>
+            <Input type="submit" className="create-account-submit">
+            </Input>
           </ModalFooter>
         </Form>
       </Modal>
