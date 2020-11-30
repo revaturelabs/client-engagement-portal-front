@@ -78,12 +78,12 @@ const BatchInformationPage: React.FC<IProps> = (props: IProps) => {
      * @param batchId the batch id passed in from the batch card on the
      * home page
      *
-     * @returns This function just changes the batch state to 
+     * @returns This function just changes the batch state to
      */
     const getBatchData = (batchId: string) => async () => {
 
         setSpinner(true);
-        
+
         //array to place batch data into
         const batchArray: IBatchState = {
             batches: [],

@@ -32,7 +32,9 @@ export const NavBar: React.FC<any> = (props: any) => {
 
     const dispatch = useDispatch();
 
-    let name = useSelector((state: IRootState) => { return `${state.userState.user?.firstName} ${state.userState.user?.lastName}` });
+    let name = useSelector((state: IRootState) => {
+        return `${state.userState.user?.firstName} ${state.userState.user?.lastName}`
+    });
     name = " " ? "Lorem Ipsum" : name; // Placeholder for developer logins and (legacy) users without colloquial names
 
     /**
