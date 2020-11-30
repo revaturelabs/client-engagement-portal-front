@@ -37,27 +37,3 @@ describe('NavBar component', () => {
     
 });
 
-// beforeEach(() => {
-//     store = mockStore({
-//         userState:{
-//             user:{
-//                 firstName: 'wack',
-//                 lastName: 'jobs',
-//             }     
-//         }   
-//     }); 
-
-//     wrapper = shallow(
-//         <Provider store={store}>
-//            <NavBar />
-//        </Provider> 
-//    ).dive();
-
-
-// });
-
-// test("dropdown menu can toggle on and off", () => {
-//     expect(wrapper.find(ButtonDropdown).props("navMenuOpen")).toBe(false);
-//     wrapper.find("#navDropButton").simulate("click");
-//     expect(wrapper.find(ButtonDropdown).props("navMenuOpen")).toBe(true);
-// });
