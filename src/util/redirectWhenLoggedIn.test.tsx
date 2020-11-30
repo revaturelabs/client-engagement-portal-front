@@ -19,7 +19,7 @@ it("Default to /login when no user exists", async () => {
     Auth.currentUserInfo = jest.fn().mockImplementation(() => {
         return null;
     });
-    Auth.currentSession = jest.fn().mockImplementation(() => Promise.resolve("No current user"));
+    Auth.currentSession = jest.fn().mockImplementation(() => Promise.reject("No current user"));
 
     let wrapper: any;
     let history: History;
