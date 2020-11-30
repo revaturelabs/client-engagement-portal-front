@@ -22,12 +22,6 @@ export const LoginPage:React.FC<undefined> = () => {
             <LoginComponent loginType="client" />
             <br />
             <br />
-<<<<<<< HEAD
-=======
-{/*     DEVELOPER links to log-in without Cognito          
-            <Link to="/home"><button>Log In As Client</button></Link>
-            <Link to="/admin"><button>Log In As Admin</button></Link> */}
->>>>>>> 8fed70a852306b703095842ae263ba4e638ea7f4
         </div>
     );
 }
