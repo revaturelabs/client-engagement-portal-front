@@ -130,9 +130,9 @@ const BatchInformationPage: React.FC<IProps> = (props: IProps) => {
         <>
             <Container style={{ minHeight: "100vh", maxWidth: "100vw", backgroundColor: "#E3E3E3" }}>
                 <NavBar>
-                    <Link to="/home">
+                    <a href="/home">
                         <DropdownItem>Return to Client Home</DropdownItem>
-                    </Link>
+                    </a>
                 </NavBar>
 
                 {/* Spinner displays below nav bar */}
@@ -165,3 +165,5 @@ const mapStateToProps = (store: any) => {
 };
 
 export default withRouter(connect<any>(mapStateToProps)(BatchInformationPage));
+
+export { BatchInformationPage };
