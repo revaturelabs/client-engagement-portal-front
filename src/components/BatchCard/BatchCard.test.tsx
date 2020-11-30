@@ -76,28 +76,28 @@ describe("Batch Card Component", () => {
 
     it("Should render all of the correct images", () => {
         let image = component.find("img");
-        expect(image.prop("src")).toBe(javaLogo);
+        expect(JSON.stringify(image.prop("src"))).toEqual(JSON.stringify(javaLogo));
 
         image = pegaComp.find("img");
-        expect(image.prop("src")).toBe(pegaLogo);
+        expect(JSON.stringify(image.prop("src"))).toEqual(JSON.stringify(pegaLogo));
 
         image = javaAutoComp.find("img");
-        expect(image.prop("src")).toBe(javaAuto);
+        expect(JSON.stringify(image.prop("src"))).toEqual(JSON.stringify(javaAuto));
 
         image = javaReactComp.find("img");
-        expect(image.prop("src")).toBe(reactReduxLogo);
+        expect(JSON.stringify(image.prop("src"))).toEqual(JSON.stringify(reactReduxLogo));
 
         image = bigDataComp.find("img");
-        expect(image.prop("src")).toBe(bigData);
+        expect(JSON.stringify(image.prop("src"))).toEqual(JSON.stringify(bigData));
 
         image = salesComp.find("img");
-        expect(image.prop("src")).toBe(salesLogo);
+        expect(JSON.stringify(image.prop("src"))).toEqual(JSON.stringify(salesLogo));
 
         image = netComp.find("img");
-        expect(image.prop("src")).toBe(netLogo);
+        expect(JSON.stringify(image.prop("src"))).toEqual(JSON.stringify(netLogo));
 
         image = devComp.find("img");
-        expect(image.prop("src")).toBe(devOpsLogo);
+        expect(JSON.stringify(image.prop("src"))).toEqual(JSON.stringify(devOpsLogo));
     })
 
     it("Should render batch name and specialization", () => {
