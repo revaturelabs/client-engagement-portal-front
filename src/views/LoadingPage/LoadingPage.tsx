@@ -5,7 +5,7 @@ import { NavBar } from '../../components/NavBar/NavBar';
 /**
  * @function
  * loading page to display before user is routed to client or admin page
- * @param props 
+ * @param props
  */
 const LoadingPage: React.FC<any> = (props: any) => {
     return (

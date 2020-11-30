@@ -8,22 +8,21 @@ import Carousel from "react-multi-carousel";
  * This component is a factory that will display all of the AssociateCards
  * for a particular batch. Takes in props containing the associates' info.
  * @param props - Type: IAssociate. passed in from BatchInformation.tsx
- * 
+ *
  * @returns TSX Element to render
  */
 export const AssociateCardFactory:React.FC<any> = (props:IAssociate) => {
-    
+
     /**
      * This field will hold all of the AssociateCards, based on the associates
      * returned from the batch.
      */
-    let cards = [];
+    const cards = [];
 
     /**
      * This anonymous function adds AssociateCards to the cards field.
      */
     (() => {
-        
        let i = 0;
 
       /**
@@ -31,14 +30,13 @@ export const AssociateCardFactory:React.FC<any> = (props:IAssociate) => {
        * and add them to the cards array.
        */
       try{
-        for(let assoc of props.associateAssignments){
+        for(const assoc of props.associateAssignments){
           cards.push(<AssociateCard {...assoc.associate}/>);
           i++;
          }
       } catch (error){
         // console.log("no associate found")
       }
-        
     })();
 
     /**
@@ -74,13 +72,13 @@ export const AssociateCardFactory:React.FC<any> = (props:IAssociate) => {
      */
     return(
         <>
-            
+
             {/* <Button onClick={handleHide}>Associates</Button> */}
-            <Carousel className="holderCarousel" responsive={responsive}>              
+            <Carousel className="holderCarousel" responsive={responsive}>
                 {cards}
             </Carousel>
             {/* <span id="contentHolder" hidden={isHidden}>{cards}</span> */}
-            
+
         </>
     )
 

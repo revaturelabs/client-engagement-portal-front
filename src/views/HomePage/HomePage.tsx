@@ -1,22 +1,16 @@
 import React, { useState } from "react";
-import { Col, Container, DropdownItem, Row, Spinner } from "reactstrap";
+import { Col, Container, Row, Spinner } from "reactstrap";
 import { BatchCard } from "../../components/BatchCard/BatchCard";
 import { NavBar } from "../../components/NavBar/NavBar";
 
 import RequestBatchCard from "../../components/RequestBatchCard/RequestBatchCard";
-import RequestBatchCardModal from "../../components/RequestBatchCard/RequestBatchCardModal";
 import {
-  IBatchDetailedState,
-  IBatchState,
-  initialBatchState,
+  IBatchState
 } from "../../_reducers/BatchReducer";
 import { connect, useDispatch } from "react-redux";
-import Axios from "axios";
 import {
-  setBatchDetailsState,
   setBatchState,
 } from "../../actions/BatchCardActions";
-import PlanInterventionModal from "../../components/PlanInterventionModal/PlanInterventionModal";
 import { Auth } from "aws-amplify";
 import { axiosInstance } from "../../util/axiosConfig";
 
@@ -59,13 +53,13 @@ const HomePage: React.FC<IProps> = (props: IProps) => {
    * DEVELOPER function used to simulate having zero batches
    */
 
-/** 
+/**
 *  const resetBatches = () => {
 *    setHasBatches(false);
 *
 *    //removes batches' data / resets the batch state
 *    dispatch(setBatchState(initialBatchState));
-*  }; 
+*  };
 */
 
   /**
@@ -118,13 +112,13 @@ const HomePage: React.FC<IProps> = (props: IProps) => {
         .then((response: any) => {
           if (response != null) {
             //individual batch info is placed into the array from above
-            for (let batchData of response.data) {
+            for (const batchData of response.data) {
               const batchCardInfo = { ...batchData };
               batchArray.batches.push(batchCardInfo);
             }
 
             //if there were no batches found, then don't show any batch card data
-            if (batchArray.batches.length != 0) {
+            if (batchArray.batches.length !== 0) {
               setHasBatches(true);
             }
 
@@ -143,10 +137,9 @@ const HomePage: React.FC<IProps> = (props: IProps) => {
   /** gets the user's email */
   const getEmail = async () => {
     setSpinner(true);
-
     const checkRole = Auth.currentUserInfo();
 
-    const checker = await checkRole.then((result) => {
+    await checkRole.then((result) => {
       //if there is no AWS cognito token information at all, then redirect to the login page
       if (result != null) {
         //if the AWS congito token contains an email value, check for batches associated
@@ -163,7 +156,7 @@ const HomePage: React.FC<IProps> = (props: IProps) => {
   };
 
   //should run on page load only once
-  if (hasData == false) {
+  if (!hasData) {
     setRecievedData(true); //prevents an infinite loop
     getEmail();
   }
@@ -199,7 +192,7 @@ const HomePage: React.FC<IProps> = (props: IProps) => {
                 <Row>
                   {
                     /* displays all of the batch cards that are mapped to the client */
-                    props.batches.map((element, index) => (
+                    props.batches?.map((element, index) => (
                       <Col xl="3" lg="4" md="5" sm="6" xs="6" key={index}>
                         <BatchCard
                           batchId={element.batchId}

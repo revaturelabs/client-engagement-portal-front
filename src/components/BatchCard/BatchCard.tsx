@@ -21,8 +21,8 @@ export interface IBasicBatchInfo {
  * are mapped to a specific client. The button on this card should send the
  * user to a page displaying much more detailed information about this specific
  * batch.
- * 
- * @param props The batch information that was passed in from the Home page component. 
+ *
+ * @param props The batch information that was passed in from the Home page component.
  */
 export const BatchCard: React.FC<IBasicBatchInfo> = (props: IBasicBatchInfo) => {
 
@@ -42,28 +42,28 @@ export const BatchCard: React.FC<IBasicBatchInfo> = (props: IBasicBatchInfo) => 
 
 
     let image = ""; //sets the image of this card to match the specialization
-    if (props.specialization == "Java/Microservices") {
+    if (props.specialization === "Java/Microservices") {
         image = javaLogo;
     }
-    else if (props.specialization == "PEGA") {
+    else if (props.specialization === "PEGA") {
         image = pegaLogo;
     }
-    else if (props.specialization == "Java with Automation") {
+    else if (props.specialization === "Java with Automation") {
         image = javaAuto;
     }
-    else if (props.specialization == "Java React") {
+    else if (props.specialization === "Java React") {
         image = reactReduxLogo;
     }
-    else if (props.specialization == "Big Data") {
+    else if (props.specialization === "Big Data") {
         image = bigData;
     }
-    else if (props.specialization == "SalesForce") {
+    else if (props.specialization === "SalesForce") {
         image = salesLogo;
     }
-    else if (props.specialization == ".NET/Microservices") {
+    else if (props.specialization === ".NET/Microservices") {
         image = netLogo;
     }
-    else if (props.specialization == "Java Devops") {
+    else if (props.specialization === "Java Devops") {
         image = devOpsLogo;
     }
 

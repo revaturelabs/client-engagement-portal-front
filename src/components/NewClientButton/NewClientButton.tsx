@@ -1,5 +1,5 @@
 import { Auth } from "aws-amplify";
-import React, { ChangeEvent, SyntheticEvent, useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import {
   Button,
   Modal,
@@ -91,7 +91,7 @@ export const NewClientButton: React.FC<any> = () => {
     setModal(!modal);
 
     try {
-      const signUpResult = await Auth.signUp({
+      await Auth.signUp({
         username: email,
         password: password,
         attributes: {
@@ -134,7 +134,10 @@ export const NewClientButton: React.FC<any> = () => {
       // console.log(signUpResult.codeDeliveryDetails);
     } catch (error) {
       console.log("Couldn't complete signup: ", error); // !!! Should this be removed as well?
+      return false;
     }
+
+    return true;
   };
 
   const [accountType, setAccountType] = useState("client");
