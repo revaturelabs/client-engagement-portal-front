@@ -9,8 +9,6 @@ import bigData from '../../assets/bigData.png';
 import netLogo from '../../assets/NET.jpg';
 import devOpsLogo from '../../assets/devOps.jpg';
 import { Redirect } from 'react-router-dom';
-import { SET_BATCHES_DETAILS } from '../../actions/BatchCardActions';
-import { BatchDetailReducer, IBatchDetailedState } from '../../_reducers/BatchReducer';
 
 export interface IBasicBatchInfo {
     batchId: string,
@@ -70,19 +68,25 @@ export const BatchCard: React.FC<IBasicBatchInfo> = (props: IBasicBatchInfo) => 
     }
 
     return (
-        <div className="batchcardcomp rev-card justify-content-center text-center">
+        <div id="batchcardcomp" className="batchcardcomp rev-card justify-content-center text-center">
 
+            {/* Specialization image */}
             <div className="row justify-content-center">
-                <img src={image} alt={props.specialization + " thumbnail"} className="pic logoimg" />
+                <img src={image} alt={props.specialization + " thumbnail"} className="pic" id="img-test"/>
             </div>
 
             <br />
-            <p className="spec-text">{props.specialization}</p>
-            <p>{props.batchName}</p>
+            {/* Specialization text */}
+            <p id="test-spec" className="spec-text">{props.specialization}</p>
+            {/* Batch Name text */}
+            <p id="test-name">{props.batchName}</p>
+            
+            {/* View button */}
             <div className="row justify-content-center">
-                <button onClick={(event: React.MouseEvent<Element, MouseEvent>) => goToBatchViewPage(event)} className="view-btn test1">View</button>
+                <button onClick={(event: React.MouseEvent<Element, MouseEvent>) => goToBatchViewPage(event)} id="test-btn" className="view-btn">View</button>
             </div>
-            {batchButtonClicked ? <Redirect to={`/batch/${props.batchId}`} /> : <></>}
+            {/* Boolean which determines if a view button has been clicked. If so, the user gets redirected */}
+            {batchButtonClicked ? <Redirect to={`/batch/${props.batchId}`} /> : <span id="no-redirect" /> }
 
         </div>
     )

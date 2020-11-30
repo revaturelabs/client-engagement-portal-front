@@ -9,7 +9,6 @@ import salesLogo from '../../assets/sales.png';
 import bigData from '../../assets/bigData.png';
 import netLogo from '../../assets/NET.jpg';
 import devOpsLogo from '../../assets/devOps.jpg';
-import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { AssociateCardFactory } from '../AssociateCard/AssociateCardFactory';
 import PlanInterventionModalv2 from '../PlanInterventionModal/PlanInterventionModalv2';
@@ -35,12 +34,7 @@ interface IProps {
  */
 export const BatchInformation: React.FC<IProps> = (props: IProps) => {
 
-    const [showInterventionModal, setShowInterventionModal] = useState(false);
-    const [isOrangeBtn, setOrangeBtn] = useState(false);
-
-    console.log(props.batches[0]);
-
-    let image = "";      //sets the image of this card to match the specialization
+    let image = "";      //sets the image of this component to match the specialization
     if (props.batches[0].skill === "Java/Microservices") {
         image = javaLogo;
     }
@@ -73,10 +67,12 @@ export const BatchInformation: React.FC<IProps> = (props: IProps) => {
              <Col md="10" lg="8">
                 <div id="batch-info-wrapper">
                     <Card className="batch-info-card">
+                        {/* Batch name header */}
                         <CardHeader>
                             <h4>{props.batches[0].batchName}</h4>
                         </CardHeader>
                         <CardBody>
+                            {/* Core tech. label and image */}
                             <h5><b className = 'readctl'>Core Technology Learned:</b></h5>
                             <Row>
                                 <Col className="logo-container">
@@ -84,21 +80,24 @@ export const BatchInformation: React.FC<IProps> = (props: IProps) => {
                                     <img src={image} alt="Specialization logo" className='speclogo' />
                                 </Col>
                             </Row>
+                            {/* Specialization text underneeth image */}
                             <Row style={{textAlign: "center"}}>
-                                <Col><p>{props.batches[0].skill}</p></Col>
+                                <Col><p id="test-skill">{props.batches[0].skill}</p></Col>
                             </Row>
-                            <p><b className ='readtrainer'>Trainer:</b> {props.batches[0].trainer}</p>
-                            <p><b className = 'readted'>Training End Date:</b> {props.batches[0].endDate}</p>
+                            {/* Trainer and end date text */}
+                            <p id="test-train"><b className ='readtrainer'>Trainer:</b> {props.batches[0].trainer}</p>
+                            <p id="test-end-date"><b className = 'readted'>Training End Date:</b> {props.batches[0].endDate}</p>
                         </CardBody>
                         <CardFooter></CardFooter>
                     </Card>
                     { props.batches[0].associateAssignments != undefined ?
                     <>
+                        {/* Cards which provide detailed info. on the batch associates */}
                         <h1>Batch Engineers: ({props.batches[0].associateAssignments.length})</h1>
                         <AssociateCardFactory {...props.batches[0]}/>
                     </>
                         :
-                        <span/>
+                        <span id="test-noAss"/>
                     }
                     
 
