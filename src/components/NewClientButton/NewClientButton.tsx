@@ -168,7 +168,7 @@ export const NewClientButton: React.FC<any> = () => {
             </FormGroup>
             <FormGroup>
               <Label>Email</Label>
-              <Input type="text" required name="email"></Input>
+              <Input type="email" required name="email"></Input>
             </FormGroup>
             <Container>
               <Row>
