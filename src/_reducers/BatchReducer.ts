@@ -24,8 +24,8 @@ export const initialBatchState:IBatchState = {
  * @returns Batch state. Basically just updates the batches state
  */
 export const BatchReducer = (action: any, batchState: IBatchState = initialBatchState,) => {
-        if (action.type === SET_BATCHES) {
-            if (action.payload != null) {
+        if (action?.type === SET_BATCHES) {
+            if (action?.payload != null) {
                 return { ...action.payload }  //places batch data into batchCard state
             }
             else {
@@ -97,8 +97,8 @@ export const initialBatchDetailedState: IBatchDetailedState = {
  * @returns Batch detailed state. Basically just updates the batches details
  */
 export const BatchDetailReducer = (action: any, batchDetailedState: IBatchDetailedState = initialBatchDetailedState) => {
-    if (action.type === SET_BATCHES_DETAILS) {
-        if (action.payload != null) {
+    if (action?.type === SET_BATCHES_DETAILS) {
+        if (action?.payload != null) {
             return { ...action.payload }  //places batch detailed data into batchCard state
         }
         else {
