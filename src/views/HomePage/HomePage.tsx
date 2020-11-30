@@ -185,7 +185,7 @@ const HomePage: React.FC<IProps> = (props: IProps) => {
             <hr style={{ borderTop: "2px solid #474C55" }} />
             <Container>
               {/* displays spinner while loading */}
-              ({hasSpinner ? (
+              {hasSpinner ? (
                 <div className="row justify-content-center">
                   <Spinner color="info" style={{ margin: 20 }} />
                 </div>
@@ -204,7 +204,7 @@ const HomePage: React.FC<IProps> = (props: IProps) => {
                     ))
                   }
                 </Row>
-              )})
+              )}
             </Container>
           </Col>
           <Col md="auto"></Col>
@@ -212,13 +212,13 @@ const HomePage: React.FC<IProps> = (props: IProps) => {
       ) : (
         <>
           {/* displays spinner while loading */}
-          ({hasSpinner ? (
+          {hasSpinner ? (
             <div className="row justify-content-center">
               <Spinner color="info" style={{ margin: 20 }} />
             </div>
           ) : (
             <RequestBatchCard />
-          )})
+          )}
         </>
       )}
     </Container>
