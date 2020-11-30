@@ -101,17 +101,17 @@ export const NewClientButton: React.FC<any> = () => {
         },
       });
 
-      // !!! This should be removed at the end
-      console.log(
-        "Cognito User: " +
-        signUpResult.user +
-        "\nUserConfirmed: " +
-        signUpResult.userConfirmed +
-        "\nUserSub: " +
-        signUpResult.userSub +
-        "\nCode delivery details: " +
-        signUpResult.codeDeliveryDetails
-      );
+      // // !!! This should be removed at the end
+      // console.log(
+      //   "Cognito User: " +
+      //   signUpResult.user +
+      //   "\nUserConfirmed: " +
+      //   signUpResult.userConfirmed +
+      //   "\nUserSub: " +
+      //   signUpResult.userSub +
+      //   "\nCode delivery details: " +
+      //   signUpResult.codeDeliveryDetails
+      // );
 
       if (role === "client") {
         (await axiosInstance()).post("/client/", { // Client does not have firstName and lastName; this must be retrieved from Cognito upon login
@@ -133,7 +133,7 @@ export const NewClientButton: React.FC<any> = () => {
       // console.log(signUpResult.user);
       // console.log(signUpResult.codeDeliveryDetails);
     } catch (error) {
-      console.log("Couldn't complete signup: ", error);
+      console.log("Couldn't complete signup: ", error); // !!! Should this be removed as well?
     }
   };
 
@@ -183,13 +183,13 @@ export const NewClientButton: React.FC<any> = () => {
                 <Col>
                   <FormGroup>
                     <Label>First Name</Label>
-                    <Input type="text" required name="firstName"></Input>
+                    <Input type="text" required name="firstName" id="firstName"></Input>
                   </FormGroup>
                 </Col>
                 <Col>
                   <FormGroup>
                     <Label>Last Name</Label>
-                    <Input type="text" required name="lastName"></Input>
+                    <Input type="text" required name="lastName" id="lastName"></Input>
                   </FormGroup>
                 </Col>
               </Row>
@@ -197,11 +197,11 @@ export const NewClientButton: React.FC<any> = () => {
             {accountType === "client" ? (<>
               <FormGroup>
                 <Label>Company Name</Label>
-                <Input type="text" required name="companyName"></Input>
+                <Input type="text" required name="companyName" id="companyName"></Input>
               </FormGroup>
               <FormGroup>
                 <Label>Phone Number</Label>
-                <Input type="tel" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required name="phoneNumber"></Input>
+                <Input type="tel" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required name="phoneNumber" id="phoneNumber"></Input>
               </FormGroup>
             </>
             ) : (
@@ -214,6 +214,7 @@ export const NewClientButton: React.FC<any> = () => {
                 required
                 minLength={6}
                 name="password"
+                id="password"
               ></Input>
             </FormGroup>
             <FormGroup>
