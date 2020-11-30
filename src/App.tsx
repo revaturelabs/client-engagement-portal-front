@@ -5,7 +5,7 @@ import './scss/app.scss';
 import './scss/batch-card.scss';
 import { Provider } from 'react-redux';
 import { store } from './Store';
-import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { LoginPage } from './views/LoginPage/LoginPage';
 import HomePage from './views/HomePage/HomePage';
 import LoadingPage from './views/LoadingPage/LoadingPage';
