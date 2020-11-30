@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { Col, Form, Input, Modal, ModalBody, ModalHeader, Row } from 'reactstrap';
 import '../../scss/BatchFormStyle.scss';
 import { axiosInstance } from '../../util/axiosConfig';
