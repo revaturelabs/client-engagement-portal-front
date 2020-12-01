@@ -40,10 +40,25 @@
 
 #notif-toggle {
     padding: 0;
-    text-align: left !important;
+    //text-align: left !important;
 }
 
 #notif-head {
     margin: 0px !important;
+    text-align: center;
+}
+
+#head {
+    padding: 10px;
+}
+
+#head:hover {
+    background-color: lightgray;
+}
+
+#head > div {
+    display: inline-block;
+    zoom: 1;
+    width: 33%;
     text-align: center;
 }

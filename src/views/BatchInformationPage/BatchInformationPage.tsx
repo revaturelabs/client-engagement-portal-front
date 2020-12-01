@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { connect, useDispatch } from 'react-redux';
-import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { Container, DropdownItem, Spinner } from 'reactstrap';
 import { setBatchState } from '../../actions/BatchCardActions';
 import { IBasicBatchInfo } from '../../components/BatchCard/BatchCard';
 import { BatchInformation } from '../../components/BatchInformation/BatchInformation';
 import { NavBar } from '../../components/NavBar/NavBar';
+import PlanInterventionModalv2 from '../../components/PlanInterventionModal/PlanInterventionModalv2';
 import { axiosInstance } from '../../util/axiosConfig';
 import { IBatchState } from '../../_reducers/BatchReducer';
 
@@ -143,14 +144,17 @@ const BatchInformationPage: React.FC<IProps> = (props: IProps) => {
                             <Spinner color="info" style={{ margin: 70 }} />
                         </div>
                         :
-                        <BatchInformation batches={[{
-                            batchId: passedInId,
-                            batchName: props.batches[0].name,
-                            endDate: props.batches[0].endDate,
-                            skill: props.batches[0].skill,
-                            trainer: givenTrainer,
-                            associateAssignments: associateArray,
-                        }]} />
+                        <div>
+                            <BatchInformation batches={[{
+                                batchId: passedInId,
+                                batchName: props.batches[0].name,
+                                endDate: props.batches[0].endDate,
+                                skill: props.batches[0].skill,
+                                trainer: givenTrainer,
+                                associateAssignments: associateArray,
+                            }]} />
+                            <PlanInterventionModalv2/>
+                        </div>
                 }
 
             </Container>

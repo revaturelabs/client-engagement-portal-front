@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Accordion, Card } from 'react-bootstrap';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { Table } from 'reactstrap';
 import { axiosInstance } from '../../util/axiosConfig';
 import { IRootState } from '../../_reducers';
 import { INotificationState } from '../../_reducers/NotificationReducer';
+import { setNotifications } from './NotificationActions';
 import './Notifications.scss';
 
 /**
@@ -18,17 +19,16 @@ import './Notifications.scss';
 const Notifications:React.FC<INotificationState> = (props:INotificationState) => {
 
     const [requests, gotRequests] = useState(false);
+    const dispatch = useDispatch();
+    
+    const getNotifications = async () => {
+        const response = await (await axiosInstance()).get("intervention/");
+        dispatch(setNotifications(response.data));
+        gotRequests(true);
+    }
 
     if(!requests) {
-        axiosInstance().then((axios) => {
-            axios.get("intervention/")
-            .then((result) => {
-                console.log(result.data)
-            })
-            .catch((err) => {
-                console.log(err);
-            })
-        }).then(() => {gotRequests(true)})
+        getNotifications()
     }
 
     return (
@@ -45,15 +45,9 @@ const Notifications:React.FC<INotificationState> = (props:INotificationState) =>
                                         (e, i) =>
                                         <>
                                             <Accordion.Toggle as={Card.Header} variant="link" eventKey={i.toString()} id="notif-toggle">
-                                                <Table className="notif-table" hover>
-                                                    <tbody>
-                                                        <tr className="notif-row">
-                                                            <td>{e.client.companyName}</td>
-                                                            <td>{e.requestType}</td>
-                                                            <td>{e.createdDate.getMonth()}/{e.createdDate.getDate()}/{e.createdDate.getFullYear()}</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </Table>
+                                                <div id="head">
+                                                    <div id="companyName">{e.client.companyName}</div><div id="requestType">{e.requestType}</div><div id="dateCreated">{e.dateCreated}</div>
+                                                </div>
                                             </Accordion.Toggle>
 
                                             <Accordion.Collapse eventKey={i.toString()} key={i}>

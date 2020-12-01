@@ -13,31 +13,13 @@ exports[`notification component should render the component with the given state
     Notifications
   </div>
   <div
-    className="notifs"
+    aria-expanded={null}
+    className="collapse"
   >
-    <div
-      aria-expanded={null}
-      className="collapse"
-    >
-      <table
-        className="myTable table table-hover"
-      >
-        <tbody>
-          <tr
-            className="notif-row"
-          >
-            <td>
-              a1
-            </td>
-            <td>
-              a2
-            </td>
-            <td>
-              a3
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <div>
+      <div
+        className="notifs accordion"
+      />
     </div>
   </div>
 </div>
