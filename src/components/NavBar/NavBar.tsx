@@ -3,9 +3,8 @@ import { Col, DropdownItem, DropdownMenu, DropdownToggle, Row, ButtonDropdown } 
 import logo from '../../assets/logo.png';
 import '../../scss/navStyles.scss';
 import { Turn as Hamburger } from 'hamburger-react'
-import { Link } from 'react-router-dom';
 import { Auth } from 'aws-amplify';
-import { Provider, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../actions/UserActions';
 import { IRootState } from '../../_reducers';
 

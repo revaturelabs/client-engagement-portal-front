@@ -12,7 +12,9 @@ exports[`renders the component 1`] = `
     }
   }
 >
-  <NewClientButton>
+  <NewClientButton
+    reloadClientDropdowns={[Function]}
+  >
     <Button
       className="create-account-button"
       color="secondary"
@@ -100,6 +102,7 @@ exports[`renders the component 1`] = `
                     </div>
                     <form
                       class=""
+                      id="new-client-button-form"
                     >
                       <div
                         class="modal-body"
@@ -209,6 +212,7 @@ exports[`renders the component 1`] = `
                             name="companyName"
                             required=""
                             type="text"
+                            value="Tesla"
                           />
                         </div>
                         <div
@@ -265,7 +269,7 @@ exports[`renders the component 1`] = `
                         class="modal-footer"
                       >
                         <input
-                          class="create-account-submit"
+                          class="create-account-submit form-control"
                           type="submit"
                           value="Submit"
                         />
@@ -325,6 +329,7 @@ exports[`renders the component 1`] = `
                       </div>
                       <form
                         class=""
+                        id="new-client-button-form"
                       >
                         <div
                           class="modal-body"
@@ -434,6 +439,7 @@ exports[`renders the component 1`] = `
                               name="companyName"
                               required=""
                               type="text"
+                              value="Tesla"
                             />
                           </div>
                           <div
@@ -490,7 +496,7 @@ exports[`renders the component 1`] = `
                           class="modal-footer"
                         >
                           <input
-                            class="create-account-submit"
+                            class="create-account-submit form-control"
                             type="submit"
                             value="Submit"
                           />
@@ -606,11 +612,13 @@ exports[`renders the component 1`] = `
                         </div>
                       </ModalHeader>
                       <Form
+                        id="new-client-button-form"
                         onSubmit={[Function]}
                         tag="form"
                       >
                         <form
                           className=""
+                          id="new-client-button-form"
                           onSubmit={[Function]}
                         >
                           <ModalBody
@@ -883,6 +891,7 @@ exports[`renders the component 1`] = `
                                     name="companyName"
                                     required={true}
                                     type="text"
+                                    value="Tesla"
                                   >
                                     <input
                                       className="form-control"
@@ -890,6 +899,7 @@ exports[`renders the component 1`] = `
                                       name="companyName"
                                       required={true}
                                       type="text"
+                                      value="Tesla"
                                     />
                                   </Input>
                                 </div>
@@ -1024,11 +1034,17 @@ exports[`renders the component 1`] = `
                             <div
                               className="modal-footer"
                             >
-                              <input
+                              <Input
                                 className="create-account-submit"
                                 type="submit"
                                 value="Submit"
-                              />
+                              >
+                                <input
+                                  className="create-account-submit form-control"
+                                  type="submit"
+                                  value="Submit"
+                                />
+                              </Input>
                             </div>
                           </ModalFooter>
                         </form>

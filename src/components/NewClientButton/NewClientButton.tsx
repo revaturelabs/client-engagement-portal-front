@@ -16,8 +16,6 @@ import {
 } from "reactstrap";
 import '../../scss/NewClientButton.scss';
 import { axiosInstance } from "../../util/axiosConfig";
-import { useDispatch } from "react-redux";
-import { logout } from "../../actions/UserActions";
 
 interface IProps{
   reloadClientDropdowns:() => void
@@ -33,7 +31,8 @@ interface IProps{
 export const NewClientButton: React.FC<IProps> = (props:IProps) => {
   const [modal, setModal] = useState(false);
 
-  const dispatch = useDispatch();
+  // Decided to eliminate Redux to help with tests, it's unnecessary anyway
+  // const dispatch = useDispatch();
 
   /**
    * @function toggle
@@ -56,13 +55,12 @@ export const NewClientButton: React.FC<IProps> = (props:IProps) => {
   const registerUser = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-
     // These need to be up here. Data is dropped when user is checked {for some reason} <= these fields are cleared when the modal unloads
     const email = event.currentTarget["email"].value;
     const password = event.currentTarget["password"].value;
-    const role = event.currentTarget["select"].value;
     const firstName = event.currentTarget["firstName"].value;
     const lastName = event.currentTarget["lastName"].value;
+    const role = event.currentTarget["select"].value;
     let companyName;
     let phoneNumber;
 
@@ -75,22 +73,22 @@ export const NewClientButton: React.FC<IProps> = (props:IProps) => {
     // This checking operation takes about 150 MS
     // Unknown Error - Response time can be 10,000 MS. Usually happens when react is updating. This shouldn't be a problem
 
-    const checkRole = Auth.currentUserInfo();
-    const checker = await checkRole.then(function (result) {
+    // const checkRole = Auth.currentUserInfo();
+    // const checker = await checkRole.then(function (result) {
 
-      if (result.attributes["custom:userRole"] !== "admin") {
-        dispatch(logout());
-        return false;
-      } else {
-        return true;
-      }
-    });
+    //   if (result.attributes["custom:userRole"] !== "admin") {
+    //     // dispatch(logout());
+    //     // Auth.signOut().then(() => window.location.href="/");
+    //     return false;
+    //   } else {
+    //     return true;
+    //   }
+    // });
 
-    if (!checker) {
-      console.log("Error: User does not have permissions to create an account");
-      return null;
-    }
-    console.log("Before signup")
+    // if (!checker) {
+    //   console.log("Error: User does not have permissions to create an account");
+    //   return null;
+    // }
     setModal(!modal);
 
     try {
@@ -103,18 +101,6 @@ export const NewClientButton: React.FC<IProps> = (props:IProps) => {
           "family_name": lastName
         },
       });
-
-      // // !!! This should be removed at the end
-      // console.log(
-      //   "Cognito User: " +
-      //   signUpResult.user +
-      //   "\nUserConfirmed: " +
-      //   signUpResult.userConfirmed +
-      //   "\nUserSub: " +
-      //   signUpResult.userSub +
-      //   "\nCode delivery details: " +
-      //   signUpResult.codeDeliveryDetails
-      // );
 
       if (role === "client") {
         (await axiosInstance()).post("/client/", { // Client does not have firstName and lastName; this must be retrieved from Cognito upon login
@@ -135,13 +121,9 @@ export const NewClientButton: React.FC<IProps> = (props:IProps) => {
         })
       }
 
-      // console.log(signUpResult.user);
-      // console.log(signUpResult.codeDeliveryDetails);
     } catch (error) {
-      console.log("Couldn't complete signup: ", error); // !!! Should this be removed as well?
       return false;
     }
-
     return true;
   };
 
@@ -166,7 +148,7 @@ export const NewClientButton: React.FC<IProps> = (props:IProps) => {
         <ModalHeader toggle={toggle} className="container create-account-modal-header">
           Create Account
             </ModalHeader>
-        <Form onSubmit={(event: React.FormEvent<HTMLFormElement>) => registerUser(event)}>
+        <Form onSubmit={(event: React.FormEvent<HTMLFormElement>) => registerUser(event)} id="new-client-button-form">
           <ModalBody>
             {/* <Form onSubmit={registerUser}> */}
             <FormGroup>
@@ -232,7 +214,7 @@ export const NewClientButton: React.FC<IProps> = (props:IProps) => {
           </ModalBody>
 
           <ModalFooter>
-            <input type="submit" value="Submit" className="create-account-submit"/>
+            <Input type="submit" value="Submit" className="create-account-submit"/>
           </ModalFooter>
         </Form>
       </Modal>
