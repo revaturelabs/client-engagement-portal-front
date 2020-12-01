@@ -182,6 +182,29 @@ exports[`HomePage should render with given state from Redux store 1`] = `
       </span>
     </div>
   </div>
+  <div
+    className="row justify-content-center row"
+    style={
+      Object {
+        "marginTop": "300px",
+      }
+    }
+  >
+    <button
+      className="intervention-button"
+      onClick={[Function]}
+    >
+      Request More Talent
+    </button>
+  </div>
+  <br />
+  <div
+    className="row justify-content-center row"
+  >
+    <h4
+      id="talentRequested"
+    />
+  </div>
 </div>
 `;
 
@@ -366,6 +389,29 @@ exports[`HomePage should render with given state from Redux store 2`] = `
         Loading...
       </span>
     </div>
+  </div>
+  <div
+    className="row justify-content-center row"
+    style={
+      Object {
+        "marginTop": "300px",
+      }
+    }
+  >
+    <button
+      className="intervention-button"
+      onClick={[Function]}
+    >
+      Request More Talent
+    </button>
+  </div>
+  <br />
+  <div
+    className="row justify-content-center row"
+  >
+    <h4
+      id="talentRequested"
+    />
   </div>
 </div>
 `;
