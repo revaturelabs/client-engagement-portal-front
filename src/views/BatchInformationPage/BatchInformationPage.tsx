@@ -39,7 +39,7 @@ interface IProps extends RouteComponentProps<IBatchId>, IBasicBatchInfo {
     batches: [IBatchDetailedInfo],
 }
 
-const BatchInformationPage: React.FC<IProps> = (props: IProps) => {
+export const BatchInformationPage: React.FC<IProps> = (props: IProps) => {
 
     const [hasSpinner, setSpinner] = useState(false);
     const [hasData, setRecievedData] = useState(false);
@@ -152,5 +152,7 @@ const mapStateToProps = (store: any) => {
 };
 
 export default withRouter(connect<any>(mapStateToProps)(BatchInformationPage));
+
+
 
 
