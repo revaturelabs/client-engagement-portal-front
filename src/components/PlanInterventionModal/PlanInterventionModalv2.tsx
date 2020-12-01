@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Modal, ModalBody, ModalHeader } from 'reactstrap';
+import { Modal, ModalBody, ModalHeader } from 'reactstrap';
 import './PlanInterventionModal.scss'
 
 
@@ -9,10 +9,10 @@ const PlanInterventionModalv2:React.FC = () => {
     const toggle = () => setShow(!show);
 
     return (
-        
+
         <>
             <button onClick={toggle} className="intervention-button">Request Intervention</button>
-            
+
             <Modal isOpen={show} toggle={toggle}>
                 <ModalHeader toggle={toggle}>
                     <h4>Request Intervention</h4>
