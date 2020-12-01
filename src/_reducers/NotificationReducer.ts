@@ -71,14 +71,6 @@ const initialState:INotificationState = {
 export const notificationReducer = 
     (state:INotificationState = initialState, action:{type:string, payload:INotification}):INotificationState => {
         switch(action.type) {
-            /**
-             * !!! May or may not be used, TBD...
-             */
-            case "GET_NOTIFICATIONS":
-
-                //TODO: make an axios get request here to populate the notification state
-
-                return {notifications: null};
             case "ADD_NOTIFICATION": //Adds a new notification to the state using the payload provided in the action
                 if(state == null)
                     return {notifications: null};

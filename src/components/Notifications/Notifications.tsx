@@ -1,12 +1,10 @@
-import Axios from 'axios';
-import React from 'react';
+import React, { useState } from 'react';
 import { Accordion, Card } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Table } from 'reactstrap';
 import { axiosInstance } from '../../util/axiosConfig';
 import { IRootState } from '../../_reducers';
 import { INotificationState } from '../../_reducers/NotificationReducer';
-import { addNotification } from './NotificationActions';
 import './Notifications.scss';
 
 /**
@@ -15,18 +13,23 @@ import './Notifications.scss';
  *
  * @param props the current state of notifications
  *
- * @returns An Accordion element populated with all current requests for more Talent and desires to stage Interventions.
+ * @returns An Accordion element populated with all current requests for more Talent and desires to stage Interventions/Request more talent.
  */
 const Notifications:React.FC<INotificationState> = (props:INotificationState) => {
 
-    // axiosInstance().then((axios) => {
-    //     return axios.get("/intervention/")
-    // }).then((result) => {
-    //     for(let intervention of result.data) {
-            
-    //     }
-    // })
-    Axios.get("localhost:9011/")
+    const [requests, gotRequests] = useState(false);
+
+    if(!requests) {
+        axiosInstance().then((axios) => {
+            axios.get("intervention/")
+            .then((result) => {
+                console.log(result.data)
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+        }).then(() => {gotRequests(true)})
+    }
 
     return (
         <Accordion className="notifs-container">
@@ -34,18 +37,9 @@ const Notifications:React.FC<INotificationState> = (props:INotificationState) =>
                     Notifications
                 </Accordion.Toggle>
 
-                
+
                 <Accordion.Collapse eventKey="0">
                         <div>
-                            {/* <Table id="notif-head">
-                                <thead>
-                                    <tr>
-                                        <th>Client Name</th>
-                                        <th>Message</th>
-                                        <th>Date of Request</th>
-                                    </tr>
-                                </thead>
-                            </Table> */}
                             <Accordion className="notifs">
                                 {props.notifications?.map(
                                         (e, i) =>
