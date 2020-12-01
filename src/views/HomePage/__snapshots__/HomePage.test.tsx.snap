@@ -19,9 +19,11 @@ exports[`HomePage should render with given state from Redux store 1`] = `
       <a
         href="/home"
       >
-        <div
+        <img
+          alt="revature logo"
           className="myLogo"
-          id="navLogo"
+          id="revLogo"
+          src=""
         />
       </a>
     </div>
@@ -61,7 +63,7 @@ exports[`HomePage should render with given state from Redux store 1`] = `
             }
           >
             Welcome, 
-            undefined undefined
+            Developer User
              ▼
           </span>
           <span
@@ -203,9 +205,11 @@ exports[`HomePage should render with given state from Redux store 2`] = `
       <a
         href="/home"
       >
-        <div
+        <img
+          alt="revature logo"
           className="myLogo"
-          id="navLogo"
+          id="revLogo"
+          src=""
         />
       </a>
     </div>
