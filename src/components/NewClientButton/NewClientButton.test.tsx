@@ -80,10 +80,9 @@ beforeEach(() => {
 /**
  * Tests if the component renders
  */
-// test("renders the component", () => {
-//     const component = shallow(<NewClientButton />);
-//     expect(component).toMatchSnapshot();
-//   });
+test("renders the component", () => {
+    expect(wrapper).toMatchSnapshot();
+  });
  
 /**
  * There should be one Button to open the Modal.
