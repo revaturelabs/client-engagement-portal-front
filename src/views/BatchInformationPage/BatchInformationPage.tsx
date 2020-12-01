@@ -1,76 +1,62 @@
 import React, { useState } from 'react';
-import { connect, useDispatch } from 'react-redux';
-import { RouteComponentProps, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
 import { Container, DropdownItem, Spinner } from 'reactstrap';
-import { setBatchState } from '../../actions/BatchCardActions';
 import { IBasicBatchInfo } from '../../components/BatchCard/BatchCard';
 import { BatchInformation } from '../../components/BatchInformation/BatchInformation';
 import { NavBar } from '../../components/NavBar/NavBar';
-import PlanInterventionModalv2 from '../../components/PlanInterventionModal/PlanInterventionModalv2';
 import { axiosInstance } from '../../util/axiosConfig';
-import { IBatchState } from '../../_reducers/BatchReducer';
 
 interface IBatchId {
     batchId: string,
 }
 
-interface IProps extends RouteComponentProps<IBatchId>, IBasicBatchInfo {
-    batches: [{
-        name: string,
-        endDate: string,
-        employeeAssignments: [{
-            employee: {
-                firstName: string,
-                lastName: string,
-            },
-        }],
-        skill: string,
-        associateAssignments: [{
-            active: boolean,
-            associate: {
-                firstName: string,
-                lastName: string,
-                grades: [{
-                    gradeId: number,
-                    dateReceived: string,
-                    score: number,
-                }],
-            },
-        }],
+interface IBatchDetailedInfo{
+    name: string,
+    endDate: string,
+    employeeAssignments: [{
+        employee: {
+            firstName: string,
+            lastName: string,
+        },
     }],
+    skill: string,
+    associateAssignments: {
+        active: boolean,
+        associate: {
+            firstName: string,
+            lastName: string,
+            grades: {
+                gradeId: number,
+                dateReceived: string,
+                score: number,
+            }[],
+        },
+    }[],
 }
 
-const BatchInformationPage: React.FC<IProps> = (props: IProps) => {
+interface IProps extends RouteComponentProps<IBatchId>, IBasicBatchInfo {
+    batches: [IBatchDetailedInfo],
+}
 
-    const passedInId = props.match.params.batchId;
-    console.log(passedInId); //this returns the passed in id
-
-    let givenTrainer:string;
-    if(props.batches[0].employeeAssignments != null)
-    {
-        givenTrainer = `${props.batches[0].employeeAssignments[0].employee.firstName} ${props.batches[0].employeeAssignments[0].employee.lastName}`;
-        // props.batches[0].employeeAssignments[0].employee.firstName + " " +
-        // props.batches[0].employeeAssignments[0].employee.lastName
-    }
-    else
-    {
-        givenTrainer = "N/A";
-    }
-
-    let associateArray:any;
-    if(props.batches[0].employeeAssignments != null)
-    {
-        associateArray = props.batches[0].associateAssignments;
-    }
-    else
-    {
-        associateArray = [{}];
-    }
+export const BatchInformationPage: React.FC<IProps> = (props: IProps) => {
 
     const [hasSpinner, setSpinner] = useState(false);
     const [hasData, setRecievedData] = useState(false);
+    const [batchData, setBatchData] = useState({
+        name: "N/A",
+        endDate: "",
+        employeeAssignments: [{
+            employee: {
+                firstName: "N/A",
+                lastName: ""
+            },
+        }],
+        skill: "N/A",
+        associateAssignments: []
+    } as IBatchDetailedInfo);
 
-    const dispatch = useDispatch();
+    
 
     /**
      * This function gets all of the batch data from our back end. This
@@ -79,51 +65,51 @@ const BatchInformationPage: React.FC<IProps> = (props: IProps) => {
      * @param batchId the batch id passed in from the batch card on the
      * home page
      *
-     * @returns This function just changes the batch state to 
+     * @returns This function just changes the batch state
      */
-    const getBatchData = (batchId: string) => async () => {
+    const getBatchData = async (batchId: string) => {
 
         setSpinner(true);
-        
+
         //array to place batch data into
-        const batchArray: IBatchState = {
-            batches: [],
-        };
+        let batchInfo:IBatchDetailedInfo = {
+            name: "N/A",
+            endDate: "",
+            employeeAssignments: [{
+                employee: {
+                    firstName: "N/A",
+                    lastName: "",
+                },
+            }],
+            skill: "N/A",
+            associateAssignments: [],
+        }
 
         //get data from server based on user id that was given
-        await axiosInstance().then((result) => {
-            result.get("/client/batch/" + batchId)
-            .then((response: any) => {
-                console.log(response.data);
+        try{
+            const response = await (await axiosInstance()).get("/client/batch/" + batchId);
 
-                if (response != null) {
-                    const batchCardInfo = { ...response.data }
-                    batchArray.batches.push(batchCardInfo);
+            batchInfo = { ...response.data };
+        }
+        catch (error:any){
+            console.log(error);
+        }
+        finally{
+            setSpinner(false);
+        }
 
-                    console.log(batchArray.batches[0]);
-                    //the "batch state" is set to be whatever was extracted from the db
-                    dispatch(setBatchState(batchArray));
-
-                }
-                setSpinner(false);
-            })
-            .catch((error: any) => {
-                console.log(error);
-                setSpinner(false);
-            });
-        })
-
+        return batchInfo;
     };
 
-    const getBatchDataNow = () => {
-        if (passedInId != null)
+    const getBatchDataNow = async () => {
+        if (props.match.params.batchId != null)
         {
-            dispatch(getBatchData(passedInId));
+            getBatchData(props.match.params.batchId).then((response:IBatchDetailedInfo) => setBatchData(response));
         }
         setRecievedData(true);
     };
 
-    if (hasData) {
+    if (!hasData) {
         getBatchDataNow();
     }
 
@@ -131,9 +117,9 @@ const BatchInformationPage: React.FC<IProps> = (props: IProps) => {
         <>
             <Container style={{ minHeight: "100vh", maxWidth: "100vw", backgroundColor: "#E3E3E3" }}>
                 <NavBar>
-                    <a href="/home">
+                    <Link to="/home">
                         <DropdownItem>Return to Client Home</DropdownItem>
-                    </a>
+                    </Link>
                 </NavBar>
 
                 {/* Spinner displays below nav bar */}
@@ -144,17 +130,14 @@ const BatchInformationPage: React.FC<IProps> = (props: IProps) => {
                             <Spinner color="info" style={{ margin: 70 }} />
                         </div>
                         :
-                        <div>
-                            <BatchInformation batches={[{
-                                batchId: passedInId,
-                                batchName: props.batches[0].name,
-                                endDate: props.batches[0].endDate,
-                                skill: props.batches[0].skill,
-                                trainer: givenTrainer,
-                                associateAssignments: associateArray,
-                            }]} />
-                            <PlanInterventionModalv2/>
-                        </div>
+                        <BatchInformation batches={[{
+                            batchId: props.match.params.batchId,
+                            batchName: batchData.name,
+                            endDate: batchData.endDate,
+                            skill: batchData.skill,
+                            trainer: `${batchData.employeeAssignments[0].employee.firstName} ${batchData.employeeAssignments[0].employee.lastName}`,
+                            associateAssignments: batchData.associateAssignments,
+                        }]} />
                 }
 
             </Container>
@@ -170,4 +153,6 @@ const mapStateToProps = (store: any) => {
 
 export default withRouter(connect<any>(mapStateToProps)(BatchInformationPage));
 
-export { BatchInformationPage }
+
+
+

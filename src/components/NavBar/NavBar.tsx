@@ -42,7 +42,6 @@ export const NavBar: React.FC<any> = (props: any) => {
      */
     const LogOut = () => {
         Auth.signOut() // de-authenticates the user
-            .then(data => console.log(data))
             .catch(err => console.log(err));
 
         dispatch(logout()); // clears the user data from the local state
@@ -61,7 +60,7 @@ export const NavBar: React.FC<any> = (props: any) => {
                 </a>
             </Col>
             <Col className="d-flex align-items-center justify-content-end auto test1" >
-                <ButtonDropdown  isOpen={navMenuOpen} toggle={toggle}>
+                <ButtonDropdown isOpen={navMenuOpen} toggle={toggle}>
                     {/* Mobile Hamburger Menu */}
                     <DropdownToggle id="navDropButton" style={{ margin: "10px", backgroundColor: "white", border: "none" }}>
                         <span className="myDropdown" id="usersName" style={{ margin: "5px", color: "#474C55", backgroundColor: "white", border: "none" }}>Welcome, {name} &#9660;</span>
@@ -73,7 +72,7 @@ export const NavBar: React.FC<any> = (props: any) => {
                     <DropdownMenu right>
                         {props.children}
                         <DropdownItem id="test-head" header>Account Options</DropdownItem>
-                        <a href="/login" id="test-logout"><DropdownItem onClick={LogOut}>Logout</DropdownItem></a>
+                        <a href="/login"><DropdownItem onClick={LogOut}>Logout</DropdownItem></a>
                     </DropdownMenu>
                 </ButtonDropdown>
             </Col>

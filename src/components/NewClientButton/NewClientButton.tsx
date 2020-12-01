@@ -16,9 +16,10 @@ import {
 } from "reactstrap";
 import '../../scss/NewClientButton.scss';
 import { axiosInstance } from "../../util/axiosConfig";
-import { useDispatch } from "react-redux";
-import { logout } from "../../actions/UserActions";
 
+interface IProps{
+  reloadClientDropdowns:() => void
+}
 
 /**
  * @function newClientButton
@@ -27,10 +28,11 @@ import { logout } from "../../actions/UserActions";
  * This also has a modal form that pops up when the button is clicked
  *
   */
-export const NewClientButton: React.FC<any> = () => {
+export const NewClientButton: React.FC<IProps> = (props:IProps) => {
   const [modal, setModal] = useState(false);
 
-  const dispatch = useDispatch();
+  // Decided to eliminate Redux to help with tests, it's unnecessary anyway
+  // const dispatch = useDispatch();
 
   /**
    * @function toggle
@@ -53,13 +55,12 @@ export const NewClientButton: React.FC<any> = () => {
   const registerUser = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-
     // These need to be up here. Data is dropped when user is checked {for some reason} <= these fields are cleared when the modal unloads
     const email = event.currentTarget["email"].value;
     const password = event.currentTarget["password"].value;
-    const role = event.currentTarget["select"].value;
     const firstName = event.currentTarget["firstName"].value;
     const lastName = event.currentTarget["lastName"].value;
+    const role = event.currentTarget["select"].value;
     let companyName;
     let phoneNumber;
 
@@ -72,22 +73,22 @@ export const NewClientButton: React.FC<any> = () => {
     // This checking operation takes about 150 MS
     // Unknown Error - Response time can be 10,000 MS. Usually happens when react is updating. This shouldn't be a problem
 
-    const checkRole = Auth.currentUserInfo();
-    const checker = await checkRole.then(function (result) {
+    // const checkRole = Auth.currentUserInfo();
+    // const checker = await checkRole.then(function (result) {
 
-      if (result.attributes["custom:userRole"] !== "admin") {
-        dispatch(logout());
-        return false;
-      } else {
-        return true;
-      }
-    });
+    //   if (result.attributes["custom:userRole"] !== "admin") {
+    //     // dispatch(logout());
+    //     // Auth.signOut().then(() => window.location.href="/");
+    //     return false;
+    //   } else {
+    //     return true;
+    //   }
+    // });
 
-    if (!checker) {
-      console.log("Error: User does not have permissions to create an account");
-      return null;
-    }
-    console.log("Before signup")
+    // if (!checker) {
+    //   console.log("Error: User does not have permissions to create an account");
+    //   return null;
+    // }
     setModal(!modal);
 
     try {
@@ -101,18 +102,6 @@ export const NewClientButton: React.FC<any> = () => {
         },
       });
 
-      // // !!! This should be removed at the end
-      // console.log(
-      //   "Cognito User: " +
-      //   signUpResult.user +
-      //   "\nUserConfirmed: " +
-      //   signUpResult.userConfirmed +
-      //   "\nUserSub: " +
-      //   signUpResult.userSub +
-      //   "\nCode delivery details: " +
-      //   signUpResult.codeDeliveryDetails
-      // );
-
       if (role === "client") {
         (await axiosInstance()).post("/client/", { // Client does not have firstName and lastName; this must be retrieved from Cognito upon login
           clientBatches: [],
@@ -121,6 +110,8 @@ export const NewClientButton: React.FC<any> = () => {
           email: email,
           phoneNumber: phoneNumber,
         });
+
+        props.reloadClientDropdowns();
       } else if (role === "admin") {
         (await axiosInstance()).post("/admin/new", { // Should also retrieve Admin firstName and lastName from Cognito; it saves a database request
           adminId: 0,
@@ -130,13 +121,9 @@ export const NewClientButton: React.FC<any> = () => {
         })
       }
 
-      // console.log(signUpResult.user);
-      // console.log(signUpResult.codeDeliveryDetails);
     } catch (error) {
-      console.log("Couldn't complete signup: ", error); // !!! Should this be removed as well?
       return false;
     }
-
     return true;
   };
 
@@ -161,7 +148,7 @@ export const NewClientButton: React.FC<any> = () => {
         <ModalHeader toggle={toggle} className="container create-account-modal-header">
           Create Account
             </ModalHeader>
-        <Form onSubmit={(event: React.FormEvent<HTMLFormElement>) => registerUser(event)}>
+        <Form onSubmit={(event: React.FormEvent<HTMLFormElement>) => registerUser(event)} id="new-client-button-form">
           <ModalBody>
             {/* <Form onSubmit={registerUser}> */}
             <FormGroup>
@@ -179,20 +166,20 @@ export const NewClientButton: React.FC<any> = () => {
             </FormGroup>
             <FormGroup>
               <Label>Email</Label>
-              <Input type="email" required name="email" id="email"></Input>
+              <Input type="email" required name="email" id="email">Dude</Input>
             </FormGroup>
             <Container>
               <Row>
                 <Col>
                   <FormGroup>
                     <Label>First Name</Label>
-                    <Input type="text" required name="firstName" id="firstName"></Input>
+                    <Input type="text" required name="firstName" id="firstName">Man</Input>
                   </FormGroup>
                 </Col>
                 <Col>
                   <FormGroup>
                     <Label>Last Name</Label>
-                    <Input type="text" required name="lastName" id="lastName"></Input>
+                    <Input type="text" required name="lastName" id="lastName">Guy</Input>
                   </FormGroup>
                 </Col>
               </Row>
@@ -200,7 +187,7 @@ export const NewClientButton: React.FC<any> = () => {
             {accountType === "client" ? (<>
               <FormGroup>
                 <Label>Company Name</Label>
-                <Input type="text" required name="companyName" id="companyName"></Input>
+                <Input type="text" required name="companyName" id="companyName" value="Tesla"></Input>
               </FormGroup>
               <FormGroup>
                 <Label>Phone Number</Label>
@@ -227,7 +214,7 @@ export const NewClientButton: React.FC<any> = () => {
           </ModalBody>
 
           <ModalFooter>
-            <input type="submit" value="Submit" className="create-account-submit"/>
+            <Input type="submit" value="Submit" className="create-account-submit"/>
           </ModalFooter>
         </Form>
       </Modal>
