@@ -19,6 +19,9 @@ import { axiosInstance } from "../../util/axiosConfig";
 import { useDispatch } from "react-redux";
 import { logout } from "../../actions/UserActions";
 
+interface IProps{
+  reloadClientDropdowns:() => void
+}
 
 /**
  * @function newClientButton
@@ -27,7 +30,7 @@ import { logout } from "../../actions/UserActions";
  * This also has a modal form that pops up when the button is clicked
  *
   */
-export const NewClientButton: React.FC<any> = () => {
+export const NewClientButton: React.FC<IProps> = (props:IProps) => {
   const [modal, setModal] = useState(false);
 
   const dispatch = useDispatch();
@@ -121,6 +124,8 @@ export const NewClientButton: React.FC<any> = () => {
           email: email,
           phoneNumber: phoneNumber,
         });
+
+        props.reloadClientDropdowns();
       } else if (role === "admin") {
         (await axiosInstance()).post("/admin/new", { // Should also retrieve Admin firstName and lastName from Cognito; it saves a database request
           adminId: 0,
@@ -227,8 +232,7 @@ export const NewClientButton: React.FC<any> = () => {
           </ModalBody>
 
           <ModalFooter>
-            <Input type="submit" className="create-account-submit">
-            </Input>
+            <input type="submit" value="Submit" className="create-account-submit"/>
           </ModalFooter>
         </Form>
       </Modal>

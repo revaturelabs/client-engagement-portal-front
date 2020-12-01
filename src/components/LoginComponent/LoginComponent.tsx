@@ -61,8 +61,7 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
                         firstName: user.attributes["given_name"],
                         lastName: user.attributes["family_name"],
                     }
-                    
-                    console.log(user);
+
                     dispatch(clientLogin(statefulClient));
 
                     setAdmin(false);
@@ -87,7 +86,6 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
 
             setSpinner(false);
         } catch (error) {
-            console.log("Couldn't sign in: ", error);
             setSpinner(false);
             setLoginMsg(error.message);
         }
@@ -97,47 +95,47 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
     return (
         <>
             {isClient ?
-            <Redirect to="/home" />
-            :
-            (isAdmin ?
-            <Redirect to="/admin" />
-            :
-                <form onSubmit={handleSubmit} className="login-form">
+                <Redirect to="/home" />
+                :
+                (isAdmin ?
+                    <Redirect to="/admin" />
+                    :
+                    <form onSubmit={handleSubmit} className="login-form">
 
-                    <div style={{ maxHeight: "90%" }}>
-                        <div style={{ position: "relative", textAlign: "center" }}>
-                            <div className="login-header">
-                                Client Engagement Portal
+                        <div style={{ maxHeight: "90%" }}>
+                            <div style={{ position: "relative", textAlign: "center" }}>
+                                <div className="login-header">
+                                    Client Engagement Portal
                         </div>
-                            <div className="cep-logo-area">
-                                <img src={ceplogo2} alt="cep-logo" className="cep-logo" />
+                                <div className="cep-logo-area">
+                                    <img src={ceplogo2} alt="cep-logo" className="cep-logo" />
+                                </div>
                             </div>
-                        </div>
 
-                        <div style={{ color: "#FF0000" }}>{loginMsg}</div>
+                            <div style={{ color: "#FF0000" }}>{loginMsg}</div>
 
-                        <div style={{ position: "relative" }}>
-                            <input type="email" required className="form-control" name="email" placeholder="E-mail"
-                                style={new CEPLoginInputStyle()} />
-                            <div style={{ position: "absolute", top: "45%", left: "21%", transform: "translate(-50%, -50%)" }}>
-                                <img src={userThumb} alt="email thumbnail" className="userthumbcheck" />
+                            <div style={{ position: "relative" }}>
+                                <input type="email" required className="form-control" name="email" placeholder="E-mail"
+                                    style={new CEPLoginInputStyle()} />
+                                <div style={{ position: "absolute", top: "45%", left: "21%", transform: "translate(-50%, -50%)" }}>
+                                    <img src={userThumb} alt="email thumbnail" className="userthumbcheck" />
+                                </div>
                             </div>
-                        </div>
 
-                        <div style={{ position: "relative" }}>
-                            <input type="password" required className="form-control" name="password" placeholder="Password"
-                                style={new CEPLoginInputStyle()} />
-                            <div style={{ position: "absolute", top: "45%", left: "21%", transform: "translate(-50%, -50%)" }}>
-                                <img src={passThumb} alt="password thumbnail" className="passthumbcheck" />
+                            <div style={{ position: "relative" }}>
+                                <input type="password" required className="form-control" name="password" placeholder="Password"
+                                    style={new CEPLoginInputStyle()} />
+                                <div style={{ position: "absolute", top: "45%", left: "21%", transform: "translate(-50%, -50%)" }}>
+                                    <img src={passThumb} alt="password thumbnail" className="passthumbcheck" />
+                                </div>
                             </div>
-                        </div>
 
-                        <button className="test2 login-submit" type="submit">
-                            Login
+                            <button className="test2 login-submit" type="submit">
+                                Login
                             {spinner ? <Spinner color="info" className="spinner" /> : <span />}
-                        </button>
-                    </div >
-                </form >)
+                            </button>
+                        </div >
+                    </form >)
             }
         </>
     );

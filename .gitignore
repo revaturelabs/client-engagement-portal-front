@@ -18,3 +18,4 @@ amplify-gradle-config.json
 amplifytools.xcconfig
 #coverage
 coverage
+debug.log

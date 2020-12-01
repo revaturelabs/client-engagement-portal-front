@@ -109,7 +109,7 @@ test('should be 8 Labels', () => {
  * There should be eight inputs on this modal.
  */
 test('should be 9 Inputs', () => {
-    expect(wrapper.find(Input).length).toBe(9);
+    expect(wrapper.find(Input).length).toBe(8);
 })
 
 /**
@@ -218,7 +218,7 @@ test('Form should be different for client and admin', ()=>{
     const optionClient = wrapper.find({value:"client"});
     optionClient.instance().selected = true;
     input.simulate('change')
-    expect(wrapper.find(Input).length).toBe(9);
+    expect(wrapper.find(Input).length).toBe(8);
 
     /**
      * Checks that when admin is selected, form has 6 fields and a button
@@ -226,6 +226,6 @@ test('Form should be different for client and admin', ()=>{
     const optionAdmin = wrapper.find({value:"admin"});
     optionAdmin.instance().selected = true;
     input.simulate('change')
-    expect(wrapper.find(Input).length).toBe(7);
+    expect(wrapper.find(Input).length).toBe(6);
 
 })
