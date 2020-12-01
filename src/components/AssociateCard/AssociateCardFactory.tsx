@@ -35,7 +35,6 @@ export const AssociateCardFactory:React.FC<any> = (props:IAssociate) => {
           i++;
          }
       } catch (error){
-        // console.log("no associate found")
       }
     })();
 
@@ -44,7 +43,6 @@ export const AssociateCardFactory:React.FC<any> = (props:IAssociate) => {
      */
     const responsive = {
         superLargeDesktop: {
-          // the naming can be any, depends on you.
           breakpoint: { max: 4000, min: 1200 },
           items: 5,
           slidesToSlide: 5
@@ -72,15 +70,9 @@ export const AssociateCardFactory:React.FC<any> = (props:IAssociate) => {
      */
     return(
         <>
-
-            {/* <Button onClick={handleHide}>Associates</Button> */}
             <Carousel className="holderCarousel" responsive={responsive}>
                 {cards}
             </Carousel>
-            {/* <span id="contentHolder" hidden={isHidden}>{cards}</span> */}
-
         </>
     )
-
-
 }

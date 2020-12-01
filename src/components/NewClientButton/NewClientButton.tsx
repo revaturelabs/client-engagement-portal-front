@@ -16,8 +16,6 @@ import {
 } from "reactstrap";
 import '../../scss/NewClientButton.scss';
 import { axiosInstance } from "../../util/axiosConfig";
-import { useDispatch } from "react-redux";
-import { logout } from "../../actions/UserActions";
 
 interface IProps{
   reloadClientDropdowns:() => void
