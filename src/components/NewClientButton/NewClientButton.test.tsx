@@ -69,11 +69,12 @@ beforeAll(() => {
 });
 
 beforeEach(() => {
-     wrapper = mount(
-        <Provider store={store}>
-          <NewClientButton reloadClientDropdowns={()=> {return;}} />
-        </Provider>
-    );
+    //  wrapper = mount(
+    //     <Provider store={store}>
+    //       <NewClientButton reloadClientDropdowns={()=> {return;}} />
+    //     </Provider>
+    // );
+    wrapper = shallow(<NewClientButton reloadClientDropdowns={()=> {return;}} />);
     wrapper.find('.create-account-button').first().simulate('click');
 })
 
@@ -95,7 +96,7 @@ test("Should be one button", () => {
  * The dropdown for account type should have two values (client, Admin)
  */
 test('should be two options for account type', () => {
-    expect(wrapper.find('#exampleSelect').length).toBe(2);
+    expect(wrapper.find('#exampleSelect').children().length).toBe(2);
 })
 
 /**
@@ -130,18 +131,22 @@ test('register user function should properly set constants', async () => {
     // Auth.signUp = jest.fn().mockImplementation(() => true);
     Auth.signUp = jest.fn().mockImplementation(() => Promise.resolve(true));
 
-    const values = ['client@test', 'Clint','Johnson','Walmart','123-123-1231','coolpass','coolpass'];
+    const values = ['client@test','Clint','Johnson','Walmart','123-123-1231','coolpass','coolpass'];
     for(let i = 1; i < 8; i++){
-        // let input = wrapper.find(Input).at(i).childAt(0);
         let val = { target: { value: values[i-1] } };
+        console.log("Value.target.value is "+val.target.value);
+        console.log("Target: " + val.target);
         wrapper.find(Input).at(i).childAt(0).value=values[i-1];
+        console.log("Idk bro: " + wrapper.find(Input).at(i).childAt(0).innerText);
+        console.log("Idk bro 2.0: " + wrapper.find(Input).at(i).values);
+        console.log("Idk bro 3.0: " + wrapper.find(Input).at(i).value);
         //input.instance().value=values[i - 1];
-        wrapper.find(Input).at(i).childAt(0).simulate('change', val);
+        // wrapper.find(Input).at(i).childAt(0).simulate('change', val);
         // wrapper.update();
         // console.log("Value is "+input.props().value);
-        console.log(wrapper.find(Input).at(i).childAt(0).debug());
+        // console.log("Debug guy "+wrapper.find(Input).at(i).childAt(0).debug());
     };
-    console.log(wrapper.find(Input).at(1).childAt(0).debug());
+    // console.log(wrapper.find(Input).at(1).childAt(0).debug());
     
     // const instance = wrapper.instance();
     // const registerUserSpy = jest.spyOn(instance, 'registerUser'); //its not finding the function
@@ -150,8 +155,8 @@ test('register user function should properly set constants', async () => {
     // console.log(wrapper.find('#new-client-button-form').debug());
     // await act(async () => {await wrapper.find('#new-client-button-form').first().simulate('submit')});
     // wrapper.find('.create-account-submit').first().simulate('click');
-
     wrapper.find('#new-client-button-form').first().simulate('submit');
+    console.log(wrapper.debug());
     
     // wrapper.update();
     // wrapper.setProps({});
@@ -190,17 +195,13 @@ test('Form should be different for client and admin', ()=>{
     /**
      * Checks that when client is selected, form has 8 fields and a button
      */
-    const optionClient = wrapper.find({value:"client"});
-    optionClient.instance().selected = true;
-    input.simulate('change')
+    wrapper.find('#exampleSelect').simulate('change', {target : { value : 'client'}});
     expect(wrapper.find(Input).length).toBe(9);
 
     /**
      * Checks that when admin is selected, form has 6 fields and a button
      */
-    const optionAdmin = wrapper.find({value:"admin"});
-    optionAdmin.instance().selected = true;
-    input.simulate('change')
+    wrapper.find('#exampleSelect').simulate('change', {target : { value : 'admin'}});
     expect(wrapper.find(Input).length).toBe(7);
 
 })

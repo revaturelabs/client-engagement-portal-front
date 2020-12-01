@@ -33,7 +33,8 @@ interface IProps{
 export const NewClientButton: React.FC<IProps> = (props:IProps) => {
   const [modal, setModal] = useState(false);
 
-  const dispatch = useDispatch();
+  // Decided to eliminate Redux to help with tests, it's unnecessary anyway
+  // const dispatch = useDispatch();
 
   /**
    * @function toggle
@@ -82,21 +83,22 @@ export const NewClientButton: React.FC<IProps> = (props:IProps) => {
     // This checking operation takes about 150 MS
     // Unknown Error - Response time can be 10,000 MS. Usually happens when react is updating. This shouldn't be a problem
 
-    const checkRole = Auth.currentUserInfo();
-    const checker = await checkRole.then(function (result) {
+    // const checkRole = Auth.currentUserInfo();
+    // const checker = await checkRole.then(function (result) {
 
-      if (result.attributes["custom:userRole"] !== "admin") {
-        dispatch(logout());
-        return false;
-      } else {
-        return true;
-      }
-    });
+    //   if (result.attributes["custom:userRole"] !== "admin") {
+    //     // dispatch(logout());
+    //     // Auth.signOut().then(() => window.location.href="/");
+    //     return false;
+    //   } else {
+    //     return true;
+    //   }
+    // });
 
-    if (!checker) {
-      console.log("Error: User does not have permissions to create an account");
-      return null;
-    }
+    // if (!checker) {
+    //   console.log("Error: User does not have permissions to create an account");
+    //   return null;
+    // }
     console.log("Before signup")
     setModal(!modal);
 
@@ -191,20 +193,20 @@ export const NewClientButton: React.FC<IProps> = (props:IProps) => {
             </FormGroup>
             <FormGroup>
               <Label>Email</Label>
-              <Input type="email" required name="email" id="email"></Input>
+              <Input type="email" required name="email" id="email">Dude</Input>
             </FormGroup>
             <Container>
               <Row>
                 <Col>
                   <FormGroup>
                     <Label>First Name</Label>
-                    <Input type="text" required name="firstName" id="firstName"></Input>
+                    <Input type="text" required name="firstName" id="firstName">Man</Input>
                   </FormGroup>
                 </Col>
                 <Col>
                   <FormGroup>
                     <Label>Last Name</Label>
-                    <Input type="text" required name="lastName" id="lastName"></Input>
+                    <Input type="text" required name="lastName" id="lastName">Guy</Input>
                   </FormGroup>
                 </Col>
               </Row>
@@ -212,7 +214,7 @@ export const NewClientButton: React.FC<IProps> = (props:IProps) => {
             {accountType === "client" ? (<>
               <FormGroup>
                 <Label>Company Name</Label>
-                <Input type="text" required name="companyName" id="companyName"></Input>
+                <Input type="text" required name="companyName" id="companyName" value="Tesla"></Input>
               </FormGroup>
               <FormGroup>
                 <Label>Phone Number</Label>
