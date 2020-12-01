@@ -6,7 +6,8 @@ import axios from "axios";
 import { act } from "react-dom/test-utils";
 
 Enzyme.configure({ adapter: new Adapter() });
-const wrapper = shallow(<BatchForms />);
+const wrapper = shallow(<BatchForms rerender={false} doRerender={() => {return}} />
+);
 
 /**
  * @field
@@ -96,7 +97,8 @@ describe("BatchForms", () => {
   it("should test axios call", async () => {
     let wrapper2: any;
     await act(async () => {
-      wrapper2 = mount(<BatchForms />);
+      wrapper2 = mount(<BatchForms rerender={false} doRerender={() => {return}} />
+      );
     });
     const button = wrapper2.find("#map-batch");
     button.simulate("click");
@@ -111,7 +113,8 @@ describe("BatchForms", () => {
   it("should test that the mapping is correct for options",async ()=>{
     let wrapper2: any;
     await act(async () => {
-      wrapper2 = mount(<BatchForms />);
+      wrapper2 = mount(<BatchForms rerender={false} doRerender={() => {return}} />
+      );
     });
     const button = wrapper2.find("#map-batch");
     button.simulate("click");
@@ -128,7 +131,7 @@ describe("BatchForms", () => {
   it("should test axios call getClientsToBatches", async () => {
     let wrapper2: any;
     await act(async () => {
-      wrapper2 = mount(<BatchForms />);
+      wrapper2 = mount(<BatchForms rerender={false} doRerender={() => {return}} />);
       
     });
     wrapper2.update();
