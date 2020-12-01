@@ -39,15 +39,12 @@ interface IProps extends RouteComponentProps<IBatchId>, IBasicBatchInfo {
     }],
 }
 
-export let getBatchData:(arg0:string) => {};
-
-let givenTrainer:string;
-
 const BatchInformationPage: React.FC<IProps> = (props: IProps) => {
 
-    const passedInId = props.match.params.batchId;
+    const passedInId = props.match.params.batchId; //this returns the passed in id
 
-    if(props.batches[0].employeeAssignments != null)
+    let givenTrainer:string;
+    if(props.batches && props.batches[0].employeeAssignments != null)
     {
         givenTrainer = `${props.batches[0].employeeAssignments[0].employee.firstName} ${props.batches[0].employeeAssignments[0].employee.lastName}`;
     }
@@ -57,7 +54,7 @@ const BatchInformationPage: React.FC<IProps> = (props: IProps) => {
     }
 
     let associateArray:any;
-    if(props.batches[0].employeeAssignments != null)
+    if(props.batches && props.batches[0].employeeAssignments != null)
     {
         associateArray = props.batches[0].associateAssignments;
     }
@@ -78,12 +75,12 @@ const BatchInformationPage: React.FC<IProps> = (props: IProps) => {
      * @param batchId the batch id passed in from the batch card on the
      * home page
      *
-     * @returns This function just changes the batch state to 
+     * @returns This function just changes the batch state to
      */
-    getBatchData = (batchId: string) => async () => {
+    const getBatchData = (batchId: string) => async () => {
 
         setSpinner(true);
-        
+
         //array to place batch data into
         const batchArray: IBatchState = {
             batches: [],
@@ -94,11 +91,11 @@ const BatchInformationPage: React.FC<IProps> = (props: IProps) => {
             result.get("/client/batch/" + batchId)
             .then((response: any) => {
 
-
                 if (response != null) {
                     const batchCardInfo = { ...response.data }
                     batchArray.batches.push(batchCardInfo);
 
+                    console.log(batchArray.batches[0]);
                     //the "batch state" is set to be whatever was extracted from the db
                     dispatch(setBatchState(batchArray));
 
@@ -106,6 +103,7 @@ const BatchInformationPage: React.FC<IProps> = (props: IProps) => {
                 setSpinner(false);
             })
             .catch((error: any) => {
+                console.log(error);
                 setSpinner(false);
             });
         })
@@ -120,7 +118,7 @@ const BatchInformationPage: React.FC<IProps> = (props: IProps) => {
         setRecievedData(true);
     };
 
-    if (hasData) {
+    if (!hasData) {
         getBatchDataNow();
     }
 
@@ -128,9 +126,9 @@ const BatchInformationPage: React.FC<IProps> = (props: IProps) => {
         <>
             <Container style={{ minHeight: "100vh", maxWidth: "100vw", backgroundColor: "#E3E3E3" }}>
                 <NavBar>
-                    <a href="/home">
+                    <Link to="/home">
                         <DropdownItem>Return to Client Home</DropdownItem>
-                    </a>
+                    </Link>
                 </NavBar>
 
                 {/* Spinner displays below nav bar */}
@@ -163,5 +161,3 @@ const mapStateToProps = (store: any) => {
 };
 
 export default withRouter(connect<any>(mapStateToProps)(BatchInformationPage));
-
-export { BatchInformationPage }
