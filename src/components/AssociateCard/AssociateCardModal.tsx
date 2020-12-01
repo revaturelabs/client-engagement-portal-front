@@ -27,7 +27,7 @@ export const AssociateCardModal:React.FC<IAssociateSingle> = (props:IAssociateSi
     let averageGrade = 0;
     if(props.grades !== undefined){
         let numGrades = 0;
-        gradeMap = props.grades.map((g) => <div id="grade"><p>Date {g.dateReceived}: {g.score.toFixed(2)}%</p><div className="h-divider"></div></div>);
+        gradeMap = props.grades.map((g) => <div id="grade" key={g.gradeId}><p>Date {g.dateReceived}: {g.score.toFixed(2)}%</p><div className="h-divider"></div></div>);
         for(const grade of props.grades){
 
             averageGrade += grade.score;
