@@ -1,10 +1,8 @@
 import React from "react";
 import { Provider } from "react-redux";
 import renderer from "react-test-renderer";
-import { BatchInformationPage, getBatchData } from "./BatchInformationPage";
+import BatchInformationPage from "./BatchInformationPage";
 import configureStore from "redux-mock-store";
-import { Router } from "react-router";
-import { BrowserRouter } from "react-router-dom";
 import Axios from "axios";
 import { act } from "react-dom/test-utils";
 import { mount } from "enzyme";
@@ -159,7 +157,7 @@ it("should test axios call", async () => {
       </Provider>);
     });   
     //wrapper2.render();
-    getBatchData("1");
+    // getBatchData("1");
     console.log(wrapper2.debug());
     wrapper2.update();
     wrapper2.setProps(fakeData);
