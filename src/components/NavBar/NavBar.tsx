@@ -62,7 +62,7 @@ export const NavBar: React.FC<any> = (props: any) => {
                 </a>
             </Col>
             <Col className="d-flex align-items-center justify-content-end auto test1" >
-                <ButtonDropdown  isOpen={navMenuOpen} toggle={toggle}>
+                <ButtonDropdown isOpen={navMenuOpen} toggle={toggle}>
                     {/* Mobile Hamburger Menu */}
                     <DropdownToggle id="navDropButton" style={{ margin: "10px", backgroundColor: "white", border: "none" }}>
                         <span className="myDropdown" id="usersName" style={{ margin: "5px", color: "#474C55", backgroundColor: "white", border: "none" }}>Welcome, {name} &#9660;</span>
