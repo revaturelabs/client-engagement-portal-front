@@ -3,11 +3,16 @@ import { Col, Form, Input, Modal, ModalBody, ModalHeader, Row } from 'reactstrap
 import '../../scss/BatchFormStyle.scss';
 import { axiosInstance } from '../../util/axiosConfig';
 
+interface IProps{
+    rerender:boolean,
+    doRerender:() => void
+}
+
 /**
  * @function BatchForms
  * Renders the Map and Unmap forms on the page.
  */
-export const BatchForms: React.FC = () => {
+export const BatchForms: React.FC<IProps> = (props:IProps) => {
 
     const [mapModal, setMapModal] = useState(false);
     const [unmapModal, setUnmapModal] = useState(false);
@@ -61,9 +66,11 @@ export const BatchForms: React.FC = () => {
        * call the getBatches function on load of page
        */
       useEffect(()=>{
-        getBatches();
         getClients();
-      },[]);
+        getBatches();
+
+        props.doRerender();
+      },[props.rerender]);
 
 
       /**
