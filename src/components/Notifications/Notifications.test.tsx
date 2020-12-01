@@ -4,7 +4,7 @@ import renderer from 'react-test-renderer'
 import { Provider } from 'react-redux';
 import Notifications from './Notifications';
 import React from 'react';
-import { setNotifications } from './NotificationActions';
+import { setNotifications } from '../../actions/NotificationActions';
 import axios from "axios";
 
 /**

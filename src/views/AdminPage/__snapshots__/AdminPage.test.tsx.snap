@@ -1,351 +1,375 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AminPage should render with given state from Redux store 1`] = `
-<div
-  className="container"
-  style={
-    Object {
-      "backgroundColor": "#E3E3E3",
-      "maxWidth": "100vw",
-      "minHeight": "100vh",
-    }
-  }
->
+Array [
   <div
-    className="justify-content-around myNav row"
+    className="container"
+    style={
+      Object {
+        "backgroundColor": "#E3E3E3",
+        "maxWidth": "100vw",
+        "minHeight": "100vh",
+      }
+    }
   >
     <div
-      className="justify-content-start logoContainer col-auto"
-    >
-      <a
-        href="#"
-      >
-        <img
-          alt="revature logo"
-          className="myLogo"
-          id="revLogo"
-          src=""
-        />
-      </a>
-    </div>
-    <div
-      className="d-flex align-items-center justify-content-end auto test1 col"
+      className="justify-content-around myNav row"
     >
       <div
-        className="btn-group"
-        onKeyDown={[Function]}
+        className="justify-content-start logoContainer col-auto"
       >
-        <button
-          aria-expanded={false}
-          aria-haspopup={true}
-          aria-label={null}
-          className="btn btn-secondary"
-          id="navDropButton"
-          onClick={[Function]}
-          style={
-            Object {
-              "backgroundColor": "white",
-              "border": "none",
-              "margin": "10px",
-            }
-          }
-          type="button"
+        <a
+          href="#"
         >
-          <span
-            className="myDropdown"
-            id="usersName"
+          <img
+            alt="revature logo"
+            className="myLogo"
+            id="revLogo"
+            src=""
+          />
+        </a>
+      </div>
+      <div
+        className="d-flex align-items-center justify-content-end auto test1 col"
+      >
+        <div
+          className="btn-group"
+          onKeyDown={[Function]}
+        >
+          <button
+            aria-expanded={false}
+            aria-haspopup={true}
+            aria-label={null}
+            className="btn btn-secondary"
+            id="navDropButton"
+            onClick={[Function]}
             style={
               Object {
                 "backgroundColor": "white",
                 "border": "none",
-                "color": "#474C55",
-                "margin": "5px",
+                "margin": "10px",
               }
             }
+            type="button"
           >
-            Welcome, 
-            Developer User
-             ▼
-          </span>
-          <span
-            className="myMobileDropdown"
-          >
-            <div
-              className="hamburger-react"
-              onClick={[Function]}
-              onKeyUp={[Function]}
-              role="button"
+            <span
+              className="myDropdown"
+              id="usersName"
               style={
                 Object {
-                  "cursor": "pointer",
-                  "height": "48px",
-                  "outline": "none",
-                  "position": "relative",
-                  "transition": "0.4s cubic-bezier(0, 0, 0, 1)",
-                  "userSelect": "none",
-                  "width": "48px",
+                  "backgroundColor": "white",
+                  "border": "none",
+                  "color": "#474C55",
+                  "margin": "5px",
                 }
               }
-              tabIndex={0}
+            >
+              Welcome, 
+              Developer User
+               ▼
+            </span>
+            <span
+              className="myMobileDropdown"
             >
               <div
+                className="hamburger-react"
+                onClick={[Function]}
+                onKeyUp={[Function]}
+                role="button"
                 style={
                   Object {
-                    "background": "#474C55",
-                    "height": "3px",
-                    "left": "8px",
-                    "position": "absolute",
-                    "top": "13px",
-                    "transform": "none",
+                    "cursor": "pointer",
+                    "height": "48px",
+                    "outline": "none",
+                    "position": "relative",
                     "transition": "0.4s cubic-bezier(0, 0, 0, 1)",
-                    "width": "32px",
+                    "userSelect": "none",
+                    "width": "48px",
                   }
                 }
-              />
-              <div
-                style={
-                  Object {
-                    "background": "#474C55",
-                    "height": "3px",
-                    "left": "8px",
-                    "position": "absolute",
-                    "top": "23px",
-                    "transform": "none",
-                    "transition": "0.2s cubic-bezier(0, 0, 0, 1)",
-                    "width": "32px",
+                tabIndex={0}
+              >
+                <div
+                  style={
+                    Object {
+                      "background": "#474C55",
+                      "height": "3px",
+                      "left": "8px",
+                      "position": "absolute",
+                      "top": "13px",
+                      "transform": "none",
+                      "transition": "0.4s cubic-bezier(0, 0, 0, 1)",
+                      "width": "32px",
+                    }
                   }
-                }
-              />
-              <div
-                style={
-                  Object {
-                    "background": "#474C55",
-                    "height": "3px",
-                    "left": "8px",
-                    "position": "absolute",
-                    "top": "33px",
-                    "transform": "none",
-                    "transition": "0.4s cubic-bezier(0, 0, 0, 1)",
-                    "width": "32px",
+                />
+                <div
+                  style={
+                    Object {
+                      "background": "#474C55",
+                      "height": "3px",
+                      "left": "8px",
+                      "position": "absolute",
+                      "top": "23px",
+                      "transform": "none",
+                      "transition": "0.2s cubic-bezier(0, 0, 0, 1)",
+                      "width": "32px",
+                    }
                   }
-                }
-              />
-            </div>
-          </span>
-        </button>
-        <div
-          aria-hidden={true}
-          className="dropdown-menu dropdown-menu-right"
-          role="menu"
-          tabIndex="-1"
-        >
-          <h6
-            className="dropdown-header"
-            id="test-head"
-            onClick={[Function]}
+                />
+                <div
+                  style={
+                    Object {
+                      "background": "#474C55",
+                      "height": "3px",
+                      "left": "8px",
+                      "position": "absolute",
+                      "top": "33px",
+                      "transform": "none",
+                      "transition": "0.4s cubic-bezier(0, 0, 0, 1)",
+                      "width": "32px",
+                    }
+                  }
+                />
+              </div>
+            </span>
+          </button>
+          <div
+            aria-hidden={true}
+            className="dropdown-menu dropdown-menu-right"
+            role="menu"
             tabIndex="-1"
           >
-            Account Options
-          </h6>
-          <a
-            href="/login"
-          >
-            <button
-              className="dropdown-item"
+            <h6
+              className="dropdown-header"
+              id="test-head"
               onClick={[Function]}
-              role="menuitem"
-              tabIndex="0"
-              type="button"
+              tabIndex="-1"
             >
-              Logout
-            </button>
-          </a>
+              Account Options
+            </h6>
+            <a
+              href="/login"
+            >
+              <button
+                className="dropdown-item"
+                onClick={[Function]}
+                role="menuitem"
+                tabIndex="0"
+                type="button"
+              >
+                Logout
+              </button>
+            </a>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div
-    className="justify-content-center my-button-row row"
-  >
     <div
-      className="col-2 col-sm-3 col-lg-5"
-    />
-    <div
-      className="col-8 col-sm-6 col-lg-2"
+      className="justify-content-center my-button-row row"
     >
-      <button
-        className="batch-form-button"
-        id="map-batch"
-        onClick={[Function]}
+      <div
+        className="col-2 col-sm-3 col-lg-5"
+      />
+      <div
+        className="col-8 col-sm-6 col-lg-2"
       >
-        Map Batch To Client
-      </button>
-    </div>
-    <div
-      className="col-2 col-sm-3 col-lg-5"
-    />
-  </div>
-  <div
-    className="justify-content-center my-button-row row"
-  >
-    <div
-      className="col-2 col-sm-3 col-lg-5"
-    />
-    <div
-      className="col-8 col-sm-6 col-lg-2"
-    >
-      <button
-        className="batch-form-button"
-        id="unmap-batch"
-        onClick={[Function]}
-      >
-        Unmap Batch From Client
-      </button>
-    </div>
-    <div
-      className="col-2 col-sm-3 col-lg-5"
-    />
-  </div>
-  <div
-    className="justify-content-between my-form-row row"
-  >
-    <div
-      className="col-sm-1 col-md-1 col-lg-2 col-xl-3"
-    />
-    <div
-      className="text-left col-sm-5 col-md-5 col-lg-4 col-xl-3"
-      style={
-        Object {
-          "marginTop": "50px",
-        }
-      }
-    >
-      <form
-        className="batch-form"
-        onSubmit={[Function]}
-      >
-        <h5>
+        <button
+          className="batch-form-button"
+          id="map-batch"
+          onClick={[Function]}
+        >
           Map Batch To Client
-        </h5>
-        <select
-          className="form-control"
-          name="mappedClientEmail"
-        >
-          <option
-            disabled={true}
-            selected={true}
-          >
-            Select Client
-          </option>
-        </select>
-        <br />
-        <select
-          className="form-control"
-          name="mappedBatchId"
-        >
-          <option
-            disabled={true}
-            selected={true}
-          >
-            Select Batch:
-          </option>
-        </select>
-        <span>
-          
-        </span>
-        <input
-          className="batch-form-submit"
-          id="test-submit-map"
-          type="submit"
-          value="Submit"
-        />
-      </form>
+        </button>
+      </div>
+      <div
+        className="col-2 col-sm-3 col-lg-5"
+      />
     </div>
     <div
-      className="text-right col-sm-5 col-md-5 col-lg-4 col-xl-3"
+      className="justify-content-center my-button-row row"
+    >
+      <div
+        className="col-2 col-sm-3 col-lg-5"
+      />
+      <div
+        className="col-8 col-sm-6 col-lg-2"
+      >
+        <button
+          className="batch-form-button"
+          id="unmap-batch"
+          onClick={[Function]}
+        >
+          Unmap Batch From Client
+        </button>
+      </div>
+      <div
+        className="col-2 col-sm-3 col-lg-5"
+      />
+    </div>
+    <div
+      className="justify-content-between my-form-row row"
+    >
+      <div
+        className="col-sm-1 col-md-1 col-lg-2 col-xl-3"
+      />
+      <div
+        className="text-left col-sm-5 col-md-5 col-lg-4 col-xl-3"
+        style={
+          Object {
+            "marginTop": "50px",
+          }
+        }
+      >
+        <form
+          className="batch-form"
+          onSubmit={[Function]}
+        >
+          <h5>
+            Map Batch To Client
+          </h5>
+          <select
+            className="form-control"
+            name="mappedClientEmail"
+          >
+            <option
+              disabled={true}
+              selected={true}
+            >
+              Select Client
+            </option>
+          </select>
+          <br />
+          <select
+            className="form-control"
+            name="mappedBatchId"
+          >
+            <option
+              disabled={true}
+              selected={true}
+            >
+              Select Batch:
+            </option>
+          </select>
+          <span>
+            
+          </span>
+          <input
+            className="batch-form-submit"
+            id="test-submit-map"
+            type="submit"
+            value="Submit"
+          />
+        </form>
+      </div>
+      <div
+        className="text-right col-sm-5 col-md-5 col-lg-4 col-xl-3"
+        style={
+          Object {
+            "marginTop": "50px",
+          }
+        }
+      >
+        <form
+          className="batch-form"
+          onSubmit={[Function]}
+        >
+          <h5>
+            Unmap Batch From Client
+          </h5>
+          <select
+            className="form-control"
+            disabled={false}
+            id="map-client-to-batch"
+            name="unmappingClientEmail"
+            onChange={[Function]}
+          >
+            <option
+              disabled={true}
+              selected={true}
+            >
+              Select Client
+            </option>
+          </select>
+          <br />
+          <select
+            className="form-control"
+            disabled={false}
+            name="unmappingBatchId"
+          >
+            Select Batch
+            <option
+              disabled={true}
+              selected={true}
+            >
+              Select Batch:
+            </option>
+          </select>
+          <span>
+            
+          </span>
+          <input
+            className="batch-form-submit"
+            disabled={false}
+            id="test-submit-unmap"
+            type="submit"
+            value="Submit"
+          />
+        </form>
+      </div>
+      <div
+        className="col-sm-1 col-md-1 col-lg-2 col-xl-3"
+      />
+    </div>
+    <div
+      className="row"
       style={
         Object {
-          "marginTop": "50px",
+          "marginTop": "20px",
         }
       }
     >
-      <form
-        className="batch-form"
-        onSubmit={[Function]}
+      <div
+        className="col-2 col-sm-3 col-md-4 col-lg-4 col-xl-5"
+      />
+      <div
+        className="col-8 col-sm-6 col-md-4 col-lg-4 col-xl-2"
       >
-        <h5>
-          Unmap Batch From Client
-        </h5>
-        <select
-          className="form-control"
-          disabled={false}
-          id="map-client-to-batch"
-          name="unmappingClientEmail"
-          onChange={[Function]}
+        <button
+          aria-label={null}
+          className="create-account-button btn btn-secondary"
+          onClick={[Function]}
+          type="button"
         >
-          <option
-            disabled={true}
-            selected={true}
-          >
-            Select Client
-          </option>
-        </select>
-        <br />
-        <select
-          className="form-control"
-          disabled={false}
-          name="unmappingBatchId"
-        >
-          Select Batch
-          <option
-            disabled={true}
-            selected={true}
-          >
-            Select Batch:
-          </option>
-        </select>
-        <span>
-          
-        </span>
-        <input
-          className="batch-form-submit"
-          disabled={false}
-          id="test-submit-unmap"
-          type="submit"
-          value="Submit"
-        />
-      </form>
+          Create Account
+        </button>
+      </div>
+      <div
+        className="col-2 col-sm-3 col-md-4 col-lg-4 col-xl-5"
+      />
     </div>
-    <div
-      className="col-sm-1 col-md-1 col-lg-2 col-xl-3"
-    />
-  </div>
+  </div>,
   <div
-    className="row"
-    style={
-      Object {
-        "marginTop": "20px",
-      }
-    }
+    className="notifs-container accordion"
   >
     <div
-      className="col-2 col-sm-3 col-md-4 col-lg-4 col-xl-5"
-    />
-    <div
-      className="col-8 col-sm-6 col-md-4 col-lg-4 col-xl-2"
+      className="card-header"
+      id="notif-header"
+      onClick={[Function]}
+      variant="link"
     >
-      <button
-        aria-label={null}
-        className="create-account-button btn btn-secondary"
-        onClick={[Function]}
-        type="button"
-      >
-        Create Account
-      </button>
+      Notifications
     </div>
     <div
-      className="col-2 col-sm-3 col-md-4 col-lg-4 col-xl-5"
-    />
-  </div>
-</div>
+      aria-expanded={null}
+      className="collapse"
+    >
+      <div>
+        <div
+          className="notifs accordion"
+        />
+      </div>
+    </div>
+  </div>,
+]
 `;
