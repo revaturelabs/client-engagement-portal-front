@@ -265,8 +265,9 @@ exports[`renders the component 1`] = `
                         class="modal-footer"
                       >
                         <input
-                          class="create-account-submit form-control"
+                          class="create-account-submit"
                           type="submit"
+                          value="Submit"
                         />
                       </div>
                     </form>
@@ -489,8 +490,9 @@ exports[`renders the component 1`] = `
                           class="modal-footer"
                         >
                           <input
-                            class="create-account-submit form-control"
+                            class="create-account-submit"
                             type="submit"
+                            value="Submit"
                           />
                         </div>
                       </form>
@@ -1022,15 +1024,11 @@ exports[`renders the component 1`] = `
                             <div
                               className="modal-footer"
                             >
-                              <Input
+                              <input
                                 className="create-account-submit"
                                 type="submit"
-                              >
-                                <input
-                                  className="create-account-submit form-control"
-                                  type="submit"
-                                />
-                              </Input>
+                                value="Submit"
+                              />
                             </div>
                           </ModalFooter>
                         </form>
