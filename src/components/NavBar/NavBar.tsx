@@ -35,7 +35,7 @@ export const NavBar: React.FC<any> = (props: any) => {
         return `${state.userState.user?.firstName} ${state.userState.user?.lastName}`
     });
     name = (name === "undefined undefined") ? "Developer User" : name; // Placeholder for developer logins and (legacy) users without colloquial names
-    
+
     /**
      * @function LogOut
      * De-authenticates the user session upon clicking the logout dropdown option.
