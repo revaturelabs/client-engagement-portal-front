@@ -13,13 +13,12 @@ configure({ adapter: new Adapter() });
    * Component will create
    */
 
-it('Component Should Create', () => {
+it('Component Should Create and Not log in with no user', () => {
     const wrapper = mount(
         <Provider store={store}>
             <LoginComponent />
         </Provider>
     )
     expect(wrapper.find('.login-form').length).toBe(1);
-    const fakeEvent = { preventDefault: () => console.log('preventDefault') };
-    wrapper.find('.login-form').simulate('submit', fakeEvent);
+    wrapper.find('.login-form').simulate('submit', { preventDefault() { } });
 })
