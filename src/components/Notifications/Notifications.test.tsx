@@ -128,7 +128,6 @@ describe('notification component', () => {
     });
 
     beforeEach(() => {
-        
         component = renderer.create(
             <Provider store={store}>
                 <Notifications/>

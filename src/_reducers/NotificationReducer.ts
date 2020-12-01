@@ -31,33 +31,12 @@ const initialState:INotificationState = {
  */
 export const notificationReducer = 
     ( state:INotificationState = initialState, action:{type:string, payload:INotification[]}):INotificationState => {
-        switch(action.type) {
-            case "ADD_NOTIFICATION": //Adds a new notification to the state using the payload provided in the action
-                if(state == null)
-                    return {notifications: null};
-
-                state = {
-                    notifications:[
-                        ...state.notifications as INotification[],
-                        ...action.payload
-                    ]
-                };
-
-                return state;
-            case "SET_NOTIFICATIONS":
-                return {
-                    notifications:[...action.payload]
-                };
-            case "REMOVE_NOTIFICATION": //Removes the payload object from the current state
-                if(state == null)
-                    return {notifications: null};
-
-                const index = state.notifications?.findIndex((element:INotification) => element = action.payload[0]);
-
-                state.notifications?.splice(index as number, 1) as INotification[];
-
-                return state;
-            default:
-                return state;
+        if(action.type === "SET_NOTIFICATIONS") {
+            return {
+                notifications:[...action.payload]
+            };
+        }
+        else {
+            return state;
         }
 }
