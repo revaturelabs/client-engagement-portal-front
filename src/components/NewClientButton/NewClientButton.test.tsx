@@ -1,12 +1,8 @@
-import React, { SyntheticEvent } from 'react';
 import { Auth } from "aws-amplify";
-import { IUserAdmin } from '../../_reducers/UserReducer';
-import Enzyme, { mount, shallow } from "enzyme";
+import { shallow } from "enzyme";
+import React from 'react';
+import { Button, Input, Label, Modal } from 'reactstrap';
 import { NewClientButton } from './NewClientButton';
-import { Button, Modal, Label, Input } from 'reactstrap';
-import { store } from '../../Store';
-import { Provider } from 'react-redux';
-import { act, Simulate } from 'react-dom/test-utils';
 
 interface IAdmin {
     role: String,
