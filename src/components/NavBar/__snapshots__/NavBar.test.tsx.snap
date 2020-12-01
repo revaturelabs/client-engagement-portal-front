@@ -139,7 +139,6 @@ exports[`NavBar component should render with given state from Redux store 1`] = 
         </h6>
         <a
           href="/login"
-          id="test-logout"
         >
           <button
             className="dropdown-item"

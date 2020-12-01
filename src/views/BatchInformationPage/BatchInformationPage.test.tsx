@@ -1,7 +1,7 @@
 import React from "react";
 import { Provider } from "react-redux";
 import renderer from "react-test-renderer";
-import { BatchInformationPage, getBatchData } from "./BatchInformationPage";
+import BatchInformationPage from "./BatchInformationPage";
 import configureStore from "redux-mock-store";
 import { Router } from "react-router";
 import { BrowserRouter } from "react-router-dom";
@@ -137,12 +137,17 @@ describe("BatchInformationPage view", () => {
           lastName: "jobs",
         },
       },
+      batchState: {
+          batches: nullData.batches
+      }
     });
 
     component = renderer.create(
+    <BrowserRouter>
       <Provider store={store}>
         <BatchInformationPage {...initialData} />
       </Provider>
+      </BrowserRouter>
     );
   });
 
@@ -154,12 +159,14 @@ describe("BatchInformationPage view", () => {
 it("should test axios call", async () => {
     let wrapper2: any;
     await act(async () => {
-      wrapper2 = mount(<Provider store={store}>
-        <BatchInformationPage {...initialData} />
-      </Provider>);
-    });   
+      wrapper2 = mount(    <BrowserRouter>
+        <Provider store={store}>
+          <BatchInformationPage {...initialData} />
+        </Provider>
+        </BrowserRouter>
+    )});   
     //wrapper2.render();
-    getBatchData("1");
+    //getBatchData("1");
     console.log(wrapper2.debug());
     wrapper2.update();
     wrapper2.setProps(fakeData);
@@ -169,9 +176,11 @@ it("should test axios call", async () => {
   it("should set trainer to N/A and associateAssignments to an empty array" , async () => {
     let wrapper2: any;
     await act(async () => {
-      wrapper2 = mount(<Provider store={store}>
-        <BatchInformationPage {...nullData} />
-      </Provider>);
+      wrapper2 = mount(<BrowserRouter>
+        <Provider store={store}>
+          <BatchInformationPage {...nullData} />
+        </Provider>
+        </BrowserRouter>)
     });   
     wrapper2.render();
     wrapper2.setProps({});

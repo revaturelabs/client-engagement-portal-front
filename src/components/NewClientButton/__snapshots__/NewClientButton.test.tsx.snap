@@ -12,7 +12,9 @@ exports[`renders the component 1`] = `
     }
   }
 >
-  <NewClientButton>
+  <NewClientButton
+    reloadClientDropdowns={[Function]}
+  >
     <Button
       className="create-account-button"
       color="secondary"

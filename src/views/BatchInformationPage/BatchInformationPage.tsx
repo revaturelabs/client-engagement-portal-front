@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
 import { Container, DropdownItem, Spinner } from 'reactstrap';
-import { setBatchState } from '../../actions/BatchCardActions';
+import { setBatchState, SET_BATCHES } from '../../actions/BatchCardActions';
 import { IBasicBatchInfo } from '../../components/BatchCard/BatchCard';
 import { BatchInformation } from '../../components/BatchInformation/BatchInformation';
 import { NavBar } from '../../components/NavBar/NavBar';
@@ -39,7 +39,7 @@ interface IProps extends RouteComponentProps<IBatchId>, IBasicBatchInfo {
     }],
 }
 
-const BatchInformationPage: React.FC<IProps> = (props: IProps) => {
+export const BatchInformationPage: React.FC<IProps> = (props: IProps) => {
 
     const passedInId = props.match.params.batchId; //this returns the passed in id
 
@@ -97,7 +97,7 @@ const BatchInformationPage: React.FC<IProps> = (props: IProps) => {
 
                     console.log(batchArray.batches[0]);
                     //the "batch state" is set to be whatever was extracted from the db
-                    dispatch(setBatchState(batchArray));
+                    dispatch({type: SET_BATCHES, payload:setBatchState(batchArray)});
 
                 }
                 setSpinner(false);
@@ -113,7 +113,7 @@ const BatchInformationPage: React.FC<IProps> = (props: IProps) => {
     const getBatchDataNow = () => {
         if (passedInId != null)
         {
-            dispatch(getBatchData(passedInId));
+            dispatch({type: SET_BATCHES, payload:getBatchData(passedInId)});
         }
         setRecievedData(true);
     };
@@ -161,3 +161,5 @@ const mapStateToProps = (store: any) => {
 };
 
 export default withRouter(connect<any>(mapStateToProps)(BatchInformationPage));
+
+
