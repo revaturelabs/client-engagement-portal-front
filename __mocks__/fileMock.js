@@ -1,1 +1,1 @@
-module.exports = "mocked-file-path";
+module.exports = '';
