@@ -46,12 +46,12 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
         if (form.checkValidity() === false)
             event.stopPropagation();
 
-        const loginCredentials = {
-            email: form["email"].value,
-            password: form["password"].value
-        }
-
         try {
+            const loginCredentials = {
+                email: form["email"].value,
+                password: form["password"].value
+            }
+
             const user = await Auth.signIn(loginCredentials.email, loginCredentials.password); // user.attributes.email contains the user email
 
             switch (user.attributes["custom:userRole"]) { // Assigns what page to redirect to based upon what role the user has
