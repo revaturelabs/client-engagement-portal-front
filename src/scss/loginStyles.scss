@@ -1,0 +1,101 @@
+@import "revature-colors.scss";
+
+.login-wrapper {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  max-width: 100%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+.login-wrapper .logo {
+  display: block;
+  position: relative;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+.login-form {
+    text-align: center;
+    background-color: white;
+    width: auto;
+    height: auto;
+    min-width: 200px;
+    display: inline-block;
+    border-radius: 50px;
+    padding: 30px;
+    border: 1px solid $rev-orange;
+    box-shadow: 3px 3px 15px $rev-blue-trans;
+}
+
+.logo {
+    height: 80px;
+    width: auto;
+    margin: 5px;
+}
+
+.cep-logo-area {
+    margin: 5px;
+}
+
+.cep-logo {
+    max-width: 140px;
+    max-height: 140px;
+}
+
+.login-header {
+    color: $rev-dgray;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 5px;
+}
+
+.login-btn
+{
+    line-height: 1.5;
+    width: 70%;
+    border: 4px solid $rev-orange;
+    border-radius: 5px;
+    background-color: $rev-orange;
+    color: white;
+    font-size: 20px;
+    padding: 8px;
+    margin: 10px;
+}
+
+.login-btn:hover
+{
+    background-color: white;
+    color: $rev-orange;
+}
+
+.login-submit {
+    position: relative;
+    margin: 10px;
+    line-height: 2.2;
+    width: 70%;
+    background-color: $rev-orange; 
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    box-sizing: border-box;
+    border-radius: 15px;
+    border: 3px solid $rev-orange;
+    transition: all 0.2s ease 0s;
+}
+.login-submit:hover {
+    background-color: white; 
+    color: $rev-orange;
+}
+.cep-logo-area img {
+  // width: 100px;
+  // height: 60px;
+  font-weight: 400;// does nothing except for keeping the compiler from whining
+}
+.spinner {
+  position: absolute;
+  right: 5px;
+  top: 15%;
+}

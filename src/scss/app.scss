@@ -1,8 +1,9 @@
 @import "revature-colors.scss";
 
-body
+html body
 {
-    font-family: $rev-font;
+    background-color: #EAEAEA;
+    font-family: $rev-font !important;
     font-style: $rev-font-style;
     font-weight: $rev-font-weight;
 }

@@ -1,0 +1,119 @@
+.batch-form{
+    position: relative;
+    height: 40vh;
+    min-height: 250px;
+    background-color:white;
+    border-radius:25px;
+    text-align:center;
+    color:#F26925;
+    border:solid;
+    border: 1px solid #F26925;
+    box-shadow: 3px 3px 15px #72a3c260;
+    border-width:1px;
+    padding:20px;
+    margin: 0px;
+
+}
+.batch-form .batch-form-submit{
+    box-sizing: border-box;
+    position: absolute;
+    bottom: 20px;
+    width: 100px;
+    max-width:80%;
+    left: 0;
+    right: 0;
+    color:white;
+    background-color:#F26925 ; 
+    margin: 0px auto; 
+    border: 3px solid #F26925; 
+    border-radius: 15px;
+    transition: all 0.3s ease 0s;
+}
+ .batch-form-submit:hover {
+    background-color:white;
+    color: #F26925;
+    font-weight: bold;
+}
+.batch-form .batch-form-submit:focus {
+    background-color:white;
+    color: #F26925;
+    font-weight: bold;
+    border: 3px solid #F26925;
+    box-shadow: none;
+}
+.batch-form-button {
+    width: 100%;
+    color:white;
+    background-color:#F26925 ; 
+    margin: 0px auto; 
+    border: 3px solid #F26925; 
+    border-radius: 15px;
+    padding: 6px 12px;
+    font-weight: bold;
+    transition: all 0.3s ease 0s;
+}
+// .batch-form-button:focus {
+//     background-color:white;
+//     color: #F26925;
+//     font-weight: bold;
+//     border: 3px solid #F26925;
+//     box-shadow: none;
+// }
+.batch-form-button:hover {
+    background-color:white;
+    color: #F26925;
+    font-weight: bold;
+}
+.my-button-row {
+    display: none;
+    margin-top: 20px;
+}
+.modal-header{
+    color: #F26925;
+}
+button.close {
+    color: #F26925 !important;
+}
+button.close:focus{
+    outline: none;
+}
+
+.modal-batch-form {
+    position: relative;
+    height: 40vh;
+    min-height: 250px;
+    background-color:white;
+    text-align:center;
+    color:#F26925;
+    padding:20px;
+    margin: 0px;
+}
+.modal-batch-form .modal-batch-form-submit{
+    box-sizing: border-box;
+    position: absolute;
+    bottom: 20px;
+    width:80%;
+    max-width:80%;
+    left: 0;
+    right: 0;
+    color:white;
+    background-color:#F26925 ; 
+    margin: 0px auto; 
+    border: 3px solid #F26925; 
+    border-radius: 15px;
+}
+
+@media (min-width: 576px){
+    .my-button-row{
+        display: none !important;
+    }
+}
+
+@media (max-width: 576px){
+.my-button-row{
+    display: flex !important;
+}
+.my-form-row {
+    display:none !important;
+}
+}

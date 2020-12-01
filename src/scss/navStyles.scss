@@ -1,0 +1,43 @@
+.myNav {
+    height: 120px;
+     background-color: white;
+     border-bottom: 3px solid #F26925;
+}
+.myNav a:hover {
+    text-decoration: none;
+}
+.myLogo {
+    margin-top: 25px;
+}
+#navLogo {
+    background-image: "../assets/logo.png";
+}
+
+.logoContainer {
+    padding-left: 25px;
+    padding-right: 25px;
+}
+.dropdown-item:active {
+    background-color: #f8f9fa !important;
+    color:black !important;
+    border: none;
+    outline: none;
+}
+@media (max-width: 768px){
+    .myLogo {
+        width: 150px;
+        margin-top: 33px;
+    }
+    .myDropdown {
+        display: none !important;
+    }
+    div#myMobileDropdown {
+        display: flex;
+    }
+
+}
+@media (min-width: 769px){
+    .myMobileDropdown{
+        display: none !important;
+    }
+}
