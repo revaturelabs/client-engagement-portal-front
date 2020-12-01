@@ -1,0 +1,64 @@
+@import "./revature-colors.scss";
+
+.notifs-container {
+    position: fixed;      
+    bottom: 0;
+    width: 100%;
+}
+
+.notifs {
+    max-height: 200px;
+    overflow-y: scroll;
+    background-color: white;
+}
+
+#notif-header {
+    background-color: $rev-orange;
+    text-align: center;
+    font-family: $rev-font;
+    font-style: $rev-font-style;
+    font-weight: $rev-font-weight;
+    color: $rev-cust-gray;
+    transition: all 0.3s ease 0s;
+}
+
+#notif-header:hover {
+    background-color:white;
+    border: 3px solid #F26925;
+    box-shadow: none;
+    color: #F26925;
+    font-weight: bold;
+}
+
+.notif-table {
+    text-align: center;
+    margin: 0px !important;
+    font-family: $rev-font;
+    font-style: $rev-font-style;
+    font-weight: $rev-font-weight;
+}
+
+#notif-toggle {
+    padding: 0;
+    //text-align: left !important;
+}
+
+#notif-head {
+    margin: 0px !important;
+    text-align: center;
+}
+
+#head {
+    padding: 10px;
+}
+
+#head:hover {
+    background-color: lightgray;
+}
+
+#head > div {
+    display: inline-block;
+    zoom: 1;
+    width: 33%;
+    text-align: center;
+}
