@@ -5,7 +5,7 @@ import { BatchInformationPage } from "./BatchInformationPage";
 import configureStore from "redux-mock-store";
 import Axios from "axios";
 import { act } from "react-dom/test-utils";
-import { mount, shallow } from "enzyme";
+import { mount } from "enzyme";
 import { BatchInformation } from "../../components/BatchInformation/BatchInformation";
 import { AssociateCardFactory } from "../../components/AssociateCard/AssociateCardFactory";
 import { createBrowserHistory, History } from "history";
@@ -165,9 +165,7 @@ it("should test axios call", async () => {
         </Provider>
         </BrowserRouter>
     )});   
-    //wrapper2.render();
-    //getBatchData("1");
-    console.log(wrapper2.debug());
+
     wrapper2.update();
     wrapper2.setProps(fakeData);
     expect(wrapper2.find(BatchInformation).children().length).toBeGreaterThan(0);
