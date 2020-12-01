@@ -35,7 +35,6 @@ export const BatchCard: React.FC<IBasicBatchInfo> = (props: IBasicBatchInfo) => 
      * @param event contains the click event that calls this function.
      */
     const goToBatchViewPage = (event:React.MouseEvent<Element, MouseEvent>) => {
-        console.log(props.batchId);
 
         setBatchButtonClicked(true);
     }
