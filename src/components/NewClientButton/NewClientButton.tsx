@@ -55,14 +55,21 @@ export const NewClientButton: React.FC<IProps> = (props:IProps) => {
    */
   const registerUser = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
+    const eventObject = event.currentTarget;
+    console.log("-------------------- Start values --------------------");
+    console.log(eventObject["email"].value);
+    console.log(eventObject["password"].value);
+    console.log(eventObject["firstName"].value);
+    console.log(eventObject["lastName"].value);
+    console.log(eventObject["select"].value);
+    console.log("-------------------- End values --------------------");
 
     // These need to be up here. Data is dropped when user is checked {for some reason} <= these fields are cleared when the modal unloads
     const email = event.currentTarget["email"].value;
     const password = event.currentTarget["password"].value;
-    const role = event.currentTarget["select"].value;
     const firstName = event.currentTarget["firstName"].value;
     const lastName = event.currentTarget["lastName"].value;
+    const role = event.currentTarget["select"].value;
     let companyName;
     let phoneNumber;
 
@@ -166,7 +173,7 @@ export const NewClientButton: React.FC<IProps> = (props:IProps) => {
         <ModalHeader toggle={toggle} className="container create-account-modal-header">
           Create Account
             </ModalHeader>
-        <Form onSubmit={(event: React.FormEvent<HTMLFormElement>) => registerUser(event)}>
+        <Form onSubmit={(event: React.FormEvent<HTMLFormElement>) => registerUser(event)} id="new-client-button-form">
           <ModalBody>
             {/* <Form onSubmit={registerUser}> */}
             <FormGroup>
@@ -232,7 +239,7 @@ export const NewClientButton: React.FC<IProps> = (props:IProps) => {
           </ModalBody>
 
           <ModalFooter>
-            <input type="submit" value="Submit" className="create-account-submit"/>
+            <Input type="submit" value="Submit" className="create-account-submit"/>
           </ModalFooter>
         </Form>
       </Modal>
