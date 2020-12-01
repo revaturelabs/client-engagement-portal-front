@@ -3,9 +3,8 @@ import { Col, DropdownItem, DropdownMenu, DropdownToggle, Row, ButtonDropdown } 
 import logo from '../../assets/logo.png';
 import '../../scss/navStyles.scss';
 import { Turn as Hamburger } from 'hamburger-react'
-import { Link } from 'react-router-dom';
 import { Auth } from 'aws-amplify';
-import { Provider, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../actions/UserActions';
 import { IRootState } from '../../_reducers';
 
@@ -43,7 +42,6 @@ export const NavBar: React.FC<any> = (props: any) => {
      */
     const LogOut = () => {
         Auth.signOut() // de-authenticates the user
-            .then(data => console.log(data))
             .catch(err => console.log(err));
 
         dispatch(logout()); // clears the user data from the local state

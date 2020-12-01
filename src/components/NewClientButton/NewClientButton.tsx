@@ -90,7 +90,6 @@ export const NewClientButton: React.FC<IProps> = (props:IProps) => {
       console.log("Error: User does not have permissions to create an account");
       return null;
     }
-    console.log("Before signup")
     setModal(!modal);
 
     try {
@@ -103,18 +102,6 @@ export const NewClientButton: React.FC<IProps> = (props:IProps) => {
           "family_name": lastName
         },
       });
-
-      // // !!! This should be removed at the end
-      // console.log(
-      //   "Cognito User: " +
-      //   signUpResult.user +
-      //   "\nUserConfirmed: " +
-      //   signUpResult.userConfirmed +
-      //   "\nUserSub: " +
-      //   signUpResult.userSub +
-      //   "\nCode delivery details: " +
-      //   signUpResult.codeDeliveryDetails
-      // );
 
       if (role === "client") {
         (await axiosInstance()).post("/client/", { // Client does not have firstName and lastName; this must be retrieved from Cognito upon login
@@ -134,9 +121,6 @@ export const NewClientButton: React.FC<IProps> = (props:IProps) => {
           lastName: lastName
         })
       }
-
-      // console.log(signUpResult.user);
-      // console.log(signUpResult.codeDeliveryDetails);
     } catch (error) {
       console.log("Couldn't complete signup: ", error); // !!! Should this be removed as well?
       return false;
