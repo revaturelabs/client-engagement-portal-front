@@ -5,7 +5,7 @@ import '../../scss/navStyles.scss';
 import { Turn as Hamburger } from 'hamburger-react'
 import { Link } from 'react-router-dom';
 import { Auth } from 'aws-amplify';
-import { useDispatch, useSelector } from 'react-redux';
+import { Provider, useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../actions/UserActions';
 import { IRootState } from '../../_reducers';
 
@@ -56,15 +56,15 @@ export const NavBar: React.FC<any> = (props: any) => {
     return (
         <Row className="justify-content-around myNav">
             <Col xs="auto" className="justify-content-start logoContainer">
-                <Link to={logoLink}>
-                    <img src={logo} className="myLogo" alt="revature logo" />
-                </Link>
+                <a href={logoLink}>
+                    <img id="revLogo" src={logo} className="myLogo" alt="revature logo" />
+                </a>
             </Col>
             <Col className="d-flex align-items-center justify-content-end auto test1" >
                 <ButtonDropdown isOpen={navMenuOpen} toggle={toggle}>
                     {/* Mobile Hamburger Menu */}
-                    <DropdownToggle className="" style={{ margin: "10px", backgroundColor: "white", border: "none" }}>
-                        <span className="myDropdown" style={{ margin: "5px", color: "#474C55", backgroundColor: "white", border: "none" }}>Welcome, {name} &#9660;</span>
+                    <DropdownToggle id="navDropButton" style={{ margin: "10px", backgroundColor: "white", border: "none" }}>
+                        <span className="myDropdown" id="usersName" style={{ margin: "5px", color: "#474C55", backgroundColor: "white", border: "none" }}>Welcome, {name} &#9660;</span>
                         <span className="myMobileDropdown">
                             <Hamburger hideOutline={true} toggled={hamOpen} toggle={setHamOpen} color="#474C55"></Hamburger>
                         </span>
@@ -72,9 +72,8 @@ export const NavBar: React.FC<any> = (props: any) => {
                     {/* Desktop Menu */}
                     <DropdownMenu right>
                         {props.children}
-                        {/* DEVELOPER separator when there are other types of options
-                        <DropdownItem header>Account Options</DropdownItem> */}
-                        <Link to="/login"><DropdownItem onClick={LogOut}>Logout</DropdownItem></Link>
+                        <DropdownItem id="test-head" header>Account Options</DropdownItem>
+                        <a href="/login"><DropdownItem onClick={LogOut}>Logout</DropdownItem></a>
                     </DropdownMenu>
                 </ButtonDropdown>
             </Col>
