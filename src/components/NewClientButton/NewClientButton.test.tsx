@@ -115,90 +115,99 @@ test('should be 9 Inputs', () => {
 /**
  * This test verifies that constants are properly set when the form is filled
  */
-// test('register user function should properly set constants', async () => {
+test('register user function should properly set constants', async () => {
 
-//     // const mockSignUp = jest.spyOn(Auth, "signUp").mockImplementation(() => { return {
-//     //     user: "",
-//     //     userConfirmed: "",
-//     //     userSub: "",
-//     //     codeDeliveryDetails: ""
-//     // }});
+    // const mockSignUp = jest.spyOn(Auth, "signUp").mockImplementation(() => { return {
+    //     user: "",
+    //     userConfirmed: "",
+    //     userSub: "",
+    //     codeDeliveryDetails: ""
+    // }});
 
-//     const mockSignUp = jest.spyOn(Auth, "signUp");
+    const mockSignUp = jest.spyOn(Auth, "signUp");
 
-//     const Amplify = require('aws-amplify');
-//     // Auth.signUp = jest.fn().mockImplementation(() => true);
-//     Auth.signUp = jest.fn().mockImplementation(() => Promise.resolve(true));
+    const Amplify = require('aws-amplify');
+    // Auth.signUp = jest.fn().mockImplementation(() => true);
+    Auth.signUp = jest.fn().mockImplementation(() => Promise.resolve(true));
 
-//     const values = ['client@test', 'Clint','Johnson','Walmart','123-123-1231','coolpass','coolpass']
-//     for(let i = 1; i < 8; i++){
-//         let input = wrapper.find(Input).at(i);
-//         let val = { target: { value: values[i-1] } }; //not sure if this will work, seen it on stack overflow
-//         input.simulate('change', val)
-//     };
-//     // const instance = wrapper.instance();
-//     // const registerUserSpy = jest.spyOn(instance, 'registerUser'); //its not finding the function
-//     // registerUserSpy.mockImplementation(() => Promise.resolve());
+    const values = ['client@test', 'Clint','Johnson','Walmart','123-123-1231','coolpass','coolpass']
+    for(let i = 1; i < 8; i++){
+        let input = wrapper.find(Input).at(i);
+        let val = { target: { value: values[i-1] } }; //not sure if this will work, seen it on stack overflow
+        input.simulate('change', val);
+        console.log(input.debug());
+        console.log("Value is "+input.props().value);
+    };
+    console.log(wrapper.find('.email').render().text());
     
-//     act(() => {wrapper.find('.create-account-submit').first().simulate('click')});
-//     // wrapper.find('.create-account-submit').first().simulate('click');
-//     wrapper.update();
-//     wrapper.setProps({});
-//     expect(Auth.currentUserInfo).not.toHaveBeenCalled();
-//     expect(Auth.signUp).not.toHaveBeenCalled();
-//     // expect(registerUserSpy).toBeCalled();
-//     // await expect(registerUserSpy).toBeCalled(); //hoping simulate click triggers this
+    // const instance = wrapper.instance();
+    // const registerUserSpy = jest.spyOn(instance, 'registerUser'); //its not finding the function
+    // registerUserSpy.mockImplementation(() => Promise.resolve());
     
-//     // setTimeout(() => {
-//     //     const registerUserSpy = jest.spyOn(wrapper, 'registerUser');
-//     //     expect(registerUserSpy).toBeCalled(); //hoping simulate click triggers this
-//     // }, 5000);
+    // act(() => {wrapper.find('.create-account-submit').first().simulate('click')});
+    wrapper.find('.create-account-submit').first().simulate('click');
 
-//     // const fakeClient:IClient = {
-//     //     role: 'client',
-//     //     email: 'client@test',
-//     //     firstname: 'Clint',
-//     //     lastname: 'Johnson',
-//     //     companyname: 'Walmart',
-//     //     phonenumber: '123-123-1231',
-//     //     password: 'coolpass'
-//     //
     
-//     // wrapper.simulate("click", { preventDefault: () => null });
 
-//     // const event:React.FormEvent<HTMLFormElement>;
-//     // event.currentTarget = fakeClient
+    wrapper.update();
+    wrapper.setProps({});
+
+    expect(Auth.currentUserInfo).toHaveBeenCalledTimes(0);
+    expect(Auth.signUp).toHaveBeenCalledTimes(0);
+
+    // expect(registerUserSpy).toBeCalled();
+    // await expect(registerUserSpy).toBeCalled(); //hoping simulate click triggers this
+    
+    // setTimeout(() => {
+    //     const registerUserSpy = jest.spyOn(wrapper, 'registerUser');
+    //     expect(registerUserSpy).toBeCalled(); //hoping simulate click triggers this
+    // }, 5000);
+
+    // const fakeClient:IClient = {
+    //     role: 'client',
+    //     email: 'client@test',
+    //     firstname: 'Clint',
+    //     lastname: 'Johnson',
+    //     companyname: 'Walmart',
+    //     phonenumber: '123-123-1231',
+    //     password: 'coolpass'
+    //
+    
+    // wrapper.simulate("click", { preventDefault: () => null });
+
+    // const event:React.FormEvent<HTMLFormElement>;
+    // event.currentTarget = fakeClient
  
-//     // expect(wrapper.find(email).toBe('client@test');
+    // expect(wrapper.find(email).toBe('client@test');
 
-// // const email = event.currentTarget["email"].value;
-// // const password = event.currentTarget["password"].value;
-// // const role = event.currentTarget["select"].value;
-// // const firstName = event.currentTarget["firstName"].value;
-// // const lastName = event.currentTarget["lastName"].value;
-// // let companyName;
-// // let phoneNumber;
-// // if(role==='client') {
-// //   companyName = event.currentTarget["companyName"].value;
-// //   phoneNumber = event.currentTarget["phoneNumber"].value;
-// // }
+// const email = event.currentTarget["email"].value;
+// const password = event.currentTarget["password"].value;
+// const role = event.currentTarget["select"].value;
+// const firstName = event.currentTarget["firstName"].value;
+// const lastName = event.currentTarget["lastName"].value;
+// let companyName;
+// let phoneNumber;
+// if(role==='client') {
+//   companyName = event.currentTarget["companyName"].value;
+//   phoneNumber = event.currentTarget["phoneNumber"].value;
+// }
     
-// // nativeEvent: unknown,
-// // target: 'asd',
-// // bubbles: false,
-// // cancelable: false,
-// // defaultPrevented: true,
-// // isDefaultPrevented: true,
-// // preventDefault: true,
-// // eventPhase: true,
-// // isTrusted: true,
-// // stopPropagation: false,
-// // isPropagationStopped: false,
-// // persist: true,
-// // timeStamp: false,
-// // type: 'cool',
+// nativeEvent: unknown,
+// target: 'asd',
+// bubbles: false,
+// cancelable: false,
+// defaultPrevented: true,
+// isDefaultPrevented: true,
+// preventDefault: true,
+// eventPhase: true,
+// isTrusted: true,
+// stopPropagation: false,
+// isPropagationStopped: false,
+// persist: true,
+// timeStamp: false,
+// type: 'cool',
 
-// })
+})
 
 test('Form should be different for client and admin', ()=>{
     const input = wrapper.find('#exampleSelect').at(0);
