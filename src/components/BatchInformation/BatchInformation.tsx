@@ -21,7 +21,7 @@ interface IProps {
         endDate: string,
         skill: string,
         trainer: string,
-        associateAssignments?: [{}],
+        associateAssignments?: {}[],
     }],
 }
 
