@@ -58,7 +58,6 @@ export const NavBar: React.FC<any> = (props: any) => {
         <Row className="justify-content-around myNav">
             <Col xs="auto" className="justify-content-start logoContainer">
                 <a href={logoLink}>
-                    <div id="navLogo" className="myLogo"></div>
                     <img id="revLogo" src={logo} className="myLogo" alt="revature logo" />
                 </a>
             </Col>

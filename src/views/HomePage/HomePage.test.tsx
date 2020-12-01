@@ -9,6 +9,7 @@ import { store } from '../../Store';
 const mockStore = configureStore([ thunk ]);
 
 let homePageComp: any;
+let fakeHomePageComp: any;
 describe("HomePage", () => {
 
     beforeEach(() => {
@@ -21,6 +22,12 @@ describe("HomePage", () => {
                     skill: "Java/Microservices",
                     name: "Dummy Name",
                 }],
+            },
+            userState:{
+                user:{
+                    firstName: 'wack',
+                    lastName: 'jobs',
+                }     
             }
         });
         homePageComp = renderer.create(
@@ -28,13 +35,19 @@ describe("HomePage", () => {
                <HomePage />
            </Provider>
        );
+
+       fakeHomePageComp = renderer.create(
+        <Provider store={fakeStore}>
+           <HomePage />
+       </Provider>
+   );
        
     });
 
     it('should render with given state from Redux store', ()=>{
-        console.log(homePageComp.toJSON().children);
-        console.log(homePageComp.toJSON().props);
-        expect(homePageComp.toJSON()).toMatchSnapshot();
+        expect(homePageComp.toJSON()).toMatchSnapshot(); //original store
+
+        expect(fakeHomePageComp.toJSON()).toMatchSnapshot(); //fake store
     });
 
 });

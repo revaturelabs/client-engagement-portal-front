@@ -31,7 +31,7 @@ export const AssociateCardFactory:React.FC<any> = (props:IAssociate) => {
        */
       try{
         for(const assoc of props.associateAssignments){
-          cards.push(<AssociateCard {...assoc.associate}/>);
+          cards.push(<AssociateCard {...assoc.associate} key={assoc.associate.lastName}/>);
           i++;
          }
       } catch (error){

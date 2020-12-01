@@ -11,7 +11,6 @@ let fakeData:any;
 let store:any;
 
 beforeAll(() => {
-    
     fakeData = {
         match: {
             params: {
@@ -55,31 +54,7 @@ describe("BatchInformationPage view", () => {
                     firstName: 'wack',
                     lastName: 'jobs',
                 }     
-            },
-            batches: [{
-                name: "Test",
-                endDate: "endDate",
-                employeeAssignments: [{
-                    employee: {
-                        firstName: "TestFName",
-                        lastName: "TestLameName",
-                    },
-                }],
-                skill: "Java, React, Spring",
-                associateAssignments: [{
-                    active: "true",
-                    associate: {
-                        firstName: "wack",
-                        lastName: "jobs",
-                        grades: [{
-                            gradeId: "GR6953",
-                            dateReceived: "10/03/2020",
-                            score: "5",
-                        }],
-                    },
-                }],
-            }],
-            
+            }   
         });
 
         component = renderer.create(

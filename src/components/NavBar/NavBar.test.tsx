@@ -6,6 +6,8 @@ import { NavBar } from './NavBar';
 import { shallow, mount } from "enzyme";
 import { ButtonDropdown } from 'reactstrap';
 import thunk from 'redux-thunk';
+import logo from '../../assets/logo.png';
+
 
 let store:any;
 let component:any;
@@ -26,7 +28,7 @@ describe('NavBar component', () => {
         });
         component = renderer.create(
             <Provider store={store}>
-               <NavBar route="test"/>
+               <NavBar route="test" logoSrc={ logo }/>
            </Provider>
        );
     });
@@ -34,30 +36,6 @@ describe('NavBar component', () => {
     it('should render with given state from Redux store', ()=>{
         expect(component.toJSON()).toMatchSnapshot();
     });
+
     
 });
-
-// beforeEach(() => {
-//     store = mockStore({
-//         userState:{
-//             user:{
-//                 firstName: 'wack',
-//                 lastName: 'jobs',
-//             }     
-//         }   
-//     }); 
-
-//     wrapper = shallow(
-//         <Provider store={store}>
-//            <NavBar />
-//        </Provider> 
-//    ).dive();
-
-
-// });
-
-// test("dropdown menu can toggle on and off", () => {
-//     expect(wrapper.find(ButtonDropdown).props("navMenuOpen")).toBe(false);
-//     wrapper.find("#navDropButton").simulate("click");
-//     expect(wrapper.find(ButtonDropdown).props("navMenuOpen")).toBe(true);
-// });

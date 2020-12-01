@@ -10,15 +10,11 @@ exports[`NavBar component should render with given state from Redux store 1`] = 
     <a
       href="test"
     >
-      <div
-        className="myLogo"
-        id="navLogo"
-      />
       <img
         alt="revature logo"
         className="myLogo"
         id="revLogo"
-        src={null}
+        src=""
       />
     </a>
   </div>
