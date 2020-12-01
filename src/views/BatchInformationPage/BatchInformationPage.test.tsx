@@ -11,7 +11,6 @@ let fakeData:any;
 let store:any;
 
 beforeAll(() => {
-    
     fakeData = {
         match: {
             params: {

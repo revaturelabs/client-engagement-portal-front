@@ -23,12 +23,6 @@ exports[`HomePage should render with given state from Redux store 1`] = `
           className="myLogo"
           id="navLogo"
         />
-        <img
-          alt="revature logo"
-          className="myLogo"
-          id="revLogo"
-          src={null}
-        />
       </a>
     </div>
     <div
@@ -168,17 +162,25 @@ exports[`HomePage should render with given state from Redux store 1`] = `
       </div>
     </div>
   </div>
-  (
   <div
-    className="RequestBatchCard"
+    className="row justify-content-center"
   >
     <div
-      className="RequestBatchCardText"
+      className="spinner-border text-info"
+      role="status"
+      style={
+        Object {
+          "margin": 20,
+        }
+      }
     >
-      No batches have been selected for you just yet. Our administrators will assign you one soon.
+      <span
+        className="sr-only"
+      >
+        Loading...
+      </span>
     </div>
   </div>
-  )
 </div>
 `;
 
@@ -204,12 +206,6 @@ exports[`HomePage should render with given state from Redux store 2`] = `
         <div
           className="myLogo"
           id="navLogo"
-        />
-        <img
-          alt="revature logo"
-          className="myLogo"
-          id="revLogo"
-          src={null}
         />
       </a>
     </div>
