@@ -7,7 +7,7 @@ import { Route } from 'react-router-dom';
 // Some trivial tests for now
 
 // it.skip() keeps the skipped test from running when Jest checks tests
-it.skip('renders without crashing', () => {
+it('renders without crashing', () => {
     shallow(<App />);
 });
 

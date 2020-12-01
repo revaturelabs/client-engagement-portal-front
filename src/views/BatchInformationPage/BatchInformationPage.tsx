@@ -39,17 +39,17 @@ interface IProps extends RouteComponentProps<IBatchId>, IBasicBatchInfo {
     }],
 }
 
+export let getBatchData:(arg0:string) => {};
+
+let givenTrainer:string;
+
 const BatchInformationPage: React.FC<IProps> = (props: IProps) => {
 
     const passedInId = props.match.params.batchId;
-    console.log(passedInId); //this returns the passed in id
 
-    let givenTrainer:string;
     if(props.batches[0].employeeAssignments != null)
     {
         givenTrainer = `${props.batches[0].employeeAssignments[0].employee.firstName} ${props.batches[0].employeeAssignments[0].employee.lastName}`;
-        // props.batches[0].employeeAssignments[0].employee.firstName + " " +
-        // props.batches[0].employeeAssignments[0].employee.lastName
     }
     else
     {
@@ -80,7 +80,7 @@ const BatchInformationPage: React.FC<IProps> = (props: IProps) => {
      *
      * @returns This function just changes the batch state to 
      */
-    const getBatchData = (batchId: string) => async () => {
+    getBatchData = (batchId: string) => async () => {
 
         setSpinner(true);
         
@@ -93,13 +93,12 @@ const BatchInformationPage: React.FC<IProps> = (props: IProps) => {
         await axiosInstance().then((result) => {
             result.get("/client/batch/" + batchId)
             .then((response: any) => {
-                console.log(response.data);
+
 
                 if (response != null) {
                     const batchCardInfo = { ...response.data }
                     batchArray.batches.push(batchCardInfo);
 
-                    console.log(batchArray.batches[0]);
                     //the "batch state" is set to be whatever was extracted from the db
                     dispatch(setBatchState(batchArray));
 
@@ -107,7 +106,6 @@ const BatchInformationPage: React.FC<IProps> = (props: IProps) => {
                 setSpinner(false);
             })
             .catch((error: any) => {
-                console.log(error);
                 setSpinner(false);
             });
         })
