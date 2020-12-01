@@ -45,7 +45,7 @@ const BatchInformationPage: React.FC<IProps> = (props: IProps) => {
     console.log(passedInId); //this returns the passed in id
 
     let givenTrainer:string;
-    if(props.batches && props.batches[0].employeeAssignments != null)
+    if(props.batches[0].employeeAssignments != null)
     {
         givenTrainer = `${props.batches[0].employeeAssignments[0].employee.firstName} ${props.batches[0].employeeAssignments[0].employee.lastName}`;
         // props.batches[0].employeeAssignments[0].employee.firstName + " " +
@@ -57,7 +57,7 @@ const BatchInformationPage: React.FC<IProps> = (props: IProps) => {
     }
 
     let associateArray:any;
-    if(props.batches && props.batches[0].employeeAssignments != null)
+    if(props.batches[0].employeeAssignments != null)
     {
         associateArray = props.batches[0].associateAssignments;
     }
@@ -78,12 +78,12 @@ const BatchInformationPage: React.FC<IProps> = (props: IProps) => {
      * @param batchId the batch id passed in from the batch card on the
      * home page
      *
-     * @returns This function just changes the batch state to
+     * @returns This function just changes the batch state to 
      */
     const getBatchData = (batchId: string) => async () => {
 
         setSpinner(true);
-
+        
         //array to place batch data into
         const batchArray: IBatchState = {
             batches: [],
@@ -122,7 +122,7 @@ const BatchInformationPage: React.FC<IProps> = (props: IProps) => {
         setRecievedData(true);
     };
 
-    if (!hasData) {
+    if (hasData) {
         getBatchDataNow();
     }
 
@@ -130,9 +130,9 @@ const BatchInformationPage: React.FC<IProps> = (props: IProps) => {
         <>
             <Container style={{ minHeight: "100vh", maxWidth: "100vw", backgroundColor: "#E3E3E3" }}>
                 <NavBar>
-                    <Link to="/home">
+                    <a href="/home">
                         <DropdownItem>Return to Client Home</DropdownItem>
-                    </Link>
+                    </a>
                 </NavBar>
 
                 {/* Spinner displays below nav bar */}
@@ -165,3 +165,5 @@ const mapStateToProps = (store: any) => {
 };
 
 export default withRouter(connect<any>(mapStateToProps)(BatchInformationPage));
+
+export { BatchInformationPage }

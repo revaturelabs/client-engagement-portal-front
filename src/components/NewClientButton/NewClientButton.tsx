@@ -227,8 +227,7 @@ export const NewClientButton: React.FC<any> = () => {
           </ModalBody>
 
           <ModalFooter>
-            <Input type="submit" className="create-account-submit">
-            </Input>
+            <input type="submit" value="Submit" className="create-account-submit"/>
           </ModalFooter>
         </Form>
       </Modal>
