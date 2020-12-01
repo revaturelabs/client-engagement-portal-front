@@ -1,34 +1,25 @@
-import React from "react";
-import { shallow } from "enzyme";
-import { LoginComponent } from "./LoginComponent";
+import React from 'react';
+import { configure, mount, shallow } from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+import { LoginComponent } from './LoginComponent'
+import { Provider } from 'react-redux';
+import { store } from '../../Store';
+import "../../scss/loginStyles.scss";
 
-const setUp = (props={loginType:"client"}) => {
-    return shallow(<LoginComponent {...props}/>);
-}
+configure({ adapter: new Adapter() });
 
-describe('logincomp', () => {
+/**
+   * @Test
+   * Component will create
+   */
 
-    let component: any;
-    beforeEach(() => {
-        component = setUp();
-    });
-
-    // Simple Test 2
-    it("Should render Login", () => {
-        const div = component.find('button.test2').text();
-
-        expect(div).toBe("Login");
-    })
-
-      //Simple Test 3
-      it("Should render user thumbnail", () => {
-        const image = component.find('.userthumbcheck');
-        expect(image.length).toBe(1);
-    })
-
-      //Simple Test 4
-      it("Should render password thumbnail", () => {
-        const image = component.find('.passthumbcheck');
-        expect(image.length).toBe(1);
-    })
+it('Component Should Create', () => {
+    const wrapper = mount(
+        <Provider store={store}>
+            <LoginComponent />
+        </Provider>
+    )
+    expect(wrapper.find('.login-form').length).toBe(1);
+    const fakeEvent = { preventDefault: () => console.log('preventDefault') };
+    wrapper.find('.login-form').simulate('submit', fakeEvent);
 })

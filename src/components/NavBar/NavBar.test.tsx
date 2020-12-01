@@ -1,30 +1,41 @@
-import React from "react";
-import { shallow } from "enzyme";
-import { NavBar } from "./NavBar";
+import React from 'react';
+import { Provider } from 'react-redux';
+import renderer from 'react-test-renderer';
+import configureStore from 'redux-mock-store';
+import { NavBar } from './NavBar';
+import { shallow, mount } from "enzyme";
+import { ButtonDropdown } from 'reactstrap';
+import thunk from 'redux-thunk';
+import logo from '../../assets/logo.png';
 
-const setUp = (props={loginType:"client"}) => {
-    const component = shallow(<NavBar {...props}/>);
-    return component;
-}
 
-describe('navbarcomp', () => {
+let store:any;
+let component:any;
+let wrapper:any;
 
-    let component: any;
+const mockStore = configureStore([ thunk ]);
+
+describe('NavBar component', () => {
+
     beforeEach(() => {
-        component = setUp();
+        store = mockStore({
+            userState:{
+                user:{
+                    firstName: 'wack',
+                    lastName: 'jobs',
+                }     
+            }   
+        });
+        component = renderer.create(
+            <Provider store={store}>
+               <NavBar route="test" logoSrc={ logo }/>
+           </Provider>
+       );
     });
 
-    //Simple Test 1
-    it("Should render a image", () => {
-        const image = component.find('.myLogo');
-        expect(image.length).toBe(1);
-    })
+    it('should render with given state from Redux store', ()=>{
+        expect(component.toJSON()).toMatchSnapshot();
+    });
 
-    //Simple Test 2
-    it("Should render Welcome, Lorem Ipsum", () => {
-        const span = component.find('span.testlorem').text();
-
-        expect(span).toBe("Welcome, Lorem Ipsum");
-    })
-
-})
+    
+});

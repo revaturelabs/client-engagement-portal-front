@@ -26,19 +26,9 @@ pipeline {
         sh 'npm install'
       }
     }
-    stage('Test and Build') {
-      parallel {
-        stage('Run Tests') {
-          steps {
-            //sh 'npm run test'
-            echo 'a test was supposed to happen'
-          }
-        }
-        stage('Create Build Artifacts') {
-          steps {
-            sh 'npm run build'
-          }
-        }
+    stage('Create Build Artifacts') {
+      steps {
+        sh 'npm run build'
       }
     }
     stage('Production') {

@@ -1,0 +1,369 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HomePage should render with given state from Redux store 1`] = `
+<div
+  className="container"
+  style={
+    Object {
+      "maxWidth": "100vw",
+      "minHeight": "100vh",
+    }
+  }
+>
+  <div
+    className="justify-content-around myNav row"
+  >
+    <div
+      className="justify-content-start logoContainer col-auto"
+    >
+      <a
+        href="/home"
+      >
+        <div
+          className="myLogo"
+          id="navLogo"
+        />
+      </a>
+    </div>
+    <div
+      className="d-flex align-items-center justify-content-end auto test1 col"
+    >
+      <div
+        className="btn-group"
+        onKeyDown={[Function]}
+      >
+        <button
+          aria-expanded={false}
+          aria-haspopup={true}
+          aria-label={null}
+          className="btn btn-secondary"
+          id="navDropButton"
+          onClick={[Function]}
+          style={
+            Object {
+              "backgroundColor": "white",
+              "border": "none",
+              "margin": "10px",
+            }
+          }
+          type="button"
+        >
+          <span
+            className="myDropdown"
+            id="usersName"
+            style={
+              Object {
+                "backgroundColor": "white",
+                "border": "none",
+                "color": "#474C55",
+                "margin": "5px",
+              }
+            }
+          >
+            Welcome, 
+            undefined undefined
+             ▼
+          </span>
+          <span
+            className="myMobileDropdown"
+          >
+            <div
+              className="hamburger-react"
+              onClick={[Function]}
+              onKeyUp={[Function]}
+              role="button"
+              style={
+                Object {
+                  "cursor": "pointer",
+                  "height": "48px",
+                  "outline": "none",
+                  "position": "relative",
+                  "transition": "0.4s cubic-bezier(0, 0, 0, 1)",
+                  "userSelect": "none",
+                  "width": "48px",
+                }
+              }
+              tabIndex={0}
+            >
+              <div
+                style={
+                  Object {
+                    "background": "#474C55",
+                    "height": "3px",
+                    "left": "8px",
+                    "position": "absolute",
+                    "top": "13px",
+                    "transform": "none",
+                    "transition": "0.4s cubic-bezier(0, 0, 0, 1)",
+                    "width": "32px",
+                  }
+                }
+              />
+              <div
+                style={
+                  Object {
+                    "background": "#474C55",
+                    "height": "3px",
+                    "left": "8px",
+                    "position": "absolute",
+                    "top": "23px",
+                    "transform": "none",
+                    "transition": "0.2s cubic-bezier(0, 0, 0, 1)",
+                    "width": "32px",
+                  }
+                }
+              />
+              <div
+                style={
+                  Object {
+                    "background": "#474C55",
+                    "height": "3px",
+                    "left": "8px",
+                    "position": "absolute",
+                    "top": "33px",
+                    "transform": "none",
+                    "transition": "0.4s cubic-bezier(0, 0, 0, 1)",
+                    "width": "32px",
+                  }
+                }
+              />
+            </div>
+          </span>
+        </button>
+        <div
+          aria-hidden={true}
+          className="dropdown-menu dropdown-menu-right"
+          role="menu"
+          tabIndex="-1"
+        >
+          <h6
+            className="dropdown-header"
+            id="test-head"
+            onClick={[Function]}
+            tabIndex="-1"
+          >
+            Account Options
+          </h6>
+          <a
+            href="/login"
+            id="test-logout"
+          >
+            <button
+              className="dropdown-item"
+              onClick={[Function]}
+              role="menuitem"
+              tabIndex="0"
+              type="button"
+            >
+              Logout
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="row justify-content-center"
+  >
+    <div
+      className="spinner-border text-info"
+      role="status"
+      style={
+        Object {
+          "margin": 20,
+        }
+      }
+    >
+      <span
+        className="sr-only"
+      >
+        Loading...
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`HomePage should render with given state from Redux store 2`] = `
+<div
+  className="container"
+  style={
+    Object {
+      "maxWidth": "100vw",
+      "minHeight": "100vh",
+    }
+  }
+>
+  <div
+    className="justify-content-around myNav row"
+  >
+    <div
+      className="justify-content-start logoContainer col-auto"
+    >
+      <a
+        href="/home"
+      >
+        <div
+          className="myLogo"
+          id="navLogo"
+        />
+      </a>
+    </div>
+    <div
+      className="d-flex align-items-center justify-content-end auto test1 col"
+    >
+      <div
+        className="btn-group"
+        onKeyDown={[Function]}
+      >
+        <button
+          aria-expanded={false}
+          aria-haspopup={true}
+          aria-label={null}
+          className="btn btn-secondary"
+          id="navDropButton"
+          onClick={[Function]}
+          style={
+            Object {
+              "backgroundColor": "white",
+              "border": "none",
+              "margin": "10px",
+            }
+          }
+          type="button"
+        >
+          <span
+            className="myDropdown"
+            id="usersName"
+            style={
+              Object {
+                "backgroundColor": "white",
+                "border": "none",
+                "color": "#474C55",
+                "margin": "5px",
+              }
+            }
+          >
+            Welcome, 
+            wack jobs
+             ▼
+          </span>
+          <span
+            className="myMobileDropdown"
+          >
+            <div
+              className="hamburger-react"
+              onClick={[Function]}
+              onKeyUp={[Function]}
+              role="button"
+              style={
+                Object {
+                  "cursor": "pointer",
+                  "height": "48px",
+                  "outline": "none",
+                  "position": "relative",
+                  "transition": "0.4s cubic-bezier(0, 0, 0, 1)",
+                  "userSelect": "none",
+                  "width": "48px",
+                }
+              }
+              tabIndex={0}
+            >
+              <div
+                style={
+                  Object {
+                    "background": "#474C55",
+                    "height": "3px",
+                    "left": "8px",
+                    "position": "absolute",
+                    "top": "13px",
+                    "transform": "none",
+                    "transition": "0.4s cubic-bezier(0, 0, 0, 1)",
+                    "width": "32px",
+                  }
+                }
+              />
+              <div
+                style={
+                  Object {
+                    "background": "#474C55",
+                    "height": "3px",
+                    "left": "8px",
+                    "position": "absolute",
+                    "top": "23px",
+                    "transform": "none",
+                    "transition": "0.2s cubic-bezier(0, 0, 0, 1)",
+                    "width": "32px",
+                  }
+                }
+              />
+              <div
+                style={
+                  Object {
+                    "background": "#474C55",
+                    "height": "3px",
+                    "left": "8px",
+                    "position": "absolute",
+                    "top": "33px",
+                    "transform": "none",
+                    "transition": "0.4s cubic-bezier(0, 0, 0, 1)",
+                    "width": "32px",
+                  }
+                }
+              />
+            </div>
+          </span>
+        </button>
+        <div
+          aria-hidden={true}
+          className="dropdown-menu dropdown-menu-right"
+          role="menu"
+          tabIndex="-1"
+        >
+          <h6
+            className="dropdown-header"
+            id="test-head"
+            onClick={[Function]}
+            tabIndex="-1"
+          >
+            Account Options
+          </h6>
+          <a
+            href="/login"
+            id="test-logout"
+          >
+            <button
+              className="dropdown-item"
+              onClick={[Function]}
+              role="menuitem"
+              tabIndex="0"
+              type="button"
+            >
+              Logout
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="row justify-content-center"
+  >
+    <div
+      className="spinner-border text-info"
+      role="status"
+      style={
+        Object {
+          "margin": 20,
+        }
+      }
+    >
+      <span
+        className="sr-only"
+      >
+        Loading...
+      </span>
+    </div>
+  </div>
+</div>
+`;

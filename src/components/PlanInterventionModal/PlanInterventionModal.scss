@@ -15,7 +15,7 @@
 }
 .TextAreaContainer {
     display: flex;
-    justify-content: center;
+    max-width: 90%;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -28,7 +28,7 @@
 
 .TextAreaInput {
     resize: none;
-    max-width: 90%;
+    max-width: 100%;
     width: 400px;
     height: 200px;
     padding: 10px;

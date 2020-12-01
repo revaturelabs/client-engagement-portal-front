@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { Col, Form, Input, Modal, ModalBody, ModalHeader, Row } from 'reactstrap';
 import '../../scss/BatchFormStyle.scss';
 import { axiosInstance } from '../../util/axiosConfig';
@@ -13,9 +12,15 @@ export const BatchForms: React.FC = () => {
     const [mapModal, setMapModal] = useState(false);
     const [unmapModal, setUnmapModal] = useState(false);
 
+    const [mapNotice, setMapNotice] = useState("");
+    const [unmapNotice, setUnmapNotice] = useState("");
+
+    const [selectDisabled, setSelectDisabled] = useState(false);
+
+
     /**
      * @function toggleMap
-     * toggles the mobile map batch modal 
+     * toggles the mobile map batch modal
      */
     const toggleMap = () => setMapModal(!mapModal);
     /**
@@ -33,11 +38,9 @@ export const BatchForms: React.FC = () => {
      * loops though batch objects to extract and assign appropriate data
      * @async
      * Creates an axios get call to gather batch information
-     *
      */
     const getBatches = async () => {
-        // const response = await axiosInstance.get("admin/batch/allNames")
-        const response = await axios.get("http://ec2-35-174-62-5.compute-1.amazonaws.com:9011/admin/batch/allNames")
+        const response = await(await axiosInstance()).get("admin/batch/allNames")
         const tempArray=[];
         for (const r of response.data)
         {
@@ -52,7 +55,7 @@ export const BatchForms: React.FC = () => {
        */
       setBatchInfo([...tempArray]);
       }
-  
+
       /**
        * @function useEffect
        * call the getBatches function on load of page
@@ -64,32 +67,50 @@ export const BatchForms: React.FC = () => {
 
 
       /**
-       * 
-       * @param event 
+       * @param event
+       * Sending the  mappedClientEmail and the mappedBatchId to the backend though a put request parameter to map a client to a batch
        */
     const mapBatches = async (event: React.FormEvent<HTMLFormElement>)=>{
         event.preventDefault();
         const clientEmail=event.currentTarget["mappedClientEmail"].value;
         const batchId = event.currentTarget["mappedBatchId"].value;
-        const response = await axios.put("http://ec2-35-174-62-5.compute-1.amazonaws.com:9011/admin/mapBatchToClient?batchId="+batchId+"&email="+clientEmail);
+        setMapNotice("Loading")
+        try{
+            (await axiosInstance()).put(`admin/mapBatchToClient?batchId=${batchId}&email=${clientEmail}`);
+            //"admin/mapBatchToClient?batchId="+batchId+"&email="+clientEmail
+            setMapNotice("Batch has been mapped");
+        } catch(error){
+            setMapNotice("Something went wrong");
+        }
+
     }
 
     /**
-     * 
-     * @param event 
+     * @param event
+     * Sending the  unmappedClientEmail and the unmappedBatchId to the backend though a put request parameter to unmap a client form a batch
      */
     const unmapBatches = async (event: React.FormEvent<HTMLFormElement>)=>{
         event.preventDefault();
         const clientEmail=event.currentTarget["unmappingClientEmail"].value;
         const batchId = event.currentTarget["unmappingBatchId"].value;
-        const response = await axios.put("http://ec2-35-174-62-5.compute-1.amazonaws.com:9011/admin/unmapBatchFromClient?batchId="+batchId+"&email="+clientEmail);
+        setUnmapNotice("Loading");
+        try{
+            (await axiosInstance()).put(`"admin/unmapBatchFromClient?batchId=${batchId}&email=${clientEmail}`);
+            //"admin/unmapBatchFromClient?batchId="+batchId+"&email="+clientEmail
+            setUnmapNotice("Batch has been removed");
+        } catch (error){
+
+            setUnmapNotice("something went wrong")
+        }
+
     }
 
     /**
-     * 
+     * @function getClients
+     * Pull the information of all the clients to the backend to populate our client buttons
      */
     const getClients = async () =>{
-        const response = await axios.get("http://ec2-35-174-62-5.compute-1.amazonaws.com:9011/client/")
+        const response = await(await axiosInstance()).get("client/")
         const tempArray=[];
         for (const r of response.data)
         {
@@ -98,7 +119,7 @@ export const BatchForms: React.FC = () => {
           const email=r.email
           tempArray.push({id,name,email});
       }
-  
+
       /**
        * @function setBatchInfo
        * spreading the tempArray and assigning all values to the clientInfo
@@ -108,12 +129,13 @@ export const BatchForms: React.FC = () => {
     }
 
     /**
-     * 
-     * @param event 
+     * @param event
+     * On the client unmapping form this is used to when a client is selected, it sends an axios call to get all the clients mapped batches.
      */
     const getClientsToBatches = async(event: React.ChangeEvent<HTMLInputElement>)=>{
+        setSelectDisabled(true);
         const clientEmail=event.target.value;
-        const response = await axios.get('http://ec2-35-174-62-5.compute-1.amazonaws.com:9011/client/batch/email/'+clientEmail);
+        const response = await (await axiosInstance()).get('client/batch/email/'+clientEmail);
         const tempArray=[];
         for (const r of response.data)
         {
@@ -121,9 +143,10 @@ export const BatchForms: React.FC = () => {
           const name = r.name;
           tempArray.push({id,name});
       }
+      setSelectDisabled(false);
       setUnmapBatchInfo([...tempArray]);
     }
-      
+
     return (
         <>
             <Row className="justify-content-center my-button-row">
@@ -150,7 +173,7 @@ export const BatchForms: React.FC = () => {
                             {clientInfo.map((e:any,i:any)=>
                                 <option key={i} id={e.id} value={e.email}>{e.name}</option>
                             )}
-                            
+
                         </Input>
                         <br/>
                         <Input type="select" name="mappedBatchId">
@@ -159,27 +182,28 @@ export const BatchForms: React.FC = () => {
                                 <option key={i} value={e.id}>{e.name}</option>
                             )}
                         </Input>
+                        <span>{mapNotice}</span>
                         <input className="batch-form-submit" type="submit" value="Submit" id="test-submit-map" ></input>
                     </Form>
                 </Col>
                 <Col sm="5" md="5" lg="4" xl="3" className="text-right" style={{marginTop:"50px"}}>
                     <Form className="batch-form"  onSubmit={unmapBatches}>
                         <h5>Unmap Batch From Client</h5>
-                        <Input type="select" name="unmappingClientEmail" id="map-client-to-batch" onChange={getClientsToBatches}>
+                        <Input type="select" name="unmappingClientEmail" id="map-client-to-batch" disabled={selectDisabled} onChange={getClientsToBatches}>
                             <option disabled selected>Select Client</option>
                             {clientInfo.map((e:any,i:any)=>
                                 <option key={i} value={e.email}>{e.name}</option>
                             )}
                         </Input>
                         <br/>
-                        <Input type="select" name="unmappingBatchId">Select Batch
+                        <Input type="select" name="unmappingBatchId" disabled={selectDisabled}>Select Batch
                             <option disabled selected>Select Batch:</option>
                             {unmapBatchInfo.map((e:any,i:any) =>
                                 <option key={i} value={e.id} >{e.name}</option>
                             )}
                         </Input>
-
-                        <input className="batch-form-submit" type="submit" value="Submit" id="test-submit-unmap"></input>
+                        <span>{unmapNotice}</span>
+                        <input className="batch-form-submit" type="submit" value="Submit" id="test-submit-unmap" disabled={selectDisabled}></input>
                     </Form>
                 </Col>
                 <Col sm="1" md="1" lg="2" xl="3"></Col>
@@ -197,7 +221,7 @@ export const BatchForms: React.FC = () => {
                             {clientInfo.map((e:any,i:any)=>
                                 <option key={i} id={e.id} value={e.email}>{e.name}</option>
                             )}
-                            
+
                         </Input>
                         <br/>
                         <Input type="select" id='map-options' name="mappedBatchId" >
@@ -206,6 +230,7 @@ export const BatchForms: React.FC = () => {
                                 <option key={i} value={e.id} >{e.name}</option>
                             )}
                         </Input>
+                        <span>{mapNotice}</span>
                         <input className="modal-batch-form-submit" type="submit" value="Submit" ></input>
                     </Form>
                 </ModalBody>
@@ -218,21 +243,22 @@ export const BatchForms: React.FC = () => {
             </ModalHeader>
             <ModalBody>
             <Form className="modal-batch-form">
-            <Input type="select" name="unmappingClientEmail" onChange={getClientsToBatches}>
+            <Input type="select" name="unmappingClientEmail" disabled={selectDisabled} onChange={getClientsToBatches}>
                             <option disabled selected>Select Client</option>
                             {clientInfo.map((e:any,i:any)=>
                                 <option key={i} id={e.id} value={e.email}>{e.name}</option>
                             )}
                         </Input>
                         <br/>
-                        <Input type="select"  name="unmappingBatchId">
+                        <Input type="select"  name="unmappingBatchId" disabled={selectDisabled}>
                             <option>Select Batch</option>
                             {unmapBatchInfo.map((e:any,i:any) =>
                             <option key={i} value={e.id} >{e.name}</option>
                             )}
-                            
-                        </Input>    
-                        <input className="modal-batch-form-submit" type="submit" value="Submit"></input>
+
+                        </Input>
+                            <span>{unmapNotice}</span>
+                        <input className="modal-batch-form-submit" type="submit" value="Submit" disabled={selectDisabled}></input>
                     </Form>
                 </ModalBody>
             </Modal>

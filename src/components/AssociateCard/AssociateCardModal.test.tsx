@@ -2,7 +2,7 @@ import React from 'react';
 import {shallow} from 'enzyme';
 import {AssociateCardModal} from './AssociateCardModal';
 import { IAssociateSingle } from '../../_reducers/AssociateReducer';
-import {Button, Modal} from 'reactstrap';
+import {Button, Modal, ModalHeader} from 'reactstrap';
 
 let wrapper: any;
 let fakeData:IAssociateSingle;
@@ -47,8 +47,8 @@ beforeEach(() => {
  * There should be a Button to open the Modal as well
  * as a Button to close the Modal.
  */
-test("Should be two buttons", () => {
-    expect(wrapper.find(Button).length).toBe(2);
+test("Should be one button", () => {
+    expect(wrapper.find(Button).length).toBe(1);
 })
 
 /**
@@ -58,8 +58,6 @@ test("modal can toggle on and off", () => {
     expect(wrapper.find(Modal).prop("isOpen")).toBe(false);
     wrapper.find("#openBtn").simulate("click");
     expect(wrapper.find(Modal).prop("isOpen")).toBe(true);
-    wrapper.find("#closeBtn").simulate("click");
-    expect(wrapper.find(Modal).prop("isOpen")).toBe(false);
 });
 
 /**
@@ -67,23 +65,22 @@ test("modal can toggle on and off", () => {
  * correctly
  */
 test("First and last name should show", () => {
-    expect(wrapper.find("#firstName").render().text()).toBe("Bill");
-    expect(wrapper.find("#lastName").render().text()).toBe("Gates");
+    expect(wrapper.find("#associateName").render().text()).toBe("Bill Gates");
 })
 
 /**
  * Using our fake data the number of divs should be 
  * equal to the number of grades, which is 3 in this case.
  */
-test("gradeMap should have 4 divs", () => {
+test("gradeMap should have 3 divs", () => {
     const divs = wrapper.find("#grade");
     expect(divs.length).toBe(3);
 })
 
-/**
- * The average test score should equal to the sum of all the weekly scores
- * divided by the number of weeks.
- */
-test("grade average should be 74.00%", () => {
-    expect(wrapper.find("#avgGrade").render().text()).toBe("74.00%");
-})
+// /**
+//  * The average test score should equal to the sum of all the weekly scores
+//  * divided by the number of weeks.
+//  */
+// test("grade average should be 74.00%", () => {
+//     expect(wrapper.find("#avgGrade").render().text()).toBe("74.00%");
+// })

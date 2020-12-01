@@ -8,39 +8,11 @@ import { IAssociateSingle } from '../../_reducers/AssociateReducer'
  * This component shows a card giving some brief information about an associate.
  * Takes in props containing information about the associate.
  * @param props - Type: IAssociate {firstName, lastName, testScores, techScores}
- * 
+ *
  * @returns TSX Element to render
  */
 export const AssociateCard: React.FC<IAssociateSingle> = (props: IAssociateSingle) => {
 
-    //just for testing purposes
-    const fakeData: IAssociateSingle = {
-        firstName: "Bill",
-        lastName: "Gates",
-        testScores: [{
-            week: 1,
-            score: 90
-        }, {
-            week: 2,
-            score: 80
-        }, {
-            week: 3,
-            score: 70
-        }, {
-            week: 4,
-            score: 50
-        }],
-        techScores: [{
-            tech: "Java",
-            score: 80
-        }, {
-            tech: "React",
-            score: 70
-        }, {
-            tech: "SQL",
-            score: 90
-        }]
-    };
     /**
      * This field will calculate the average test score of the associate.
      */
@@ -49,13 +21,13 @@ export const AssociateCard: React.FC<IAssociateSingle> = (props: IAssociateSingl
         let sc = 0;
         let weeks = 0;
 
-        /** 
+        /**
          * If the list of scores is empty, don't iterate through.
          * Otherwise, add each test score to a total, divide by the number of scores,
          * and return the average score
          */
         if (props.grades !== undefined) {
-            for (let test of props.grades) {
+            for (const test of props.grades) {
                 sc += test.score;
                 weeks++;
             }
@@ -74,7 +46,7 @@ export const AssociateCard: React.FC<IAssociateSingle> = (props: IAssociateSingl
         let i = 0;
         let size = 0;
         let gId = 0;
-        if (props.grades?.length != undefined) {
+        if (props.grades?.length !== undefined) {
             size = props.grades.length;
         }
 

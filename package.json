@@ -84,6 +84,7 @@
     "@types/reactstrap": "^8.7.2",
     "@types/redux": "^3.6.0",
     "@types/redux-thunk": "^2.1.0",
+    "@types/sinon": "^9.0.9",
     "@types/typescript": "^2.0.0",
     "babel-jest": "^26.6.3",
     "enzyme": "3.11.0",
@@ -106,7 +107,8 @@
       "./src/index.tsx",
       "./src/serviceWorker.ts",
       "/node_modules/",
-      "/__test__/"
+      "/__test__/",
+      "./src/reportWebVitals.ts"
     ],
     "coverageReporters": [
       "json",
@@ -128,8 +130,8 @@
       "^react-native$": "react-native-web",
       "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy",
       "src//(.*)$": "<rootDir>/src/$1",
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "identity-obj-proxy",
-      "\\.(s?css|less)$": "identity-obj-proxy"
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(s?css|less)$": "<rootDir>/__mocks__/styleMock.js"
     }
   },
   "jestSonar": {
