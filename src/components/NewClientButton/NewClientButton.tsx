@@ -166,20 +166,20 @@ export const NewClientButton: React.FC<IProps> = (props:IProps) => {
             </FormGroup>
             <FormGroup>
               <Label>Email</Label>
-              <Input type="email" required name="email" id="email">Dude</Input>
+              <Input type="email" required name="email" id="email"></Input>
             </FormGroup>
             <Container>
               <Row>
                 <Col>
                   <FormGroup>
                     <Label>First Name</Label>
-                    <Input type="text" required name="firstName" id="firstName">Man</Input>
+                    <Input type="text" required name="firstName" id="firstName"></Input>
                   </FormGroup>
                 </Col>
                 <Col>
                   <FormGroup>
                     <Label>Last Name</Label>
-                    <Input type="text" required name="lastName" id="lastName">Guy</Input>
+                    <Input type="text" required name="lastName" id="lastName"></Input>
                   </FormGroup>
                 </Col>
               </Row>
@@ -187,7 +187,7 @@ export const NewClientButton: React.FC<IProps> = (props:IProps) => {
             {accountType === "client" ? (<>
               <FormGroup>
                 <Label>Company Name</Label>
-                <Input type="text" required name="companyName" id="companyName" value="Tesla"></Input>
+                <Input type="text" required name="companyName" id="companyName"></Input>
               </FormGroup>
               <FormGroup>
                 <Label>Phone Number</Label>
