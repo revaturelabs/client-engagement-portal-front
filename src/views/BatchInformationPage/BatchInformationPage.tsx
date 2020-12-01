@@ -41,15 +41,12 @@ interface IProps extends RouteComponentProps<IBatchId>, IBasicBatchInfo {
 
 const BatchInformationPage: React.FC<IProps> = (props: IProps) => {
 
-    const passedInId = props.match.params.batchId;
-    console.log(passedInId); //this returns the passed in id
+    const passedInId = props.match.params.batchId; //this returns the passed in id
 
     let givenTrainer:string;
     if(props.batches && props.batches[0].employeeAssignments != null)
     {
         givenTrainer = `${props.batches[0].employeeAssignments[0].employee.firstName} ${props.batches[0].employeeAssignments[0].employee.lastName}`;
-        // props.batches[0].employeeAssignments[0].employee.firstName + " " +
-        // props.batches[0].employeeAssignments[0].employee.lastName
     }
     else
     {
@@ -93,7 +90,6 @@ const BatchInformationPage: React.FC<IProps> = (props: IProps) => {
         await axiosInstance().then((result) => {
             result.get("/client/batch/" + batchId)
             .then((response: any) => {
-                console.log(response.data);
 
                 if (response != null) {
                     const batchCardInfo = { ...response.data }
