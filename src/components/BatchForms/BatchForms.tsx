@@ -95,7 +95,7 @@ export const BatchForms: React.FC = () => {
         const batchId = event.currentTarget["unmappingBatchId"].value;
         setUnmapNotice("Loading");
         try{
-            (await axiosInstance()).put(`"admin/unmapBatchFromClient?batchId=${batchId}&email=${clientEmail}`);
+            (await axiosInstance()).put(`admin/unmapBatchFromClient?batchId=${batchId}&email=${clientEmail}`);
             //"admin/unmapBatchFromClient?batchId="+batchId+"&email="+clientEmail
             setUnmapNotice("Batch has been removed");
         } catch (error){
