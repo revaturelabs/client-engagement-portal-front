@@ -17,7 +17,7 @@ export interface INotificationState {
 }
 
 const initialState:INotificationState = {
-        notifications: []
+        notifications: [],
 }
 
 /**

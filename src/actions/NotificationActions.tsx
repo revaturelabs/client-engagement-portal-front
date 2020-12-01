@@ -1,4 +1,4 @@
-import { INotification } from "../../_reducers/NotificationReducer";
+import { INotification } from "../_reducers/NotificationReducer";
 
 export const setNotifications = (notifs:INotification[]) => {
     return {

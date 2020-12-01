@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { Accordion, Card } from 'react-bootstrap';
 import { connect, useDispatch } from 'react-redux';
-import { Table } from 'reactstrap';
 import { axiosInstance } from '../../util/axiosConfig';
 import { IRootState } from '../../_reducers';
 import { INotificationState } from '../../_reducers/NotificationReducer';
-import { setNotifications } from './NotificationActions';
-import './Notifications.scss';
+import { setNotifications } from '../../actions/NotificationActions';
+import '../../scss/Notifications.scss';
 
 /**
  * This component creates an Accordion element that is populated with the current notification state.
@@ -20,7 +19,7 @@ const Notifications:React.FC<INotificationState> = (props:INotificationState) =>
 
     const [requests, gotRequests] = useState(false);
     const dispatch = useDispatch();
-    
+
     const getNotifications = async () => {
         const response = await (await axiosInstance()).get("intervention/");
         dispatch(setNotifications(response.data));
@@ -28,7 +27,7 @@ const Notifications:React.FC<INotificationState> = (props:INotificationState) =>
     }
 
     if(!requests) {
-        getNotifications()
+        getNotifications();
     }
 
     return (
@@ -53,7 +52,9 @@ const Notifications:React.FC<INotificationState> = (props:INotificationState) =>
                                             <Accordion.Collapse eventKey={i.toString()} key={i}>
                                                 <div>
                                                     Status: {e.status}
-                                                    <br/>
+                                                    <br/><br/>
+                                                    {e.message}
+                                                    <br/><br/>
                                                     Client Email: {e.client.email}
                                                     <br/>
                                                     Client Phone Number: {e.client.phoneNumber}
