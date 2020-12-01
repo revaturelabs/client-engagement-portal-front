@@ -51,8 +51,7 @@ it('Component Should Create', () => {
             <LoginComponent />
         </Provider>
     )
-    //test
-    const handleSubmit = jest.fn().mockImplementation((cb) => () => cb({ test: 'test' }));
-    wrapper.find('form').simulate('submit');
-    expect(handleSubmit).toBeCalledTimes(2);
+    expect(wrapper.find('.login-form').length).toBe(1);
+    const fakeEvent = { preventDefault: () => console.log('preventDefault') };
+    wrapper.find('.login-form').simulate('submit', fakeEvent);
 })
