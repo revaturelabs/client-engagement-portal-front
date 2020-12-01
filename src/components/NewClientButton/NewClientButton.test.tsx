@@ -71,7 +71,7 @@ beforeAll(() => {
 beforeEach(() => {
      wrapper = mount(
         <Provider store={store}>
-          <NewClientButton />
+          <NewClientButton reloadClientDropdowns={() => {return}} />
         </Provider>
     );
     wrapper.find('.create-account-button').first().simulate('click');
