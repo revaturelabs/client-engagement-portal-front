@@ -64,11 +64,3 @@ test("dropdown menu can toggle on and off", () => {
     wrapper.find("button#navDropButton").simulate("click");
     expect(wrapper.find(ButtonDropdown).prop("isOpen")).toBe(true);
 });
-
-test("Does logout log the user out?",() => {
-
-    wrapper.find("#test-logout").simulate("click");
-     
-    //Excluded .toHaveBeenCalledWith as LOGOUT Does not have a payload
-    
-});

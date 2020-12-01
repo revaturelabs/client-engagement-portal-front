@@ -74,7 +74,7 @@ export const NavBar: React.FC<any> = (props: any) => {
                     <DropdownMenu right>
                         {props.children}
                         <DropdownItem id="test-head" header>Account Options</DropdownItem>
-                        <a href="/login" id="test-logout"><DropdownItem onClick={LogOut}>Logout</DropdownItem></a>
+                        <a href="/login"><DropdownItem onClick={LogOut}>Logout</DropdownItem></a>
                     </DropdownMenu>
                 </ButtonDropdown>
             </Col>
