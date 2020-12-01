@@ -36,14 +36,13 @@ export const NavBar: React.FC<any> = (props: any) => {
         return `${state.userState.user?.firstName} ${state.userState.user?.lastName}`
     });
     name = (name === "undefined undefined") ? "Developer User" : name; // Placeholder for developer logins and (legacy) users without colloquial names
-    
+
     /**
      * @function LogOut
      * De-authenticates the user session upon clicking the logout dropdown option.
      */
     const LogOut = () => {
         Auth.signOut() // de-authenticates the user
-            .then(data => console.log(data))
             .catch(err => console.log(err));
 
         dispatch(logout()); // clears the user data from the local state
