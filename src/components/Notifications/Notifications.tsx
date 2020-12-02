@@ -50,7 +50,7 @@ const Notifications:React.FC<INotificationState> = (props:INotificationState) =>
                                             </Accordion.Toggle>
 
                                             <Accordion.Collapse eventKey={i.toString()} key={i}>
-                                                <div>
+                                                <div className="infoContainer">
                                                     Status: {e.status}
                                                     <br/><br/>
                                                     {e.message}
