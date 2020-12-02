@@ -5,25 +5,28 @@ import Carousel from "react-multi-carousel";
 
 
 /**
+ * @function AssociateCardFactory
  * This component is a factory that will display all of the AssociateCards
  * for a particular batch. Takes in props containing the associates' info.
- * @param props - Type: IAssociate. passed in from BatchInformation.tsx
+ * 
+ * @param props - Type: IAssociate. Passed in from BatchInformation.tsx
  *
  * @returns TSX Element to render
  */
 export const AssociateCardFactory:React.FC<any> = (props:IAssociate) => {
 
     /**
+     * @constant cards
      * This field will hold all of the AssociateCards, based on the associates
      * returned from the batch.
      */
     const cards = [];
 
     /**
+     * @function
      * This anonymous function adds AssociateCards to the cards field.
      */
     (() => {
-       let i = 0;
 
       /**
        * Loop through the associateAssignments array that was passed in the props
@@ -32,14 +35,14 @@ export const AssociateCardFactory:React.FC<any> = (props:IAssociate) => {
       try{
         for(const assoc of props.associateAssignments){
           cards.push(<AssociateCard {...assoc.associate} key={assoc.associate.lastName}/>);
-          i++;
          }
       } catch (error){
       }
     })();
 
     /**
-     * Configurations for the carousel
+     * @constant responsive
+     * Styling Configurations for the carousel
      */
     const responsive = {
         superLargeDesktop: {
@@ -65,6 +68,7 @@ export const AssociateCardFactory:React.FC<any> = (props:IAssociate) => {
       };
 
     /**
+     * @function return
      * This function returns the TSX element itself.
      * It contains the content field, which displays all of the AssociateCards.
      */

@@ -5,23 +5,26 @@ import {IAssociateSingle} from '../../_reducers/AssociateReducer'
 
 
 /**
+ * @function AssociateCardModal * 
  * This component shows a modal that gives information about an associate.
  * Takes in props containing information about the associate.
- * @param props - Type: IAssociate {firstName, lastName, testScores, techScores}
+ * 
+ * @param props - Type: IAssociateSingle {firstName, lastName, grades, testScores, techScores}
  *
  * @returns TSX Element to render
  */
 export const AssociateCardModal:React.FC<IAssociateSingle> = (props:IAssociateSingle) => {
 
     /**
-     * This state determines if this modal component is showing.
+     * @function toggle
+     * The toggle and the show state determines if this modal component is showing.
      */
     const [show, setShow] = React.useState(false);
     const toggle = () => setShow(!show);
 
     /**
-     * This will map the grades and date grade was recieved to TSX elements.
-     * As well as calculate the average grade.
+     * This will map the grades and date the grade was received to TSX elements,
+     * as well as calculate the average grade.
      */
     let gradeMap;
     let averageGrade = 0;
@@ -36,6 +39,12 @@ export const AssociateCardModal:React.FC<IAssociateSingle> = (props:IAssociateSi
         averageGrade = averageGrade / numGrades;
     }
 
+    /**
+     * @function return
+     * This function returns the TSX element itself.
+     * It contains fields to hold the associates name, their average test score,
+     * and all of their test scores.
+     */
     return (
         <>
                 <Button id="openBtn" className="view-btn" onClick={toggle}>View</Button>
