@@ -16,16 +16,12 @@ exports[`HomePage should render with given state from Redux store 1`] = `
     <div
       className="justify-content-start logoContainer col-auto"
     >
-      <a
-        href="/home"
-      >
-        <img
-          alt="revature logo"
-          className="myLogo"
-          id="revLogo"
-          src=""
-        />
-      </a>
+      <img
+        alt="revature logo"
+        className="myLogo"
+        id="revLogo"
+        src=""
+      />
     </div>
     <div
       className="d-flex align-items-center justify-content-end auto test1 col"
@@ -224,16 +220,12 @@ exports[`HomePage should render with given state from Redux store 2`] = `
     <div
       className="justify-content-start logoContainer col-auto"
     >
-      <a
-        href="/home"
-      >
-        <img
-          alt="revature logo"
-          className="myLogo"
-          id="revLogo"
-          src=""
-        />
-      </a>
+      <img
+        alt="revature logo"
+        className="myLogo"
+        id="revLogo"
+        src=""
+      />
     </div>
     <div
       className="d-flex align-items-center justify-content-end auto test1 col"
