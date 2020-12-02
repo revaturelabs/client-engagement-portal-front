@@ -21,7 +21,7 @@ interface IProps {
         endDate: string,
         skill: string,
         trainer: string,
-        associateAssignments?: [{}],
+        associateAssignments?: {}[],
     }],
 }
 
@@ -106,7 +106,6 @@ export const BatchInformation: React.FC<IProps> = (props: IProps) => {
                 <Col md="1" lg="2"></Col>
 
                 <PlanInterventionModalv2 />
-
             </Row>
         </>
     );

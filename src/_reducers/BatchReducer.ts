@@ -10,7 +10,7 @@ export interface IBatchState{
 }
 
 export const initialBatchState:IBatchState = {
-    batches: [{id: 0, skill: "", name: ""}] //empty array to start with
+    batches: [] //empty array to start with
 }
 
 /**
@@ -23,19 +23,19 @@ export const initialBatchState:IBatchState = {
  *
  * @returns Batch state. Basically just updates the batches state
  */
-export const BatchReducer = (action: any, batchState: IBatchState = initialBatchState,) => {
-        if (action?.type === SET_BATCHES) {
-            if (action?.payload != null) {
-                return { ...action.payload }  //places batch data into batchCard state
-            }
-            else {
-                return batchState;
-            }
+export const BatchReducer = (batchState: IBatchState = initialBatchState, action: any) => {
+    if (action?.type === SET_BATCHES) {
+        if (action?.payload != null) {
+            return { ...action.payload }; //places batch data into batchCard state
         }
         else {
             return batchState;
         }
     }
+    else {
+        return batchState;
+    }
+}
 
 
 /**
@@ -96,7 +96,7 @@ export const initialBatchDetailedState: IBatchDetailedState = {
  *
  * @returns Batch detailed state. Basically just updates the batches details
  */
-export const BatchDetailReducer = (action: any, batchDetailedState: IBatchDetailedState = initialBatchDetailedState) => {
+export const BatchDetailReducer = (batchDetailedState: IBatchDetailedState = initialBatchDetailedState, action: any) => {
     if (action?.type === SET_BATCHES_DETAILS) {
         if (action?.payload != null) {
             return { ...action.payload }  //places batch detailed data into batchCard state

@@ -1,7 +1,7 @@
 import React from "react";
 import { Provider } from "react-redux";
 import renderer from "react-test-renderer";
-import { BatchInformationPage, getBatchData } from "./BatchInformationPage";
+import { BatchInformationPage } from "./BatchInformationPage";
 import configureStore from "redux-mock-store";
 import { Router } from "react-router";
 import { BrowserRouter } from "react-router-dom";
@@ -10,6 +10,7 @@ import { act } from "react-dom/test-utils";
 import { mount } from "enzyme";
 import { BatchInformation } from "../../components/BatchInformation/BatchInformation";
 import { AssociateCardFactory } from "../../components/AssociateCard/AssociateCardFactory";
+import { createBrowserHistory, History } from "history";
 
 const mockStore = configureStore([]);
 let fakeData: any;
@@ -137,12 +138,17 @@ describe("BatchInformationPage view", () => {
           lastName: "jobs",
         },
       },
+      batchState: {
+          batches: nullData.batches
+      }
     });
 
     component = renderer.create(
+    <BrowserRouter>
       <Provider store={store}>
         <BatchInformationPage {...initialData} />
       </Provider>
+      </BrowserRouter>
     );
   });
 
@@ -154,13 +160,13 @@ describe("BatchInformationPage view", () => {
 it("should test axios call", async () => {
     let wrapper2: any;
     await act(async () => {
-      wrapper2 = mount(<Provider store={store}>
-        <BatchInformationPage {...initialData} />
-      </Provider>);
-    });   
-    //wrapper2.render();
-    getBatchData("1");
-    console.log(wrapper2.debug());
+      wrapper2 = mount(    <BrowserRouter>
+        <Provider store={store}>
+          <BatchInformationPage {...initialData} />
+        </Provider>
+        </BrowserRouter>
+    )});   
+
     wrapper2.update();
     wrapper2.setProps(fakeData);
     expect(wrapper2.find(BatchInformation).children().length).toBeGreaterThan(0);
@@ -168,12 +174,19 @@ it("should test axios call", async () => {
 
   it("should set trainer to N/A and associateAssignments to an empty array" , async () => {
     let wrapper2: any;
+    let history: History;
+    history = createBrowserHistory();
+    history.push("/");
     await act(async () => {
-      wrapper2 = mount(<Provider store={store}>
-        <BatchInformationPage {...nullData} />
-      </Provider>);
+      wrapper2 = mount(
+          <Router history={history}>
+        <Provider store={store}>
+          <BatchInformationPage {...nullData} match={{params: {batchId: "1"}}}/>
+        </Provider>
+        </Router>
+        )
     });   
     wrapper2.render();
     wrapper2.setProps({});
-    expect(wrapper2.find(AssociateCardFactory).props()).toStrictEqual({"associateAssignments": [{}], "batchId": "1", "batchName": "", "endDate": "", "skill": "", "trainer": "N/A"});
+    expect(wrapper2.find(AssociateCardFactory).props()).toStrictEqual({"associateAssignments": [], "batchId": "1", "batchName": "N/A", "endDate": "", "skill": "N/A", "trainer": "N/A "});
   });
