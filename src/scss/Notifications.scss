@@ -13,21 +13,26 @@
 }
 
 #notif-header {
+    box-sizing: border-box;
+    border-top: 3px solid #F26925;
+    border-bottom: 3px solid #F26925;
     background-color: $rev-orange;
     text-align: center;
     font-family: $rev-font;
     font-style: $rev-font-style;
-    font-weight: $rev-font-weight;
+    font-weight: bold;
     color: $rev-cust-gray;
     transition: all 0.3s ease 0s;
 }
 
 #notif-header:hover {
     background-color:white;
-    border: 3px solid #F26925;
+    border-top: 3px solid #F26925;
+    border-bottom: 3px solid #F26925;
     box-shadow: none;
     color: #F26925;
     font-weight: bold;
+    cursor:pointer;
 }
 
 .notif-table {
@@ -54,6 +59,7 @@
 
 #head:hover {
     background-color: lightgray;
+    cursor:pointer;
 }
 
 #head > div {
@@ -61,4 +67,7 @@
     zoom: 1;
     width: 33%;
     text-align: center;
+}
+.infoContainer {
+    padding: 5px 20px;
 }
