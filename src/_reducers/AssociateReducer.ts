@@ -1,4 +1,5 @@
 /**
+ * @interface IAssociate
  * This interface defines an Associate array object.
  */
 export interface IAssociate {
@@ -24,6 +25,10 @@ export interface IAssociate {
     }[]
 }
 
+/**
+ * @interface IAssociateSingle
+ * This interface defines a single associate object.
+ */
 export interface IAssociateSingle {
     firstName?: string,
     lastName?: string,

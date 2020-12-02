@@ -5,16 +5,21 @@ import '../../scss/associate-card.scss'
 import { IAssociateSingle } from '../../_reducers/AssociateReducer'
 
 /**
+ * @function AssociateCard
  * This component shows a card giving some brief information about an associate.
  * Takes in props containing information about the associate.
- * @param props - Type: IAssociate {firstName, lastName, testScores, techScores}
+ * 
+ * @param props - Type: IAssociateSingle {firstName, lastName, grades, testScores, techScores}
  *
  * @returns TSX Element to render
  */
 export const AssociateCard: React.FC<IAssociateSingle> = (props: IAssociateSingle) => {
 
     /**
+     * @constant avg
      * This field will calculate the average test score of the associate.
+     * 
+     * @returns sc.toFixed(2), the average test score to two decimal places.
      */
     const avg = () => {
 
@@ -35,10 +40,13 @@ export const AssociateCard: React.FC<IAssociateSingle> = (props: IAssociateSingl
         }
 
         return sc.toFixed(2);
-    }
+    };
 
     /**
+     * @constant score
      * This field will hold the last test score the associate got.
+     * 
+     * @returns value.toFixed(2), the value of the last test score to two decimal places.
      */
     const score = () => {
 
@@ -71,6 +79,8 @@ export const AssociateCard: React.FC<IAssociateSingle> = (props: IAssociateSingl
     }
 
     /**
+     * @function return
+     * 
      * This function returns the TSX element itself.
      * It contains a button to toggle a card,
      * a card that holds the associate's information,
@@ -81,9 +91,9 @@ export const AssociateCard: React.FC<IAssociateSingle> = (props: IAssociateSingl
             <Card className="aso-card">
                 {/* div for name and average */}
                 <div>
-                    <h5 id="nameHolder" font-family={"$rev-font"}>{props.firstName} {props.lastName}</h5>
-                    <h5 font-family={"$rev-font"}>Average:</h5>
-                    <h4 id="averageHolder" font-family={"$rev-font"}>{avg()}%</h4>
+                    <h5 id="nameHolder" >{props.firstName} {props.lastName}</h5>
+                    <h5 >Average:</h5>
+                    <h4 id="averageHolder" >{avg()}%</h4>
                 </div>
                 {/* div for last quiz grade */}
                 <div>

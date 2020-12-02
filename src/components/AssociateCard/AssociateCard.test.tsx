@@ -35,21 +35,32 @@ beforeAll(() => {
     };
 });
 
-
+/**
+ * This beforeEach function creates a wrapper with the AssociateCard inside it before every test
+ */
 beforeEach(() => {
     wrapper = shallow(<AssociateCard {...fakeData}/>)
 });
 
+/**
+ * This test checks that the average is calculated correctly with the given fake data.
+ */
 test("average should equal 74 with 3 fake grades passed as props",() => {
     const average = wrapper.find("#averageHolder").render().text();
     expect(average).toBe("74.00%");
 });
 
+/**
+ * This test checks that the correct test score is selected for the last test score display.
+ */
 test("last test score should equal 72 with 3 fake grades passed as props", () => {
     const score = wrapper.find("#scoreHolder").render().text();
     expect(score).toBe("Latest Test Score: 72.00%");
 });
 
+/**
+ * This test checks that the associate's name field is properly populated with the fake name given.
+ */
 test("associate's name field should be filled out with a fake name passed as props", () => {
     const name = wrapper.find("#nameHolder").render().text();
     expect(name).toBe("Bill Gates");

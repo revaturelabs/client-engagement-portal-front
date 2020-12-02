@@ -3,14 +3,13 @@ import { Provider } from "react-redux";
 import renderer from "react-test-renderer";
 import { BatchInformationPage } from "./BatchInformationPage";
 import configureStore from "redux-mock-store";
-import { Router } from "react-router";
-import { BrowserRouter } from "react-router-dom";
 import Axios from "axios";
 import { act } from "react-dom/test-utils";
 import { mount } from "enzyme";
 import { BatchInformation } from "../../components/BatchInformation/BatchInformation";
 import { AssociateCardFactory } from "../../components/AssociateCard/AssociateCardFactory";
 import { createBrowserHistory, History } from "history";
+import { BrowserRouter, Router } from "react-router-dom";
 
 const mockStore = configureStore([]);
 let fakeData: any;
