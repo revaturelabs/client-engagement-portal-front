@@ -26,7 +26,10 @@ export const initialBatchState:IBatchState = {
 export const BatchReducer = (action: any, batchState: IBatchState = initialBatchState,) => {
         if (action?.type === SET_BATCHES) {
             if (action?.payload != null) {
-                return { ...action.payload }  //places batch data into batchCard state
+                if(action?.payload.payload != null)
+                    return { ...action.payload.payload };
+                else
+                    return { ...action.payload }; //places batch data into batchCard state
             }
             else {
                 return batchState;
