@@ -1,43 +1,44 @@
 import React from 'react';
 import { Form, FormGroup, Input, Label, Modal, ModalBody, ModalHeader, Row } from 'reactstrap';
-import './PlanInterventionModal.scss';
+import './RequestTalent.scss'
 import { useSelector } from 'react-redux';
 import { IRootState } from '../../_reducers';
 import { axiosInstance } from '../../util/axiosConfig';
 
-
 /**
- * @function PlanInterventionModalv2
+ * @function RequestTalent
  * This component includes the button for requesting talent and the modal pop
  * when the button is clicked.
  */
-const PlanInterventionModalv2:React.FC = () => {
+const RequestTalent:React.FC = () => {
 
     const [show, setShow] = React.useState(false);
     const toggle = () => setShow(!show);
-
-    /**
+     
+      /**
        * sets clientEmail equal to the email of the client that is logged in
        */
-    let clientEmail = useSelector((state: IRootState) => {
+     let clientEmail = useSelector((state: IRootState) => {
         return `${state.userState.user?.email}`
     });
 
-    /**
+   /**
       * @Function requestTalentFormSubmit
       * Send form data to the backend to request more talent
       * 
       * @param event 
       * Collecting information from the form
       */
-    const requestInterventionFormSubmit = async(event: React.FormEvent<HTMLFormElement>) => {
+    const requestTalentFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        
+
+        const email = clientEmail;
         const message = event.currentTarget["message"].value;
-        const requestType = "INTERVENTION";
+        const requestType = "TALENT";
+
         try {
             (await axiosInstance()).post(`intervention/`, {
-                clientEmail: clientEmail,
+                clientEmail: email,
                 message: message,
                 requestId: 0,
                 requestType: requestType,
@@ -48,30 +49,38 @@ const PlanInterventionModalv2:React.FC = () => {
             return false;
         }
         toggle();
-        alert("Request Received!")
+
+        const reqReceived = document.getElementById("talentRequested");
+        if(reqReceived) (reqReceived as HTMLElement).innerText = "Request Received!";
+
         return true;
-    };
+    }
 
     return (
-
-        <>  
-            <button onClick={toggle} className="intervention-button">Request Intervention</button>
+        <>
+            <Row className="row justify-content-center" style={{marginTop: "300px"}}>
+                <button onClick={toggle} className="intervention-button">Request More Talent</button>
+            </Row>
             <Modal isOpen={show} toggle={toggle}>
                 <ModalHeader toggle={toggle}>
-                    <h4>Request Intervention</h4>
+                    <h4>Request More Talent</h4>
                 </ModalHeader>
-                <ModalBody style={{textAlign: "center"}}>
-                    <Form onSubmit={(event: React.FormEvent<HTMLFormElement>) => requestInterventionFormSubmit(event)}>
+                <ModalBody>
+                    <Form onSubmit={(event: React.FormEvent<HTMLFormElement>) => requestTalentFormSubmit(event)}>
                     <FormGroup>
-                        <Label for="message" className="TextAreaLabel">Message:</Label>
-                        <Input type="textarea" name="message" className="TextAreaInput" placeholder="Reason for intervention, target dates/times, etc..."></Input>
+                        <Label for="message" className="talentTextAreaLabel">Message:</Label>
+                        <Input type="textarea" name="message" className="talentTextAreaInput" placeholder="Please enter important information regarding the talent you require"></Input>
                         <input type="submit" value="Submit" className="talentSubmit"></input>
                     </FormGroup>
                     </Form>
                 </ModalBody>
             </Modal>
+            <br/>
+            <Row className="row justify-content-center">
+                <h4 id="talentRequested"></h4>
+            </Row>
         </>
     );
 }
 
-export default PlanInterventionModalv2;
+export default RequestTalent;
