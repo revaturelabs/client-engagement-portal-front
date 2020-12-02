@@ -81,9 +81,9 @@ export const AssociateCard: React.FC<IAssociateSingle> = (props: IAssociateSingl
             <Card className="aso-card">
                 {/* div for name and average */}
                 <div>
-                    <h5 id="nameHolder" font-family={"$rev-font"}>{props.firstName} {props.lastName}</h5>
-                    <h5 font-family={"$rev-font"}>Average:</h5>
-                    <h4 id="averageHolder" font-family={"$rev-font"}>{avg()}%</h4>
+                    <h5 id="nameHolder" >{props.firstName} {props.lastName}</h5>
+                    <h5 >Average:</h5>
+                    <h4 id="averageHolder" >{avg()}%</h4>
                 </div>
                 {/* div for last quiz grade */}
                 <div>
