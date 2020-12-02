@@ -7,6 +7,7 @@ import { Auth } from 'aws-amplify';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../actions/UserActions';
 import { IRootState } from '../../_reducers';
+import { Link } from 'react-router-dom';
 
 
 /**
@@ -55,9 +56,7 @@ export const NavBar: React.FC<any> = (props: any) => {
     return (
         <Row className="justify-content-around myNav">
             <Col xs="auto" className="justify-content-start logoContainer">
-                <a href={logoLink}>
-                    <img id="revLogo" src={logo} className="myLogo" alt="revature logo" />
-                </a>
+                <img id="revLogo" src={logo} className="myLogo" alt="revature logo" />
             </Col>
             <Col className="d-flex align-items-center justify-content-end auto test1" >
                 <ButtonDropdown isOpen={navMenuOpen} toggle={toggle}>

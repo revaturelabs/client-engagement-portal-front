@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Col, Container, Row, Spinner } from "reactstrap";
 import { BatchCard } from "../../components/BatchCard/BatchCard";
 import { NavBar } from "../../components/NavBar/NavBar";
-
+import RequestTalent from "../../components/RequestTalentModal/RequestTalent";
 import RequestBatchCard from "../../components/RequestBatchCard/RequestBatchCard";
 import {
   IBatchState
@@ -220,6 +220,8 @@ const HomePage: React.FC<IProps> = (props: IProps) => {
           )}
         </>
       )}
+
+          <RequestTalent />
     </Container>
   );
 };

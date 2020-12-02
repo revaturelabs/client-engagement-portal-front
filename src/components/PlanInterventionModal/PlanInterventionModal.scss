@@ -29,8 +29,7 @@
 .TextAreaInput {
     resize: none;
     max-width: 100%;
-    width: 400px;
-    height: 200px;
+    height: 200px !important;
     padding: 10px;
     outline: none;
     border: 1px solid $rev-superlgray;
