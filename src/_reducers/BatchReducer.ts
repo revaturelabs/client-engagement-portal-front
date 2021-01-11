@@ -1,15 +1,9 @@
-import { SET_BATCHES } from "../actions/BatchCardActions"
+import { SET_BATCHES, /* SET_BATCHES_DETAILS */ } from "../actions/BatchCardActions";
+import { BatchState, Action } from '../types';
 
 //Batch state is essentially just an array of batch objects
-export interface IBatchState{
-    batches: {
-        id: number,
-        skill: string,
-        name: string
-    }[];
-}
 
-export const initialBatchState:IBatchState = {
+export const initialBatchState:BatchState = {
     batches: [] //empty array to start with
 }
 
@@ -23,17 +17,11 @@ export const initialBatchState:IBatchState = {
  *
  * @returns Batch state. Basically just updates the batches state
  */
-export const BatchReducer = (batchState: IBatchState = initialBatchState, action: any) => {
-    if (action?.type === SET_BATCHES) {
-        if (action?.payload != null) {
-            return { ...action.payload }; //places batch data into batchCard state
-        }
-        else {
-            return batchState;
-        }
-    }
-    else {
-        return batchState;
+export const BatchReducer = (batchState:BatchState = initialBatchState, {type, payload}:Action) => {
+    switch (type) {
+        case SET_BATCHES:
+            if (!payload) break;
+            return {...payload};
+        default: return {...batchState};
     }
 }
-
