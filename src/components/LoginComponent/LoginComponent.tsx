@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import userThumb from "../../assets/user-thumb.png";
 import passThumb from "../../assets/pass-thumb.png";
-import { Auth } from "aws-amplify";
+// import { Auth } from "aws-amplify";
 import "../../scss/loginStyles.scss";
 import ceplogo2 from "../../assets/engagementPortalLogo.svg";
 import { Spinner } from "reactstrap";
 import { IUserAdmin, IUserClient } from "../../_reducers/UserReducer";
 import { useDispatch } from 'react-redux';
 import { adminLogin, clientLogin } from '../../actions/UserActions';
+import firebase from 'firebase/app'
+import 'firebase/auth'
 
 interface ILoginProps {
     loginType?: string;
@@ -52,37 +54,70 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
                 password: form["password"].value
             }
 
-            const user = await Auth.signIn(loginCredentials.email, loginCredentials.password); // user.attributes.email contains the user email
+            // const user = await Auth.signIn(loginCredentials.email, loginCredentials.password); // user.attributes.email contains the user email
 
-            switch (user.attributes["custom:userRole"]) { // Assigns what page to redirect to based upon what role the user has
-                case "client":
-                    const statefulClient: IUserClient = {
-                        email: user.attributes.email,
-                        firstName: user.attributes["given_name"],
-                        lastName: user.attributes["family_name"],
-                    }
+            const user = await firebase
+                .auth()
+                .signInWithEmailAndPassword(loginCredentials.email, loginCredentials.password);
+                console.log(user);
+                // .then((user: any) => {
+                //     console.log(user)
+                //     console.log(firebase.auth().currentUser?.getIdToken(true))
+                //     // firebase.auth().currentUser?.getIdToken(true).then((resp) => {
+                //         // axios.post("http://localhost:8080", {}, {
+                //         // headers:
+                //         // { auth: resp }
+                //         // }).then((resp) => console.log(resp)).catch((e) => console.log(e))
+                //     // })
+                // })
+                // .catch((error: any) => {
+                //     var errorCode = error.code;
+                //     var errorMessage = error.message;
+                //     console.log(`error code: ${errorCode} \nerror message: ${errorMessage}`)
+                // });
 
-                    dispatch(clientLogin(statefulClient));
 
-                    setAdmin(false);
-                    setClient(true);
-                    break;
-                case "admin":
-                    const statefulAdmin: IUserAdmin = {
-                        email: user.attributes.email,
-                        firstName: user.attributes["given_name"],
-                        lastName: user.attributes["family_name"],
-                    }
+            // switch (user.attributes["custom:userRole"]) { // Assigns what page to redirect to based upon what role the user has
+            //     case "client":
+            //         const statefulClient: IUserClient = {
+            //             email: user.attributes.email,
+            //             firstName: user.attributes["given_name"],
+            //             lastName: user.attributes["family_name"],
+            //         }
 
-                    dispatch(adminLogin(statefulAdmin));
+            //         dispatch(clientLogin(statefulClient));
 
-                    setClient(false);
-                    setAdmin(true);
-                    break;
-                default:
-                    setClient(false);
-                    setAdmin(false);
+            //         setAdmin(false);
+            //         setClient(true);
+            //         break;
+            //     case "admin":
+            //         const statefulAdmin: IUserAdmin = {
+            //             email: user.attributes.email,
+            //             firstName: user.attributes["given_name"],
+            //             lastName: user.attributes["family_name"],
+            //         }
+
+            //         dispatch(adminLogin(statefulAdmin));
+
+            //         setClient(false);
+            //         setAdmin(true);
+            //         break;
+            //     default:
+            //         setClient(false);
+            //         setAdmin(false);
+            // }
+
+            //for now, hardcoded only to admin user role until we get firebase roles implemented
+            const statefulClient: IUserClient = {
+                email: user.user?.email || "",
+                firstName: "HardcodedFirstName",
+                lastName: "HardcodedLastName",
             }
+
+            dispatch(clientLogin(statefulClient));
+
+            setAdmin(true);
+            setClient(false);
 
             setSpinner(false);
         } catch (error) {

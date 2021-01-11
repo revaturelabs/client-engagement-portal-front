@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@react-firebase/auth": "^0.2.10",
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.1.2",
     "@testing-library/user-event": "^12.2.2",
@@ -19,6 +20,7 @@
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.5",
     "enzyme-to-json": "^3.6.1",
+    "firebase": "^8.2.2",
     "hamburger-react": "^2.3.0",
     "jest-fetch-mock": "^3.0.3",
     "jest-sonar-reporter": "^2.0.0",

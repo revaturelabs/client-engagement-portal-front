@@ -3,11 +3,13 @@ import { Col, DropdownItem, DropdownMenu, DropdownToggle, Row, ButtonDropdown } 
 import logo from '../../assets/logo.png';
 import '../../scss/navStyles.scss';
 import { Turn as Hamburger } from 'hamburger-react'
-import { Auth } from 'aws-amplify';
+// import { Auth } from 'aws-amplify';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../actions/UserActions';
 import { IRootState } from '../../_reducers';
 import { Link } from 'react-router-dom';
+import firebase from 'firebase/app'
+import 'firebase/auth'
 
 
 /**
@@ -42,9 +44,10 @@ export const NavBar: React.FC<any> = (props: any) => {
      * De-authenticates the user session upon clicking the logout dropdown option.
      */
     const LogOut = () => {
-        Auth.signOut() // de-authenticates the user
-            .catch(err => console.log(err));
+        // Auth.signOut() // de-authenticates the user
+        //     .catch(err => console.log(err));
 
+        firebase.auth().signOut();
         dispatch(logout()); // clears the user data from the local state
     }
 
