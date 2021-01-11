@@ -11,6 +11,7 @@ import { useDispatch } from 'react-redux';
 import { adminLogin, clientLogin } from '../../actions/UserActions';
 import firebase from 'firebase/app'
 import 'firebase/auth'
+import { useHistory } from "react-router-dom";
 
 interface ILoginProps {
     loginType?: string;
@@ -31,6 +32,7 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
     const [loginMsg, setLoginMsg] = useState<string>("");
 
     const dispatch = useDispatch();
+    const history = useHistory();
 
     /**
      * @function handleSubmit
@@ -116,10 +118,17 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
 
             dispatch(clientLogin(statefulClient));
 
-            setAdmin(true);
-            setClient(false);
+            // setAdmin(true);
+            // setClient(false);
 
             setSpinner(false);
+            const userRole = "admin";
+
+            if (userRole === "admin") {
+                history.replace("/admin")
+            } else {
+                history.replace("/home")
+            }
         } catch (error) {
             setSpinner(false);
             setLoginMsg(error.message);
@@ -129,12 +138,12 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
 
     return (
         <>
-            {isClient ?
+            {/* {isClient ?
                 <Redirect to="/home" />
                 :
                 (isAdmin ?
                     <Redirect to="/admin" />
-                    :
+                    : */}
                     <form onSubmit={handleSubmit} className="login-form">
 
                         <div style={{ maxHeight: "90%" }}>
@@ -170,8 +179,8 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
                             {spinner ? <Spinner color="info" className="spinner" /> : <span />}
                             </button>
                         </div >
-                    </form >)
-            }
+                    </form >
+            {/* } */}
         </>
     );
 };
