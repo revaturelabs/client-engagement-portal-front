@@ -1,11 +1,11 @@
-import reactReduxLogo from '../../assets/react-redux-logo.png';
-import javaLogo from '../../assets/java-logo.png';
-import javaAuto from '../../assets/JavaAutoLogo.png';
-import pegaLogo from '../../assets/Pegalogo.jpg';
-import salesLogo from '../../assets/sales.png';
-import bigData from '../../assets/bigData.png';
-import netLogo from '../../assets/NET.jpg';
-import devOpsLogo from '../../assets/devOps.jpg';
+import reactReduxLogo from './assets/react-redux-logo.png';
+import javaLogo from './assets/java-logo.png';
+import javaAuto from './assets/JavaAutoLogo.png';
+import pegaLogo from './assets/Pegalogo.jpg';
+import salesLogo from './assets/sales.png';
+import bigData from './assets/bigData.png';
+import netLogo from './assets/NET.jpg';
+import devOpsLogo from './assets/devOps.jpg';
 
 
 // Primitive Aliases
@@ -40,14 +40,6 @@ export interface Grade {
   gradeId: number;
   score: number;
   traineeId: string;
-}
-
-export interface Associate {
-  email: string;
-  salesforceId: string; // ie SF-2012
-  firstName: string;
-  lastName: string;
-  grades: Grade[];
 }
 
 export interface Employee {
@@ -114,6 +106,32 @@ export interface UserState{
 }
 
 /* Batches */
+export interface Associate {
+    email: string;
+    salesforceId: string // ex: SF-2012
+    firstName: string;
+    lastName: string;
+    grades: {
+        dateReceived: string,
+        gradeId: number,
+        score: number,
+        traineeId: string
+    }[];
+    testScores?: {
+        week: number,
+        score: number
+    }[];
+    techScores?: {
+        tech: string,
+        score: number
+    }[];
+}
+
+export interface Employee {
+    firstName: string,
+    lastName: string,
+}
+
 export interface BasicBatchData {
     batchId: string;
     skill: BatchSkill;

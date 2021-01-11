@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { Accordion, Card } from 'react-bootstrap';
 import { connect, useDispatch } from 'react-redux';
 import { axiosInstance } from '../../util/axiosConfig';
-import { IRootState } from '../../_reducers';
-import { INotificationState } from '../../_reducers/NotificationReducer';
+import { Store, NotificationState } from '../../types';
 import { setNotifications } from '../../actions/NotificationActions';
 import '../../scss/Notifications.scss';
 
@@ -15,7 +14,7 @@ import '../../scss/Notifications.scss';
  *
  * @returns An Accordion element populated with all current requests for more Talent and desires to stage Interventions/Request more talent.
  */
-const Notifications:React.FC<INotificationState> = (props:INotificationState) => {
+const Notifications:React.FC<NotificationState> = (props:NotificationState) => {
 
     const [requests, gotRequests] = useState(false);
     const dispatch = useDispatch();
@@ -75,7 +74,7 @@ const Notifications:React.FC<INotificationState> = (props:INotificationState) =>
  *
  * @param state current state that holds all other states
  */
-const mapStateToProps = (state:IRootState) => {
+const mapStateToProps = (state:Store) => {
     return {
         notifications: state.notificationState.notifications
     }

@@ -97,7 +97,7 @@ export const AssociateCard: React.FC<IAssociateCardProps> = (props) => {
                     <ProgressBar now={assocScore} striped/>
                 </Col>
                 <Col md={2} sm={12} style={{ textAlign: "right", marginTop:"15px" }}>
-                    <AssociateCardModal {...props} />
+                    <AssociateCardModal {...associate} />
                 </Col>
             </Row>
         </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal, ModalBody, Row, ModalHeader } from 'reactstrap';
 import '../../scss/associate-card.scss';
-import {IAssociateSingle} from '../../_reducers/AssociateReducer'
+import {Associate} from '../../types'
 
 
 /**
@@ -13,7 +13,7 @@ import {IAssociateSingle} from '../../_reducers/AssociateReducer'
  *
  * @returns TSX Element to render
  */
-export const AssociateCardModal:React.FC<IAssociateSingle> = (props:IAssociateSingle) => {
+export const AssociateCardModal:React.FC<Associate> = (props:Associate) => {
 
     /**
      * @function toggle

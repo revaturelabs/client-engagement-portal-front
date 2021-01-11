@@ -5,8 +5,8 @@ import '../../scss/navStyles.scss';
 import { Turn as Hamburger } from 'hamburger-react'
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../actions/UserActions';
-import firebase from 'firebase/app'
-import 'firebase/auth'
+import firebase from 'firebase/app';
+import 'firebase/auth';
 
 
 /**
