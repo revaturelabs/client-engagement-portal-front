@@ -45,7 +45,7 @@ export const BatchInformation : React.FC<{batch:Batch}> = ({ batch }) => {
                         ? <>
                             {/* Cards which provide detailed info. on the batch associates */}
                             <h1>Batch Engineers: ({batch.associateAssignments.length})</h1>
-                            <AssociateCardFactory {...batch}/>
+                            <AssociateCardFactory {...Object.entries(batch).reduce((a, [k,v]) => ['employeeAssignments'].includes(k) ? a : ({...a, [k]: v }), {})} />
                         </>
                         : <span id="test-noAss"/>
                     }

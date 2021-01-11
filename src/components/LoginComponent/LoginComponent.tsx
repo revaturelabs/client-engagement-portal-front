@@ -6,7 +6,7 @@ import { Auth } from "aws-amplify";
 import "../../scss/loginStyles.scss";
 import ceplogo2 from "../../assets/engagementPortalLogo.svg";
 import { Spinner } from "reactstrap";
-import { IUserAdmin, IUserClient } from "../../_reducers/UserReducer";
+import { UserAdmin, UserClient } from "../../types";
 import { useDispatch } from 'react-redux';
 import { adminLogin, clientLogin } from '../../actions/UserActions';
 
@@ -56,7 +56,7 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
 
             switch (user.attributes["custom:userRole"]) { // Assigns what page to redirect to based upon what role the user has
                 case "client":
-                    const statefulClient: IUserClient = {
+                    const statefulClient: UserClient = {
                         email: user.attributes.email,
                         firstName: user.attributes["given_name"],
                         lastName: user.attributes["family_name"],
@@ -68,7 +68,7 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
                     setClient(true);
                     break;
                 case "admin":
-                    const statefulAdmin: IUserAdmin = {
+                    const statefulAdmin: UserAdmin = {
                         email: user.attributes.email,
                         firstName: user.attributes["given_name"],
                         lastName: user.attributes["family_name"],

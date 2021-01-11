@@ -13,8 +13,8 @@ interface IProps extends RouteComponentProps<{batchId:string}> {
 const defaultBatchData : Batch = {
     batchId: 'N/A',
     name: "N/A",
-    endDate: "",
-    trainer: "",
+    endDate: "N/A",
+    trainer: "N/A",
     employeeAssignments: [{
         employee: {
             firstName: "N/A",
@@ -48,6 +48,7 @@ export const BatchInformationPage: React.FC<IProps> = (props) => {
                 </div>
                 : <BatchInformation batch={{
                     ...batchData,
+                    batchId: props.match.params.batchId,
                     trainer: `${batchData.employeeAssignments[0].employee.firstName} ${batchData.employeeAssignments[0].employee.lastName}`
                 }} />
             }

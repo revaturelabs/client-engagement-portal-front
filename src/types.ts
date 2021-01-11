@@ -1,11 +1,11 @@
-import reactReduxLogo from '../../assets/react-redux-logo.png';
-import javaLogo from '../../assets/java-logo.png';
-import javaAuto from '../../assets/JavaAutoLogo.png';
-import pegaLogo from '../../assets/Pegalogo.jpg';
-import salesLogo from '../../assets/sales.png';
-import bigData from '../../assets/bigData.png';
-import netLogo from '../../assets/NET.jpg';
-import devOpsLogo from '../../assets/devOps.jpg';
+import reactReduxLogo from './assets/react-redux-logo.png';
+import javaLogo from './assets/java-logo.png';
+import javaAuto from './assets/JavaAutoLogo.png';
+import pegaLogo from './assets/Pegalogo.jpg';
+import salesLogo from './assets/sales.png';
+import bigData from './assets/bigData.png';
+import netLogo from './assets/NET.jpg';
+import devOpsLogo from './assets/devOps.jpg';
 
 
 // Primitive Aliases
@@ -61,6 +61,30 @@ export interface UserState{
 }
 
 /* Batches */
+export interface Associate {
+    firstName?: string;
+    lastName?: string;
+    grades?: {
+        dateReceived: string,
+        gradeId: number,
+        score: number,
+        traineeId: string
+    }[];
+    testScores?: {
+        week: number,
+        score: number
+    }[];
+    techScores?: {
+        tech: string,
+        score: number
+    }[];
+}
+
+export interface Employee {
+    firstName: string,
+    lastName: string,
+}
+
 export interface BasicBatchData {
     batchId: string;
     skill: BatchSkill;
@@ -71,22 +95,11 @@ export interface Batch extends BasicBatchData {
     endDate: string;
     trainer: string;
     employeeAssignments: {
-        employee: {
-            firstName: string,
-            lastName: string,
-        },
+        employee: Employee,
     }[];
     associateAssignments: {
         active: boolean,
-        associate: {
-            firstName: string,
-            lastName: string,
-            grades: {
-                gradeId: number,
-                dateReceived: string,
-                score: number,
-            }[],
-        },
+        associate: Associate,
     }[];
 }
 

@@ -6,7 +6,7 @@ import { Turn as Hamburger } from 'hamburger-react'
 import { Auth } from 'aws-amplify';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../actions/UserActions';
-import { IRootState } from '../../_reducers';
+import { Store } from '../../types';
 import { Link } from 'react-router-dom';
 
 
@@ -32,7 +32,7 @@ export const NavBar: React.FC<any> = (props: any) => {
 
     const dispatch = useDispatch();
 
-    let name = useSelector((state: IRootState) => {
+    let name = useSelector((state: Store) => {
         return `${state.userState.user?.firstName} ${state.userState.user?.lastName}`
     });
     name = (name === "undefined undefined") ? "Developer User" : name; // Placeholder for developer logins and (legacy) users without colloquial names

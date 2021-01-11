@@ -1,10 +1,10 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 import { AssociateCard } from './AssociateCard';
-import { IAssociateSingle } from '../../_reducers/AssociateReducer';
+import { Associate } from '../../types';
 
 let wrapper:any;
-let fakeData:IAssociateSingle;
+let fakeData:Associate;
 
 /**
  * This represents associate data to be used in the tests below.

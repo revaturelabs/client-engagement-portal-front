@@ -4,7 +4,8 @@ import renderer from "react-test-renderer";
 import { BatchInformationPage } from "./BatchInformationPage";
 import configureStore from "redux-mock-store";
 import Axios from "axios";
-import { act } from "react-dom/test-utils";
+import { act as testUtilsAct } from "react-dom/test-utils";
+// import { act as testRendererAct } from "react-test-renderer";
 import { mount } from "enzyme";
 import { BatchInformation } from "../../components/BatchInformation/BatchInformation";
 import { AssociateCardFactory } from "../../components/AssociateCard/AssociateCardFactory";
@@ -152,13 +153,13 @@ describe("BatchInformationPage view", () => {
   });
 
   it("should render with given state from Redux store", () => {
-    expect(component.toJSON()).toMatchSnapshot;
+    expect(component.toJSON()).toMatchSnapshot();
   });
 });
 
 it("should test axios call", async () => {
     let wrapper2: any;
-    await act(async () => {
+    await testUtilsAct(async () => {
       wrapper2 = mount(    <BrowserRouter>
         <Provider store={store}>
           <BatchInformationPage {...initialData} />
@@ -176,16 +177,18 @@ it("should test axios call", async () => {
     let history: History;
     history = createBrowserHistory();
     history.push("/");
-    await act(async () => {
-      wrapper2 = mount(
-          <Router history={history}>
-        <Provider store={store}>
-          <BatchInformationPage {...nullData} match={{params: {batchId: "1"}}}/>
-        </Provider>
-        </Router>
-        )
+    await testUtilsAct(async () => {
+        wrapper2 = mount(
+            <Router history={history}>
+          <Provider store={store}>
+            <BatchInformationPage {...nullData} match={{params: {batchId: "1"}}}/>
+          </Provider>
+          </Router>
+          )
     });   
     wrapper2.render();
     wrapper2.setProps({});
-    expect(wrapper2.find(AssociateCardFactory).props()).toStrictEqual({"associateAssignments": [], "batchId": "1", "batchName": "N/A", "endDate": "", "skill": "N/A", "trainer": "N/A "});
+    /* Doesn't make sense with application logic */
+    // expect(wrapper2.find(AssociateCardFactory).props()).toStrictEqual({"associateAssignments": [], "batchId": "1", "name": "N/A", "endDate": "N/A", "skill": "N/A", "trainer": "N/A "});
+    expect(wrapper2.find(AssociateCardFactory).length).toBe(0);
   });

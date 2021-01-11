@@ -2,7 +2,7 @@ import React from 'react';
 import { Card } from 'reactstrap';
 import { AssociateCardModal } from './AssociateCardModal';
 import '../../scss/associate-card.scss'
-import { IAssociateSingle } from '../../_reducers/AssociateReducer'
+import { Associate } from '../../types';
 
 /**
  * @function AssociateCard
@@ -13,7 +13,7 @@ import { IAssociateSingle } from '../../_reducers/AssociateReducer'
  *
  * @returns TSX Element to render
  */
-export const AssociateCard: React.FC<IAssociateSingle> = (props: IAssociateSingle) => {
+export const AssociateCard: React.FC<Associate> = (props: Associate) => {
 
     /**
      * @constant avg

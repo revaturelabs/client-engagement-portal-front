@@ -2,7 +2,7 @@ import React from 'react';
 import { Form, FormGroup, Input, Label, Modal, ModalBody, ModalHeader, Row } from 'reactstrap';
 import './RequestTalent.scss'
 import { useSelector } from 'react-redux';
-import { IRootState } from '../../_reducers';
+import { Store } from '../../types';
 import { axiosInstance } from '../../util/axiosConfig';
 
 /**
@@ -18,7 +18,7 @@ const RequestTalent:React.FC = () => {
       /**
        * sets clientEmail equal to the email of the client that is logged in
        */
-     let clientEmail = useSelector((state: IRootState) => {
+     let clientEmail = useSelector((state: Store) => {
         return `${state.userState.user?.email}`
     });
 

@@ -7,8 +7,8 @@ import { Batch } from './types';
  */
 export const getBatchData = async (batchId: string|number) : Promise<Batch|undefined> => {
     try {
-        const { data } = await (await axiosInstance()).get<Batch>("/client/batch/" + batchId);
-        return data;
+        const response = await (await axiosInstance())?.get<Batch>("/client/batch/" + batchId);
+        if (response?.data) return response.data;
     } catch (error:any) {
         console.log(error);
     }
