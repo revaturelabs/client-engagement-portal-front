@@ -1,25 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Col, Container, Row, Spinner } from "reactstrap";
 import { BatchCard } from "../../components/BatchCard/BatchCard";
 import { NavBar } from "../../components/NavBar/NavBar";
 import RequestTalent from "../../components/RequestTalentModal/RequestTalent";
 import RequestBatchCard from "../../components/RequestBatchCard/RequestBatchCard";
-import {
-  IBatchState
-} from "../../_reducers/BatchReducer";
-import { connect, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import {
   setBatchState,
 } from "../../actions/BatchCardActions";
 import { Auth } from "aws-amplify";
 import { axiosInstance } from "../../util/axiosConfig";
+import { Store, BasicBatchData, BatchState } from '../../types';
+import { RouteComponentProps } from 'react-router-dom';
 
-interface IProps {
-  batches: {
-    batchId: string;
-    skill: string;
-    name: string;
-  }[];
+interface Props extends RouteComponentProps {
+  batches : BasicBatchData[];
 }
 
 /**
@@ -29,23 +24,68 @@ interface IProps {
  *
  * @param props Basic batch information. Should be pulled from the database whenever this component loads
  */
-const HomePage: React.FC<IProps> = (props: IProps) => {
+const HomePage: React.FC<Props> = ({ history }) => {
   const [hasBatches, setHasBatches] = useState(false);
-  const [hasData, setRecievedData] = useState(false);
   const [hasSpinner, setSpinner] = useState(false);
-
+  const { batches } = useSelector((store : Store) => store.batchState);
   const dispatch = useDispatch();
+
+  /**
+   * This function gets all of the batch data currently in the Caliber
+   *  db. It places all of the data from that endpoint into the "batch
+   *  state".
+   *
+   * @param userId The passed in user id (currently does nothing)
+   *
+   * @returns This function just changes the batch state to contain
+   * each currently avaiable batch in the db.
+   */
+  const getBatchCardData = useCallback((userEmail: string) => async () => {
+    /** array to place batch data into */
+    const batchArray: BatchState = {
+      batches: [],
+    };
+    setSpinner(true);
+
+    //get data from server based on user id that was given
+
+    await axiosInstance().then((result) => {
+      result
+        .get("/client/batch/email/" + userEmail)
+        .then((response: any) => {
+          if (response != null) {
+            //individual batch info is placed into the array from above
+            for (const batchData of response.data) {
+              const batchCardInfo = { ...batchData };
+              batchArray.batches.push(batchCardInfo);
+            }
+
+            //if there were no batches found, then don't show any batch card data
+            if (batchArray.batches.length !== 0) {
+              setHasBatches(true);
+            }
+
+            //the "batch state" is set to be whatever was extracted from the db
+            dispatch(setBatchState(batchArray));
+          }
+          setSpinner(false);
+        })
+        .catch((error: any) => {
+          console.log(error);
+          setSpinner(false);
+        });
+    });
+  }, [dispatch]);
 
   /**
    * @function getBatches
    * DEVELOPER function used to retrieve mock data for display
    */
 
-    const getBatches = (userEmail:string) =>
-   {
-        //gets batch data from caliber
-        dispatch(getBatchCardData(userEmail));
-     }
+    // const getBatches = (userEmail:string) => {
+    //   //gets batch data from caliber
+    //   dispatch(getBatchCardData(userEmail));
+    // }
 
 
   /**
@@ -86,80 +126,22 @@ const HomePage: React.FC<IProps> = (props: IProps) => {
 *  };
 */
 
-  /** array to place batch data into */
-  const batchArray: IBatchState = {
-    batches: [],
-  };
-
-  /**
-   * This function gets all of the batch data currently in the Caliber
-   *  db. It places all of the data from that endpoint into the "batch
-   *  state".
-   *
-   * @param userId The passed in user id (currently does nothing)
-   *
-   * @returns This function just changes the batch state to contain
-   * each currently avaiable batch in the db.
-   */
-  const getBatchCardData = (userEmail: string) => async () => {
-    setSpinner(true);
-
-    //get data from server based on user id that was given
-
-    await axiosInstance().then((result) => {
-      result
-        .get("/client/batch/email/" + userEmail)
-        .then((response: any) => {
-          if (response != null) {
-            //individual batch info is placed into the array from above
-            for (const batchData of response.data) {
-              const batchCardInfo = { ...batchData };
-              batchArray.batches.push(batchCardInfo);
-            }
-
-            //if there were no batches found, then don't show any batch card data
-            if (batchArray.batches.length !== 0) {
-              setHasBatches(true);
-            }
-
-            //the "batch state" is set to be whatever was extracted from the db
-            dispatch(setBatchState(batchArray));
-          }
-          setSpinner(false);
-        })
-        .catch((error: any) => {
-          console.log(error);
-          setSpinner(false);
-        });
-    });
-  };
-
-  /** gets the user's email */
-  const getEmail = async () => {
-    setSpinner(true);
-    const checkRole = Auth.currentUserInfo();
-
-    await checkRole.then((result) => {
-      //if there is no AWS cognito token information at all, then redirect to the login page
-      if (result != null) {
-        //if the AWS congito token contains an email value, check for batches associated
-        // with that email address
-        if (result.attributes["email"] != null) {
-          getBatches(result.attributes["email"]);
-        } else {
-          setSpinner(false);
-        }
-      } else {
-        window.location.href = "/"; //redirects to login page
-      }
-    });
-  };
-
   //should run on page load only once
-  if (!hasData) {
-    setRecievedData(true); //prevents an infinite loop
-    getEmail();
-  }
+  useEffect(() => {
+    (async () => {
+      setSpinner(true);
+
+      const result = await Auth.currentUserInfo();
+      //if there is no AWS cognito token information at all, then redirect to the login page
+      !result && history.push('/');
+
+      //if the AWS congito token contains an email value, check for batches associated
+      // with that email address
+      result.attributes["email"]
+        ? dispatch( getBatchCardData(result.attributes["email"]) )
+        : setSpinner(false);
+    })();
+  }, [history, dispatch, getBatchCardData]);
 
   return (
     <Container style={{ minHeight: "100vh", maxWidth: "100vw" }}>
@@ -192,12 +174,12 @@ const HomePage: React.FC<IProps> = (props: IProps) => {
                 <Row>
                   {
                     /* displays all of the batch cards that are mapped to the client */
-                    props.batches?.map((element, index) => (
+                    batches?.map((element, index) => (
                       <Col xl="3" lg="4" md="5" sm="6" xs="6" key={index}>
                         <BatchCard
                           batchId={element.batchId}
-                          specialization={element.skill}
-                          batchName={element.name}
+                          skill={element.skill}
+                          name={element.name}
                         />
                       </Col>
                     ))
@@ -226,10 +208,4 @@ const HomePage: React.FC<IProps> = (props: IProps) => {
   );
 };
 
-const mapStateToProps = (store: any) => {
-  return {
-    batches: store.batchState.batches,
-  };
-};
-
-export default connect<IProps>(mapStateToProps)(HomePage);
+export default HomePage;

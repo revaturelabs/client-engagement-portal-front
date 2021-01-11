@@ -9,6 +9,7 @@ import salesLogo from '../../assets/sales.png';
 import bigData from '../../assets/bigData.png';
 import netLogo from '../../assets/NET.jpg';
 import devOpsLogo from '../../assets/devOps.jpg';
+import { BatchSkill } from '../../types';
 
 /**
  * Setup for a mocked batch information component
@@ -16,17 +17,18 @@ import devOpsLogo from '../../assets/devOps.jpg';
  * @param givenSpec The specialization chosen for this component. Should
  * determine the photo that is generated when the component is loaded up
  */
-const setUp = (givenSpec: string) => {
+const setUp = (givenSpec: BatchSkill) => {
 
     const props={
         batchId: "TR-6969",
-        batchName: "Mock Batch 69",
+        name: "Mock Batch 69",
         endDate: "tomorrow",
         skill: givenSpec,
         trainer: "batman",
-        associateAssignments: undefined,
+        employeeAssignments: [],
+        associateAssignments: [],
     };
-    return shallow(<BatchInformation batches={[{...props}]}/>);
+    return shallow(<BatchInformation batch={{...props}}/>);
 }
 
 describe('batchinfocomp', () => {

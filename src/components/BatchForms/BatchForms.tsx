@@ -69,7 +69,7 @@ export const BatchForms: React.FC<IProps> = (props:IProps) => {
         getBatches();
 
         props.doRerender();
-      },[props.rerender]);
+      },[props]);
 
 
     /**
