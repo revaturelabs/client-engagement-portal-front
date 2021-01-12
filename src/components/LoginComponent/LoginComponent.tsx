@@ -11,6 +11,7 @@ import { useDispatch } from 'react-redux';
 import { adminLogin, clientLogin } from '../../actions/UserActions';
 import firebase from 'firebase/app'
 import 'firebase/auth'
+
 import { useHistory } from "react-router-dom";
 import { axiosInstance } from "../../util/axiosConfig";
 
@@ -70,7 +71,7 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
                 if (idTokenResult.claims.role) {
 
                     //no api for admin by email
-                    const statefulClient: IUserClient = {
+                    const statefulClient: IUserAdmin = {
                         email: user.user?.email || "",
                         firstName: "HardcodedFirstName",
                         lastName: "HardcodedLastName",
@@ -82,7 +83,7 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
                     history.replace("/admin")
 
                     // SHOULD only be role: admin if admin, ELSE if client role will not exist
-                    console.log(idTokenResult)
+                    // console.log(idTokenResult)
                 } else {
 
                     axiosInstance()
@@ -107,44 +108,8 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
                 }
              })
              .catch((error) => {
-               console.log(error);
+               console.log(error.response.status);
              })
-
-            // switch (user.attributes["custom:userRole"]) { // Assigns what page to redirect to based upon what role the user has
-            //     case "client":
-            //         const statefulClient: IUserClient = {
-            //             email: user.attributes.email,
-            //             firstName: user.attributes["given_name"],
-            //             lastName: user.attributes["family_name"],
-            //         }
-
-            //         dispatch(clientLogin(statefulClient));
-
-            //         setAdmin(false);
-            //         setClient(true);
-            //         break;
-            //     case "admin":
-            //         const statefulAdmin: IUserAdmin = {
-            //             email: user.attributes.email,
-            //             firstName: user.attributes["given_name"],
-            //             lastName: user.attributes["family_name"],
-            //         }
-
-            //         dispatch(adminLogin(statefulAdmin));
-
-            //         setClient(false);
-            //         setAdmin(true);
-            //         break;
-            //     default:
-            //         setClient(false);
-            //         setAdmin(false);
-            // }
-
-            //for now, hardcoded only to admin user role until we get firebase roles implemented
-            
-
-            // setAdmin(true);
-            // setClient(false);
 
             setSpinner(false);
         } catch (error) {
@@ -162,6 +127,7 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
                 (isAdmin ?
                     <Redirect to="/admin" />
                     : */}
+
                     <form onSubmit={handleSubmit} className="login-form">
 
                         <div style={{ maxHeight: "90%" }}>
