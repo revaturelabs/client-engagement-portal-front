@@ -12,7 +12,9 @@ import LoadingPage from './views/LoadingPage/LoadingPage';
 
 import { AdminPage } from './views/AdminPage/AdminPage';
 import BatchInformationPage from './views/BatchInformationPage/BatchInformationPage';
-// import { RedirectWhenLoggedIn } from './util/redirectWhenLoggedIn';
+import {PrivateAdminRoute} from './components/PrivateRoutes/PrivateAdminRoute';
+import {PrivateClientRoute} from './components/PrivateRoutes/PrivateClientRoute';
+import {PrivateRoute} from './components/PrivateRoutes/PrivateRoute';
 
 import FirebaseContainer from './util/FirebaseContainer'
 
@@ -26,9 +28,7 @@ function App() {
         <div className="App">
             <FirebaseContainer>
                 <Provider store={store}>
-                    <BrowserRouter>
-                        {/* <RedirectWhenLoggedIn /> */}
-                        
+                    <BrowserRouter>                        
                         <FirebaseAuthConsumer>
                             {({ isSignedIn, user, providerId }) => {
                                 return (
@@ -42,9 +42,9 @@ function App() {
                         <Switch>
                             <Route exact path="/" component={LoadingPage} />
                             <Route path="/login" component={LoginPage} />
-                            <Route path="/home" component={HomePage} />
-                            <Route path="/admin" component={AdminPage} />
-                            <Route path="/batch/:batchId" component={BatchInformationPage} />
+                            <PrivateClientRoute path="/home" component={HomePage} />
+                            <PrivateAdminRoute path="/admin" component={AdminPage} />
+                            <PrivateRoute path="/batch/:batchId" component={BatchInformationPage} />
                             <Route path="/loading" component={LoadingPage} />
                         </Switch>
                     </BrowserRouter>
