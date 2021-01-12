@@ -13,6 +13,7 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 
 import { useHistory } from "react-router-dom";
+import { axiosInstance } from "../../util/axiosConfig";
 
 interface ILoginProps {
     loginType?: string;
@@ -68,67 +69,49 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
                 // Confirm the user is an Admin.
                 console.log(idTokenResult.claims);
                 if (idTokenResult.claims.role) {
-                  // Show admin UI.
 
-                  // SHOULD only be role: admin if admin, ELSE if client role will not exist
-                  console.log(idTokenResult)
-                } 
+                    //no api for admin by email
+                    const statefulClient: IUserAdmin = {
+                        email: user.user?.email || "",
+                        firstName: "HardcodedFirstName",
+                        lastName: "HardcodedLastName",
+                    }
+
+                    dispatch(clientLogin(statefulClient));
+
+                    // Show admin UI.
+                    history.replace("/admin")
+
+                    // SHOULD only be role: admin if admin, ELSE if client role will not exist
+                    // console.log(idTokenResult)
+                } else {
+
+                    axiosInstance()
+                        .then((i) => i.get('/client/email/' + user.user?.email)
+                            .then((r) => {
+                                const statefulClient: IUserClient = {
+                                    //retrieved from firebase
+                                    email: user.user?.email || "",
+                                    //unfortunately cognito stores this, NOT backend db
+                                    firstName: "HardcodedFirstName",
+                                    lastName: "HardcodedLastName",
+                                    //retrieved from backend db
+                                    companyName: r.data.companyName,
+                                }
+                                console.log(r)
+                                dispatch(clientLogin(statefulClient));
+                            } ))
+
+                    //Show client UI
+                    history.replace("/home")
+
+                }
              })
              .catch((error) => {
                console.log(error.response.status);
              })
 
-            // switch (user.attributes["custom:userRole"]) { // Assigns what page to redirect to based upon what role the user has
-            //     case "client":
-            //         const statefulClient: IUserClient = {
-            //             email: user.attributes.email,
-            //             firstName: user.attributes["given_name"],
-            //             lastName: user.attributes["family_name"],
-            //         }
-
-            //         dispatch(clientLogin(statefulClient));
-
-            //         setAdmin(false);
-            //         setClient(true);
-            //         break;
-            //     case "admin":
-            //         const statefulAdmin: IUserAdmin = {
-            //             email: user.attributes.email,
-            //             firstName: user.attributes["given_name"],
-            //             lastName: user.attributes["family_name"],
-            //         }
-
-            //         dispatch(adminLogin(statefulAdmin));
-
-            //         setClient(false);
-            //         setAdmin(true);
-            //         break;
-            //     default:
-            //         setClient(false);
-            //         setAdmin(false);
-            // }
-
-            //for now, hardcoded only to admin user role until we get firebase roles implemented
-            const statefulClient: IUserClient = {
-                email: user.user?.email || "",
-                firstName: "HardcodedFirstName",
-                lastName: "HardcodedLastName",
-                role: "client"
-            }
-
-            dispatch(clientLogin(statefulClient));
-
-            // setAdmin(true);
-            // setClient(false);
-
             setSpinner(false);
-            const userRole = "admin";
-
-            if (userRole === "admin") {
-                history.replace("/admin")
-            } else {
-                history.replace("/home")
-            }
         } catch (error) {
             setSpinner(false);
             setLoginMsg(error.message);
