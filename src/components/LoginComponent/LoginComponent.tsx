@@ -11,6 +11,7 @@ import { useDispatch } from 'react-redux';
 import { adminLogin, clientLogin } from '../../actions/UserActions';
 import firebase from 'firebase/app'
 import 'firebase/auth'
+
 import { useHistory } from "react-router-dom";
 
 interface ILoginProps {
@@ -74,7 +75,7 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
                 } 
              })
              .catch((error) => {
-               console.log(error);
+               console.log(error.response.status);
              })
 
             // switch (user.attributes["custom:userRole"]) { // Assigns what page to redirect to based upon what role the user has
@@ -112,6 +113,7 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
                 email: user.user?.email || "",
                 firstName: "HardcodedFirstName",
                 lastName: "HardcodedLastName",
+                role: "client"
             }
 
             dispatch(clientLogin(statefulClient));
@@ -142,6 +144,7 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
                 (isAdmin ?
                     <Redirect to="/admin" />
                     : */}
+
                     <form onSubmit={handleSubmit} className="login-form">
 
                         <div style={{ maxHeight: "90%" }}>

@@ -5,6 +5,7 @@ export interface IUser{
     firstName:string,
     lastName:string,
     phone?:string,
+    role: string
 }
 
 export interface IUserAdmin extends IUser{
