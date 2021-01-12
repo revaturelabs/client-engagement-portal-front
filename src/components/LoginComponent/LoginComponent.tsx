@@ -62,22 +62,20 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
                 .auth()
                 .signInWithEmailAndPassword(loginCredentials.email, loginCredentials.password);
                 console.log(user);
-                // .then((user: any) => {
-                //     console.log(user)
-                //     console.log(firebase.auth().currentUser?.getIdToken(true))
-                //     // firebase.auth().currentUser?.getIdToken(true).then((resp) => {
-                //         // axios.post("http://localhost:8080", {}, {
-                //         // headers:
-                //         // { auth: resp }
-                //         // }).then((resp) => console.log(resp)).catch((e) => console.log(e))
-                //     // })
-                // })
-                // .catch((error: any) => {
-                //     var errorCode = error.code;
-                //     var errorMessage = error.message;
-                //     console.log(`error code: ${errorCode} \nerror message: ${errorMessage}`)
-                // });
 
+            await firebase.auth().currentUser?.getIdTokenResult(true).then((idTokenResult) => {
+                // Confirm the user is an Admin.
+                console.log(idTokenResult.claims);
+                if (idTokenResult.claims.role) {
+                  // Show admin UI.
+
+                  // SHOULD only be role: admin if admin, ELSE if client role will not exist
+                  console.log(idTokenResult)
+                } 
+             })
+             .catch((error) => {
+               console.log(error);
+             })
 
             // switch (user.attributes["custom:userRole"]) { // Assigns what page to redirect to based upon what role the user has
             //     case "client":

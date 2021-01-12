@@ -1,4 +1,5 @@
-import { Auth } from "aws-amplify";
+import firebase from 'firebase/app'
+import 'firebase/auth'
 import React, { ChangeEvent, useState } from "react";
 import {
   Button,
@@ -17,8 +18,8 @@ import {
 import '../../scss/NewClientButton.scss';
 import { axiosInstance } from "../../util/axiosConfig";
 
-interface IProps{
-  reloadClientDropdowns:() => void
+interface IProps {
+  reloadClientDropdowns: () => void
 }
 
 /**
@@ -28,7 +29,7 @@ interface IProps{
  * This also has a modal form that pops up when the button is clicked
  *
   */
-export const NewClientButton: React.FC<IProps> = (props:IProps) => {
+export const NewClientButton: React.FC<IProps> = (props: IProps) => {
   const [modal, setModal] = useState(false);
 
   // Decided to eliminate Redux to help with tests, it's unnecessary anyway
@@ -64,7 +65,7 @@ export const NewClientButton: React.FC<IProps> = (props:IProps) => {
     let companyName;
     let phoneNumber;
 
-    if(role==='client') {
+    if (role === 'client') {
       companyName = event.currentTarget["companyName"].value;
       phoneNumber = event.currentTarget["phoneNumber"].value;
     }
@@ -92,15 +93,14 @@ export const NewClientButton: React.FC<IProps> = (props:IProps) => {
     setModal(!modal);
 
     try {
-      await Auth.signUp({
-        username: email,
-        password: password,
-        attributes: {
-          "custom:userRole": role, // custom role for assigning user to admin or client role
-          "given_name": firstName,
-          "family_name": lastName
-        },
-      });
+
+      firebase.auth().createUserWithEmailAndPassword(email, password)
+        .catch((error) => {
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          // ..
+          console.log(errorCode, errorMessage)
+        });
 
       if (role === "client") {
         (await axiosInstance()).post("/client/", { // Client does not have firstName and lastName; this must be retrieved from Cognito upon login
@@ -214,7 +214,7 @@ export const NewClientButton: React.FC<IProps> = (props:IProps) => {
           </ModalBody>
 
           <ModalFooter>
-            <Input type="submit" value="Submit" className="create-account-submit"/>
+            <Input type="submit" value="Submit" className="create-account-submit" />
           </ModalFooter>
         </Form>
       </Modal>
