@@ -16,50 +16,17 @@ import {PrivateAdminRoute} from './components/PrivateRoutes/PrivateAdminRoute';
 import {PrivateClientRoute} from './components/PrivateRoutes/PrivateClientRoute';
 import {PrivateRoute} from './components/PrivateRoutes/PrivateRoute';
 
-import firebase from "firebase/app";
-import "firebase/auth";
+import FirebaseContainer from './util/FirebaseContainer'
+
+//retaining for dev purposes for now
 import {
-    FirebaseAuthProvider,
     FirebaseAuthConsumer,
-    IfFirebaseAuthed,
-    IfFirebaseAuthedAnd,
 } from "@react-firebase/auth";
-
-
-const firebaseConfig = {
-    apiKey: "AIzaSyD_ybaiHaGC0LobWwODnBwS9hKYg1ltOcs",
-    authDomain: "fir-demo-1c557.firebaseapp.com",
-    projectId: "fir-demo-1c557",
-    storageBucket: "fir-demo-1c557.appspot.com",
-    messagingSenderId: "68185354875",
-    appId: "1:68185354875:web:e01f97050875f4b97228de",
-    measurementId: "G-L9CB6SL6NL",
-    databaseURL: "",
-  };
-
-// {
-//     apiKey: "AIzaSyC4sxZlT-McTildwtxa8LV1lj7ZQhzOrs0",
-//     authDomain: "training-team-253916.firebaseapp.com",
-//     projectId: "training-team-253916",
-//     storageBucket: "training-team-253916.appspot.com",
-//     messagingSenderId: "492701958610",
-//     appId: "1:492701958610:web:4a30a1be93803701d3480b",
-//     measurementId: "G-DP6XDH9DTW",
-//     databaseURL: "",
-// };
-
-if (!firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig);
-    // if you want analytics enabled, un-comment the following line
-    // firebase.analytics();
-}
-
-// Amplify.configure(awsconfig);
 
 function App() {
     return (
         <div className="App">
-            <FirebaseAuthProvider firebase={firebase} {...firebaseConfig}>
+            <FirebaseContainer>
                 <Provider store={store}>
                     <BrowserRouter>                        
                         <FirebaseAuthConsumer>
@@ -82,7 +49,7 @@ function App() {
                         </Switch>
                     </BrowserRouter>
                 </Provider>
-            </FirebaseAuthProvider>
+            </FirebaseContainer>
         </div>
     );
 }
