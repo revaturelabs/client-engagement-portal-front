@@ -11,7 +11,6 @@ import { connect, useDispatch } from "react-redux";
 import {
   setBatchState,
 } from "../../actions/BatchCardActions";
-// import { Auth } from "aws-amplify";
 import { axiosInstance } from "../../util/axiosConfig";
 import firebase from 'firebase/app';
 import 'firebase/auth';
@@ -139,20 +138,11 @@ const HomePage: React.FC<IProps> = (props: IProps) => {
   /** gets the user's email */
   const getEmail = async () => {
     setSpinner(true);
-    // const checkRole = Auth.currentUserInfo();
-
-    // firebase.auth().currentUser
-
-    
-
-    // await checkRole.then((result) => {
 
       firebase.auth().onAuthStateChanged((user) => {
         if (user) {
         const email = user.email;
-      //if there is no AWS cognito token information at all, then redirect to the login page
-        //if the AWS congito token contains an email value, check for batches associated
-        // with that email address
+
         if (email != null) {
           getBatches(email);
         } else {

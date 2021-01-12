@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
 import userThumb from "../../assets/user-thumb.png";
 import passThumb from "../../assets/pass-thumb.png";
-// import { Auth } from "aws-amplify";
 import "../../scss/loginStyles.scss";
 import ceplogo2 from "../../assets/engagementPortalLogo.svg";
 import { Spinner } from "reactstrap";
@@ -27,9 +25,6 @@ interface ILoginProps {
  */
 export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
 
-
-    const [isClient, setClient] = useState(false);
-    const [isAdmin, setAdmin] = useState(false);
     const [spinner, setSpinner] = useState(false);
     const [loginMsg, setLoginMsg] = useState<string>("");
 
@@ -63,11 +58,11 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
             const user = await firebase
                 .auth()
                 .signInWithEmailAndPassword(loginCredentials.email, loginCredentials.password);
-                console.log(user);
+            console.log(user);
 
             await firebase.auth().currentUser?.getIdTokenResult(true).then((idTokenResult) => {
                 // Confirm the user is an Admin.
-                console.log(idTokenResult.claims);
+                // console.log(idTokenResult.claims);
                 if (idTokenResult.claims.role) {
 
                     //no api for admin by email
@@ -75,9 +70,10 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
                         email: user.user?.email || "",
                         firstName: "HardcodedFirstName",
                         lastName: "HardcodedLastName",
+                        role: "admin"
                     }
 
-                    dispatch(clientLogin(statefulClient));
+                    dispatch(adminLogin(statefulClient));
 
                     // Show admin UI.
                     history.replace("/admin")
@@ -97,19 +93,19 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
                                     lastName: "HardcodedLastName",
                                     //retrieved from backend db
                                     companyName: r.data.companyName,
+                                    role: "client"
                                 }
                                 console.log(r)
                                 dispatch(clientLogin(statefulClient));
-                            } ))
+                                //Show client UI
+                                history.replace("/home")
 
-                    //Show client UI
-                    history.replace("/home")
-
+                            }))
                 }
-             })
-             .catch((error) => {
-               console.log(error.response.status);
-             })
+            })
+                .catch((error) => {
+                    console.log(error.response.status);
+                })
 
             setSpinner(false);
         } catch (error) {
@@ -121,50 +117,43 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
 
     return (
         <>
-            {/* {isClient ?
-                <Redirect to="/home" />
-                :
-                (isAdmin ?
-                    <Redirect to="/admin" />
-                    : */}
 
-                    <form onSubmit={handleSubmit} className="login-form">
+            <form onSubmit={handleSubmit} className="login-form">
 
-                        <div style={{ maxHeight: "90%" }}>
-                            <div style={{ position: "relative", textAlign: "center" }}>
-                                <div className="login-header">
-                                    Client Engagement Portal
+                <div style={{ maxHeight: "90%" }}>
+                    <div style={{ position: "relative", textAlign: "center" }}>
+                        <div className="login-header">
+                            Client Engagement Portal
                         </div>
-                                <div className="cep-logo-area">
-                                    <img src={ceplogo2} alt="cep-logo" className="cep-logo" />
-                                </div>
-                            </div>
+                        <div className="cep-logo-area">
+                            <img src={ceplogo2} alt="cep-logo" className="cep-logo" />
+                        </div>
+                    </div>
 
-                            <div style={{ color: "#FF0000" }}>{loginMsg}</div>
+                    <div style={{ color: "#FF0000" }}>{loginMsg}</div>
 
-                            <div style={{ position: "relative" }}>
-                                <input type="email" required className="form-control" name="email" placeholder="E-mail"
-                                    style={new CEPLoginInputStyle()} />
-                                <div style={{ position: "absolute", top: "45%", left: "21%", transform: "translate(-50%, -50%)" }}>
-                                    <img src={userThumb} alt="email thumbnail" className="userthumbcheck" />
-                                </div>
-                            </div>
+                    <div style={{ position: "relative" }}>
+                        <input type="email" required className="form-control" name="email" placeholder="E-mail"
+                            style={new CEPLoginInputStyle()} />
+                        <div style={{ position: "absolute", top: "45%", left: "21%", transform: "translate(-50%, -50%)" }}>
+                            <img src={userThumb} alt="email thumbnail" className="userthumbcheck" />
+                        </div>
+                    </div>
 
-                            <div style={{ position: "relative" }}>
-                                <input type="password" required className="form-control" name="password" placeholder="Password"
-                                    style={new CEPLoginInputStyle()} />
-                                <div style={{ position: "absolute", top: "45%", left: "21%", transform: "translate(-50%, -50%)" }}>
-                                    <img src={passThumb} alt="password thumbnail" className="passthumbcheck" />
-                                </div>
-                            </div>
+                    <div style={{ position: "relative" }}>
+                        <input type="password" required className="form-control" name="password" placeholder="Password"
+                            style={new CEPLoginInputStyle()} />
+                        <div style={{ position: "absolute", top: "45%", left: "21%", transform: "translate(-50%, -50%)" }}>
+                            <img src={passThumb} alt="password thumbnail" className="passthumbcheck" />
+                        </div>
+                    </div>
 
-                            <button className="test2 login-submit" type="submit">
-                                Login
+                    <button className="test2 login-submit" type="submit">
+                        Login
                             {spinner ? <Spinner color="info" className="spinner" /> : <span />}
-                            </button>
-                        </div >
-                    </form >
-            {/* } */}
+                    </button>
+                </div >
+            </form >
         </>
     );
 };

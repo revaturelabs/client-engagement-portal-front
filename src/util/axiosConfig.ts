@@ -1,5 +1,4 @@
 import Axios from "axios";
-// import { Auth } from "aws-amplify";
 import firebase from 'firebase/app'
 import 'firebase/auth'
 
@@ -8,13 +7,6 @@ const getAxiosHeader = async () => {
   const result = await firebase.auth().currentUser?.getIdToken(true).then((resp) => resp);
   return result;
 
-  // //Assigns the current session promise
-  // const sessionPromise = (Auth.currentSession());
-  // //Awaits the promise to fufill, then triggers and axios
-  // return sessionPromise.then(function (result) {
-  //   //Grabs the JWT token from the promise
-  //   return result.getIdToken().getJwtToken();
-  // });
 }
 
 
@@ -33,9 +25,6 @@ const getAxiosHeader = async () => {
  */
 export const axiosInstance = async () => {
   const token = await getAxiosHeader();
-  // .then(function (result) {
-  //   return result
-  // });
 
   return Axios.create({
 

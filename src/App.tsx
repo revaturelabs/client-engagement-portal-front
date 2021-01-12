@@ -1,6 +1,4 @@
 import React from 'react';
-// import Amplify from 'aws-amplify';
-// import awsconfig from './aws-exports';
 import './scss/app.scss';
 import './scss/batch-card.scss';
 import { Provider } from 'react-redux';
@@ -18,27 +16,12 @@ import {PrivateRoute} from './components/PrivateRoutes/PrivateRoute';
 
 import FirebaseContainer from './util/FirebaseContainer'
 
-//retaining for dev purposes for now
-import {
-    FirebaseAuthConsumer,
-} from "@react-firebase/auth";
-
 function App() {
     return (
         <div className="App">
             <FirebaseContainer>
                 <Provider store={store}>
                     <BrowserRouter>                        
-                        <FirebaseAuthConsumer>
-                            {({ isSignedIn, user, providerId }) => {
-                                return (
-                                    <pre style={{ height: 300, overflow: "auto" }}>
-                                        {JSON.stringify({ isSignedIn, user, providerId }, null, 2)}
-                                    </pre>
-                                    // (isSignedIn) ? <Route path="/home" /> : <Route path="/login" />
-                                );
-                            }}
-                        </FirebaseAuthConsumer>
                         <Switch>
                             <Route exact path="/" component={LoadingPage} />
                             <Route path="/login" component={LoginPage} />

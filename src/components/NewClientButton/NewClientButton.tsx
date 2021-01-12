@@ -70,26 +70,6 @@ export const NewClientButton: React.FC<IProps> = (props: IProps) => {
       phoneNumber = event.currentTarget["phoneNumber"].value;
     }
 
-    // Checks cognito if they have the admin role in the current session  for security. If not exit out
-    // This checking operation takes about 150 MS
-    // Unknown Error - Response time can be 10,000 MS. Usually happens when react is updating. This shouldn't be a problem
-
-    // const checkRole = Auth.currentUserInfo();
-    // const checker = await checkRole.then(function (result) {
-
-    //   if (result.attributes["custom:userRole"] !== "admin") {
-    //     // dispatch(logout());
-    //     // Auth.signOut().then(() => window.location.href="/");
-    //     return false;
-    //   } else {
-    //     return true;
-    //   }
-    // });
-
-    // if (!checker) {
-    //   console.log("Error: User does not have permissions to create an account");
-    //   return null;
-    // }
     setModal(!modal);
 
     try {
