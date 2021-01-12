@@ -16,14 +16,14 @@ import { RedirectWhenLoggedIn } from './util/redirectWhenLoggedIn';
 
 
 
-Amplify.configure(awsconfig);
+// Amplify.configure(awsconfig);
 
 function App() {
     return (
         <div className="App">
             <Provider store={store}>
                 <BrowserRouter>
-                    <RedirectWhenLoggedIn />
+                    {/* <RedirectWhenLoggedIn /> */}
                     <Switch>
                         <Route exact path="/" component={LoadingPage} />
                         <Route path="/login" component={LoginPage} />

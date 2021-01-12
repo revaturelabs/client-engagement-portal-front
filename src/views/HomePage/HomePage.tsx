@@ -133,11 +133,11 @@ const HomePage: React.FC<Props> = ({ history }) => {
 
       const result = await Auth.currentUserInfo();
       //if there is no AWS cognito token information at all, then redirect to the login page
-      !result && history.push('/');
+      !result && history.push('/login');
 
       //if the AWS congito token contains an email value, check for batches associated
       // with that email address
-      result.attributes["email"]
+      result?.attributes["email"]
         ? dispatch( getBatchCardData(result.attributes["email"]) )
         : setSpinner(false);
     })();
