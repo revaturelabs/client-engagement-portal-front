@@ -58,7 +58,12 @@ export const NavBar: React.FC<any> = (props: any) => {
             <Col xs="auto" className="justify-content-start logoContainer">
                 <img id="revLogo" src={logo} className="myLogo" alt="revature logo" />
             </Col>
+            
             <Col className="d-flex align-items-center justify-content-end auto test1" >
+            
+            <Link to={'/messages'}>
+                <a href="/messages" className="btn btn-primary mr-2">Messages</a>
+            </Link>
                 <ButtonDropdown isOpen={navMenuOpen} toggle={toggle}>
                     {/* Mobile Hamburger Menu */}
                     <DropdownToggle id="navDropButton" style={{ margin: "10px", backgroundColor: "white", border: "none" }}>

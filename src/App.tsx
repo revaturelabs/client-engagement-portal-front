@@ -13,6 +13,7 @@ import LoadingPage from './views/LoadingPage/LoadingPage';
 import { AdminPage } from './views/AdminPage/AdminPage';
 import BatchInformationPage from './views/BatchInformationPage/BatchInformationPage';
 import { RedirectWhenLoggedIn } from './util/redirectWhenLoggedIn';
+import { MessagesPage } from './views/MessagesPage/MessagesPage';
 
 
 
@@ -31,6 +32,7 @@ function App() {
                         <Route path="/admin" component={AdminPage} />
                         <Route path="/batch/:batchId" component={BatchInformationPage} />
                         <Route path="/loading" component={LoadingPage} />
+                        <Route path="/messages" component={MessagesPage} />
                     </Switch>
                 </BrowserRouter>
             </Provider>

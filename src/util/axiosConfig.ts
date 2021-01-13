@@ -33,7 +33,7 @@ export const axiosInstance = async () => {
   });
 
   return Axios.create({
-    baseURL: process.env.REACT_APP_BACKEND_API,
+    baseURL: "http://localhost:9011/",
     headers: { 'Authorization': `Bearer ${token}` },
 
   });
