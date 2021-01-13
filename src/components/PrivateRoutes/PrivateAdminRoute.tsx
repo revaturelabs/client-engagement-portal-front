@@ -3,7 +3,7 @@ import { Route, Redirect } from "react-router-dom";
 import 'firebase/auth'
 import { RootStateOrAny, useSelector } from 'react-redux';
 
-export const PrivateAdminRoute = ({ component: Component, ...rest }) => {
+export const PrivateAdminRoute = ({ component: Component, ...rest }:any) => {
 
     const user = useSelector((state: RootStateOrAny) => state.userState.user);
 

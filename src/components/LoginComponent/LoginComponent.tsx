@@ -107,7 +107,7 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
                     console.log(error.response.status);
                 })
 
-            setSpinner(false);
+            // setSpinner(false);
         } catch (error) {
             setSpinner(false);
             setLoginMsg(error.message);

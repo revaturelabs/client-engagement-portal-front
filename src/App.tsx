@@ -23,7 +23,7 @@ function App() {
                 <Provider store={store}>
                     <BrowserRouter>                        
                         <Switch>
-                            <Route exact path="/" component={LoadingPage} />
+                            <Route exact path="/" component={LoginPage} />
                             <Route path="/login" component={LoginPage} />
                             <PrivateClientRoute path="/home" component={HomePage} />
                             <PrivateAdminRoute path="/admin" component={AdminPage} />
