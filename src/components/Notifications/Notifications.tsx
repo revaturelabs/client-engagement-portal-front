@@ -55,9 +55,9 @@ const Notifications:React.FC<INotificationState> = (props:INotificationState) =>
                                                     <br/><br/>
                                                     {e.message}
                                                     <br/><br/>
-                                                    Client Email: {e.client.email}
+                                                    Client Email: Client Email: {e.client.email}
                                                     <br/>
-                                                    Client Phone Number: {e.client.phoneNumber}
+                                                    Client Phone Number:{e.client.phoneNumber}
                                                 </div>
                                             </Accordion.Collapse>
                                         </>

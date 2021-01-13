@@ -4,6 +4,7 @@ import './RequestTalent.scss'
 import { useSelector } from 'react-redux';
 import { IRootState } from '../../_reducers';
 import { axiosInstance } from '../../util/axiosConfig';
+import emailjs from 'emailjs-com';
 
 /**
  * @function RequestTalent
@@ -14,14 +15,22 @@ const RequestTalent:React.FC = () => {
 
     const [show, setShow] = React.useState(false);
     const toggle = () => setShow(!show);
-     
+    const [clientInfo, setClientInfo] = React.useState({});
+    const [adminEmail,setAdminEmail] = React.useState('');
+    
+    
       /**
        * sets clientEmail equal to the email of the client that is logged in
        */
      let clientEmail = useSelector((state: IRootState) => {
         return `${state.userState.user?.email}`
     });
-
+    let clientFirstName = useSelector ((state: IRootState) => {
+        return `${state.userState.user?.firstName}`
+    })
+    let clientLastName = useSelector ((state: IRootState) => {
+        return `${state.userState.user?.lastName}`
+    });
    /**
       * @Function requestTalentFormSubmit
       * Send form data to the backend to request more talent
@@ -39,11 +48,20 @@ const RequestTalent:React.FC = () => {
         try {
             (await axiosInstance()).post(`intervention/`, {
                 clientEmail: email,
+                firstName : clientFirstName,
+                lastName:clientLastName,
                 message: message,
                 requestId: 0,
                 requestType: requestType,
                 status: "PENDING",
-            });
+            }).then((response)=> {
+                const data = response
+                console.log("data: ",data.config.data)
+                setClientInfo(data.config.data);
+                
+            })
+            
+            
         }
         catch(error) {
             return false;
@@ -55,7 +73,33 @@ const RequestTalent:React.FC = () => {
 
         return true;
     }
+    
+    
 
+
+    async function NoticeAdmin(){
+        var txt = (document.getElementById("message") as HTMLInputElement).value;
+        console.log("You get a notification from Client: ", '\n' ," Message: " ,txt);
+        console.log('data2 ', clientInfo);
+        (await axiosInstance()).get(`admin/`).then((response)=> {
+            const data = response
+            for(var i=0; i< data.data.length; i++) {
+                console.log("adminEmail: ", data.data[i].email);
+                let mailOptions = {
+                    firstName: clientFirstName,
+                    lastName: clientLastName,
+                    adminEmail: data.data[i].email,
+                    message: txt
+                };
+                emailjs.send('service_780easr', 'template_1co3ggw',mailOptions,'user_qNzha4WnrQ4xZeolBYZkl')
+                    .then((result) => {
+                        console.log(result.text);
+                    }, (error) => {
+                        console.log(error.text);
+                    });
+            }
+        })    
+    }
     return (
         <>
             <Row className="row justify-content-center" style={{marginTop: "300px"}}>
@@ -69,8 +113,8 @@ const RequestTalent:React.FC = () => {
                     <Form onSubmit={(event: React.FormEvent<HTMLFormElement>) => requestTalentFormSubmit(event)}>
                     <FormGroup>
                         <Label for="message" className="talentTextAreaLabel">Message:</Label>
-                        <Input type="textarea" name="message" className="talentTextAreaInput" placeholder="Please enter important information regarding the talent you require"></Input>
-                        <input type="submit" value="Submit" className="talentSubmit"></input>
+                        <Input type="textarea" name="message" id="message" className="talentTextAreaInput" placeholder="Please enter important information regarding the talent you require"></Input>
+                        <input type="submit" value="Submit" className="talentSubmit" onClick={NoticeAdmin} ></input>
                     </FormGroup>
                     </Form>
                 </ModalBody>

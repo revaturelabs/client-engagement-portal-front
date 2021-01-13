@@ -4,6 +4,7 @@ import './PlanInterventionModal.scss';
 import { useSelector } from 'react-redux';
 import { IRootState } from '../../_reducers';
 import { axiosInstance } from '../../util/axiosConfig';
+import emailjs from 'emailjs-com';
 
 
 /**
@@ -11,9 +12,10 @@ import { axiosInstance } from '../../util/axiosConfig';
  * This component includes the button for requesting talent and the modal pop
  * when the button is clicked.
  */
-const PlanInterventionModalv2:React.FC = () => {
+const PlanInterventionModalv2: React.FC = () => {
 
     const [show, setShow] = React.useState(false);
+    const [clientInfo, setClientInfo] = React.useState({});
     const toggle = () => setShow(!show);
 
     /**
@@ -22,6 +24,12 @@ const PlanInterventionModalv2:React.FC = () => {
     let clientEmail = useSelector((state: IRootState) => {
         return `${state.userState.user?.email}`
     });
+    let clientFirstName = useSelector((state: IRootState) => {
+        return `${state.userState.user?.firstName}`
+    })
+    let clientLastName = useSelector((state: IRootState) => {
+        return `${state.userState.user?.lastName}`
+    })
 
     /**
       * @Function requestTalentFormSubmit
@@ -30,43 +38,78 @@ const PlanInterventionModalv2:React.FC = () => {
       * @param event 
       * Collecting information from the form
       */
-    const requestInterventionFormSubmit = async(event: React.FormEvent<HTMLFormElement>) => {
+    const requestInterventionFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        
+
         const message = event.currentTarget["message"].value;
         const requestType = "INTERVENTION";
         try {
             (await axiosInstance()).post(`intervention/`, {
                 clientEmail: clientEmail,
+                firstName: clientFirstName,
+                lastName: clientLastName,
                 message: message,
                 requestId: 0,
                 requestType: requestType,
                 status: "PENDING",
+            }).then((response) => {
+                const data = response
+                console.log("data ", data.config.data)
+                setClientInfo(data.config.data);
+                console.log('data2 ', clientInfo)
+
             });
         }
-        catch(error) {
+        catch (error) {
             return false;
         }
         toggle();
         alert("Request Received!")
         return true;
     };
+    
+    
 
+
+    async function NoticeAdmin(){
+        var txt = (document.getElementById("message") as HTMLInputElement).value;
+        console.log("You get a notification from Client: ", '\n' ," Message: " ,txt);
+        console.log('data2 ', clientInfo);
+        (await axiosInstance()).get(`admin/`).then((response)=> {
+            const data = response
+            for(var i=0; i< data.data.length; i++) {
+                console.log("adminEmail: ", data.data[i].email);
+                let mailOptions = {
+                    firstName: clientFirstName,
+                    lastName: clientLastName,
+                    adminEmail: data.data[i].email,
+                    message: txt
+                };
+                emailjs.send('service_780easr', 'template_1co3ggw',mailOptions,'user_qNzha4WnrQ4xZeolBYZkl')
+                    .then((result) => {
+                        console.log(result.text);
+                    }, (error) => {
+                        console.log(error.text);
+                    });
+            }
+        })    
+    }
     return (
 
-        <>  
+        <>
+
             <button onClick={toggle} className="intervention-button">Request Intervention</button>
             <Modal isOpen={show} toggle={toggle}>
                 <ModalHeader toggle={toggle}>
                     <h4>Request Intervention</h4>
                 </ModalHeader>
-                <ModalBody style={{textAlign: "center"}}>
+                <ModalBody style={{ textAlign: "center" }}>
                     <Form onSubmit={(event: React.FormEvent<HTMLFormElement>) => requestInterventionFormSubmit(event)}>
-                    <FormGroup>
-                        <Label for="message" className="TextAreaLabel">Message:</Label>
-                        <Input type="textarea" name="message" className="TextAreaInput" placeholder="Reason for intervention, target dates/times, etc..."></Input>
-                        <input type="submit" value="Submit" className="talentSubmit"></input>
-                    </FormGroup>
+                        <FormGroup>
+                            <Label for="message" className="TextAreaLabel">Message:</Label>
+                            <Input type="textarea" name="message" id="message" className="TextAreaInput" placeholder="Reason for intervention, target dates/times, etc..."></Input>
+                            <input type="submit" value="Submit" className="talentSubmit" onClick={NoticeAdmin}></input>
+                        </FormGroup>
                     </Form>
                 </ModalBody>
             </Modal>
