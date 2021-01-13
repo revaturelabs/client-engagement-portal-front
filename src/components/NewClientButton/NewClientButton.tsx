@@ -1,4 +1,3 @@
-import firebase from 'firebase/app'
 import 'firebase/auth'
 import React, { ChangeEvent, useState } from "react";
 import {
@@ -17,6 +16,7 @@ import {
 } from "reactstrap";
 import '../../scss/NewClientButton.scss';
 import { axiosInstance } from "../../util/axiosConfig";
+import {signUp} from "../../util/FirebaseContainer";
 
 interface IProps {
   reloadClientDropdowns: () => void
@@ -59,28 +59,25 @@ export const NewClientButton: React.FC<IProps> = (props: IProps) => {
     // These need to be up here. Data is dropped when user is checked {for some reason} <= these fields are cleared when the modal unloads
     const email = event.currentTarget["email"].value;
     const password = event.currentTarget["password"].value;
-    const firstName = event.currentTarget["firstName"].value;
-    const lastName = event.currentTarget["lastName"].value;
     const role = event.currentTarget["select"].value;
+    let firstName;
+    let lastName;
     let companyName;
     let phoneNumber;
 
     if (role === 'client') {
       companyName = event.currentTarget["companyName"].value;
       phoneNumber = event.currentTarget["phoneNumber"].value;
+    } else {
+      firstName = event.currentTarget["firstName"].value;
+      lastName = event.currentTarget["lastName"].value;
     }
 
     setModal(!modal);
 
     try {
 
-      firebase.auth().createUserWithEmailAndPassword(email, password)
-        .catch((error) => {
-          var errorCode = error.code;
-          var errorMessage = error.message;
-          // ..
-          console.log(errorCode, errorMessage)
-        });
+      signUp(email, password);
 
       if (role === "client") {
         (await axiosInstance()).post("/client/", { // Client does not have firstName and lastName; this must be retrieved from Cognito upon login
@@ -148,22 +145,6 @@ export const NewClientButton: React.FC<IProps> = (props: IProps) => {
               <Label>Email</Label>
               <Input type="email" required name="email" id="email"></Input>
             </FormGroup>
-            <Container>
-              <Row>
-                <Col>
-                  <FormGroup>
-                    <Label>First Name</Label>
-                    <Input type="text" required name="firstName" id="firstName"></Input>
-                  </FormGroup>
-                </Col>
-                <Col>
-                  <FormGroup>
-                    <Label>Last Name</Label>
-                    <Input type="text" required name="lastName" id="lastName"></Input>
-                  </FormGroup>
-                </Col>
-              </Row>
-            </Container>
             {accountType === "client" ? (<>
               <FormGroup>
                 <Label>Company Name</Label>
@@ -175,7 +156,22 @@ export const NewClientButton: React.FC<IProps> = (props: IProps) => {
               </FormGroup>
             </>
             ) : (
-                <></>
+                <><Container>
+                <Row>
+                  <Col>
+                    <FormGroup>
+                      <Label>First Name</Label>
+                      <Input type="text" required name="firstName" id="firstName"></Input>
+                    </FormGroup>
+                  </Col>
+                  <Col>
+                    <FormGroup>
+                      <Label>Last Name</Label>
+                      <Input type="text" required name="lastName" id="lastName"></Input>
+                    </FormGroup>
+                  </Col>
+                </Row>
+              </Container></>
               )}
             <FormGroup>
               <Label>Password</Label>

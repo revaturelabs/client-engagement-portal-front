@@ -19,7 +19,6 @@ const firebaseConfig = {
   databaseURL: ""
 };
 
-
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
   // if you want analytics enabled, un-comment the following line
@@ -60,9 +59,6 @@ const FirebaseContainer = (props: any) => {
                     const statefulClient: IUserClient = {
                         //retrieved from firebase
                         email: idTokenResult.claims.email || "",
-                        //unfortunately cognito stores this, NOT backend db
-                        firstName: "HardcodedFirstName",
-                        lastName: "HardcodedLastName",
                         //retrieved from backend db
                         companyName: r.data.companyName,
                         role: "client"
@@ -85,3 +81,15 @@ const FirebaseContainer = (props: any) => {
 };
 
 export default FirebaseContainer;
+
+const secondaryApp = firebase.initializeApp(firebaseConfig, "Secondary");
+export const signUp = (email: string, password: string) => {
+  secondaryApp.auth().createUserWithEmailAndPassword(email, password)
+  .catch((error) => {
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    console.log(errorCode, errorMessage)
+  });
+
+  secondaryApp.auth().signOut();
+}
