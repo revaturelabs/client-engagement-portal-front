@@ -10,18 +10,18 @@ import LoadingPage from './views/LoadingPage/LoadingPage';
 
 import { AdminPage } from './views/AdminPage/AdminPage';
 import BatchInformationPage from './views/BatchInformationPage/BatchInformationPage';
-import {PrivateAdminRoute} from './components/PrivateRoutes/PrivateAdminRoute';
-import {PrivateClientRoute} from './components/PrivateRoutes/PrivateClientRoute';
-import {PrivateRoute} from './components/PrivateRoutes/PrivateRoute';
+import { PrivateAdminRoute } from './components/PrivateRoutes/PrivateAdminRoute';
+import { PrivateClientRoute } from './components/PrivateRoutes/PrivateClientRoute';
+import { PrivateRoute } from './components/PrivateRoutes/PrivateRoute';
 
 import FirebaseContainer from './util/FirebaseContainer'
 
 function App() {
     return (
         <div className="App">
-            <FirebaseContainer>
-                <Provider store={store}>
-                    <BrowserRouter>                        
+            <Provider store={store}>
+                <FirebaseContainer>
+                    <BrowserRouter>
                         <Switch>
                             <Route exact path="/" component={LoginPage} />
                             <Route path="/login" component={LoginPage} />
@@ -31,8 +31,8 @@ function App() {
                             <Route path="/loading" component={LoadingPage} />
                         </Switch>
                     </BrowserRouter>
-                </Provider>
-            </FirebaseContainer>
+                </FirebaseContainer>
+            </Provider>
         </div>
     );
 }

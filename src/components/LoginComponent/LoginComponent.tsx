@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import userThumb from "../../assets/user-thumb.png";
 import passThumb from "../../assets/pass-thumb.png";
 import "../../scss/loginStyles.scss";
@@ -60,60 +60,73 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
                 .signInWithEmailAndPassword(loginCredentials.email, loginCredentials.password);
             console.log(user);
 
-            await firebase.auth().currentUser?.getIdTokenResult(true).then((idTokenResult) => {
-                // Confirm the user is an Admin.
-                // console.log(idTokenResult.claims);
-                if (idTokenResult.claims.role) {
+            checkCurrentUser();
 
-                    //no api for admin by email
-                    const statefulClient: IUserAdmin = {
-                        email: user.user?.email || "",
-                        firstName: "HardcodedFirstName",
-                        lastName: "HardcodedLastName",
-                        role: "admin"
-                    }
-
-                    dispatch(adminLogin(statefulClient));
-
-                    // Show admin UI.
-                    history.replace("/admin")
-
-                    // SHOULD only be role: admin if admin, ELSE if client role will not exist
-                    // console.log(idTokenResult)
-                } else {
-
-                    axiosInstance()
-                        .then((i) => i.get('/client/email/' + user.user?.email)
-                            .then((r) => {
-                                const statefulClient: IUserClient = {
-                                    //retrieved from firebase
-                                    email: user.user?.email || "",
-                                    //unfortunately cognito stores this, NOT backend db
-                                    firstName: "HardcodedFirstName",
-                                    lastName: "HardcodedLastName",
-                                    //retrieved from backend db
-                                    companyName: r.data.companyName,
-                                    role: "client"
-                                }
-                                console.log(r)
-                                dispatch(clientLogin(statefulClient));
-                                //Show client UI
-                                history.replace("/home")
-
-                            }))
-                }
-            })
-                .catch((error) => {
-                    console.log(error.response.status);
-                })
-
-            // setSpinner(false);
         } catch (error) {
             setSpinner(false);
             setLoginMsg(error.message);
         }
     }
 
+    const checkCurrentUser = () => {
+
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                // User is signed in, see docs for a list of available properties
+                // https://firebase.google.com/docs/reference/js/firebase.User
+                firebase.auth().currentUser?.getIdTokenResult(true).then((idTokenResult) => {
+                    // Confirm the user is an Admin.
+                    // console.log(idTokenResult.claims);
+                    if (idTokenResult.claims.role) {
+                        //no api for admin by email
+                        const statefulClient: IUserAdmin = {
+                            email: idTokenResult.claims.email || "",
+                            firstName: "HardcodedFirstName",
+                            lastName: "HardcodedLastName",
+                            role: "admin"
+                        }
+        
+                        dispatch(adminLogin(statefulClient));
+        
+                        // Show admin UI.
+                        history.replace("/admin")
+        
+                        // SHOULD only be role: admin if admin, ELSE if client role will not exist
+                        // console.log(idTokenResult)
+                    } else {
+        
+                        axiosInstance()
+                            .then((i) => i.get('/client/email/' + idTokenResult.claims.email)
+                                .then((r) => {
+                                    const statefulClient: IUserClient = {
+                                        //retrieved from firebase
+                                        email: idTokenResult.claims.email || "",
+                                        //unfortunately cognito stores this, NOT backend db
+                                        firstName: "HardcodedFirstName",
+                                        lastName: "HardcodedLastName",
+                                        //retrieved from backend db
+                                        companyName: r.data.companyName,
+                                        role: "client"
+                                    }
+                                    console.log(r)
+                                    dispatch(clientLogin(statefulClient));
+                                    //Show client UI
+                                    history.replace("/home")
+        
+                                }))
+                    }
+                })
+                    .catch((error) => {
+                        setSpinner(false);
+                        console.log(error.response.status);
+                    })
+            } 
+        });
+    }
+
+    // useEffect(() => {
+    //     checkCurrentUser();
+    // })
 
     return (
         <>

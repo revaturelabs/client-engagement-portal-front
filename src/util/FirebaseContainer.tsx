@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import firebase from "firebase/app";
 import "firebase/auth";
 import { FirebaseAuthProvider } from "@react-firebase/auth";
+import { RootStateOrAny, useSelector } from 'react-redux';
+import { adminLogin, clientLogin } from '../actions/UserActions';
+import { IUserAdmin, IUserClient } from "../_reducers/UserReducer";
+import { useDispatch } from 'react-redux';
+import { axiosInstance } from "../util/axiosConfig";
 
-//demo config; NOT william's config.
 const firebaseConfig = {
   apiKey: "AIzaSyC4sxZlT-McTildwtxa8LV1lj7ZQhzOrs0",
   authDomain: "training-team-253916.firebaseapp.com",
@@ -23,8 +27,58 @@ if (!firebase.apps.length) {
 }
 
 const FirebaseContainer = (props: any) => {
+
+  const dispatch = useDispatch();
+  const user = useSelector((state: RootStateOrAny) => state.userState.user);
+
+  useEffect(() => {
+    if (!user) {
+      firebase.auth().onAuthStateChanged((firebaseUser) => {
+
+        firebaseUser?.getIdTokenResult(true).then((idTokenResult)=> {
+          if (idTokenResult.claims.role) {
+            
+            axiosInstance()
+            .then((i) => i.get('/admin/email/' + idTokenResult.claims.email)
+                .then((r) => {
+                    console.log(r)
+                    const statefulClient: IUserAdmin = {
+                        email: idTokenResult.claims.email || "",
+                        firstName: r.data.firstName,
+                        lastName: r.data.lastName,
+                        role: "admin"
+                    }
+                    dispatch(adminLogin(statefulClient));
+
+                }));
+
+          } else {
+
+            axiosInstance()
+            .then((i) => i.get('/client/email/' + idTokenResult.claims.email)
+                .then((r) => {
+                    const statefulClient: IUserClient = {
+                        //retrieved from firebase
+                        email: idTokenResult.claims.email || "",
+                        //unfortunately cognito stores this, NOT backend db
+                        firstName: "HardcodedFirstName",
+                        lastName: "HardcodedLastName",
+                        //retrieved from backend db
+                        companyName: r.data.companyName,
+                        role: "client"
+                    }
+                    
+                    dispatch(clientLogin(statefulClient));
+
+                }))
+          }
+        })
+      })
+    }
+  }, [user])
+
   return (
-    <FirebaseAuthProvider firebase={firebase} {...firebaseConfig}>
+    <FirebaseAuthProvider firebase={firebase} {...firebaseConfig} >
       {props.children}
     </FirebaseAuthProvider>
   );
