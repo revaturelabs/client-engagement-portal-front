@@ -36,6 +36,7 @@ const FirebaseContainer = (props: any) => {
       firebase.auth().onAuthStateChanged((firebaseUser) => {
 
         firebaseUser?.getIdTokenResult(true).then((idTokenResult)=> {
+          console.log('headers["tokenId"] =\n' + idTokenResult.token);
           if (idTokenResult.claims.role) {
             
             axiosInstance()

@@ -26,7 +26,7 @@ const setUp = (givenSpec: string) => {
         trainer: "batman",
         associateAssignments: undefined,
     };
-    return shallow(<BatchInformation batches={[{...props}]}/>);
+    return shallow(<BatchInformation batch={[{...props}]}/>);
 }
 
 describe('batchinfocomp', () => {

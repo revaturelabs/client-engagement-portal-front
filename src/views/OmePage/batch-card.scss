@@ -1,0 +1,102 @@
+@import "../../scss/revature-colors.scss";
+
+.batch-card {
+  background-color: white;
+  margin: 10px;
+  padding: 20px;
+  border: 1px solid $rev-orange;
+  box-shadow: 3px 3px 15px #72A4C260;
+  border-radius: 7px;
+
+  .left {
+    .match-text-highlight {
+      background-color: rgba(0,0,0,0.12);
+    }
+
+    .name-line {
+      margin-bottom: 0;
+
+      svg {
+        fill: rgba(0,0,0,0.12);
+        margin-right: 5px;
+        margin-bottom: 3px;
+      }
+
+      span {
+        font-weight: 500;
+      }
+
+      &:hover {
+        * {
+          fill: $rev-orange;
+          text-decoration: underline;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .detail {
+      font-weight: 500;
+      color: #474c55dd;
+      margin: 4px 4px 4px 0px;
+    }
+
+    .date-line {
+      font-style: italic;
+    }
+  }
+
+  .right {
+    text-align: center;
+
+    img {
+      max-width: 150px;
+      max-height: 50px;
+      overflow: hidden;
+    }
+
+    .bar-chart-wrapper {
+      padding-top: 0.5rem;
+
+      svg {
+        fill: rgba(0,0,0,0.12);
+
+        &:hover {
+          fill: $rev-orange;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+/*
+  info to display
+  -
+  img
+  name
+  skill
+  location
+  trainer first/last names
+  start/end date
+  -- graph icon to view graphs
+  -- view icon to view that batch
+  -- put these in a control row?
+
+  filters:
+  - completedTraining
+  - inTraining
+  - text
+    (can be split on ` in which case there is an
+    or evaluation)
+    - name
+    - skill
+    - location
+    - trainer name
+    - start/end date
+
+default/only sort is by batch finish date in
+desc order
+
+
+ */
