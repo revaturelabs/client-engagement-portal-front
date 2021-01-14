@@ -62,8 +62,9 @@ export interface UserState{
 
 /* Batches */
 export interface Associate {
-    firstName?: string;
-    lastName?: string;
+    firstName: string;
+    lastName: string;
+    salesforceId: number;
     grades: {
         dateReceived: string,
         gradeId: number,
@@ -80,6 +81,11 @@ export interface Associate {
     }[];
 }
 
+export interface AssociateAssignment {
+    active: boolean;
+    associate: Associate;
+}
+
 export interface Employee {
     firstName: string,
     lastName: string,
@@ -94,13 +100,12 @@ export interface BasicBatchData {
 export interface Batch extends BasicBatchData {
     endDate: string;
     trainer: string;
+    goodGrade: number;
+    passingGrade: number;
     employeeAssignments: {
         employee: Employee,
     }[];
-    associateAssignments: {
-        active: boolean,
-        associate: Associate,
-    }[];
+    associateAssignments: AssociateAssignment[];
 }
 
 export interface BatchState {

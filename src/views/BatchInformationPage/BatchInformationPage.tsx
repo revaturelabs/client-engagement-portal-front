@@ -15,6 +15,8 @@ const defaultBatchData : Batch = {
     name: "N/A",
     endDate: "N/A",
     trainer: "N/A",
+    passingGrade: 0,
+    goodGrade: 0,
     employeeAssignments: [{
         employee: {
             firstName: "N/A",
