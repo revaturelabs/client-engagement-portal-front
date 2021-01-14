@@ -127,6 +127,11 @@ export interface Associate {
     }[];
 }
 
+export interface AssociateAssignment {
+    active: boolean;
+    associate: Associate;
+}
+
 export interface Employee {
     firstName: string,
     lastName: string,
@@ -141,6 +146,8 @@ export interface BasicBatchData {
 export interface Batch extends BasicBatchData {
     endDate: string;
     trainer: string;
+    goodGrade: number;
+    passingGrade: number;
     employeeAssignments: EmployeeAssignment[];
     associateAssignments: AssociateAssignment[];
 }
