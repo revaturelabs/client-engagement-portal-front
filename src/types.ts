@@ -64,7 +64,7 @@ export interface UserState{
 export interface Associate {
     firstName?: string;
     lastName?: string;
-    grades?: {
+    grades: {
         dateReceived: string,
         gradeId: number,
         score: number,
