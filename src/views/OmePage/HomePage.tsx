@@ -41,6 +41,12 @@ export default class HomePage extends React.Component<any, IHomePageState> {
     }, this.updateHiddenBatchIds);
   }
 
+  private handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Escape') {
+      this.setState({searchText: '' , searchTexts: []}, this.updateHiddenBatchIds);
+    }
+  }
+
   private updateHiddenBatchIds = () => {
     const needles = this.state.searchTexts;
     const hiddenBatchIds = new Set<string>();
@@ -81,6 +87,7 @@ export default class HomePage extends React.Component<any, IHomePageState> {
                   value={this.state.searchText}
                   onChange={this.onInputChange}
                   placeholder='new york`349'
+                  onKeyDown={this.handleKeyDown}
               />
               {
                 this.state.batches
