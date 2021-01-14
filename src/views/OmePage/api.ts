@@ -6,6 +6,11 @@ export const getDummyBatches = async (): Promise<Batch[]> => {
   return dummyBatches as any as Batch[];
 }
 
+export const getClientBatches = async (userEmail: String): Promise<Batch[]> => {
+  await new Promise(res => setTimeout(res, 500));
+  return [dummyBatches[1],dummyBatches[2]] as any as Batch[];
+}
+
 export const getSingleBatch = async (batchId: string):
     Promise<Batch | undefined> => {
   await new Promise(res => setTimeout(res, 500));
