@@ -1,4 +1,3 @@
-import { Auth } from "aws-amplify";
 import { shallow } from "enzyme";
 import React from 'react';
 import { Button, Input, Label, Modal } from 'reactstrap';
@@ -25,14 +24,6 @@ let fakeAdmin:IAdmin;
 let fakeClient:IClient;
 
 beforeAll(() => {
-
-    Auth.currentUserInfo = jest.fn().mockImplementation(() => {
-        return {
-          attributes: {
-            "custom:userRole": "admin",
-          },
-        };
-      });
 
     fakeAdmin = {
         role: 'admin',
