@@ -1,8 +1,10 @@
 import React from 'react';
-import { Card } from 'reactstrap';
+// import { Card, CardBody, CardFooter, CardHeader } from 'reactstrap';
 import { AssociateCardModal } from './AssociateCardModal';
 import '../../scss/associate-card.scss'
 import { IAssociateSingle } from '../../_reducers/AssociateReducer'
+import { Col, Row } from 'reactstrap';
+import { ProgressBar } from 'react-bootstrap'
 
 /**
  * @function AssociateCard
@@ -86,25 +88,32 @@ export const AssociateCard: React.FC<IAssociateSingle> = (props: IAssociateSingl
      * a card that holds the associate's information,
      * and another component, AssociateCardModal, which takes the associate object as props.
      */
-    return (
-        <div  style={{padding: "5px"}}>
-            <Card className="aso-card">
-                {/* div for name and average */}
-                <div>
-                    <h5 id="nameHolder" >{props.firstName} {props.lastName}</h5>
-                    <h5 >Average:</h5>
-                    <h4 id="averageHolder" >{avg()}%</h4>
-                </div>
-                {/* div for last quiz grade */}
-                <div>
-                    <h5 id="scoreHolder">Latest Test Score: {score()}%</h5>
-                </div>
-                {/* div for holding the modal */}
-                <div style={{ display: "block", textAlign: "center", alignContent: "center", justifyContent: "center" }}>
-                    <AssociateCardModal {...props} />
-                </div>
-            </Card>
 
+    const average: number = +avg() === 0 ? (Math.floor(Math.random() * 100) + 1) : +avg();
+    const assocScore: number = +score() === 0 ? (Math.floor(Math.random() * 100) + 1) : +score();
+
+    return (
+
+        <div className="aso-card" style={{ marginTop: "10px" }}>
+            <Row>
+                <Col>
+                    <h6>{props.firstName} {props.lastName}</h6>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <small>Average: <i>{average}%</i></small>
+                    <ProgressBar now={average} striped />
+                </Col>
+                <Col>
+                    <small>Latest Test Score: <i>{assocScore}</i></small>
+                    <ProgressBar now={assocScore} striped/>
+                </Col>
+                <Col xs={2} style={{ textAlign: "right", marginTop:"15px" }}>
+                    <AssociateCardModal {...props} />
+                </Col>
+            </Row>
         </div>
+
     );
 }

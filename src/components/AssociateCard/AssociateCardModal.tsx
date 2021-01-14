@@ -47,7 +47,7 @@ export const AssociateCardModal:React.FC<IAssociateSingle> = (props:IAssociateSi
      */
     return (
         <>
-                <Button id="openBtn" className="view-btn" onClick={toggle}>View</Button>
+                <button id="openBtn" className="view-btn" onClick={toggle}>View</button>
                 <Modal isOpen={show} toggle={toggle}>
                     <ModalHeader toggle={toggle}>
                         <h3 id="associateName">{props.firstName} {props.lastName}</h3>

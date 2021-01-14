@@ -1,18 +1,25 @@
 @import "revature-colors.scss";
 
+.progress-bar {
+    background-color: #F26925 !important;
+}
+
 .aso-card
 {
-    background-color: white !important;
     padding: 15px !important;
+    background-color: white !important;
     border: 1px solid #F26925 !important;
     border-radius: 20px !important;
     width: 100% !important;
-    text-align: center !important;
     align-content: center !important;
     display: inline-block !important;
 }
 
-
+.aso-card h1, h2, h3, h4, h5, h6 {
+    margin: 0px;
+    padding: 0px;
+    color: #F26925 !important;
+}
 
 .h-divider{
     margin-top:5px;
@@ -69,12 +76,13 @@ div.aso-scroll-container {
 }
 .view-btn
 {
-    line-height: 1.5;
-    width: 70%;
-    border: 3px solid $rev-orange !important;
+    width: auto;
+    border: 1px solid $rev-orange !important;
     background-color: $rev-orange !important;
     color: white !important;
-    font-size: 20px;
+    font-size: small;
+    border-radius: 5px;
+    padding: 1px 15px;
 }
 .view-btn:hover
 {

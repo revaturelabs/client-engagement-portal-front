@@ -1,6 +1,7 @@
 node_modules
 coverage
 .idea/
+package-lock.json
 
 #amplify
 amplify/\#current-cloud-backend
