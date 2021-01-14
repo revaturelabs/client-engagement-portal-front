@@ -2,6 +2,7 @@ import React from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { Batch } from '../OmePage/types';
 import { getSingleBatch } from '../OmePage/api';
+import LoadingPage  from '../LoadingPage/LoadingPage';
 import BatchInfoPageContent from './BatchInfoPageContent';
 
 interface IBatchInfoPageProps
@@ -32,7 +33,7 @@ class BatchInfoPage
 
   render() {
     const b = this.state.batch;
-    return !b ? 'loading batch.........' : (
+    return !b ? <LoadingPage/> : (
         <BatchInfoPageContent {...this.props} batch={b}/>
     )
   }
