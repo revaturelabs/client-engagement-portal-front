@@ -15,8 +15,6 @@ interface IAdmin {
 interface IClient {
     role: String,
     email: String,
-    firstname: String,
-    lastname: String,
     companyname: String,
     phonenumber: String,
     password: String
@@ -46,8 +44,6 @@ beforeAll(() => {
     fakeClient = {
         role: 'client',
         email: 'client@test',
-        firstname: 'Clint',
-        lastname: 'Johnson',
         companyname: 'Walmart',
         phonenumber: '123-123-1231',
         password: 'coolpass'
@@ -74,17 +70,17 @@ test('should be two options for account type', () => {
 })
 
 /**
- * There should be eight labels on this modal.
+ * There should be six labels on this modal.
  */
-test('should be 8 Labels', () => {
-    expect(wrapper.find(Label).length).toBe(8);
+test('should be 6 Labels', () => {
+    expect(wrapper.find(Label).length).toBe(6);
 })
 
 /**
- * There should be eight inputs on this modal.
+ * There should be seven inputs on this modal.
  */
-test('should be 9 Inputs', () => {
-    expect(wrapper.find(Input).length).toBe(9);
+test('should be 7 Inputs', () => {
+    expect(wrapper.find(Input).length).toBe(7);
 })
 
 /**
@@ -94,8 +90,8 @@ test('should be 9 Inputs', () => {
  */
 test('register user function should properly set constants', async () => {
 
-    const values = ['client@test','Clint','Johnson','Walmart','123-123-1231','coolpass','coolpass'];
-    for(let i = 1; i < 8; i++){
+    const values = ['client@test','Walmart','123-123-1231','coolpass','coolpass'];
+    for(let i = 1; i < 6; i++){
         // let val = { target: { value: values[i-1] } };
         wrapper.find(Input).at(i).childAt(0).value=values[i-1];
         //input.instance().value=values[i - 1];
@@ -119,7 +115,7 @@ test('Form should be different for client and admin', ()=>{
      * Checks that when client is selected, form has 8 fields and a button
      */
     wrapper.find('#exampleSelect').simulate('change', {target : { value : 'client'}});
-    expect(wrapper.find(Input).length).toBe(9);
+    expect(wrapper.find(Input).length).toBe(7);
 
     /**
      * Checks that when admin is selected, form has 6 fields and a button
