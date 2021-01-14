@@ -5,6 +5,7 @@ import { BatchInformation } from '../../components/BatchInformation/BatchInforma
 import { NavBar } from '../../components/NavBar/NavBar';
 import { Batch } from '../../types';
 import { getBatchData } from '../../ajax';
+import DoughnutChart from '../../components/Graphs/DoughnutChart';
 
 interface IProps extends RouteComponentProps<{batchId:string}> {
     batches: Batch[],
@@ -15,6 +16,8 @@ const defaultBatchData : Batch = {
     name: "N/A",
     endDate: "N/A",
     trainer: "N/A",
+    goodGrade: 0,
+    passingGrade: 0,
     employeeAssignments: [{
         employee: {
             firstName: "N/A",

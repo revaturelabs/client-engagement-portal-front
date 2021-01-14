@@ -94,6 +94,8 @@ export interface BasicBatchData {
 export interface Batch extends BasicBatchData {
     endDate: string;
     trainer: string;
+    goodGrade: number,
+    passingGrade: number,
     employeeAssignments: {
         employee: Employee,
     }[];
