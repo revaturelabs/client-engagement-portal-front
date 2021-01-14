@@ -58,8 +58,8 @@ exports[`HomePage should render with given state from Redux store 1`] = `
               }
             }
           >
-            Welcome, 
-            Developer User
+            Welcome 
+            
              ▼
           </span>
           <span
@@ -262,7 +262,7 @@ exports[`HomePage should render with given state from Redux store 2`] = `
               }
             }
           >
-            Welcome, 
+            Welcome 
             wack jobs
              ▼
           </span>
