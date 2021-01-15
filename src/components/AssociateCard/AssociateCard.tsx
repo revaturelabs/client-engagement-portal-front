@@ -101,15 +101,15 @@ export const AssociateCard: React.FC<IAssociateSingle> = (props: IAssociateSingl
                 </Col>
             </Row>
             <Row>
-                <Col>
+                <Col md={5} sm={12}>
                     <small>Average: <i>{average}%</i></small>
                     <ProgressBar now={average} striped />
                 </Col>
-                <Col>
+                <Col md={5} sm={12}>
                     <small>Latest Test Score: <i>{assocScore}</i></small>
                     <ProgressBar now={assocScore} striped/>
                 </Col>
-                <Col xs={2} style={{ textAlign: "right", marginTop:"15px" }}>
+                <Col md={2} sm={12} style={{ textAlign: "right", marginTop:"15px" }}>
                     <AssociateCardModal {...props} />
                 </Col>
             </Row>

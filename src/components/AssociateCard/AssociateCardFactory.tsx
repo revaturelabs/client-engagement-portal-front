@@ -1,7 +1,7 @@
 import React from 'react';
 import { AssociateCard } from './AssociateCard';
 import {IAssociate} from '../../_reducers/AssociateReducer'
-import Carousel from "react-multi-carousel";
+// import Carousel from "react-multi-carousel";
 
 
 /**
@@ -44,28 +44,28 @@ export const AssociateCardFactory:React.FC<any> = (props:IAssociate) => {
      * @constant responsive
      * Styling Configurations for the carousel
      */
-    const responsive = {
-        superLargeDesktop: {
-          breakpoint: { max: 4000, min: 1200 },
-          items: 5,
-          slidesToSlide: 5
-        },
-        desktop: {
-          breakpoint: { max: 1200, min: 992 },
-          items: 3,
-          slidesToSlide: 3
-        },
-        tablet: {
-          breakpoint: { max: 992, min: 576 },
-          items: 2,
-          slidesToSlide: 2
-        },
-        mobile: {
-          breakpoint: { max: 576, min: 0 },
-          items: 1,
-          slidesToSlide: 1
-        }
-      };
+    // const responsive = {
+    //     superLargeDesktop: {
+    //       breakpoint: { max: 4000, min: 1200 },
+    //       items: 5,
+    //       slidesToSlide: 5
+    //     },
+    //     desktop: {
+    //       breakpoint: { max: 1200, min: 992 },
+    //       items: 3,
+    //       slidesToSlide: 3
+    //     },
+    //     tablet: {
+    //       breakpoint: { max: 992, min: 576 },
+    //       items: 2,
+    //       slidesToSlide: 2
+    //     },
+    //     mobile: {
+    //       breakpoint: { max: 576, min: 0 },
+    //       items: 1,
+    //       slidesToSlide: 1
+    //     }
+    //   };
 
     /**
      * @function return
