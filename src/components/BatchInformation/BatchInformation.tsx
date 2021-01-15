@@ -35,29 +35,44 @@ export const BatchInformation: React.FC<IProps> = (props: IProps) => {
                             </CardHeader>
                             <CardBody >
                                 <Row style={{ textAlign: "center" }}>
-                                    <Col> 
+                                    <Col md={6} sm={12}>
                                         <div className="logo-container">
                                             <img src={image} alt="Specialization logo" className='' /><br />
                                         </div>
-                                    </Col>
-                                    <Col>
-                                        <img src={mockdonutgraph} alt="donut graph" style={{ width: "100px" }} /><br />
-                                    </Col>
-                                </Row>
-                                <Row style={{ textAlign: "center" }}>
-                                    <Col>
                                         <small id="test-skill">{props.batch.skill}</small>
                                     </Col>
-                                    <Col>
+                                    <Col md={6} sm={12}>
+                                        <img src={mockdonutgraph} alt="donut graph" style={{ width: "100px" }} /><br />
                                         <small id="test-skill">Overall Batch Progress</small>
                                     </Col>
                                 </Row>
                                 <hr />
                                 <Row>
                                     <Col style={{ textAlign: "center" }}>
-                                        <small id="test-train"><b className='readtrainer'>TRAINER:</b> {trainer}</small><br />
-                                        <small id="test-end-date"><b className='readted'>TRAINING END DATE:</b> {props.batch.endDate}</small><br />
-                                        <small><b>BATCH ENGINEERS:</b> {props.batch.associateAssignments.length}</small>
+                                        <Row>
+                                            <Col md={6} sm={12}>
+                                                <small id="test-train"><b className='readtrainer'>LOCATION:</b> {props.batch.location.toUpperCase()} </small><br />
+                                            </Col>
+                                            <Col md={6} sm={12}>
+                                                <small id="test-train"><b className='readtrainer'>TRAINER:</b> {trainer}</small><br />
+                                            </Col>
+                                        </Row>
+                                        <Row>
+                                            <Col md={6} sm={12}>
+                                                <small id="test-end-date"><b className='readted'>STARTING DATE:</b> {props.batch.startDate}</small><br />
+                                            </Col>
+                                            <Col md={6} sm={12}>
+                                                <small id="test-end-date"><b className='readted'>ENDING DATE:</b> {props.batch.endDate}</small><br />
+                                            </Col>
+                                        </Row>
+                                        <Row>
+                                            <Col md={6} sm={12}>
+                                                <small><b>BATCH ENGINEERS:</b> {props.batch.associateAssignments.length}</small>
+                                            </Col>
+                                            <Col md={6} sm={12}>
+                                                <small><b>CURRENT WEEK:</b> {props.batch.currentWeek}</small>
+                                            </Col>
+                                        </Row>
                                     </Col>
                                 </Row>
                             </CardBody>

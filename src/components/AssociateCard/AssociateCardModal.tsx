@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Button, ModalBody, Row, ModalHeader } from 'reactstrap';
+import { Modal, ModalBody, Row, ModalHeader } from 'reactstrap';
 import '../../scss/associate-card.scss';
 import {IAssociateSingle} from '../../_reducers/AssociateReducer'
 
