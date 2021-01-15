@@ -74,9 +74,9 @@ export const AssociateCardFactory:React.FC<any> = (props:IAssociate) => {
      */
     return(
         <>
-            <Carousel className="holderCarousel" responsive={responsive}>
+            {/* <Carousel className="holderCarousel" responsive={responsive}> */}
                 {cards}
-            </Carousel>
+            {/* </Carousel> */}
         </>
     )
 }

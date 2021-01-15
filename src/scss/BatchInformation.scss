@@ -51,6 +51,7 @@
 .card-header h4 {
     margin-top: 6px;
     color: $rev-orange;
+    text-transform: uppercase;
 }
 .batch-info-card .card-body {
     color: $rev-dgray;
@@ -61,8 +62,6 @@
 .logo-container img{
     max-width: 60%;
     max-height: 80px;
-    vertical-align: middle;
-    margin: auto; 
 }
 .helper{
     display: inline-block;
@@ -76,14 +75,13 @@ b {
     font-weight: bold !important;
 }
 .intervention-button {
+    font-size: small;
     box-sizing: border-box;
     box-shadow: none;
     background-color: #F26925;
     color: white;
-    font-weight: bold;
-    border: 3px solid #F26925;
+    border: 1px solid #F26925;
     border-radius: 5px;
-    margin-top: 20px;
     padding: 10px;
     transition: all 0.15s ease 0s;
 }
