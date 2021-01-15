@@ -41,7 +41,7 @@ describe('private-route', () => {
         });
 
         PrivateComponent = () => <div>Private Component</div>;
-        props = { path: '/client', component: PrivateComponent };
+        props = { path: '/home', component: PrivateComponent };
 
         wrapper = mount(
             <Provider store={store}>
@@ -62,7 +62,7 @@ describe('private-route', () => {
         });
 
         PrivateComponent = () => <div>Private Component</div>;
-        props = { path: '/client', component: PrivateComponent };
+        props = { path: '/home', component: PrivateComponent };
 
         wrapper = mount(
             <Provider store={store}>

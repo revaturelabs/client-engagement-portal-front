@@ -11,9 +11,9 @@ const getAxiosHeader = async () => {
 
 /**
  * Our Axios Instances need to wait on the token that we get
- * from the CognitoUserSession.  Once we get the token,
- * we can proceed to make the requests.  This instance refers
- * to the endpoints / resource server hosted on an AWS EC2.
+ * from the Firebase SDK.
+ * Once we get the token, we can proceed to make the requests.
+ * This instance refers to the endpoints / resource server hosted on an AWS EC2.
  * Sample code for achieveing a new instance:
  * axiosInstance().then(function (result) {
     result.get('/admin/')
