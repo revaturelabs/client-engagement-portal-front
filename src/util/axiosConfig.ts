@@ -9,8 +9,6 @@ const getAxiosHeader = async () => {
 
 }
 
-
-
 /**
  * Our Axios Instances need to wait on the token that we get
  * from the CognitoUserSession.  Once we get the token,
