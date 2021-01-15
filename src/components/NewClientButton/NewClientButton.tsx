@@ -80,7 +80,7 @@ export const NewClientButton: React.FC<IProps> = (props: IProps) => {
       signUp(email, password);
 
       if (role === "client") {
-        (await axiosInstance()).post("/client/", { // Client does not have firstName and lastName; this must be retrieved from Cognito upon login
+        (await axiosInstance()).post("/client/", {
           clientBatches: [],
           clientId: 0,
           companyName: companyName,
@@ -90,7 +90,7 @@ export const NewClientButton: React.FC<IProps> = (props: IProps) => {
 
         props.reloadClientDropdowns();
       } else if (role === "admin") {
-        (await axiosInstance()).post("/admin/new", { // Should also retrieve Admin firstName and lastName from Cognito; it saves a database request
+        (await axiosInstance()).post("/admin/new", { 
           adminId: 0,
           email: email,
           firstName: firstName,

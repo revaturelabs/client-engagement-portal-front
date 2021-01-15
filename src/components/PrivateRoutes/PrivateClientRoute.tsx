@@ -11,7 +11,7 @@ import LoadingPage from '../../views/LoadingPage/LoadingPage';
  * user to the '/login' route. If there is a current user in the redux store
  * AND they are a client then they are provided the private component.
  * 
- * If their role is admin, then they will be redirected to /client.
+ * If their role is admin, then they will be redirected to /admin.
  * 
  * @param component The private component which should not be accessed.
  * @param rest simply the rest of the props necessary to pass history, and
