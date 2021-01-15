@@ -45,7 +45,7 @@ const HomePage = (props: IProps) => {
     })();
   }, []);
 
-  useEffect(() => updateHiddenBatchIds(), [searchText])// eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => updateHiddenBatchIds(), [searchText]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const getBatches = async (email: string, admin: boolean) => {
     // show batches that finish furthest in the future first
@@ -84,12 +84,16 @@ const HomePage = (props: IProps) => {
 
     // determine which batches should be hidden
     for (const b of batches) {
-      const wc = BatchCard.WrappedComponent;
+      const date = `${b.startDate} to ${b.endDate}`;
+      const trainers = b.employeeAssignments
+        .map((e) => `${e.employee.firstName} ${e.employee.lastName || ""}`)
+        .join(", ");
+
       const haystacks: string[] = [
         b.name.toLowerCase(),
         b.location.toLowerCase(),
-        wc.getTrainersLine(b).toLowerCase(),
-        wc.getDateLine(b).toLowerCase(),
+        trainers.toLowerCase(),
+        date.toLowerCase(),
       ];
 
       let foundMatch = true;

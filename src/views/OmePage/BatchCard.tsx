@@ -16,50 +16,49 @@ interface IBatchCardProps extends RouteComponentProps {
   searchTexts: string[];
 }
 
-class BatchCard extends React.Component<IBatchCardProps, any> {
-  static getDateLine = (b: Batch) => `${ b.startDate } to ${ b.endDate }`;
+const BatchCard = (props: IBatchCardProps) => {
+  const getDateLine = (b: Batch) => `${ b.startDate } to ${ b.endDate }`;
 
-  static getTrainersLine = (b: Batch): string => b.employeeAssignments
+  const getTrainersLine = (b: Batch): string => b.employeeAssignments
       .map(e => `${ e.employee.firstName } ${ e.employee.lastName || '' }`)
       .join(', ');
 
-  goToBatchPage = () => {
-    this.props.history.push(`/batch/${ this.props.batch.batchId }`);
+  const goToBatchPage = () => {
+    props.history.push(`/batch/${ props.batch.batchId }`);
   };
 
-  render() {
-    const batch = this.props.batch;
+    const batch = props.batch;
     const imgSrc = batchSkillToImage[batch.skill];
 
     return (
         <Container className='batch-card'>
           <Row>
             <Col xs='7' sm='8' className='left'>
-              <p className='name-line' onClick={ this.goToBatchPage }>
+              <p className='name-line' onClick={ goToBatchPage }>
                 <ExternalLinkIcon width={ 20 } height={ 20 }/>
                 <MatchTextComponent
                     use='span'
-                    needles={ this.props.searchTexts }
+                    needles={ props.searchTexts }
                     haystack={ batch.name }
                 />
               </p>
               <MatchTextComponent
                   className='detail'
                   use='p'
-                  needles={ this.props.searchTexts }
+                  needles={ props.searchTexts }
                   haystack={ batch.location }
               />
               <MatchTextComponent
                   className='detail'
                   use='p'
-                  needles={ this.props.searchTexts }
-                  haystack={ BatchCard.getTrainersLine(batch) }
+                  needles={ props.searchTexts }
+                  haystack={ getTrainersLine(batch) }
               />
               <MatchTextComponent
                   className='detail date-line'
                   use='p'
-                  needles={ this.props.searchTexts }
-                  haystack={ BatchCard.getDateLine(batch) }
+                  needles={ props.searchTexts }
+                  haystack={ getDateLine(batch) }
               />
             </Col>
             <Col className='right flex-column'>
@@ -73,7 +72,6 @@ class BatchCard extends React.Component<IBatchCardProps, any> {
           </Row>
         </Container>
     );
-  }
 }
 
 export default withRouter(BatchCard);
