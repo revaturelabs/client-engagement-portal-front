@@ -1,4 +1,4 @@
-import { Auth } from "aws-amplify";
+import 'firebase/auth'
 import React, { ChangeEvent, useState } from "react";
 import {
   Button,
@@ -16,9 +16,10 @@ import {
 } from "reactstrap";
 import '../../scss/NewClientButton.scss';
 import { axiosInstance } from "../../util/axiosConfig";
+import {signUp} from "../../util/FirebaseContainer";
 
-interface IProps{
-  reloadClientDropdowns:() => void
+interface IProps {
+  reloadClientDropdowns: () => void
 }
 
 /**
@@ -28,7 +29,7 @@ interface IProps{
  * This also has a modal form that pops up when the button is clicked
  *
   */
-export const NewClientButton: React.FC<IProps> = (props:IProps) => {
+export const NewClientButton: React.FC<IProps> = (props: IProps) => {
   const [modal, setModal] = useState(false);
 
   // Decided to eliminate Redux to help with tests, it's unnecessary anyway
@@ -58,49 +59,25 @@ export const NewClientButton: React.FC<IProps> = (props:IProps) => {
     // These need to be up here. Data is dropped when user is checked {for some reason} <= these fields are cleared when the modal unloads
     const email = event.currentTarget["email"].value;
     const password = event.currentTarget["password"].value;
-    const firstName = event.currentTarget["firstName"].value;
-    const lastName = event.currentTarget["lastName"].value;
     const role = event.currentTarget["select"].value;
+    let firstName;
+    let lastName;
     let companyName;
     let phoneNumber;
 
-    if(role==='client') {
+    if (role === 'client') {
       companyName = event.currentTarget["companyName"].value;
       phoneNumber = event.currentTarget["phoneNumber"].value;
+    } else {
+      firstName = event.currentTarget["firstName"].value;
+      lastName = event.currentTarget["lastName"].value;
     }
 
-    // Checks cognito if they have the admin role in the current session  for security. If not exit out
-    // This checking operation takes about 150 MS
-    // Unknown Error - Response time can be 10,000 MS. Usually happens when react is updating. This shouldn't be a problem
-
-    // const checkRole = Auth.currentUserInfo();
-    // const checker = await checkRole.then(function (result) {
-
-    //   if (result.attributes["custom:userRole"] !== "admin") {
-    //     // dispatch(logout());
-    //     // Auth.signOut().then(() => window.location.href="/");
-    //     return false;
-    //   } else {
-    //     return true;
-    //   }
-    // });
-
-    // if (!checker) {
-    //   console.log("Error: User does not have permissions to create an account");
-    //   return null;
-    // }
     setModal(!modal);
 
     try {
-      await Auth.signUp({
-        username: email,
-        password: password,
-        attributes: {
-          "custom:userRole": role, // custom role for assigning user to admin or client role
-          "given_name": firstName,
-          "family_name": lastName
-        },
-      });
+
+      signUp(email, password);
 
       if (role === "client") {
         (await axiosInstance()).post("/client/", { // Client does not have firstName and lastName; this must be retrieved from Cognito upon login
@@ -168,22 +145,6 @@ export const NewClientButton: React.FC<IProps> = (props:IProps) => {
               <Label>Email</Label>
               <Input type="email" required name="email" id="email"></Input>
             </FormGroup>
-            <Container>
-              <Row>
-                <Col>
-                  <FormGroup>
-                    <Label>First Name</Label>
-                    <Input type="text" required name="firstName" id="firstName"></Input>
-                  </FormGroup>
-                </Col>
-                <Col>
-                  <FormGroup>
-                    <Label>Last Name</Label>
-                    <Input type="text" required name="lastName" id="lastName"></Input>
-                  </FormGroup>
-                </Col>
-              </Row>
-            </Container>
             {accountType === "client" ? (<>
               <FormGroup>
                 <Label>Company Name</Label>
@@ -195,7 +156,22 @@ export const NewClientButton: React.FC<IProps> = (props:IProps) => {
               </FormGroup>
             </>
             ) : (
-                <></>
+                <><Container>
+                <Row>
+                  <Col>
+                    <FormGroup>
+                      <Label>First Name</Label>
+                      <Input type="text" required name="firstName" id="firstName"></Input>
+                    </FormGroup>
+                  </Col>
+                  <Col>
+                    <FormGroup>
+                      <Label>Last Name</Label>
+                      <Input type="text" required name="lastName" id="lastName"></Input>
+                    </FormGroup>
+                  </Col>
+                </Row>
+              </Container></>
               )}
             <FormGroup>
               <Label>Password</Label>
@@ -214,7 +190,7 @@ export const NewClientButton: React.FC<IProps> = (props:IProps) => {
           </ModalBody>
 
           <ModalFooter>
-            <Input type="submit" value="Submit" className="create-account-submit"/>
+            <Input type="submit" value="Submit" className="create-account-submit" />
           </ModalFooter>
         </Form>
       </Modal>
