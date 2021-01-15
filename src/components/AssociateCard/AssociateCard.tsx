@@ -1,5 +1,4 @@
 import React from 'react';
-// import { Card, CardBody, CardFooter, CardHeader } from 'reactstrap';
 import { AssociateCardModal } from './AssociateCardModal';
 import '../../scss/associate-card.scss'
 import { IAssociateSingle } from '../../_reducers/AssociateReducer'
