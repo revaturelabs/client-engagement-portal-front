@@ -45,6 +45,8 @@ const HomePage = (props: IProps) => {
     })();
   }, []);
 
+  useEffect(() => updateHiddenBatchIds(), [searchText])// eslint-disable-line react-hooks/exhaustive-deps
+
   const getBatches = async (email: string, admin: boolean) => {
     // show batches that finish furthest in the future first
     const batchList = admin
@@ -67,14 +69,12 @@ const HomePage = (props: IProps) => {
         .map((s) => s.trim().toLowerCase())
         .filter((s) => !!s)
     );
-    updateHiddenBatchIds();
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Escape") {
       setSearchText("");
       setSearchTexts([]);
-      updateHiddenBatchIds();
     }
   };
 
