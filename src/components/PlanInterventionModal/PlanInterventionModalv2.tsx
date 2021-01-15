@@ -71,29 +71,64 @@ const PlanInterventionModalv2: React.FC = () => {
     
 
 
-    async function NoticeAdmin(){
-        var txt = (document.getElementById("message") as HTMLInputElement).value;
-        console.log("You get a notification from Client: ", '\n' ," Message: " ,txt);
-        console.log('data2 ', clientInfo);
-        (await axiosInstance()).get(`admin/`).then((response)=> {
+    var adminList:Number[] = [];
+    var adminEmailList:String[] = [];
+    var ClientId:Number;
+    var Message:String;
+    async function NoticeAdmin() {
+        Message = (document.getElementById("message") as HTMLInputElement).value;
+        console.log("You get a notification from Client: ", '\n', " Message: ", Message);
+        (await axiosInstance()).get(`client/email/${clientEmail}`).then((response) => {
             const data = response
-            for(var i=0; i< data.data.length; i++) {
+            console.log("clientinfo ", data)
+            ClientId = data.data.clientId;
+            
+        });
+       
+        
+        (await axiosInstance()).get(`admin/`).then((response) => {
+            const data = response
+            for (let i = 0; i < data.data.length; i++) {
                 console.log("adminEmail: ", data.data[i].email);
+                adminEmailList.push(data.data[i].email)
+                adminList.push(data.data[i].adminId)
+            }
+
+            for (let email of adminEmailList){
+                console.log(adminList);
                 let mailOptions = {
                     firstName: clientFirstName,
                     lastName: clientLastName,
-                    adminEmail: data.data[i].email,
-                    message: txt
+                    adminEmail: email,
+                    message: Message
                 };
-                emailjs.send('service_780easr', 'template_1co3ggw',mailOptions,'user_qNzha4WnrQ4xZeolBYZkl')
+                emailjs.send('service_780easr', 'template_1co3ggw', mailOptions, 'user_qNzha4WnrQ4xZeolBYZkl')
                     .then((result) => {
                         console.log(result.text);
                     }, (error) => {
                         console.log(error.text);
-                    });
-            }
-        })    
+                    });     
+            };
+            postRequestMsg();
+        });
     }
+    
+    async function postRequestMsg() {
+        for (let adminId2 of adminList){
+            (await axiosInstance()).post(`msg/client`,{
+                adminId : adminId2,
+                clientId: ClientId,
+                message: Message
+            }).then((res)=>{
+                console.log(res);
+            });
+            console.log("idminId", adminId2)
+            console.log("clientId", ClientId)
+            console.log("imessage", Message);
+        }
+   
+}
+
     return (
 
         <>

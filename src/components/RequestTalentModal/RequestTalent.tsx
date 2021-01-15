@@ -80,6 +80,7 @@ const RequestTalent: React.FC = () => {
 
 
     var adminList:Number[] = [];
+    var adminEmailList:String[] = [];
     var ClientId:Number;
     var Message:String;
     async function NoticeAdmin() {
@@ -90,19 +91,23 @@ const RequestTalent: React.FC = () => {
             console.log("clientinfo ", data)
             ClientId = data.data.clientId;
             
-        })
-        console.log("ClientId", ClientId);
+        });
+       
         
         (await axiosInstance()).get(`admin/`).then((response) => {
             const data = response
             for (let i = 0; i < data.data.length; i++) {
                 console.log("adminEmail: ", data.data[i].email);
+                adminEmailList.push(data.data[i].email)
                 adminList.push(data.data[i].adminId)
+            }
+
+            for (let email of adminEmailList){
                 console.log(adminList);
                 let mailOptions = {
                     firstName: clientFirstName,
                     lastName: clientLastName,
-                    adminEmail: data.data[i].email,
+                    adminEmail: email,
                     message: Message
                 };
                 emailjs.send('service_780easr', 'template_1co3ggw', mailOptions, 'user_qNzha4WnrQ4xZeolBYZkl')
@@ -111,13 +116,13 @@ const RequestTalent: React.FC = () => {
                     }, (error) => {
                         console.log(error.text);
                     });     
-            }
+            };
             postRequestMsg();
-        })
+        });
     }
     
     async function postRequestMsg() {
-        
+        Message = (document.getElementById("message") as HTMLInputElement).value;
         for (let adminId2 of adminList){
             (await axiosInstance()).post(`msg/client`,{
                 adminId : adminId2,
