@@ -33,8 +33,10 @@ if (!firebase.apps.length) {
 
 /**
  * This component is the Firebase wrapper and should be nested within a redux store provider.
- * It handles authentication by listening for changes to the auth state, which happens when a user logs in or out. It then dispatches those changes to the redux store.
- * Since redux store does not persist across refresh, but Firebase does, this wrapper initializes the listener when the user object is empty. Firebase will load the previous session, which will be dispatched properly to the redux store.
+ * It handles authentication by listening for changes to the auth state, which happens when a user logs in or out.
+ * It then dispatches those changes to the redux store.
+ * Since redux store does not persist across refresh, but Firebase does, this wrapper initializes the listener when the user object is empty.
+ * Firebase will load the previous session, which will be dispatched properly to the redux store.
  * User email is stored in Firebase Auth, but user details (names) are stored on the backend, requiring an axios call to retrieve said details.
  * @param props both the firebase app object and firebaseConfig are passed as props for the container.
  * @returns the FirebaseContainer as a wrapper component for the rest of the application that relies on authentication.
@@ -95,7 +97,9 @@ const secondaryApp = firebase.initializeApp(firebaseConfig, "Secondary");
 /**
  * This handles the creation of new users (Admins and Clients.)
  * Firebase immediately logs in a new user when it is created.
- * Unfortunately, there is no native solution to this problem, so in the case of our app, we must create a secondary firebase instance to handle sign-up, otherwise the new users created will override the currently authenticated user's session.
+ * Unfortunately, there is no native solution to this problem.
+ * So in the case of our app, we must create a secondary firebase instance to handle sign-up,
+ * otherwise the new users created will override the currently authenticated user's session.
  * This function uses the secondary firebase app instance exclusively.
  * @param email the email used for creating a new Firebase user.
  * @param password password for the new Firebase user.
