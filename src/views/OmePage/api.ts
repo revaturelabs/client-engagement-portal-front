@@ -1,19 +1,38 @@
-import { Batch } from './types';
-import dummyBatches from './dummyBatches.json';
+import { Batch } from "./types";
+import { axiosInstance } from "../../util/axiosConfig";
 
-export const getDummyBatches = async (): Promise<Batch[]> => {
-  await new Promise(res => setTimeout(res, 500));
-  return dummyBatches as any as Batch[];
-}
+export const getAdminBatches = async (): Promise<Batch[]> => {
+  const axios = await axiosInstance();
+
+  try {
+    const res = await axios.get<Batch[]>('/admin/batches');
+    return res.data;
+  } catch (e) {
+    console.error(e);
+    return [];
+  }
+};
 
 export const getClientBatches = async (userEmail: String): Promise<Batch[]> => {
-  await new Promise(res => setTimeout(res, 500));
-  return [dummyBatches[1],dummyBatches[2]] as any as Batch[];
-}
+  const axios = await axiosInstance();
 
-export const getSingleBatch = async (batchId: string):
-    Promise<Batch | undefined> => {
-  await new Promise(res => setTimeout(res, 500));
-  const batches = dummyBatches as any as Batch[];
-  return batches.find(b => b.batchId === batchId);
-}
+  try {
+    const res = await axios.get<Batch[]>(`/client/email/batch/${userEmail}`);
+    return res.data;
+  } catch (e) {
+    console.error(e);
+    return [];
+  }
+};
+
+export const getSingleBatch = async (batchId: string): Promise<Batch | undefined> => {
+  const axios = await axiosInstance();
+
+  try {
+    const res = await axios.get<Batch>(`/client/batch/${batchId}`);
+    return res.data;
+  } catch (e) {
+    console.error(e);
+    return undefined;
+  }
+};

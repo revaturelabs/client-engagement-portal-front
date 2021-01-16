@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { Batch } from "./types";
-import { getDummyBatches, getClientBatches } from "./api";
+import { getAdminBatches, getClientBatches } from "./api";
 import { Col, Container, Row } from "reactstrap";
 import { NavBar } from "../../components/NavBar/NavBar";
 import BatchCard from "./BatchCard";
@@ -50,7 +50,7 @@ const HomePage = (props: IProps) => {
   const getBatches = async (email: string, admin: boolean) => {
     // show batches that finish furthest in the future first
     const batchList = admin
-      ? (await getDummyBatches()).sort((a, b) =>
+      ? (await getAdminBatches()).sort((a, b) =>
           a.endDate === b.endDate ? 0 : a.endDate < b.endDate ? 1 : -1
         )
       : (await getClientBatches(email)).sort((a, b) =>
