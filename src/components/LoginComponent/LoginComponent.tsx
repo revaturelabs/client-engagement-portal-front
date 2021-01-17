@@ -4,14 +4,10 @@ import passThumb from "../../assets/pass-thumb.png";
 import "../../scss/loginStyles.scss";
 import ceplogo2 from "../../assets/engagementPortalLogo.svg";
 import { Spinner } from "reactstrap";
-import { IUserAdmin, IUserClient } from "../../_reducers/UserReducer";
-import { useDispatch } from 'react-redux';
-import { adminLogin, clientLogin } from '../../actions/UserActions';
+import { RootStateOrAny, useSelector } from 'react-redux';
 import firebase from 'firebase/app'
 import 'firebase/auth'
-
 import { useHistory } from "react-router-dom";
-import { axiosInstance } from "../../util/axiosConfig";
 
 interface ILoginProps {
     loginType?: string;
@@ -27,15 +23,14 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
 
     const [spinner, setSpinner] = useState(false);
     const [loginMsg, setLoginMsg] = useState<string>("");
-
-    const dispatch = useDispatch();
+    const reduxUser = useSelector((state: RootStateOrAny) => state.userState.user);
     const history = useHistory();
 
     /**
      * @function handleSubmit
      * Handles authentication after the user presses the login button.
      * @async
-     * Makes a call to AWS Cognito to authenticate login details,
+     * Makes a call to Firebase to authenticate login details,
      *  then makes a call to the API gateway to retrieve user info.
      *
      * @param event contains the click event that calls this function.
@@ -53,8 +48,6 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
                 password: form["password"].value
             }
 
-            // const user = await Auth.signIn(loginCredentials.email, loginCredentials.password); // user.attributes.email contains the user email
-
             const user = await firebase
                 .auth()
                 .signInWithEmailAndPassword(loginCredentials.email, loginCredentials.password);
@@ -69,68 +62,17 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
     }
 
     const checkCurrentUser = () => {
-
-        firebase.auth().onAuthStateChanged((user) => {
-            if (user) {
-                // User is signed in, see docs for a list of available properties
-                // https://firebase.google.com/docs/reference/js/firebase.User
-                firebase.auth().currentUser?.getIdTokenResult(true).then((idTokenResult) => {
-                    // Confirm the user is an Admin.
-                    // console.log(idTokenResult.claims);
-                    if (idTokenResult.claims.role) {
-                        //no api for admin by email
-                        const statefulClient: IUserAdmin = {
-                            email: idTokenResult.claims.email || "",
-                            firstName: "HardcodedFirstName",
-                            lastName: "HardcodedLastName",
-                            role: "admin"
-                        }
-        
-                        dispatch(adminLogin(statefulClient));
-        
-                        // Show admin UI.
-                        history.replace("/admin")
-        
-                        // SHOULD only be role: admin if admin, ELSE if client role will not exist
-                        // console.log(idTokenResult)
-                    } else {
-        
-                        axiosInstance()
-                            .then((i) => i.get('/client/email/' + idTokenResult.claims.email)
-                                .then((r) => {
-                                    const statefulClient: IUserClient = {
-                                        //retrieved from firebase
-                                        email: idTokenResult.claims.email || "",
-                                        //unfortunately cognito stores this, NOT backend db
-                                        firstName: "HardcodedFirstName",
-                                        lastName: "HardcodedLastName",
-                                        //retrieved from backend db
-                                        companyName: r.data.companyName,
-                                        role: "client"
-                                    }
-                                    console.log(r)
-                                    dispatch(clientLogin(statefulClient));
-                                    //Show client UI
-                                    history.replace("/home")
-        
-                                }))
-                    }
-                })
-                    .catch((error) => {
-                        setSpinner(false);
-                        console.log(error.response.status);
-                    })
-            } 
-        });
+        if (reduxUser){
+            history.push('/home');
+        }
     }
 
-    // useEffect(() => {
-    //     checkCurrentUser();
-    // })
+    useEffect(() => {
+        checkCurrentUser();
+    })
 
     return (
         <>
-
             <form onSubmit={handleSubmit} className="login-form">
 
                 <div style={{ maxHeight: "90%" }}>

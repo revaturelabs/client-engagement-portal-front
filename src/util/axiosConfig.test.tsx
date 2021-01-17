@@ -1,31 +1,23 @@
-import Amplify, { Auth } from "aws-amplify";
 import { axiosInstance } from './axiosConfig';
-import awsconfig from '../aws-exports';
 
+import firebase from 'firebase/app'
+import 'firebase/auth'
+import {firebaseConfig} from './FirebaseContainer'
+
+let testApp: firebase.app.App;
 
 beforeAll(() => {
-    Amplify.configure(awsconfig);
-
-
+    testApp = firebase.initializeApp(firebaseConfig, "testing");
 });
 /**
    * @Test
    * Axios Config File
    */
-it("Returns an axios", async () => {
-    Auth.currentSession = jest.fn().mockResolvedValue({
-        CognitoUserSession: {
-            idToken: {
-                jwtToken: "test"
-            }
-        },
-        getIdToken: jest.fn().mockReturnValue({ getJwtToken: jest.fn().mockReturnValue("SecretTestToken") })
-    });
+it("Returns an axios with correct URL", async () => {
 
     let axiosPromise: any;
-    let header: string = "";
     axiosPromise = await axiosInstance();
-    header = axiosPromise.defaults.headers['Authorization'];
+    let baseURL: string = axiosPromise.defaults.baseURL;
 
-    expect(header).toBe("Bearer SecretTestToken");
+    expect(baseURL).toBe(process.env.REACT_APP_BACKEND_API);
 });

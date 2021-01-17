@@ -6,7 +6,7 @@ import { RootStateOrAny, useSelector } from 'react-redux';
 import { adminLogin, clientLogin } from '../actions/UserActions';
 import { IUserAdmin, IUserClient } from "../_reducers/UserReducer";
 import { useDispatch } from 'react-redux';
-import { axiosInstance } from "../util/axiosConfig";
+import { axiosInstance } from './axiosConfig';
 
 const firebaseConfig = {
   apiKey: "AIzaSyC4sxZlT-McTildwtxa8LV1lj7ZQhzOrs0",
@@ -18,7 +18,6 @@ const firebaseConfig = {
   measurementId: "G-DP6XDH9DTW",
   databaseURL: ""
 };
-
 
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
@@ -36,7 +35,6 @@ const FirebaseContainer = (props: any) => {
       firebase.auth().onAuthStateChanged((firebaseUser) => {
 
         firebaseUser?.getIdTokenResult(true).then((idTokenResult)=> {
-          console.log('headers["tokenId"] =\n' + idTokenResult.token);
           if (idTokenResult.claims.role) {
             
             axiosInstance()
@@ -61,9 +59,6 @@ const FirebaseContainer = (props: any) => {
                     const statefulClient: IUserClient = {
                         //retrieved from firebase
                         email: idTokenResult.claims.email || "",
-                        //unfortunately cognito stores this, NOT backend db
-                        firstName: "HardcodedFirstName",
-                        lastName: "HardcodedLastName",
                         //retrieved from backend db
                         companyName: r.data.companyName,
                         role: "client"
@@ -76,7 +71,7 @@ const FirebaseContainer = (props: any) => {
         })
       })
     }
-  }, [user])
+  }, [user]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <FirebaseAuthProvider firebase={firebase} {...firebaseConfig} >
@@ -86,3 +81,15 @@ const FirebaseContainer = (props: any) => {
 };
 
 export default FirebaseContainer;
+
+const secondaryApp = firebase.initializeApp(firebaseConfig, "Secondary");
+export const signUp = (email: string, password: string) => {
+  secondaryApp.auth().createUserWithEmailAndPassword(email, password)
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.log(errorCode, errorMessage)
+  });
+
+  secondaryApp.auth().signOut();
+}
