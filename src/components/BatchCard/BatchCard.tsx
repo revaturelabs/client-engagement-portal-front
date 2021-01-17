@@ -1,5 +1,5 @@
 import React from 'react';
-import { Batch, batchSkillToImage } from '../../util/viewInfoSquadDummyTypes';
+import { Batch, batchSkillToImage } from '../../types';
 import { Col, Container, Row } from 'reactstrap';
 import { ReactComponent as BarChartIcon } from '../../assets/bar-chart.svg';
 import { ReactComponent as ExternalLinkIcon } from '../../assets/external-link-square.svg';

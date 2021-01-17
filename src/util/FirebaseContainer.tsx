@@ -8,7 +8,7 @@ import { IUserAdmin, IUserClient } from "../_reducers/UserReducer";
 import { useDispatch } from 'react-redux';
 import { axiosInstance } from './axiosConfig';
 
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: "AIzaSyC4sxZlT-McTildwtxa8LV1lj7ZQhzOrs0",
   authDomain: "training-team-253916.firebaseapp.com",
   projectId: "training-team-253916",

@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 import React, { useEffect, useState } from 'react';
-import { Batch } from '../../util/viewInfoSquadDummyTypes';
-import { getAdminBatches, getClientBatches } from '../../util/viewInfoSquadDummyApi';
+import { Batch } from '../../types';
+import { getAdminBatches, getClientBatches } from '../../ajax';
 import { RootStateOrAny, useSelector } from 'react-redux';
 import 'firebase/auth';
 import '../../scss/home-page.scss';

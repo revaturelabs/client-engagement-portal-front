@@ -1,4 +1,4 @@
-import { Batch } from '../../util/viewInfoSquadDummyTypes';
+import { Batch } from '../../types';
 import React from 'react';
 import { Col, Container, DropdownItem, Row } from 'reactstrap';
 import { NavBar } from '../../components/NavBar/NavBar';

@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 import React, { ChangeEvent, useEffect, useState } from "react";
-import { Batch } from '../../util/viewInfoSquadDummyTypes';
+import { Batch } from '../../types';
 import { Col, Container, DropdownItem, Row } from 'reactstrap';
 import { NavBar } from "../../components/NavBar/NavBar";
 import BatchCard from "../../components/BatchCard/BatchCard";

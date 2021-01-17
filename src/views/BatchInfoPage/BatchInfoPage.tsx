@@ -3,8 +3,8 @@
 import React, { useEffect, useState } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { RootStateOrAny, useSelector } from 'react-redux';
-import { Batch } from '../../util/viewInfoSquadDummyTypes';
-import { getSingleBatch } from '../../util/viewInfoSquadDummyApi';
+import { Batch } from '../../types';
+import { getSingleBatch } from '../../ajax';
 import LoadingPage  from '../LoadingPage/LoadingPage';
 import BatchInfoPageContent from './BatchInfoPageContent';
 import { IUserState } from "../../_reducers/UserReducer";

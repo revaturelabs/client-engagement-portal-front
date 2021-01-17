@@ -2,7 +2,7 @@ import React from 'react';
 import { AssociateCardModal } from './AssociateCardModal';
 import { Col, Row } from 'reactstrap';
 import { ProgressBar } from 'react-bootstrap'
-import { AssociateAssignment } from '../../util/viewInfoSquadDummyTypes';
+import { AssociateAssignment } from '../../types';
 import '../../scss/associate-card.scss';
 
 interface IAssociateCardProps {
