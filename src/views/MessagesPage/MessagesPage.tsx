@@ -4,7 +4,7 @@ import { NavBar } from "../../components/NavBar/NavBar";
 import { Container, DropdownItem, Spinner } from 'reactstrap';
 import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
 import Notifications from "../../components/Notifications/Notifications";
-import Message from "../../components/Notifications/Message";
+import Messages from "../../components/Notifications/Messages";
 
 export const MessagesPage: React.FC = () => {
     return (
@@ -21,11 +21,12 @@ export const MessagesPage: React.FC = () => {
         <br></br>
         <a href="#" className="btn btn-primary mr-2">new message</a>
         <br></br>
+        <br></br>
 
-        <Message></Message>
+        <Messages></Messages>
         
         </Container>
-        <Notifications></Notifications>
+        
         
         </>
         );
