@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, FormGroup, Input, Label, Modal, ModalBody, ModalHeader, Row } from 'reactstrap';
+import { Form, FormGroup, Input, Label, Modal, ModalBody, ModalHeader } from 'reactstrap';
 import './PlanInterventionModal.scss';
 import { useSelector } from 'react-redux';
 import { IRootState } from '../../_reducers';
@@ -64,8 +64,8 @@ const PlanInterventionModalv2:React.FC = () => {
                     <Form onSubmit={(event: React.FormEvent<HTMLFormElement>) => requestInterventionFormSubmit(event)}>
                     <FormGroup>
                         <Label for="message" className="TextAreaLabel">Message:</Label>
-                        <Input type="textarea" name="message" className="TextAreaInput" placeholder="Reason for intervention, target dates/times, etc..."></Input>
-                        <input type="submit" value="Submit" className="talentSubmit"></input>
+                        <Input type="textarea" name="message" className="TextAreaInput" placeholder="Reason for intervention, target dates/times, etc..."/>
+                        <input type="submit" value="Submit" className="talentSubmit"/>
                     </FormGroup>
                     </Form>
                 </ModalBody>

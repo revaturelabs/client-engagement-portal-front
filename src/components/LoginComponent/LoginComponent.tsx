@@ -63,7 +63,7 @@ export const LoginComponent: React.FC<ILoginProps> = (props: ILoginProps) => {
 
     const checkCurrentUser = () => {
         if (reduxUser){
-            reduxUser.role === "admin" ? history.push("/admin") : history.push("/home");
+            history.push('/home');
         }
     }
 

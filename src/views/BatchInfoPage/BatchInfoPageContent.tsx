@@ -1,38 +1,51 @@
-import { Batch } from '../OmePage/types';
+import { Batch } from '../../types';
 import React from 'react';
-import { Container, DropdownItem, Spinner } from 'reactstrap';
+import { Col, Container, DropdownItem, Row } from 'reactstrap';
 import { NavBar } from '../../components/NavBar/NavBar';
 import { Link } from 'react-router-dom';
-import { BatchInformation } from '../../components/BatchInformation/BatchInformation';
-import './batch-info-page.scss';
+import '../../scss/batch-info-page-content.scss';
+import { IUser } from '../../_reducers/UserReducer';
+import BatchCardLarge from '../../components/BatchCardLarge/BatchCardLarge';
+import { AssociateCard } from '../../components/AssociateCard/AssociateCard';
 
 interface IBatchInfoPageContentProps {
   batch: Batch;
+  user: IUser;
 }
 
-interface IBatchInfoPageState {
+const BatchInfoPageContent: React.FC<IBatchInfoPageContentProps> = props => {
+  return (
+      <Container className='batch-info-page-content' fluid>
+        <NavBar>
+          <Link to='/home'>
+            <DropdownItem>Home</DropdownItem>
+          </Link>
 
-}
+          {
+            props.user.role === 'admin' &&
+            (
+                <Link to='/admin'>
+                  <DropdownItem>Map Clients</DropdownItem>
+                </Link>
+            )
+          }
+        </NavBar>
+        <Row className='justify-content-center'>
+          <Col sm='1'/>
+          <Col sm='10' md='8' xl='5'>
+            <div id='batch-info-wrapper'>
+              <BatchCardLarge batch={ props.batch } user={props.user}/>
+              {
+                props.batch.associateAssignments.map((a, index) =>
+                    ( <AssociateCard key={index} associateAssignment={a}/> )
+                )
+              }
+            </div>
+          </Col>
+          <Col xs='1'/>
+        </Row>
+      </Container>
+  );
+};
 
-export default class BatchInfoPageContent
-    extends React.Component<IBatchInfoPageContentProps, IBatchInfoPageState> {
-  constructor(props: IBatchInfoPageContentProps) {
-    super(props);
-    this.state = {};
-  }
-
-  render() {
-    return (
-        <>
-          <Container className='batch-info-page-content'>
-            <NavBar>
-              <Link to="/home">
-                <DropdownItem>Return to Client Home</DropdownItem>
-              </Link>
-            </NavBar>
-            <BatchInformation batch={this.props.batch} />
-          </Container>
-        </>
-    );
-  }
-}
+export default BatchInfoPageContent;

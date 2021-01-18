@@ -1,25 +1,21 @@
 import React from 'react';
 import { AssociateCardModal } from './AssociateCardModal';
-import '../../scss/associate-card.scss'
-import { IAssociateSingle } from '../../_reducers/AssociateReducer'
 import { Col, Row } from 'reactstrap';
 import { ProgressBar } from 'react-bootstrap'
+import { AssociateAssignment } from '../../types';
+import '../../scss/associate-card.scss';
 
-/**
- * @function AssociateCard
- * This component shows a card giving some brief information about an associate.
- * Takes in props containing information about the associate.
- * 
- * @param props - Type: IAssociateSingle {firstName, lastName, grades, testScores, techScores}
- *
- * @returns TSX Element to render
- */
-export const AssociateCard: React.FC<IAssociateSingle> = (props: IAssociateSingle) => {
+interface IAssociateCardProps {
+    associateAssignment: AssociateAssignment;
+}
 
+export const AssociateCard: React.FC<IAssociateCardProps> = (props) => {
+    const associate = props.associateAssignment.associate;
+    
     /**
      * @constant avg
      * This field will calculate the average test score of the associate.
-     * 
+     *
      * @returns sc.toFixed(2), the average test score to two decimal places.
      */
     const avg = () => {
@@ -32,8 +28,8 @@ export const AssociateCard: React.FC<IAssociateSingle> = (props: IAssociateSingl
          * Otherwise, add each test score to a total, divide by the number of scores,
          * and return the average score
          */
-        if (props.grades !== undefined) {
-            for (const test of props.grades) {
+        if (associate.grades !== undefined) {
+            for (const test of associate.grades) {
                 sc += test.score;
                 weeks++;
             }
@@ -46,36 +42,28 @@ export const AssociateCard: React.FC<IAssociateSingle> = (props: IAssociateSingl
     /**
      * @constant score
      * This field will hold the last test score the associate got.
-     * 
+     *
      * @returns value.toFixed(2), the value of the last test score to two decimal places.
      */
     const score = () => {
 
         let value = 0;
         let i = 0;
-        let size = 0;
+        let size = associate.grades.length;
         let gId = 0;
-        if (props.grades?.length !== undefined) {
-            size = props.grades.length;
+
+        while (i < size) {
+            /**
+            * For each item in test scores, if the gradeId is greater than the held one, change the value to match.
+            * When it stops iterating, we'll have the last value.
+            */
+            if (associate.grades[i].gradeId > gId) {
+                value = associate.grades[i].score;
+                gId = associate.grades[i].gradeId;
+            }
+            i++;
         }
 
-        /**
-         * If there are no test scores, return 0.
-         * Otherwise, set the value to be equal to the last test.
-         */
-        if (props.grades !== undefined) {
-            while (i < size) {
-                /**
-                * For each item in test scores, if the gradeId is greater than the held one, change the value to match.
-                * When it stops iterating, we'll have the last value.
-                */
-                if (props.grades[i].gradeId > gId) {
-                    value = props.grades[i].score;
-                    gId = props.grades[i].gradeId;
-                }
-                i++;
-            }
-        }
         return value.toFixed(2);
     }
 
@@ -96,7 +84,7 @@ export const AssociateCard: React.FC<IAssociateSingle> = (props: IAssociateSingl
         <div className="aso-card" style={{ marginTop: "10px" }}>
             <Row>
                 <Col>
-                    <h6>{props.firstName} {props.lastName}</h6>
+                    <h6>{associate.firstName} {associate.lastName}</h6>
                 </Col>
             </Row>
             <Row>

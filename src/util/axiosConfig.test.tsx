@@ -2,7 +2,7 @@ import { axiosInstance } from './axiosConfig';
 
 import firebase from 'firebase/app'
 import 'firebase/auth'
-import {firebaseConfig} from './FirebaseContainer'
+import { firebaseConfig } from './FirebaseContainer'
 
 let testApp: firebase.app.App;
 

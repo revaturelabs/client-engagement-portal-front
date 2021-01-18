@@ -6,9 +6,9 @@ import { RootStateOrAny, useSelector } from 'react-redux';
 import { adminLogin, clientLogin } from '../actions/UserActions';
 import { IUserAdmin, IUserClient } from "../_reducers/UserReducer";
 import { useDispatch } from 'react-redux';
-import { axiosInstance } from "../util/axiosConfig";
+import { axiosInstance } from './axiosConfig';
 
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: "AIzaSyC4sxZlT-McTildwtxa8LV1lj7ZQhzOrs0",
   authDomain: "training-team-253916.firebaseapp.com",
   projectId: "training-team-253916",
@@ -35,7 +35,6 @@ const FirebaseContainer = (props: any) => {
       firebase.auth().onAuthStateChanged((firebaseUser) => {
 
         firebaseUser?.getIdTokenResult(true).then((idTokenResult)=> {
-          console.log('headers["tokenId"] =\n' + idTokenResult.token);
           if (idTokenResult.claims.role) {
             
             axiosInstance()
@@ -72,7 +71,7 @@ const FirebaseContainer = (props: any) => {
         })
       })
     }
-  }, [user])
+  }, [user]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <FirebaseAuthProvider firebase={firebase} {...firebaseConfig} >
@@ -87,8 +86,8 @@ const secondaryApp = firebase.initializeApp(firebaseConfig, "Secondary");
 export const signUp = (email: string, password: string) => {
   secondaryApp.auth().createUserWithEmailAndPassword(email, password)
   .catch((error) => {
-    var errorCode = error.code;
-    var errorMessage = error.message;
+    const errorCode = error.code;
+    const errorMessage = error.message;
     console.log(errorCode, errorMessage)
   });
 

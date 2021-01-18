@@ -1,5 +1,5 @@
 import { Batch } from "./types";
-import { axiosInstance } from "../../util/axiosConfig";
+import { axiosInstance } from "./util/axiosConfig";
 
 export const getAdminBatches = async (): Promise<Batch[]> => {
   const axios = await axiosInstance();

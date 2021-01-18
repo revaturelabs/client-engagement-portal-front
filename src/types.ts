@@ -1,11 +1,11 @@
-import reactReduxLogo from '../../assets/react-redux-logo.png';
-import javaLogo from '../../assets/java-logo.png';
-import javaAuto from '../../assets/JavaAutoLogo.png';
-import pegaLogo from '../../assets/Pegalogo.jpg';
-import salesLogo from '../../assets/sales.png';
-import bigData from '../../assets/bigData.png';
-import netLogo from '../../assets/NET.jpg';
-import devOpsLogo from '../../assets/devOps.jpg';
+import reactReduxLogo from './assets/react-redux-logo.png';
+import javaLogo from './assets/java-logo.png';
+import javaAuto from './assets/JavaAutoLogo.png';
+import pegaLogo from './assets/Pegalogo.jpg';
+import salesLogo from './assets/sales.png';
+import bigData from './assets/bigData.png';
+import netLogo from './assets/NET.jpg';
+import devOpsLogo from './assets/devOps.jpg';
 
 export const JAVA_MICROSERVICES = 'Java/Microservices';
 export const PEGA = 'PEGA';
@@ -48,12 +48,12 @@ export interface Employee {
   lastName: string;
 }
 
-interface EmployeeAssignment {
+export interface EmployeeAssignment {
   role: string; // ie ROLE_LEAD_TRAINER
   employee: Employee;
 }
 
-interface AssociateAssignment {
+export interface AssociateAssignment {
   trainingStatus: string; // ie Training
   associate: Associate;
   startDate: string;

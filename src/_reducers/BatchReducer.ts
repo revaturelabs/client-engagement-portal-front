@@ -1,4 +1,4 @@
-import { SET_BATCHES, SET_BATCHES_DETAILS } from "../actions/BatchCardActions"
+import { SET_BATCHES } from "../actions/BatchCardActions"
 
 //Batch state is essentially just an array of batch objects
 export interface IBatchState{
