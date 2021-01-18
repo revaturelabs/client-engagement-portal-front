@@ -7,6 +7,7 @@ import '../../scss/batch-info-page-content.scss';
 import { IUser } from '../../_reducers/UserReducer';
 import BatchCardLarge from '../../components/BatchCardLarge/BatchCardLarge';
 import { AssociateCard } from '../../components/AssociateCard/AssociateCard';
+import Notifications from '../../components/Notifications/Notifications';
 
 interface IBatchInfoPageContentProps {
   batch: Batch;
@@ -39,6 +40,10 @@ const BatchInfoPageContent: React.FC<IBatchInfoPageContentProps> = props => {
                 props.batch.associateAssignments.map((a, index) =>
                     ( <AssociateCard key={index} associateAssignment={a}/> )
                 )
+              }
+              {
+                props.user.role === 'admin' &&
+                <Notifications/>
               }
             </div>
           </Col>

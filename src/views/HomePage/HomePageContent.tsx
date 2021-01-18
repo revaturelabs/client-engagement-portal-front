@@ -9,6 +9,8 @@ import "firebase/auth";
 import "../../scss/home-page.scss";
 import { Link } from 'react-router-dom';
 import { IUser } from '../../_reducers/UserReducer';
+import RequestTalent from '../../components/RequestTalentModal/RequestTalent';
+import Notifications from '../../components/Notifications/Notifications';
 
 interface IHomePageContentProps {
   user: IUser;
@@ -91,6 +93,10 @@ const HomePageContent: React.FC<IHomePageContentProps> = props => {
         <Row className="justify-content-center">
           <Col />
           <Col className="text-left center-column" sm="10" lg="8" xl="5">
+            {
+              props.user.role === 'client' &&
+              <RequestTalent/>
+            }
             <h3>your batches</h3>
             <br/>
             <input
@@ -110,7 +116,12 @@ const HomePageContent: React.FC<IHomePageContentProps> = props => {
                           batch={batch}
                           searchTexts={searchTexts}
                       />
-                  ))}
+                  ))
+            }
+            {
+              props.user.role === 'admin' &&
+              <Notifications/>
+            }
           </Col>
           <Col />
         </Row>
