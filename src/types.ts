@@ -46,6 +46,7 @@ export interface Employee {
   email: string;
   firstName: string;
   lastName: string;
+  role?: string;
 }
 
 export interface EmployeeAssignment {
@@ -85,8 +86,8 @@ export interface Batch extends BasicBatchData {
 /* Users */
 export interface User{
     email:string;
-    firstName:string;
-    lastName:string;
+    firstName?:string;
+    lastName?:string;
     phone?:string;
     role?:string;
 }
@@ -95,10 +96,11 @@ export interface UserAdmin extends User{
 
 }
 
-export interface UserClient extends User{
+export interface UserClient extends User {
     businessFunction?:string;
     industry?:string;
     companyName?:string;
+    role?: string;
 }
 
 export interface UserState{

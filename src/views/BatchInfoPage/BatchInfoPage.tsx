@@ -7,7 +7,7 @@ import { Batch } from '../../types';
 import { getSingleBatch } from '../../ajax';
 import LoadingPage  from '../LoadingPage/LoadingPage';
 import BatchInfoPageContent from './BatchInfoPageContent';
-import { IUserState } from "../../_reducers/UserReducer";
+import { UserState } from "../../types";
 import { useHistory } from 'react-router';
 
 interface IBatchInfoPageProps
@@ -18,7 +18,7 @@ const BatchInfoPage: React.FC<IBatchInfoPageProps> = props => {
   const history = useHistory();
 
   // TODO we should not have to cast this
-  const userObj: IUserState = useSelector((state: RootStateOrAny) => state.userState as IUserState)
+  const userObj: UserState = useSelector((state: RootStateOrAny) => state.userState)
 
   useEffect(() => {
     (async () => {

@@ -2,7 +2,7 @@ import React from 'react';
 import {shallow} from 'enzyme';
 import {AssociateCardModal} from './AssociateCardModal';
 import { Associate } from '../../types';
-import {Button, Modal, ModalHeader} from 'reactstrap';
+import {Button, Modal, /*ModalHeader*/} from 'reactstrap';
 
 let wrapper: any;
 let fakeData:Associate;

@@ -1,14 +1,13 @@
 import React from 'react';
 import { Card, CardBody, CardFooter, CardHeader, Col, Row } from 'reactstrap';
-import { Batch, batchSkillToImage } from '../../types';
+import { Batch, batchSkillToImage, User } from '../../types';
 import InterventionModal from '../PlanInterventionModal/PlanInterventionModalv2';
 import mockDonutGraph from '../../assets/mock-donut-graph.png';
 import '../../scss/batch-card-large.scss';
-import { IUser } from '../../_reducers/UserReducer';
 
 interface IBatchCardLargeProps {
   batch: Batch;
-  user: IUser;
+  user: User;
 }
 
 const BatchCardLarge: React.FC<IBatchCardLargeProps> = (props) => {

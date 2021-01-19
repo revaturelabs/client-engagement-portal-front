@@ -4,14 +4,14 @@ import { Col, Container, DropdownItem, Row } from 'reactstrap';
 import { NavBar } from '../../components/NavBar/NavBar';
 import { Link } from 'react-router-dom';
 import '../../scss/batch-info-page-content.scss';
-import { IUser } from '../../_reducers/UserReducer';
+import { User } from '../../types';
 import BatchCardLarge from '../../components/BatchCardLarge/BatchCardLarge';
 import { AssociateCard } from '../../components/AssociateCard/AssociateCard';
 import Notifications from '../../components/Notifications/Notifications';
 
 interface IBatchInfoPageContentProps {
   batch: Batch;
-  user: IUser;
+  user: User;
 }
 
 const BatchInfoPageContent: React.FC<IBatchInfoPageContentProps> = props => {

@@ -8,12 +8,12 @@ import BatchCard from "../../components/BatchCard/BatchCard";
 import "firebase/auth";
 import "../../scss/home-page.scss";
 import { Link } from 'react-router-dom';
-import { IUser } from '../../_reducers/UserReducer';
+import { User } from '../../types';
 import RequestTalent from '../../components/RequestTalentModal/RequestTalent';
 import Notifications from '../../components/Notifications/Notifications';
 
 interface IHomePageContentProps {
-  user: IUser;
+  user: User;
   batches: Batch[];
 }
 
