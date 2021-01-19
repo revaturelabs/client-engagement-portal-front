@@ -3,6 +3,7 @@ export interface INewMessageProps {
   toggle: () => void;
   isAdmin: boolean;
   clients: any[];
+  admins: any[];
 }
 
 export interface IReplyModalProps {

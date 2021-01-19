@@ -22,7 +22,6 @@ export const ReplyModal: React.FC<IReplyModalProps> = (props) => {
     return `${state.userState.user?.role}`;
   });
 
-  // TODO send correct info
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     let title = (event.target as any).elements.title.value; // Not type safe, but had to get it in
@@ -38,7 +37,7 @@ export const ReplyModal: React.FC<IReplyModalProps> = (props) => {
         });
       } else {
         (await axiosInstance()).post(`msg/client`, {
-          adminEmail: "test@test.com", // TODO future iteration, please change: no hard coded emails
+          adminEmail: recipient,
           clientEmail: userEmail,
           message: body,
           title: title,
@@ -75,7 +74,7 @@ export const ReplyModal: React.FC<IReplyModalProps> = (props) => {
               type="textarea"
               name="body"
               className="talentTextAreaInput"
-              placeholder="Say something nice."
+              placeholder="This is where your message goes."
             ></Input>
           </FormGroup>
         </ModalBody>

@@ -23,7 +23,6 @@ export const MessageModal: React.FC<INewMessageProps> = (props) => {
   let role = useSelector((state: IRootState) => {
     return `${state.userState.user?.role}`;
   });
-
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     let title = (event.target as any).elements.title.value; // Not type safe, but had to get it in
@@ -38,11 +37,13 @@ export const MessageModal: React.FC<INewMessageProps> = (props) => {
           title: title,
         });
       } else {
-        (await axiosInstance()).post(`msg/client`, {
-          adminEmail: "test@test.com", // TODO future iteration, please change: no hard coded emails
-          clientEmail: userEmail,
-          message: body,
-          title: title,
+        props.admins.map(async (admin) => {
+          (await axiosInstance()).post(`msg/client`, {
+            adminEmail: admin.email, // TODO future iteration, please change: no hard coded emails
+            clientEmail: userEmail,
+            message: body,
+            title: title,
+          });
         });
       }
     } catch (error) {
@@ -95,7 +96,7 @@ export const MessageModal: React.FC<INewMessageProps> = (props) => {
               type="textarea"
               name="body"
               className="talentTextAreaInput"
-              placeholder="Say something nice."
+              placeholder="This is where your message goes."
             ></Input>
           </FormGroup>
         </ModalBody>

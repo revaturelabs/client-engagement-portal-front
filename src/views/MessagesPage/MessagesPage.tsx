@@ -24,6 +24,7 @@ import { IRootState } from "./../../_reducers/index";
 export const MessagesPage: React.FC = () => {
   const [show, setShow] = React.useState(false);
   const [clients, setClients] = React.useState([]);
+  const [admins, setAdmins] = React.useState([]);
   const [isAdmin, setIsAdmin] = React.useState(false);
   const toggleShow = () => setShow(!show);
   let userEmail = useSelector((state: IRootState) => {
@@ -37,6 +38,7 @@ export const MessagesPage: React.FC = () => {
   const getAdmins = async () => {
     try {
       await (await axiosInstance()).get("/admin/").then((resp) => {
+        setAdmins(resp.data);
         setIsAdmin(resp.data.some((item: any) => item.email === userEmail));
       });
     } catch (e) {
@@ -79,6 +81,7 @@ export const MessagesPage: React.FC = () => {
           toggle={toggleShow}
           isAdmin={isAdmin}
           clients={clients}
+          admins={admins}
         />
         <br></br>
         <br></br>

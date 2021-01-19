@@ -20,6 +20,10 @@ const Messages: React.FC<IMessageState> = (props: IMessageState) => {
     return email;
   });
 
+  let role = useSelector((state: IRootState) => {
+    return `${state.userState.user?.role}`;
+  });
+
   const getMessages = async () => {
     var URL = getUrl();
     const response = await (await axiosInstance()).get(URL);
@@ -50,7 +54,7 @@ const Messages: React.FC<IMessageState> = (props: IMessageState) => {
             show={showReply}
             toggle={() => toggleReply()}
             title={e.title}
-            recipient={e.clientId.email}
+            recipient={role === "admin" ? e.clientId.email : e.adminId.email}
           />
           <div className="card border-dark">
             <div className="card-body">
