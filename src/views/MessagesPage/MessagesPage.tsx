@@ -17,36 +17,33 @@ import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 import Notifications from "../../components/Notifications/Notifications";
 import Message from "../../components/Notifications/Message";
 import { axiosInstance } from "../../util/axiosConfig";
+import { MessageModal } from "../../components/MessagesModals/MessageModal";
+import { ReplyMessageModal } from "./../../components/MessagesModals/ReplyModal";
+import { useSelector } from "react-redux";
+import { IRootState } from "./../../_reducers/index";
 
-interface IProps {
-  rerender: boolean;
-  doRerender: () => void;
-}
-
-export const MessagesPage: React.FC<IProps> = (props: IProps) => {
+export const MessagesPage: React.FC = () => {
   const [show, setShow] = React.useState(false);
-  const toggle = () => setShow(!show);
-  const [batchInfo, setBatchInfo] = useState<any>([]);
-
-  const getBatches = async () => {
-    const response = await (await axiosInstance()).get("admin/batch/allNames");
-    const tempArray = [];
-    for (const r of response.data) {
-      const id = r.batchId;
-      const name = r.name;
-      tempArray.push({ id, name });
-    }
-
-    /**
-     * @function setBatchInfo
-     * spreading the tempArray and assigning all values to the batchInfo
-     */
-    setBatchInfo([...tempArray]);
-  };
-
+  const [isAdmin, setIsAdmin] = React.useState(false);
+  const toggleShow = () => setShow(!show);
+  let userEmail = useSelector((state: IRootState) => {
+    // console.log(state);
+    return `${state.userState.user?.email}`;
+  });
   useEffect(() => {
-    getBatches();
+    getAdmins();
   }, []);
+
+  const getAdmins = async () => {
+    try {
+      await (await axiosInstance()).get("/admin/").then((resp) => {
+        setIsAdmin(resp.data.some((item: any) => item.email === userEmail));
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  console.log(isAdmin);
 
   return (
     <>
@@ -64,62 +61,11 @@ export const MessagesPage: React.FC<IProps> = (props: IProps) => {
         </NavBar>
 
         <br></br>
-        <button onClick={toggle} className="btn btn-primary mr-2">
+        <button onClick={toggleShow} className="btn btn-primary mr-2">
           new message
         </button>
 
-        <Modal isOpen={show} toggle={toggle}>
-          <ModalHeader>
-            <div>New Message</div>
-          </ModalHeader>
-          <ModalBody>
-            <Form onSubmit={() => console.log("hello")}>
-              <FormGroup>
-                <Label for="subject" className="talentTextAreaLabel">
-                  Subject:
-                </Label>
-                <Input
-                  // type="textarea"
-                  name="subject"
-                  className="subjectTextAreaInput"
-                  placeholder="Title"
-                ></Input>
-                <Label for="subject" className="talentTextAreaLabel">
-                  Batch (Drop down menu of attached batches):
-                </Label>
-                <Input
-                  type="select"
-                  name="subject"
-                  className="subjectTextAreaInput"
-                  placeholder="Please enter important information regarding the talent you require"
-                >
-                  <option disabled selected>
-                    Select Batch
-                  </option>
-                  {batchInfo.map((e: any, i: any) => (
-                    <option key={i} id={e.id} value={e.email}>
-                      {e.name}
-                    </option>
-                  ))}
-                </Input>
-                <Label for="subject" className="talentTextAreaLabel">
-                  Body
-                </Label>
-                <Input
-                  type="textarea"
-                  name="subject"
-                  className="talentTextAreaInput"
-                  placeholder="Please enter important information regarding the talent you require"
-                ></Input>
-                <input
-                  type="submit"
-                  value="Submit"
-                  className="talentSubmit"
-                ></input>
-              </FormGroup>
-            </Form>
-          </ModalBody>
-        </Modal>
+        <MessageModal show={show} toggle={toggleShow} isAdmin={isAdmin} />
         <br></br>
 
         <Message></Message>
