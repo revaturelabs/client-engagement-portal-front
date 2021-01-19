@@ -18,7 +18,7 @@ const PercentageCircle : React.FC<{batch:Batch}> = ({ batch }) => {
             </svg>
             <div className="circles-text" style={{ "position": "absolute", "top": "0px", "left": "0px", "textAlign": "center", "width": "100%", "fontSize": "28px", "height": "80px", "lineHeight": "80px" }}>
                 <span className="circles-integer">{integer}</span>.
-                <span className="circles-decimals">{decimals}</span>
+                <span className="circles-decimals">{decimals}%</span>
             </div>
         </div>
 
