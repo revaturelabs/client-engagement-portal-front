@@ -50,15 +50,15 @@ const RequestTalent:React.FC = () => {
         }
         toggle();
 
-        const reqReceived = document.getElementById("talentRequested");
-        if(reqReceived) (reqReceived as HTMLElement).innerText = "Request Received!";
+        // const reqReceived = document.getElementById("talentRequested");
+        // if(reqReceived) (reqReceived as HTMLElement).innerText = "Request Received!";
 
         return true;
     }
 
     return (
         <>
-            <Row className="row justify-content-center" style={{marginTop: "300px"}}>
+            <Row className="row justify-content-end" style={{paddingLeft: 15, paddingRight: 15}}>
                 <button onClick={toggle} className="intervention-button">Request More Talent</button>
             </Row>
             <Modal isOpen={show} toggle={toggle}>

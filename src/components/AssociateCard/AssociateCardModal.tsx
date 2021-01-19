@@ -1,7 +1,11 @@
 import React from 'react';
-import { Modal, Button, ModalBody, Row, ModalHeader } from 'reactstrap';
+import { Modal, ModalBody, Row, ModalHeader } from 'reactstrap';
 import '../../scss/associate-card.scss';
-import {IAssociateSingle} from '../../_reducers/AssociateReducer'
+import { AssociateAssignment } from '../../types';
+
+interface IAssociateCardModalProps {
+    associateAssignment: AssociateAssignment
+}
 
 
 /**
@@ -13,7 +17,7 @@ import {IAssociateSingle} from '../../_reducers/AssociateReducer'
  *
  * @returns TSX Element to render
  */
-export const AssociateCardModal:React.FC<IAssociateSingle> = (props:IAssociateSingle) => {
+export const AssociateCardModal:React.FC<IAssociateCardModalProps> = props => {
 
     /**
      * @function toggle
@@ -22,16 +26,18 @@ export const AssociateCardModal:React.FC<IAssociateSingle> = (props:IAssociateSi
     const [show, setShow] = React.useState(false);
     const toggle = () => setShow(!show);
 
+    const associate = props.associateAssignment.associate;
+
     /**
      * This will map the grades and date the grade was received to TSX elements,
      * as well as calculate the average grade.
      */
     let gradeMap;
     let averageGrade = 0;
-    if(props.grades !== undefined){
+    if(associate.grades !== undefined){
         let numGrades = 0;
-        gradeMap = props.grades.map((g) => <div id="grade" key={g.gradeId}><p>Date {g.dateReceived}: {g.score.toFixed(2)}%</p><div className="h-divider"></div></div>);
-        for(const grade of props.grades){
+        gradeMap = associate.grades.map((g) => <div id="grade" key={g.gradeId}><p>Date {g.dateReceived}: {g.score.toFixed(2)}%</p><div className="h-divider"></div></div>);
+        for(const grade of associate.grades){
 
             averageGrade += grade.score;
             numGrades++;
@@ -47,10 +53,10 @@ export const AssociateCardModal:React.FC<IAssociateSingle> = (props:IAssociateSi
      */
     return (
         <>
-                <Button id="openBtn" className="view-btn" onClick={toggle}>View</Button>
+                <button id="openBtn" className="view-btn" onClick={toggle}>View</button>
                 <Modal isOpen={show} toggle={toggle}>
                     <ModalHeader toggle={toggle}>
-                        <h3 id="associateName">{props.firstName} {props.lastName}</h3>
+                        <p id="associateName">{associate.firstName} {associate.lastName}</p>
                     </ModalHeader>
                     <ModalBody>
                     <div className="aso-info">

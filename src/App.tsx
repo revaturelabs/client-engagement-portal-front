@@ -1,20 +1,16 @@
 import React from 'react';
 import './scss/app.scss';
-import './scss/batch-card.scss';
 import { Provider } from 'react-redux';
 import { store } from './Store';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { LoginPage } from './views/LoginPage/LoginPage';
-import HomePage from './views/HomePage/HomePage';
-import LoadingPage from './views/LoadingPage/LoadingPage';
-
-import { AdminPage } from './views/AdminPage/AdminPage';
-import BatchInformationPage from './views/BatchInformationPage/BatchInformationPage';
-import { PrivateAdminRoute } from './components/PrivateRoutes/PrivateAdminRoute';
-import { PrivateClientRoute } from './components/PrivateRoutes/PrivateClientRoute';
-import { PrivateRoute } from './components/PrivateRoutes/PrivateRoute';
-
 import FirebaseContainer from './util/FirebaseContainer'
+import { LoginPage } from './views/LoginPage/LoginPage';
+import LoadingPage from './views/LoadingPage/LoadingPage';
+import { AdminPage } from './views/AdminPage/AdminPage';
+import { PrivateAdminRoute } from './components/PrivateRoutes/PrivateAdminRoute';
+import HomePage from './views/HomePage/HomePage';
+import BatchInfoPage from './views/BatchInfoPage/BatchInfoPage';
+import { PrivateRoute } from './components/PrivateRoutes/PrivateRoute';
 
 function App() {
     return (
@@ -25,9 +21,9 @@ function App() {
                         <Switch>
                             <Route exact path="/" component={LoginPage} />
                             <Route path="/login" component={LoginPage} />
-                            <PrivateClientRoute path="/home" component={HomePage} />
+                            <PrivateRoute path="/home" component={HomePage}/>
+                            <PrivateRoute path="/batch/:batchId" component={BatchInfoPage}/>
                             <PrivateAdminRoute path="/admin" component={AdminPage} />
-                            <PrivateRoute path="/batch/:batchId" component={BatchInformationPage} />
                             <Route path="/loading" component={LoadingPage} />
                         </Switch>
                     </BrowserRouter>

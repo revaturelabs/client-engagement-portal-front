@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Col, Container, Row } from "reactstrap";
+import { Col, Container, DropdownItem, Row } from 'reactstrap';
 import { BatchForms } from "../../components/BatchForms/BatchForms";
 import { NavBar } from "../../components/NavBar/NavBar";
 import { NewClientButton } from "../../components/NewClientButton/NewClientButton";
 import Notifications from "../../components/Notifications/Notifications";
+import { Link } from 'react-router-dom';
 
 /**
  * @function AdminPage
@@ -21,7 +22,12 @@ export const AdminPage: React.FC = () => {
           backgroundColor: "#E3E3E3",
         }}
       >
-        <NavBar />
+        <NavBar>
+          <Link to='/home'>
+            <DropdownItem>Home</DropdownItem>
+          </Link>
+        </NavBar>
+
         <BatchForms
           rerender={batchFormRerender}
           doRerender={() => setBatchFormRerender(false)}

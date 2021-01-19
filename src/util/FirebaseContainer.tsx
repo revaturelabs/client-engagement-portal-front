@@ -5,15 +5,15 @@ import { FirebaseAuthProvider } from "@react-firebase/auth";
 import { RootStateOrAny, useSelector } from "react-redux";
 import { adminLogin, clientLogin } from "../actions/UserActions";
 import { IUserAdmin, IUserClient } from "../_reducers/UserReducer";
-import { useDispatch } from "react-redux";
-import { axiosInstance } from "../util/axiosConfig";
+import { useDispatch } from 'react-redux';
+import { axiosInstance } from './axiosConfig';
 
 /**
  * Connection credentials for Firebase client (non-sensitive)
  * @databaseURL this property is required for Firebase App Args,
  * but is not necessary for authentication, thus we leave it empty.
  */
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: "AIzaSyC4sxZlT-McTildwtxa8LV1lj7ZQhzOrs0",
   authDomain: "training-team-253916.firebaseapp.com",
   projectId: "training-team-253916",
@@ -81,7 +81,8 @@ const FirebaseContainer = (props: any) => {
         });
       });
     }
-  }, [user]);
+  }, [user]); // eslint-disable-line react-hooks/exhaustive-deps
+
 
   return (
     <FirebaseAuthProvider firebase={firebase} {...firebaseConfig}>

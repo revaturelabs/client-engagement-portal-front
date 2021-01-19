@@ -1,10 +1,11 @@
 import React from 'react';
-import { configure, mount, shallow } from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
-import { AdminPage } from './AdminPage'
-import { Container } from 'reactstrap';
-import { store } from '../../Store'
+import { configure, mount } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+import { AdminPage } from './AdminPage';
+import { store } from '../../Store';
 import { Provider } from 'react-redux';
+import { BrowserRouter, Switch } from 'react-router-dom';
+
 configure({ adapter: new Adapter() });
 
 /**
@@ -13,9 +14,13 @@ configure({ adapter: new Adapter() });
    */
 
 it('Component Should Mount', () => {
-    const wrapper = mount(
+    mount(
         <Provider store={store}>
-            <AdminPage />
+          <BrowserRouter>
+            <Switch>
+              <AdminPage />
+            </Switch>
+          </BrowserRouter>
         </Provider>
     )
 })
