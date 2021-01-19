@@ -1,0 +1,28 @@
+@import "../../scss/revature-colors.scss";
+// all .talent* css can be found in RequestTalent.scss
+input.send-message-button {
+  box-sizing: border-box;
+  margin: auto;
+  background-color: #f26925;
+  color: white;
+  font-family: futura-pt, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  width: auto;
+  border: 3px solid #f26925;
+  border-radius: 15px;
+  font-size: 1.5rem;
+  transition: all 0.3s ease 0s;
+}
+
+input.send-message-button:hover {
+  background-color: white;
+  border: 3px solid #f26925;
+  box-shadow: none;
+  color: #f26925;
+  font-weight: bold;
+}
+
+.newMessageLabel {
+  margin-top: 10px;
+}
