@@ -6,17 +6,37 @@ import { IRootState } from '../../_reducers';
 import { IMessageState } from '../../_reducers/MessagesReducer';
 import { setMessages } from '../../actions/MessageActions';
 import '../../scss/Notifications.scss';
+import { useSelector } from 'react-redux';
 
 const Messages:React.FC<IMessageState> = (props:IMessageState) => {
 
     const [requests, gotRequests] = useState(false);
     const dispatch = useDispatch();
 
+    let userEmail = useSelector((state: IRootState) => {
+        var email = `${state.userState.user?.email}`
+        return email
+    });
+
    const getMessages = async () => {
-       const response = await (await axiosInstance()).get("msg/");
+       var URL = getUrl()
+       const response = await (await axiosInstance()).get(URL);
        dispatch(setMessages(response.data));
        gotRequests(true);
    }
+
+    const getUrl = () =>{
+        const URL = "message/" + userEmail
+        return URL
+    }
+    function sender (isAdmin: boolean, adminEmail: string, clientEmail: string){
+        if(isAdmin){
+            return adminEmail
+        }
+        else{
+            return clientEmail
+        }
+    }
 
    if(!requests) {
        getMessages();
@@ -28,12 +48,11 @@ const Messages:React.FC<IMessageState> = (props:IMessageState) => {
         <>
             <div className="card border-dark">
                 <div className="card-body">
-                    <h5 className="message-title">Subject: placeholder</h5>
+                    <h5 className="message-title">Sender: {sender(e.adminTheSender, e.adminId.email, e.clientId.email)}</h5>
 
                     <div className="row">
                         <h6><div className='col-md'>Date: {e.dateSent}</div></h6>
-                        <h6><div className='col-md'>Company Name: {e.client_Id.companyName}</div> </h6>
-                        
+                        <h6><div className='col-md'>Company Name: {e.clientId.companyName}</div> </h6>
                     </div>
 
                     <div className="row">

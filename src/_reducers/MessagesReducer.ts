@@ -4,13 +4,13 @@ export interface IMessage { //basic structure of the message
     adminTheSender: boolean
     message:string
     readStatus:boolean
-    admin_id: {
+    adminId: {
         adminId: number,
         email: string;
         firstName: string,
         lastName: string,
     }
-    client_Id: {
+    clientId: {
         clientId:number,
         email:string,
         companyName:string,

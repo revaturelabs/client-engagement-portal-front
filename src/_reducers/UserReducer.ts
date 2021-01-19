@@ -8,7 +8,7 @@ export interface IUser{
 }
 
 export interface IUserAdmin extends IUser{
-
+    
 }
 
 export interface IUserClient extends IUser{
