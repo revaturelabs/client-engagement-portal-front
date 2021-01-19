@@ -1,27 +1,27 @@
 import { ADMIN_LOGIN, CLIENT_LOGIN, LOGOUT } from "../actions/UserActions";
 
-export interface IUser{
-    email:string,
-    firstName:string,
-    lastName:string,
-    phone?:string,
+export interface IUser {
+  email: string;
+  phone?: string;
+  role: string;
 }
 
-export interface IUserAdmin extends IUser{
-    
+export interface IUserAdmin extends IUser {
+  firstName: string;
+  lastName: string;
 }
 
-export interface IUserClient extends IUser{
-    businessFunction?:string,
-    industry?:string,
-    companyName?:string
+export interface IUserClient extends IUser {
+  businessFunction?: string;
+  industry?: string;
+  companyName?: string;
 }
 
-export interface IUserState{
-    user:IUser|null
+export interface IUserState {
+  user: IUser | null;
 }
 
-const initialState:IUserState = {user:null};
+const initialState: IUserState = { user: null };
 
 /**
  * Stores the necessary front user details after a user has logged in.
@@ -30,21 +30,20 @@ const initialState:IUserState = {user:null};
  *
  * @param action Object indicating which user is being affected and how.
  */
-export const userReducer = (state:IUserState = initialState, action:{type:string, payload:IUser}):IUserState => {
-    switch(action.type){
-        case ADMIN_LOGIN:
-            if(action.payload == null)
-                return {user: null};
-            else
-                return {user: action.payload as IUserAdmin};
-        case CLIENT_LOGIN:
-            if(action.payload == null)
-                return {user: null};
-            else
-                return {user: action.payload as IUserClient};
-        case LOGOUT:
-            return {user: null};
-        default:
-            return state;
-    }
-}
+export const userReducer = (
+  state: IUserState = initialState,
+  action: { type: string; payload: IUser }
+): IUserState => {
+  switch (action.type) {
+    case ADMIN_LOGIN:
+      if (action.payload == null) return { user: null };
+      else return { user: action.payload as IUserAdmin };
+    case CLIENT_LOGIN:
+      if (action.payload == null) return { user: null };
+      else return { user: action.payload as IUserClient };
+    case LOGOUT:
+      return { user: null };
+    default:
+      return state;
+  }
+};

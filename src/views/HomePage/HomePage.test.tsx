@@ -27,6 +27,7 @@ describe("HomePage", () => {
                 user:{
                     firstName: 'wack',
                     lastName: 'jobs',
+                    role: 'admin'
                 }     
             }
         });
