@@ -1,7 +1,8 @@
 import React from 'react';
 import { Modal, ModalBody, Row, ModalHeader } from 'reactstrap';
 import '../../scss/associate-card.scss';
-import {Associate} from '../../types'
+import {Associate, Batch} from '../../types'
+import GradeHistoryLineGraph from '../Graphs/GradeHistoryLineGraph';
 
 
 /**
@@ -13,7 +14,9 @@ import {Associate} from '../../types'
  *
  * @returns TSX Element to render
  */
-export const AssociateCardModal:React.FC<Associate> = (props:Associate) => {
+export const AssociateCardModal:React.FC<{batch: Batch; traineeId: string}> = (props) => {
+
+    const [{ associate, associate: { grades, firstName, lastName } }] = props.batch.associateAssignments.filter(({ associate: { grades: [{traineeId:id}] } }) => props.traineeId === id);
 
     /**
      * @function toggle
@@ -28,10 +31,10 @@ export const AssociateCardModal:React.FC<Associate> = (props:Associate) => {
      */
     let gradeMap;
     let averageGrade = 0;
-    if(props.grades !== undefined){
+    if(grades !== undefined){
         let numGrades = 0;
-        gradeMap = props.grades.map((g) => <div id="grade" key={g.gradeId}><p>Date {g.dateReceived}: {g.score.toFixed(2)}%</p><div className="h-divider"></div></div>);
-        for(const grade of props.grades){
+        gradeMap = grades.map((g) => <div id="grade" key={g.gradeId}><p>Date {g.dateReceived}: {g.score.toFixed(2)}%</p><div className="h-divider"></div></div>);
+        for(const grade of grades){
 
             averageGrade += grade.score;
             numGrades++;
@@ -50,26 +53,27 @@ export const AssociateCardModal:React.FC<Associate> = (props:Associate) => {
                 <button id="openBtn" className="view-btn" onClick={toggle}>View</button>
                 <Modal isOpen={show} toggle={toggle}>
                     <ModalHeader toggle={toggle}>
-                        <h3 id="associateName">{props.firstName} {props.lastName}</h3>
+                        <h3 id="associateName">{firstName} {lastName}</h3>
                     </ModalHeader>
                     <ModalBody>
                     <div className="aso-info">
                     <Row>
                         {/* div for scroll area */}
-                        <div className="col-9" style={{maxHeight: "400px"}}>
+                        {/* <div className="col-9" style={{maxHeight: "400px"}}>
                         <div>Weekly Assessments</div>
                         <div className="aso-scroll-container">
-                            <div className="aso-scroll" >
+                            <div className="aso-scroll" > */}
                             {/* Week #    grade% */}
-                             <div id="gradeMap">{gradeMap}</div>
+                             {/* <div id="gradeMap">{gradeMap}</div>
                             </div>
                         </div>
-                        </div>
+                        </div> */}
                         {/* div for average grade */}
-                        <div className="aso-average col-1">
+                        {/* <div className="aso-average col-1">
                             <h6>Average</h6>
                             <h6 id="avgTest">{averageGrade.toFixed(2)}%</h6>
-                        </div>
+                        </div> */}
+                        <GradeHistoryLineGraph batch={props.batch} traineeId={props.traineeId}/>
                     </Row>
 
                 </div>

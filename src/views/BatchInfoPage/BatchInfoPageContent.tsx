@@ -8,6 +8,7 @@ import { User } from '../../types';
 import BatchCardLarge from '../../components/BatchCardLarge/BatchCardLarge';
 import { AssociateCard } from '../../components/AssociateCard/AssociateCard';
 import Notifications from '../../components/Notifications/Notifications';
+import BatchAverageGraph from '../../components/Graphs/BatchAverageGraph';
 
 interface IBatchInfoPageContentProps {
   batch: Batch;
@@ -36,9 +37,10 @@ const BatchInfoPageContent: React.FC<IBatchInfoPageContentProps> = props => {
           <Col sm='10' md='8' xl='5'>
             <div id='batch-info-wrapper'>
               <BatchCardLarge batch={ props.batch } user={props.user}/>
+              <BatchAverageGraph batch={props.batch}/>
               {
                 props.batch.associateAssignments.map((a, index) =>
-                    ( <AssociateCard key={index} associateAssignment={a}/> )
+                    ( <AssociateCard key={index} traineeId={a.associate.grades[0].traineeId} batch={props.batch}/> )
                 )
               }
               {

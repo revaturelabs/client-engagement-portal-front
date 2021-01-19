@@ -72,19 +72,19 @@ const DoughnutChart: React.FC<{batch: Batch}> = ({batch}) => {
                 },
                 animation: {
                     animateScale: true
-                }
+                },
+                maintainAspectRatio: true
             }
         });
     }, [chart, state]);
 
     return (
-    <span>
         <div className="chartContainer">
             <canvas className="gradesChart" ref={chart}></canvas>
             <h2>Performance Standings</h2>
             <style> { `
                 .chartContainer {
-                    width: 33%;
+                    // width: 30%;
                 }
 
                 .chartContainer h2 {
@@ -93,13 +93,12 @@ const DoughnutChart: React.FC<{batch: Batch}> = ({batch}) => {
                     color: #999;
                     font-weight: 700;
                     letter-spacing: 1px;
-                    font-size: 1.025rem;
+                    font-size: .90rem;
                     text-align: center;
                 }
             `}
             </style>
         </div>
-    </span>
     )
 }
 
