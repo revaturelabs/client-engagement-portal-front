@@ -8,6 +8,7 @@ import { setMessages } from "../../actions/MessageActions";
 import "../../scss/Notifications.scss";
 import { useSelector } from "react-redux";
 import { ReplyModal } from "./../MessagesModals/ReplyModal";
+import "../../scss/Messages.scss"
 import { resolveModuleNameFromCache } from "typescript";
 import { render } from "enzyme";
 
@@ -92,13 +93,13 @@ const Messages: React.FC<IMessageState> = (props: IMessageState) => {
                     onClick={toggleReply}
                     className="btn btn-primary mr-2 float-right"
                   >
-                    reply
+                    Reply
                   </button>
                   <button
                   onClick={() => deleteMessage(e.messageId)}
                   className="btn btn-primary mr-2 float-right"
                   >
-                  delete
+                  Delete
                   </button>
                 </div>
               </div>

@@ -73,7 +73,7 @@ export const MessagesPage: React.FC = () => {
 
         <br></br>
         <button onClick={toggleShow} className="btn btn-primary mr-2">
-          new message
+          New Message
         </button>
 
         <MessageModal
