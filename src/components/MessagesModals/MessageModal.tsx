@@ -19,11 +19,14 @@ import { IRootState } from "../../_reducers";
 export const MessageModal: React.FC<INewMessageProps> = (props) => {
   console.log(props);
   let userEmail = useSelector((state: IRootState) => {
-    // console.log(state);
     return `${state.userState.user?.email}`;
+  });
+  let role = useSelector((state: IRootState) => {
+    return `${state.userState.user?.role}`;
   });
 
   console.log(userEmail);
+  console.log(role);
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     // let url
