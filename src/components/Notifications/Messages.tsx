@@ -8,6 +8,8 @@ import { setMessages } from "../../actions/MessageActions";
 import "../../scss/Notifications.scss";
 import { useSelector } from "react-redux";
 import { ReplyModal } from "./../MessagesModals/ReplyModal";
+import { resolveModuleNameFromCache } from "typescript";
+import { render } from "enzyme";
 
 const Messages: React.FC<IMessageState> = (props: IMessageState) => {
   const [showReply, setShowReply] = useState(false);
@@ -31,10 +33,19 @@ const Messages: React.FC<IMessageState> = (props: IMessageState) => {
     gotRequests(true);
   };
 
+  const deleteMessage = async (messageID:number) => {
+    try {
+        (await axiosInstance()).delete(`msg/` + messageID);
+      } catch (error) {
+        return false;
+      }
+  };
+
   const getUrl = () => {
     const URL = "message/" + userEmail;
     return URL;
   };
+
   function sender(isAdmin: boolean, adminEmail: string, clientEmail: string) {
     if (isAdmin) {
       return adminEmail;
@@ -83,9 +94,12 @@ const Messages: React.FC<IMessageState> = (props: IMessageState) => {
                   >
                     reply
                   </button>
-                  <a href="#" className="btn btn-primary mr-2 float-right">
-                    delete
-                  </a>
+                  <button
+                  onClick={() => deleteMessage(e.messageId)}
+                  className="btn btn-primary mr-2 float-right"
+                  >
+                  delete
+                  </button>
                 </div>
               </div>
             </div>
