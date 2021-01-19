@@ -5,6 +5,9 @@ import "react-multi-carousel/lib/styles.css";
 import { AssociateCardFactory } from '../AssociateCard/AssociateCardFactory';
 import PlanInterventionModalv2 from '../PlanInterventionModal/PlanInterventionModalv2';
 import { Batch, batchSkillToImage } from '../../types';
+import GradeHistoryLineGraph from '../Graphs/GradeHistoryLineGraph';
+import PercentageCircle from '../Graphs/PercentageCircle';
+import BatchAverageGraph from '../Graphs/BatchAverageGraph';
 
 /**
  * This component displays data about one specific batch.
@@ -16,6 +19,9 @@ export const BatchInformation : React.FC<{batch:Batch}> = ({ batch }) => {
         <Row className="justify-content-center">
             <Col md="1" lg="2" />
             <Col md="10" lg="8">
+              <GradeHistoryLineGraph batch={batch} traineeId="SF-6304" />
+              <BatchAverageGraph batch={batch} />
+              <PercentageCircle batch={batch} />
                 <div id="batch-info-wrapper">
                     <Card className="batch-info-card">
                         {/* Batch name header */}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Chart from "chart.js";
 import { Batch } from "../../types";
 import { findAverage } from '../../util';
@@ -6,6 +6,7 @@ import { findAverage } from '../../util';
 const BatchAverageGraph: React.FC<{ batch: Batch }> = ({ batch }) => {
   const [chart, setChart] = useState<Chart>();
   const [associate, setAssociate] = useState<string>();
+  const myChart = useRef<HTMLCanvasElement>(null);
 
   // Generate chart on component mount
   useEffect(() => {
@@ -68,10 +69,8 @@ const BatchAverageGraph: React.FC<{ batch: Batch }> = ({ batch }) => {
     // console.log("Data: ", chartData);
     // console.log("Colors: ", barColor);
 
-    const ctx: any = document.getElementById("myChart");
-
     // Generate chart
-    setChart(new Chart(ctx, {
+    myChart.current && setChart(new Chart(myChart.current, {
       type: "bar",
       data: {
         labels: chartLabels,
@@ -139,6 +138,7 @@ const BatchAverageGraph: React.FC<{ batch: Batch }> = ({ batch }) => {
                 beginAtZero: true,
                 stepSize: 10,
                 max: 100,
+                fontSize: 8
               },
             },
           ],
@@ -152,11 +152,25 @@ const BatchAverageGraph: React.FC<{ batch: Batch }> = ({ batch }) => {
     return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
   };
 
+  useEffect(() => {
+    if (window.innerWidth < 500 && myChart.current)
+        myChart.current.style.display = 'none';
+    window.addEventListener('resize', () => {
+      if (!myChart.current) return;
+      console.log(window.innerWidth + " WIDTH");
+      if (window.innerWidth < 500) {
+        myChart.current.style.display = 'none';
+      } else {
+        myChart.current.style.display = 'block';
+      }
+    });
+  }, []);
+
   chart && console.log(associate ? `Clicked bar for ${associate}` : 'Closed grade history');
 
   return <>
     {/* associate && <LineGraph batch={batch} aid={associate} /> */}
-    <canvas id="myChart" onClick={e => chart && setAssociate((chart.data.labels as string[])[(chart.getElementAtEvent(e)[0] as { _index:number })?._index])} />
+    <canvas id="myChart" ref={myChart} onClick={e => chart && setAssociate((chart.data.labels as string[])[(chart.getElementAtEvent(e)[0] as { _index:number })?._index])} />
   </>;
 };
 
