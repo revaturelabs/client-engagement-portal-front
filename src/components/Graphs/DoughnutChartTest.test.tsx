@@ -4,7 +4,6 @@ import Adapter from "enzyme-adapter-react-16";
 import DoughnutChart from "./DoughnutChart";
 import { BatchCard } from "../BatchCard/BatchCard";
 import { Batch } from '../../types';
-import { batch } from "react-redux";
 import { getBatchData } from "../../ajax";
 import BatchInformationPage from "../../views/BatchInformationPage/BatchInformationPage";
 

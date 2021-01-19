@@ -12,6 +12,7 @@ const PercentageCircle : React.FC<{batch:Batch}> = ({ batch }) => {
         || .000;
 
     return (
+    <span>
          <div className="percentage-circle-container">
              <div className="percentage-circle">
                 <svg>
@@ -95,6 +96,7 @@ const PercentageCircle : React.FC<{batch:Batch}> = ({ batch }) => {
                 }
             `}</style>
         </div>
+    </span>
     )
 }
 

@@ -1,11 +1,8 @@
-import React, {Component, useEffect, useRef} from 'react';
+import React, {useEffect, useRef} from 'react';
 import Chart from 'chart.js';
-import { render } from 'enzyme';
-import { readBuilderProgram } from 'typescript';
 import { Batch } from '../../types';
 import { useState } from 'react';
-import { batch } from 'react-redux';
-import {findAverage} from './FindAverageUtil'
+import { findAverage } from '../../util';
 
 /** 
 * This component builds a chart that takes in batch data
@@ -78,20 +75,31 @@ const DoughnutChart: React.FC<{batch: Batch}> = ({batch}) => {
                 }
             }
         });
-    }, [chart]);
+    }, [chart, state]);
 
     return (
+    <span>
         <div className="chartContainer">
             <canvas className="gradesChart" ref={chart}></canvas>
+            <h2>Performance Standings</h2>
             <style> { `
                 .chartContainer {
-                    height: 25%;
-                    width: 25%;
-                    margin: auto;
-                }     
+                    width: 33%;
+                }
+
+                .chartContainer h2 {
+                    text-align: center;
+                    margin-top: .5rem;
+                    color: #999;
+                    font-weight: 700;
+                    letter-spacing: 1px;
+                    font-size: 1.025rem;
+                    text-align: center;
+                }
             `}
             </style>
         </div>
+    </span>
     )
 }
 
