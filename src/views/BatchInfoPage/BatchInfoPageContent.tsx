@@ -15,29 +15,32 @@ interface IBatchInfoPageContentProps {
   user: User;
 }
 
-const BatchInfoPageContent: React.FC<IBatchInfoPageContentProps> = props => {
+const BatchInfoPageContent: React.FC<IBatchInfoPageContentProps> = (props) => {
   return (
-      <Container className='batch-info-page-content' fluid>
-        <NavBar>
-          <Link to='/home'>
-            <DropdownItem>Home</DropdownItem>
-          </Link>
+    <Container className="batch-info-page-content" fluid>
+      <NavBar>
+        <Link to="/home">
+          <DropdownItem>Home</DropdownItem>
+        </Link>
 
-          {
-            props.user.role === 'admin' &&
-            (
-                <Link to='/admin'>
-                  <DropdownItem>Map Clients</DropdownItem>
-                </Link>
-            )
-          }
-        </NavBar>
-        <Row className='justify-content-center'>
-          <Col sm='1'/>
-          <Col sm='10' md='8' xl='5'>
-            <div id='batch-info-wrapper'>
-              <BatchCardLarge batch={ props.batch } user={props.user}/>
+        {props.user.role === "admin" && (
+          <Link to="/admin">
+            <DropdownItem>Map Clients</DropdownItem>
+          </Link>
+        )}
+      </NavBar>
+      <Row className="justify-content-center">
+        <Col sm="1" />
+        <Col sm="10" md="8" xl="5">
+          <div id="batch-info-wrapper">
+            <BatchCardLarge batch={props.batch} user={props.user} />
+            <div
+              className="batch-info-card"
+              style={{ background: "white", marginTop: "10px" }}
+            >
               <BatchAverageGraph batch={props.batch}/>
+            </div>
+            <div>
               {
                 props.batch.associateAssignments.map((a, index) =>
                     ( <AssociateCard key={index} traineeId={a.associate.grades[0].traineeId} batch={props.batch}/> )
@@ -48,10 +51,15 @@ const BatchInfoPageContent: React.FC<IBatchInfoPageContentProps> = props => {
                 <Notifications/>
               }
             </div>
-          </Col>
-          <Col xs='1'/>
-        </Row>
-      </Container>
+            {props.batch.associateAssignments.map((a, index) => (
+              <AssociateCard key={index} associateAssignment={a} />
+            ))}
+            {props.user.role === "admin" && <Notifications />}
+          </div>
+        </Col>
+        <Col xs="1" />
+      </Row>
+    </Container>
   );
 };
 
