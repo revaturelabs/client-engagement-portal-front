@@ -2,13 +2,13 @@ import { ADMIN_LOGIN, CLIENT_LOGIN, LOGOUT } from "../actions/UserActions";
 
 export interface IUser{
     email:string,
-    firstName:string,
-    lastName:string,
     phone?:string,
+    role: string
 }
 
 export interface IUserAdmin extends IUser{
-
+    firstName:string,
+    lastName:string
 }
 
 export interface IUserClient extends IUser{

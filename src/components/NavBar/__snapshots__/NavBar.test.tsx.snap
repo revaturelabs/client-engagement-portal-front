@@ -49,7 +49,7 @@ exports[`NavBar component should render with given state from Redux store 1`] = 
             }
           }
         >
-          Welcome, 
+          Welcome 
           wack jobs
            ▼
         </span>

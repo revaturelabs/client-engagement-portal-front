@@ -3,11 +3,10 @@ import { Col, DropdownItem, DropdownMenu, DropdownToggle, Row, ButtonDropdown } 
 import logo from '../../assets/logo.png';
 import '../../scss/navStyles.scss';
 import { Turn as Hamburger } from 'hamburger-react'
-import { Auth } from 'aws-amplify';
-import { useDispatch, useSelector } from 'react-redux';
+import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../actions/UserActions';
-import { IRootState } from '../../_reducers';
-import { Link } from 'react-router-dom';
+import firebase from 'firebase/app'
+import 'firebase/auth'
 
 
 /**
@@ -32,26 +31,23 @@ export const NavBar: React.FC<any> = (props: any) => {
 
     const dispatch = useDispatch();
 
-    let name = useSelector((state: IRootState) => {
-        return `${state.userState.user?.firstName} ${state.userState.user?.lastName}`
-    });
-    name = (name === "undefined undefined") ? "Developer User" : name; // Placeholder for developer logins and (legacy) users without colloquial names
+    const user = useSelector((state: RootStateOrAny) => state.userState.user);
+    const name = (user ? user.role === "admin" ? `${user.firstName} ${user.lastName}`: user.companyName : "");
 
     /**
      * @function LogOut
      * De-authenticates the user session upon clicking the logout dropdown option.
      */
     const LogOut = () => {
-        Auth.signOut() // de-authenticates the user
-            .catch(err => console.log(err));
 
+        firebase.auth().signOut();
         dispatch(logout()); // clears the user data from the local state
     }
 
-    let logoLink = "#";
-    if (props.route) {
-        logoLink = props.route;
-    }
+    // let logoLink = "#";
+    // if (props.route) {
+    //     logoLink = props.route;
+    // }
 
     return (
         <Row className="justify-content-around myNav">
@@ -67,7 +63,7 @@ export const NavBar: React.FC<any> = (props: any) => {
                 <ButtonDropdown isOpen={navMenuOpen} toggle={toggle}>
                     {/* Mobile Hamburger Menu */}
                     <DropdownToggle id="navDropButton" style={{ margin: "10px", backgroundColor: "white", border: "none" }}>
-                        <span className="myDropdown" id="usersName" style={{ margin: "5px", color: "#474C55", backgroundColor: "white", border: "none" }}>Welcome, {name} &#9660;</span>
+                        <span className="myDropdown" id="usersName" style={{ margin: "5px", color: "#474C55", backgroundColor: "white", border: "none" }}>Welcome {name} &#9660;</span>
                         <span className="myMobileDropdown">
                             <Hamburger hideOutline={true} toggled={hamOpen} toggle={setHamOpen} color="#474C55"></Hamburger>
                         </span>
