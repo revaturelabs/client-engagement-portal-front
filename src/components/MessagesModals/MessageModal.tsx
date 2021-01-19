@@ -17,7 +17,6 @@ import { IUserState } from "../../_reducers/UserReducer";
 import { IRootState } from "../../_reducers";
 
 export const MessageModal: React.FC<INewMessageProps> = (props) => {
-  console.log(props);
   let userEmail = useSelector((state: IRootState) => {
     return `${state.userState.user?.email}`;
   });
@@ -25,26 +24,32 @@ export const MessageModal: React.FC<INewMessageProps> = (props) => {
     return `${state.userState.user?.role}`;
   });
 
-  console.log(userEmail);
-  console.log(role);
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // let url
     let title = (event.target as any).elements.title.value; // Not type safe, but had to get it in
     let body = (event.target as any).elements.body.value;
-    console.log(title);
-    console.log(body);
-    // try {
-    //   (await axiosInstance()).post(`msg/admin`, {
-    //     adminId: 4,
-    //     clientId: 2,
-    //     message: body,
-    //     title: title,
-    //   });
-    // } catch (error) {
-    //   return false;
-    // }
-    // props.toggle();
+    try {
+      if (role === "admin") {
+        let clientEmail = (event.target as any).elements.client.value;
+        (await axiosInstance()).post(`msg/admin`, {
+          adminEmail: userEmail,
+          clientEmail: clientEmail,
+          message: body,
+          title: title,
+        });
+      } else {
+        (await axiosInstance()).post(`msg/client`, {
+          adminEmail: "test@test.com", // TODO future iteration, please change: no hard coded emails
+          clientEmail: userEmail,
+          message: body,
+          title: title,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+    props.toggle();
   };
 
   return (
@@ -66,18 +71,27 @@ export const MessageModal: React.FC<INewMessageProps> = (props) => {
               name="title"
               placeholder="Title"
             ></Input>
-            {props.isAdmin && (
-              <div>
-                <Label for="client" className="newMessageLabel">
-                  Client:
-                </Label>
-                <Input type="select" name="client"></Input>
-              </div>
-            )}
+          </FormGroup>
+          {props.isAdmin && (
+            <FormGroup>
+              <Label for="client" className="newMessageLabel">
+                Client:
+              </Label>
+              <Input required type="select" name="client">
+                {props.clients.map((e: any, i: any) => (
+                  <option key={i} id={e.clientId} value={e.email}>
+                    {e.companyName}
+                  </option>
+                ))}
+              </Input>
+            </FormGroup>
+          )}
+          <FormGroup>
             <Label for="body" className="newMessageLabel">
               Body:
             </Label>
             <Input
+              required
               type="textarea"
               name="body"
               className="talentTextAreaInput"

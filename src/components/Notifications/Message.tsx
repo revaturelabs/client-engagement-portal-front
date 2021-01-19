@@ -16,7 +16,6 @@ const Message: React.FC<INotificationState> = (props: INotificationState) => {
 
   const getNotifications = async () => {
     const response = await (await axiosInstance()).get("intervention/");
-    // console.log(response);
     dispatch(setNotifications(response.data));
     gotRequests(true);
   };
@@ -32,6 +31,7 @@ const Message: React.FC<INotificationState> = (props: INotificationState) => {
             show={showReply}
             toggle={toggleReply}
             title={e.requestType}
+            recipient={e.client.email}
           />
           <div className="card border-dark">
             <div className="card-body">

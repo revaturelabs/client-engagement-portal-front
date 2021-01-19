@@ -21,17 +21,19 @@ import { MessageModal } from "../../components/MessagesModals/MessageModal";
 import { ReplyMessageModal } from "./../../components/MessagesModals/ReplyModal";
 import { useSelector } from "react-redux";
 import { IRootState } from "./../../_reducers/index";
+import { AxiosResponse } from "axios";
 
 export const MessagesPage: React.FC = () => {
   const [show, setShow] = React.useState(false);
+  const [clients, setClients] = React.useState([]);
   const [isAdmin, setIsAdmin] = React.useState(false);
   const toggleShow = () => setShow(!show);
   let userEmail = useSelector((state: IRootState) => {
-    // console.log(state);
     return `${state.userState.user?.email}`;
   });
   useEffect(() => {
     getAdmins();
+    getClients();
   }, []);
 
   const getAdmins = async () => {
@@ -43,7 +45,16 @@ export const MessagesPage: React.FC = () => {
       console.log(e);
     }
   };
-  console.log(isAdmin);
+
+  const getClients = async () => {
+    try {
+      await (await axiosInstance()).get("/client/").then((resp) => {
+        setClients(resp.data);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -65,7 +76,12 @@ export const MessagesPage: React.FC = () => {
           new message
         </button>
 
-        <MessageModal show={show} toggle={toggleShow} isAdmin={isAdmin} />
+        <MessageModal
+          show={show}
+          toggle={toggleShow}
+          isAdmin={isAdmin}
+          clients={clients}
+        />
         <br></br>
 
         <Message></Message>
