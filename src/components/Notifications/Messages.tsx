@@ -7,7 +7,7 @@ import { IMessageState } from "../../_reducers/MessagesReducer";
 import { setMessages } from "../../actions/MessageActions";
 import "../../scss/Notifications.scss";
 import { useSelector } from "react-redux";
-import { ReplyMessageModal } from "./../MessagesModals/ReplyModal";
+import { ReplyModal } from "./../MessagesModals/ReplyModal";
 
 const Messages: React.FC<IMessageState> = (props: IMessageState) => {
   const [showReply, setShowReply] = useState(false);
@@ -46,7 +46,7 @@ const Messages: React.FC<IMessageState> = (props: IMessageState) => {
     <>
       {props.messages?.map((e, i) => (
         <>
-          <ReplyMessageModal
+          <ReplyModal
             show={showReply}
             toggle={() => toggleReply()}
             title={e.title}

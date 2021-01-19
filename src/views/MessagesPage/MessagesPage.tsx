@@ -18,10 +18,8 @@ import Notifications from "../../components/Notifications/Notifications";
 import Messages from "../../components/Notifications/Messages";
 import { axiosInstance } from "../../util/axiosConfig";
 import { MessageModal } from "../../components/MessagesModals/MessageModal";
-import { ReplyMessageModal } from "./../../components/MessagesModals/ReplyModal";
 import { useSelector } from "react-redux";
 import { IRootState } from "./../../_reducers/index";
-import { AxiosResponse } from "axios";
 
 export const MessagesPage: React.FC = () => {
   const [show, setShow] = React.useState(false);

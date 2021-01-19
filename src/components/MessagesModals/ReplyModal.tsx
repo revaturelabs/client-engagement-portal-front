@@ -14,7 +14,7 @@ import { IReplyModalProps } from "../../_reducers/MessageReducer";
 import { useSelector } from "react-redux";
 import { IRootState } from "./../../_reducers/index";
 
-export const ReplyMessageModal: React.FC<IReplyModalProps> = (props) => {
+export const ReplyModal: React.FC<IReplyModalProps> = (props) => {
   let userEmail = useSelector((state: IRootState) => {
     return `${state.userState.user?.email}`;
   });
