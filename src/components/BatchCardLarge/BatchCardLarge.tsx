@@ -1,14 +1,14 @@
 import React from 'react';
 import { Card, CardBody, CardFooter, CardHeader, Col, Row } from 'reactstrap';
-import { Batch, batchSkillToImage } from '../../types';
+import { Batch, batchSkillToImage, User } from '../../types';
 import InterventionModal from '../PlanInterventionModal/PlanInterventionModalv2';
-import mockDonutGraph from '../../assets/mock-donut-graph.png';
 import '../../scss/batch-card-large.scss';
-import { IUser } from '../../_reducers/UserReducer';
+import DoughnutChart from '../Graphs/DoughnutChart';
+import PercentageCircle from '../Graphs/PercentageCircle';
 
 interface IBatchCardLargeProps {
   batch: Batch;
-  user: IUser;
+  user: User;
 }
 
 const BatchCardLarge: React.FC<IBatchCardLargeProps> = (props) => {
@@ -23,20 +23,28 @@ const BatchCardLarge: React.FC<IBatchCardLargeProps> = (props) => {
         </CardHeader>
         <CardBody>
           <Row style={ { textAlign: 'center' } }>
-            <Col md={ 6 } sm={ 12 }>
+            <Col md={ 12 } sm={ 12 }>
               <div className='logo-container'>
                 <img src={ image } alt='Specialization logo'/>
                 <br/>
               </div>
               <small>{ props.batch.skill }</small>
             </Col>
-            <Col md={ 6 } sm={ 12 }>
+            {/* <Col md={ 6 } sm={ 12 }>
               <img
                   src={ mockDonutGraph } alt='donut graph'
                   style={ { width: '100px' } }
               />
               <br/>
               <small>Overall Batch Progress</small>
+            </Col> */}
+          </Row>
+          <Row className="roundCharts">
+            <Col sm={12} md={6}>
+              <DoughnutChart batch={props.batch}/>
+            </Col>
+            <Col sm={12} md={6} className="percentChart">  
+              <PercentageCircle batch={props.batch}/>
             </Col>
           </Row>
           <hr/>

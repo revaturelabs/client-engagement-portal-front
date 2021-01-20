@@ -5,8 +5,8 @@ import "../../scss/loginStyles.scss";
 import ceplogo2 from "../../assets/engagementPortalLogo.svg";
 import { Spinner } from "reactstrap";
 import { RootStateOrAny, useSelector } from 'react-redux';
-import firebase from 'firebase/app'
-import 'firebase/auth'
+import firebase from 'firebase/app';
+import 'firebase/auth';
 import { useHistory } from "react-router-dom";
 
 interface ILoginProps {

@@ -4,7 +4,7 @@ import "firebase/auth";
 import { FirebaseAuthProvider } from "@react-firebase/auth";
 import { RootStateOrAny, useSelector } from "react-redux";
 import { adminLogin, clientLogin } from "../actions/UserActions";
-import { IUserAdmin, IUserClient } from "../_reducers/UserReducer";
+import { UserAdmin, UserClient } from "../types";
 import { useDispatch } from 'react-redux';
 import { axiosInstance } from './axiosConfig';
 
@@ -53,7 +53,7 @@ const FirebaseContainer = (props: any) => {
             axiosInstance().then((i) =>
               i.get("/admin/email/" + idTokenResult.claims.email).then((r) => {
                 console.log(r);
-                const statefulClient: IUserAdmin = {
+                const statefulClient: UserAdmin = {
                   email: idTokenResult.claims.email || "",
                   firstName: r.data.firstName,
                   lastName: r.data.lastName,
@@ -66,7 +66,7 @@ const FirebaseContainer = (props: any) => {
           } else {
             axiosInstance().then((i) =>
               i.get("/client/email/" + idTokenResult.claims.email).then((r) => {
-                const statefulClient: IUserClient = {
+                const statefulClient: UserClient = {
                   //retrieved from firebase
                   email: idTokenResult.claims.email || "",
                   //retrieved from backend db
