@@ -97,6 +97,58 @@
 
 default/only sort is by batch finish date in
 desc order
-
-
  */
+
+.rev-card {
+  max-width: 200px;
+  min-width: 100px;
+  background-color: white;
+  padding: 20px;
+  border: 1px solid #f26925;
+  box-shadow: 3px 3px 15px #72a4c260;
+  border-radius: 20px;
+  margin: 10px;
+}
+
+.pic {
+  max-width: 150px;
+  max-height: 50px;
+  overflow: hidden;
+}
+
+.spec-text {
+  font-size: 12px;
+  overflow: hidden;
+}
+
+.view-btn {
+  box-sizing: border-box;
+  line-height: 1.5;
+  width: 70%;
+  border: 3px solid $rev-orange;
+  background-color: $rev-orange;
+  color: white;
+  font-size: 20px;
+  transition: all 0.15s ease 0s;
+}
+
+.view-btn:hover {
+  background-color: white;
+  color: $rev-orange;
+}
+
+.roundCharts {
+  padding: .5rem 0;
+}
+
+
+
+@media(
+  max-width: 576px
+){
+  .percentChart {
+    padding-top: 1rem;
+  }
+}
+
+

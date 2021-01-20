@@ -1,16 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { AssociateCardModal } from './AssociateCardModal';
 import { Col, Row } from 'reactstrap';
 import { ProgressBar } from 'react-bootstrap'
-import { AssociateAssignment } from '../../types';
+import { AssociateAssignment, Batch, Associate } from '../../types';
 import '../../scss/associate-card.scss';
+import { useState } from 'react';
 
 interface IAssociateCardProps {
-    associateAssignment: AssociateAssignment;
+    batch?: Batch;
+    traineeId?: string;
+    associateAssignment?: AssociateAssignment;
 }
 
 export const AssociateCard: React.FC<IAssociateCardProps> = (props) => {
-    const associate = props.associateAssignment.associate;
+    const [associate, setAssociate] = useState<Associate>();
+
+    useEffect (() => {
+        if (!props.batch) return;
+        const [{associate: newAssociate}] = props.batch.associateAssignments.filter(({ associate: { grades: [{traineeId:id}] } }) => props.traineeId === id);
+        setAssociate(newAssociate);
+    }, [props])
     
     /**
      * @constant avg
@@ -28,7 +37,7 @@ export const AssociateCard: React.FC<IAssociateCardProps> = (props) => {
          * Otherwise, add each test score to a total, divide by the number of scores,
          * and return the average score
          */
-        if (associate.grades !== undefined) {
+        if (associate?.grades !== undefined) {
             for (const test of associate.grades) {
                 sc += test.score;
                 weeks++;
@@ -47,6 +56,7 @@ export const AssociateCard: React.FC<IAssociateCardProps> = (props) => {
      */
     const score = () => {
 
+        if (!associate) return 0;
         let value = 0;
         let i = 0;
         let size = associate.grades.length;
@@ -84,7 +94,7 @@ export const AssociateCard: React.FC<IAssociateCardProps> = (props) => {
         <div className="aso-card" style={{ marginTop: "10px" }}>
             <Row>
                 <Col>
-                    <h6>{associate.firstName} {associate.lastName}</h6>
+                    <h6>{associate?.firstName} {associate?.lastName}</h6>
                 </Col>
             </Row>
             <Row>
@@ -97,7 +107,7 @@ export const AssociateCard: React.FC<IAssociateCardProps> = (props) => {
                     <ProgressBar now={assocScore} striped/>
                 </Col>
                 <Col md={2} sm={12} style={{ textAlign: "right", marginTop:"15px" }}>
-                    <AssociateCardModal associateAssignment={props.associateAssignment} />
+                    {props.batch && props.traineeId && <AssociateCardModal batch={props.batch} traineeId={props.traineeId}/>}
                 </Col>
             </Row>
         </div>

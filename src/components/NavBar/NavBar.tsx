@@ -14,7 +14,7 @@ import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import { logout } from "../../actions/UserActions";
 import firebase from "firebase/app";
 import "firebase/auth";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 /**
  * @function NavBar

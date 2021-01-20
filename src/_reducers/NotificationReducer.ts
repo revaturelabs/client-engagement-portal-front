@@ -1,28 +1,6 @@
-export interface INotification {
-  //basic structure of the notifications
-  requestId: number;
-  requestType: string;
-  status: string;
-  dateCreated: string;
-  message: string;
-  client: {
-    clientId: number;
-    email: string;
-    companyName: string;
-    phoneNumber: string;
-  };
-}
+import { NotificationState, Notification } from "../types";
 
-export interface INotificationState {
-  notifications: INotification[] | null;
-}
-
-export interface IMessageProps {
-  notifications: INotification[] | null;
-  toggle: () => void;
-}
-
-const initialState: INotificationState = {
+const initialState: NotificationState = {
   notifications: [],
 };
 
@@ -36,9 +14,9 @@ const initialState: INotificationState = {
  * @returns the current state, after possible modifications
  */
 export const notificationReducer = (
-  state: INotificationState = initialState,
-  action: { type: string; payload: INotification[] }
-): INotificationState => {
+  state: NotificationState = initialState,
+  action: { type: string; payload: Notification[] }
+): NotificationState => {
   if (action.type === "SET_NOTIFICATIONS") {
     return {
       notifications: [...action.payload],

@@ -1,0 +1,288 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BatchInformationPage view should render with given state from Redux store 1`] = `
+<div
+  className="container"
+  style={
+    Object {
+      "backgroundColor": "#E3E3E3",
+      "maxWidth": "100vw",
+      "minHeight": "100vh",
+    }
+  }
+>
+  <div
+    className="justify-content-around myNav row"
+  >
+    <div
+      className="justify-content-start logoContainer col-auto"
+    >
+      <img
+        alt="revature logo"
+        className="myLogo"
+        id="revLogo"
+        src=""
+      />
+    </div>
+    <div
+      className="d-flex align-items-center justify-content-end auto test1 col"
+    >
+      <div
+        className="btn-group"
+        onKeyDown={[Function]}
+      >
+        <button
+          aria-expanded={false}
+          aria-haspopup={true}
+          aria-label={null}
+          className="btn btn-secondary"
+          id="navDropButton"
+          onClick={[Function]}
+          style={
+            Object {
+              "backgroundColor": "white",
+              "border": "none",
+              "margin": "10px",
+            }
+          }
+          type="button"
+        >
+          <span
+            className="myDropdown"
+            id="usersName"
+            style={
+              Object {
+                "backgroundColor": "white",
+                "border": "none",
+                "color": "#474C55",
+                "margin": "5px",
+              }
+            }
+          >
+            Welcome, 
+            wack jobs
+             ▼
+          </span>
+          <span
+            className="myMobileDropdown"
+          >
+            <div
+              className="hamburger-react"
+              onClick={[Function]}
+              onKeyUp={[Function]}
+              role="button"
+              style={
+                Object {
+                  "cursor": "pointer",
+                  "height": "48px",
+                  "outline": "none",
+                  "position": "relative",
+                  "transition": "0.4s cubic-bezier(0, 0, 0, 1)",
+                  "userSelect": "none",
+                  "width": "48px",
+                }
+              }
+              tabIndex={0}
+            >
+              <div
+                style={
+                  Object {
+                    "background": "#474C55",
+                    "height": "3px",
+                    "left": "8px",
+                    "position": "absolute",
+                    "top": "13px",
+                    "transform": "none",
+                    "transition": "0.4s cubic-bezier(0, 0, 0, 1)",
+                    "width": "32px",
+                  }
+                }
+              />
+              <div
+                style={
+                  Object {
+                    "background": "#474C55",
+                    "height": "3px",
+                    "left": "8px",
+                    "position": "absolute",
+                    "top": "23px",
+                    "transform": "none",
+                    "transition": "0.2s cubic-bezier(0, 0, 0, 1)",
+                    "width": "32px",
+                  }
+                }
+              />
+              <div
+                style={
+                  Object {
+                    "background": "#474C55",
+                    "height": "3px",
+                    "left": "8px",
+                    "position": "absolute",
+                    "top": "33px",
+                    "transform": "none",
+                    "transition": "0.4s cubic-bezier(0, 0, 0, 1)",
+                    "width": "32px",
+                  }
+                }
+              />
+            </div>
+          </span>
+        </button>
+        <div
+          aria-hidden={true}
+          className="dropdown-menu dropdown-menu-right"
+          role="menu"
+          tabIndex="-1"
+        >
+          <a
+            href="/home"
+            onClick={[Function]}
+          >
+             
+            <button
+              className="dropdown-item"
+              onClick={[Function]}
+              role="menuitem"
+              tabIndex="0"
+              type="button"
+            >
+              Return to Client Home
+            </button>
+             
+          </a>
+          <h6
+            className="dropdown-header"
+            id="test-head"
+            onClick={[Function]}
+            tabIndex="-1"
+          >
+            Account Options
+          </h6>
+          <a
+            href="/login"
+          >
+            <button
+              className="dropdown-item"
+              onClick={[Function]}
+              role="menuitem"
+              tabIndex="0"
+              type="button"
+            >
+              Logout
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="justify-content-center row"
+  >
+    <div
+      className="col-md-1 col-lg-2"
+    />
+    <div
+      className="col-md-10 col-lg-8"
+    >
+      <div
+        id="batch-info-wrapper"
+      >
+        <div
+          className="batch-info-card card"
+        >
+          <div
+            className="card-header"
+          >
+            <h4>
+              N/A
+            </h4>
+          </div>
+          <div
+            className="card-body"
+          >
+            <h5>
+              <b
+                className="readctl"
+              >
+                Core Technology Learned:
+              </b>
+            </h5>
+            <div
+              className="row"
+            >
+              <div
+                className="logo-container col"
+              >
+                <span
+                  className="helper"
+                />
+                <img
+                  alt="Specialization logo"
+                  className="speclogo"
+                  src=""
+                />
+              </div>
+            </div>
+            <div
+              className="row"
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              <div
+                className="col"
+              >
+                <p
+                  id="test-skill"
+                >
+                  N/A
+                </p>
+              </div>
+            </div>
+            <p
+              id="test-train"
+            >
+              <b
+                className="readtrainer"
+              >
+                Trainer:
+              </b>
+               
+              N/A 
+            </p>
+            <p
+              id="test-end-date"
+            >
+              <b
+                className="readted"
+              >
+                Training End Date:
+              </b>
+               
+              N/A
+            </p>
+          </div>
+          <div
+            className="card-footer"
+          />
+        </div>
+        <span
+          id="test-noAss"
+        />
+      </div>
+    </div>
+    <div
+      className="col-md-1 col-lg-2"
+    />
+    <button
+      className="intervention-button"
+      onClick={[Function]}
+    >
+      Request Intervention
+    </button>
+  </div>
+</div>
+`;
