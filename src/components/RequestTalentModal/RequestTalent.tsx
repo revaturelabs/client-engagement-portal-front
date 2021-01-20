@@ -108,24 +108,24 @@ const RequestTalent: React.FC = () => {
         let mailOptions = {
           adminEmail: email,
           companyName: Company,
-          clientEmail:clientEmail,
+          clientEmail: clientEmail,
           message: Message,
         };
-        emailjs
-          .send(
-            "service_ez8xblh",
-            "template_jzfjnqq",
-            mailOptions,
-            "user_QXqN3hWGagW9ce3rVl9Ei"
-          )
-          .then(
-            (result) => {
-              console.log(result.text);
-            },
-            (error) => {
-              console.log(error.text);
-            }
-          );
+        // emailjs
+        //   .send(
+        //     "service_ez8xblh",
+        //     "template_jzfjnqq",
+        //     mailOptions,
+        //     "user_QXqN3hWGagW9ce3rVl9Ei"
+        //   )
+        //   .then(
+        //     (result) => {
+        //       console.log(result.text);
+        //     },
+        //     (error) => {
+        //       console.log(error.text);
+        //     }
+        //   );
       }
       postRequestMsg();
     });
@@ -133,20 +133,17 @@ const RequestTalent: React.FC = () => {
 
   async function postRequestMsg() {
     Message = (document.getElementById("message") as HTMLInputElement).value;
-    for (let adminId2 of adminList) {
-      (await axiosInstance())
-        .post(`msg/client`, {
-          adminId: adminId2,
-          clientId: ClientId,
-          message: Message,
-        })
-        .then((res) => {
-          console.log(res);
-        });
-      console.log("idminId", adminId2);
-      console.log("clientId", ClientId);
-      console.log("imessage", Message);
-    }
+    (await axiosInstance())
+      .post(`msg/client`, {
+        adminEmail: null,
+        clientEmail: clientEmail,
+        message: Message,
+      })
+      .then((res) => {
+        console.log(res);
+      });
+    console.log("clientId", clientEmail);
+    console.log("imessage", Message);
   }
 
   return (

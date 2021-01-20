@@ -1,7 +1,6 @@
 export interface INewMessageProps {
   show: boolean;
   toggle: () => void;
-  isAdmin: boolean;
   clients: any[];
   admins: any[];
 }

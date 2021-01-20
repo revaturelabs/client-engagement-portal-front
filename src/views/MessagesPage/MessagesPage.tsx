@@ -23,39 +23,35 @@ import { IRootState } from "./../../_reducers/index";
 
 export const MessagesPage: React.FC = () => {
   const [show, setShow] = React.useState(false);
-  const [clients, setClients] = React.useState([]);
+  const [clients, setClients] = React.useState<any>([]);
   const [admins, setAdmins] = React.useState([]);
   const [isAdmin, setIsAdmin] = React.useState(false);
   const toggleShow = () => setShow(!show);
   let userEmail = useSelector((state: IRootState) => {
     return `${state.userState.user?.email}`;
   });
-  useEffect(() => {
-    getAdmins();
-    getClients();
-  }, []);
+  let role = useSelector((state: IRootState) => {
+    return `${state.userState.user?.role}`;
+  });
 
-  const getAdmins = async () => {
-    try {
-      await (await axiosInstance()).get("/admin/").then((resp) => {
-        setAdmins(resp.data);
-        setIsAdmin(resp.data.some((item: any) => item.email === userEmail));
-      });
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  useEffect(() => {
+    console.log("hello");
+    getClients();
+  }, [show]);
 
   const getClients = async () => {
-    try {
-      await (await axiosInstance()).get("/client/").then((resp) => {
-        setClients(resp.data);
-      });
-    } catch (error) {
-      console.log(error);
+    let fetchedClients = await (await axiosInstance()).get("/client/");
+    const tempArray = [];
+    for (const r of fetchedClients.data) {
+      const id = r.clientId;
+      const name = r.companyName;
+      const email = r.email;
+      tempArray.push({ id, name, email });
     }
+    setClients([...tempArray]);
   };
 
+  console.log(clients);
   return (
     <>
       <Container
@@ -66,8 +62,10 @@ export const MessagesPage: React.FC = () => {
         }}
       >
         <NavBar>
-          <Link to="/home">
-            <DropdownItem>Return to Client Home</DropdownItem>
+          <Link to={role === "admin" ? "/admin" : "/home"}>
+            <DropdownItem>
+              Return to {role === "admin" ? "Admin" : "Client"} Home
+            </DropdownItem>
           </Link>
         </NavBar>
 
@@ -79,7 +77,6 @@ export const MessagesPage: React.FC = () => {
         <MessageModal
           show={show}
           toggle={toggleShow}
-          isAdmin={isAdmin}
           clients={clients}
           admins={admins}
         />

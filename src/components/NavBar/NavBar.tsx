@@ -66,11 +66,11 @@ export const NavBar: React.FC<any> = (props: any) => {
       </Col>
 
       <Col className="d-flex align-items-center justify-content-end auto test1">
-        <Link to={"/messages"}>
-          <a href="/messages" className="btn btn-primary mr-2">
-            Messages
-          </a>
-        </Link>
+        {/* <Link to={"/messages"}> */}
+        <a href="/messages" className="btn btn-primary mr-2">
+          Messages
+        </a>
+        {/* </Link> */}
         <ButtonDropdown isOpen={navMenuOpen} toggle={toggle}>
           {/* Mobile Hamburger Menu */}
           <DropdownToggle

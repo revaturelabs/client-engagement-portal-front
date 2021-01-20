@@ -8,7 +8,7 @@ import { setMessages } from "../../actions/MessageActions";
 import "../../scss/Notifications.scss";
 import { useSelector } from "react-redux";
 import { ReplyModal } from "./../MessagesModals/ReplyModal";
-import "../../scss/Messages.scss"
+import "../../scss/Messages.scss";
 import { resolveModuleNameFromCache } from "typescript";
 import { render } from "enzyme";
 
@@ -34,16 +34,16 @@ const Messages: React.FC<IMessageState> = (props: IMessageState) => {
     gotRequests(true);
   };
 
-  const deleteMessage = async (messageID:number) => {
+  const deleteMessage = async (messageID: number) => {
     try {
-        (await axiosInstance()).delete(`msg/` + messageID);
-      } catch (error) {
-        return false;
-      }
+      (await axiosInstance()).delete(`msg/` + messageID);
+    } catch (error) {
+      return false;
+    }
   };
 
   const getUrl = () => {
-    const URL = "message/" + userEmail;
+    const URL = role === "admin" ? "msg" : "message/" + userEmail;
     return URL;
   };
 
@@ -66,13 +66,18 @@ const Messages: React.FC<IMessageState> = (props: IMessageState) => {
             show={showReply}
             toggle={() => toggleReply()}
             title={e.title}
-            recipient={role === "admin" ? e.clientId.email : e.adminId.email}
+            recipient={role === "admin" ? e.clientId.email : "admin"}
           />
           <div className="card border-dark">
             <div className="card-body">
+              <h5 className="message-title">{e.title}</h5>
               <h5 className="message-title">
                 Sender:{" "}
-                {sender(e.adminTheSender, e.adminId.email, e.clientId.email)}
+                {sender(
+                  e.adminTheSender,
+                  e.adminId === null ? "admin" : e.adminId.email,
+                  e.clientId.email
+                )}
               </h5>
 
               <div className="row">
@@ -89,17 +94,23 @@ const Messages: React.FC<IMessageState> = (props: IMessageState) => {
               <div className="row">
                 <p className="card-text col-md">{e.message}</p>
                 <div className="col-md">
+                  {sender(
+                    e.adminTheSender,
+                    e.adminId === null ? "admin" : e.adminId.email,
+                    e.clientId.email
+                  ) !== userEmail && (
+                    <button
+                      onClick={toggleReply}
+                      className="btn btn-primary mr-2 float-right"
+                    >
+                      Reply
+                    </button>
+                  )}
                   <button
-                    onClick={toggleReply}
+                    onClick={() => deleteMessage(e.messageId)}
                     className="btn btn-primary mr-2 float-right"
                   >
-                    Reply
-                  </button>
-                  <button
-                  onClick={() => deleteMessage(e.messageId)}
-                  className="btn btn-primary mr-2 float-right"
-                  >
-                  Delete
+                    Delete
                   </button>
                 </div>
               </div>

@@ -37,14 +37,16 @@ export const MessageModal: React.FC<INewMessageProps> = (props) => {
           title: title,
         });
       } else {
-        props.admins.map(async (admin) => {
-          (await axiosInstance()).post(`msg/client`, {
-            adminEmail: admin.email, // TODO future iteration, please change: no hard coded emails
+        (await axiosInstance())
+          .post(`msg/client`, {
             clientEmail: userEmail,
             message: body,
             title: title,
-          });
-        });
+          })
+          .then((resp) => {
+            console.log(resp);
+          })
+          .catch((error) => console.log(error));
       }
     } catch (error) {
       console.log(error);
@@ -73,7 +75,7 @@ export const MessageModal: React.FC<INewMessageProps> = (props) => {
               placeholder="Title"
             ></Input>
           </FormGroup>
-          {props.isAdmin && (
+          {role === "admin" && (
             <FormGroup>
               <Label for="client" className="newMessageLabel">
                 Client:
@@ -81,7 +83,7 @@ export const MessageModal: React.FC<INewMessageProps> = (props) => {
               <Input required type="select" name="client">
                 {props.clients.map((e: any, i: any) => (
                   <option key={i} id={e.clientId} value={e.email}>
-                    {e.companyName}
+                    {e.name}
                   </option>
                 ))}
               </Input>
