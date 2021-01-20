@@ -10,6 +10,7 @@ const BatchAverageGraph: React.FC<{ batch: Batch }> = ({ batch }) => {
   const [chart, setChart] = useState<Chart>();
   const [associate, setAssociate] = useState<string>('');
   const myChart = useRef<HTMLCanvasElement>(null);
+  const [clickToggler, setClickToggler] = useState<boolean>(false);
 
   // Generate chart on component mount
   useEffect(() => {
@@ -162,22 +163,25 @@ const BatchAverageGraph: React.FC<{ batch: Batch }> = ({ batch }) => {
   };
 
   return <>
-    <LineGraphModal batch={batch} traineeId={associate} />
+    <LineGraphModal batch={batch} traineeId={associate} clickToggler={clickToggler} />
     <canvas id="myChart" ref={myChart} onClick={e => {
-      if (!chart) return;
+      setClickToggler(!clickToggler);
+      if (!chart || !batch?.associateAssignments?.length) return;
       const associateName = (chart.data.labels as string[])[(chart.getElementAtEvent(e)[0] as { _index:number })?._index];
-      const [{associate:{grades}}] = batch.associateAssignments.filter(({associate:{lastName}}) => lastName === associateName);
+      const [associateAssignment] = batch.associateAssignments.filter(({associate:{lastName}}) => lastName === associateName);
+      if (!associateAssignment) return setAssociate('');
+      const { associate: {grades} } = associateAssignment;
       setAssociate(grades[0].traineeId);
     }} />
   </>;
 };
 
-const LineGraphModal: React.FC<{batch:Batch;traineeId:string;}> = (props) => {
+const LineGraphModal: React.FC<{batch:Batch;traineeId:string;clickToggler:boolean;}> = (props) => {
   const [show, setShow] = React.useState<boolean>(true);
 
   useEffect (() => {
     setShow(true);
-  },[props.traineeId])
+  },[props]);
 
   if (!props.batch || !props.batch.associateAssignments || !props.batch.associateAssignments.length || !props.traineeId) return <></>;
   const [associateAssignment] = props.batch.associateAssignments.filter(({ associate: { grades: [{traineeId:id}] } }) => props.traineeId === id);

@@ -2,11 +2,9 @@ import React from 'react';
 import { Card, CardBody, CardFooter, CardHeader, Col, Row } from 'reactstrap';
 import { Batch, batchSkillToImage, User } from '../../types';
 import InterventionModal from '../PlanInterventionModal/PlanInterventionModalv2';
-import mockDonutGraph from '../../assets/mock-donut-graph.png';
 import '../../scss/batch-card-large.scss';
 import DoughnutChart from '../Graphs/DoughnutChart';
 import PercentageCircle from '../Graphs/PercentageCircle';
-import { Container } from 'react-bootstrap';
 
 interface IBatchCardLargeProps {
   batch: Batch;

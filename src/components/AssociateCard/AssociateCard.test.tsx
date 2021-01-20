@@ -5,6 +5,7 @@ import { Associate } from '../../types';
 
 let wrapper:any;
 let fakeData:Associate;
+let salesforceId = 'SF-1234';
 
 /**
  * This represents associate data to be used in the tests below.
@@ -12,26 +13,26 @@ let fakeData:Associate;
 beforeAll(() => {
     fakeData = {
         email: 'billgates@ms.com',
-        salesforceId: 'SF-1234',
+        salesforceId,
         firstName: "Bill",
         lastName: "Gates",
         grades: [{
             dateReceived: "2020-10-21",
             gradeId: 2,
             score: 90,
-            traineeId: "TR-1111"
+            traineeId: salesforceId
         },
         {
             dateReceived: "2020-10-14",
             gradeId: 1,
             score: 60,
-            traineeId: "TR-1111"
+            traineeId: salesforceId
         },
         {
             dateReceived: "2020-10-28",
             gradeId: 3,
             score: 72,
-            traineeId: "TR-1111"
+            traineeId: salesforceId
         }
         ]
     };

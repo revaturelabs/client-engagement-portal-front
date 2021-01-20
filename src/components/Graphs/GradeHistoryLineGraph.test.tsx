@@ -1,7 +1,7 @@
 import React from "react";
-import Enzyme, { /*mount,*/ shallow } from "enzyme";
+import Enzyme, { shallow } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import { Associate, AssociateAssignment, Batch, BIG_DATA } from '../../types';
+import { AssociateAssignment, Batch, BIG_DATA } from '../../types';
 import GradeHistoryLineGraph from "../Graphs/GradeHistoryLineGraph";
 
 Enzyme.configure({ adapter: new Adapter() });

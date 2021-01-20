@@ -29,7 +29,7 @@ const BatchInfoPageContent: React.FC<IBatchInfoPageContentProps> = (props) => {
           </Link>
         )}
       </NavBar>
-      <Row className="justify-content-center">
+      <Row className="justify-content-center mt-2">
         <Col sm="1" />
         <Col sm="10" md="10" xl="10">
           <div id="batch-info-wrapper">

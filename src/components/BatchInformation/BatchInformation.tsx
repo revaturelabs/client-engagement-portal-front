@@ -5,7 +5,6 @@ import "react-multi-carousel/lib/styles.css";
 // import { AssociateCardFactory } from '../AssociateCard/AssociateCardFactory';
 import PlanInterventionModalv2 from '../PlanInterventionModal/PlanInterventionModalv2';
 import { Batch, batchSkillToImage } from '../../types';
-import BatchAverageGraph from '../Graphs/BatchAverageGraph';
 /**
  * This component displays data about one specific batch.
  */
