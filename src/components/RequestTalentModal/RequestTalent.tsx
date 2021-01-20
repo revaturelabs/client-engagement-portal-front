@@ -148,15 +148,12 @@ const RequestTalent: React.FC = () => {
 
   return (
     <>
-      <Row
-        className="row justify-content-center"
-        style={{ marginTop: "300px" }}
-      >
+      <Row className="row justify-content-center">
         <button onClick={toggle} className="intervention-button">
           Request More Talent
         </button>
       </Row>
-      <Modal isOpen={show} toggle={toggle}>
+      <Modal style={{ marginTop: "30vh" }} isOpen={show} toggle={toggle}>
         <ModalHeader toggle={toggle}>
           <h4>Request More Talent</h4>
         </ModalHeader>
