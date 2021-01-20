@@ -3,10 +3,12 @@ import Chart from "chart.js";
 import { Batch } from "../../types";
 import { findAverage } from '../../util';
 import GradeHistoryLineGraph from "./GradeHistoryLineGraph";
+import { Modal, ModalBody, Row, ModalHeader } from 'reactstrap';
+
 
 const BatchAverageGraph: React.FC<{ batch: Batch }> = ({ batch }) => {
   const [chart, setChart] = useState<Chart>();
-  const [associate, setAssociate] = useState<string>();
+  const [associate, setAssociate] = useState<string>('');
   const myChart = useRef<HTMLCanvasElement>(null);
 
   // Generate chart on component mount
@@ -160,9 +162,41 @@ const BatchAverageGraph: React.FC<{ batch: Batch }> = ({ batch }) => {
   };
 
   return <>
-    {/* {associate && <GradeHistoryLineGraph batch={batch} traineeId={associate} />} */}
-    <canvas id="myChart" ref={myChart} onClick={e => chart && setAssociate((chart.data.labels as string[])[(chart.getElementAtEvent(e)[0] as { _index:number })?._index])} />
+    <LineGraphModal batch={batch} traineeId={associate} />
+    <canvas id="myChart" ref={myChart} onClick={e => {
+      if (!chart) return;
+      const associateName = (chart.data.labels as string[])[(chart.getElementAtEvent(e)[0] as { _index:number })?._index];
+      const [{associate:{grades}}] = batch.associateAssignments.filter(({associate:{lastName}}) => lastName === associateName);
+      setAssociate(grades[0].traineeId);
+    }} />
   </>;
 };
+
+const LineGraphModal: React.FC<{batch:Batch;traineeId:string;}> = (props) => {
+  const [show, setShow] = React.useState<boolean>(true);
+
+  useEffect (() => {
+    setShow(true);
+  },[props.traineeId])
+
+  if (!props.batch || !props.batch.associateAssignments || !props.batch.associateAssignments.length || !props.traineeId) return <></>;
+  const [associateAssignment] = props.batch.associateAssignments.filter(({ associate: { grades: [{traineeId:id}] } }) => props.traineeId === id);
+  const  associate  = associateAssignment.associate;
+  const firstName = associate.firstName;
+  const lastName  = associate.lastName;
+
+  return <Modal isOpen={show} toggle={() => setShow(!show) }>
+      <ModalHeader toggle={() => setShow(!show) }>
+        <h3 id="associateName">{firstName} {lastName}</h3>
+      </ModalHeader>
+      <ModalBody>
+        <div className="aso-info">
+          <Row>
+            <GradeHistoryLineGraph batch={props.batch} traineeId={props.traineeId}/>
+          </Row>
+        </div>
+      </ModalBody>
+    </Modal>
+}
 
 export default BatchAverageGraph;
