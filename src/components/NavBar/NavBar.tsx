@@ -74,9 +74,6 @@ export const NavBar: React.FC<any> = (props: any) => {
           Messages
         </a> */}
         {/* </Link> */}
-        <button className="btn btn-primary mr-2" onClick={navigateToMessages}>
-          Messages
-        </button>
         <ButtonDropdown isOpen={navMenuOpen} toggle={toggle}>
           {/* Mobile Hamburger Menu */}
           <DropdownToggle
@@ -110,6 +107,9 @@ export const NavBar: React.FC<any> = (props: any) => {
             <DropdownItem id="test-head" header>
               Account Options
             </DropdownItem>
+            <a href="/messages">
+              <DropdownItem onClick={navigateToMessages}>Messages</DropdownItem>
+            </a>
             <a href="/login">
               <DropdownItem onClick={LogOut}>Logout</DropdownItem>
             </a>
