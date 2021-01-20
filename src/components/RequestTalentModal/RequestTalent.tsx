@@ -76,6 +76,7 @@ const RequestTalent: React.FC = () => {
   var adminList: Number[] = [];
   var adminEmailList: String[] = [];
   var ClientId: Number;
+  var Company: String;
   var Message: String;
   async function NoticeAdmin() {
     Message = (document.getElementById("message") as HTMLInputElement).value;
@@ -91,6 +92,7 @@ const RequestTalent: React.FC = () => {
         const data = response;
         console.log("clientinfo ", data);
         ClientId = data.data.clientId;
+        Company = data.data.companyName;
       });
 
     (await axiosInstance()).get(`admin/`).then((response) => {
@@ -105,14 +107,16 @@ const RequestTalent: React.FC = () => {
         console.log(adminList);
         let mailOptions = {
           adminEmail: email,
+          companyName: Company,
+          clientEmail:clientEmail,
           message: Message,
         };
         emailjs
           .send(
-            "service_780easr",
-            "template_1co3ggw",
+            "service_ez8xblh",
+            "template_jzfjnqq",
             mailOptions,
-            "user_qNzha4WnrQ4xZeolBYZkl"
+            "user_QXqN3hWGagW9ce3rVl9Ei"
           )
           .then(
             (result) => {

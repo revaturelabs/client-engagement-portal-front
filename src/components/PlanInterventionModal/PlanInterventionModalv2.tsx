@@ -73,6 +73,7 @@ const PlanInterventionModalv2: React.FC = () => {
   var adminEmailList: String[] = [];
   var ClientId: Number;
   var Message: String;
+  var Company: String;
   async function NoticeAdmin() {
     Message = (document.getElementById("message") as HTMLInputElement).value;
     console.log(
@@ -87,6 +88,7 @@ const PlanInterventionModalv2: React.FC = () => {
         const data = response;
         console.log("clientinfo ", data);
         ClientId = data.data.clientId;
+        Company = data.data.companyName;
       });
 
     (await axiosInstance()).get(`admin/`).then((response) => {
@@ -101,14 +103,16 @@ const PlanInterventionModalv2: React.FC = () => {
         console.log(adminList);
         let mailOptions = {
           adminEmail: email,
+          companyName: Company,
+          clientEmail:clientEmail,
           message: Message,
         };
         emailjs
           .send(
-            "service_780easr",
-            "template_1co3ggw",
+            "service_ez8xblh",
+            "template_jzfjnqq",
             mailOptions,
-            "user_qNzha4WnrQ4xZeolBYZkl"
+            "user_QXqN3hWGagW9ce3rVl9Ei"
           )
           .then(
             (result) => {
