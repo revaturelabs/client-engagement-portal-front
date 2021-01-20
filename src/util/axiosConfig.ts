@@ -1,13 +1,15 @@
 import Axios from "axios";
-import firebase from 'firebase/app'
-import 'firebase/auth'
+import firebase from "firebase/app";
+import "firebase/auth";
 
 //This requires an Async function to parse the current JWT token due to promises
 const getAxiosHeader = async () => {
-  const result = await firebase.auth().currentUser?.getIdToken(true).then((resp) => resp);
+  const result = await firebase
+    .auth()
+    .currentUser?.getIdToken(true)
+    .then((resp) => resp);
   return result;
-
-}
+};
 
 /**
  * Our Axios Instances need to wait on the token that we get
@@ -25,9 +27,7 @@ export const axiosInstance = async () => {
   const token = await getAxiosHeader();
 
   return Axios.create({
-
     baseURL: process.env.REACT_APP_BACKEND_API,
     headers: { tokenId: token },
-
   });
-}
+};
