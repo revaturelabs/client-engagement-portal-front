@@ -35,4 +35,50 @@ describe("Simple render tests for Messages", () => {
         );
         expect(wrapper.find(".card-body")).toBeDefined;
     })
+    
+    it("has div with classname card", () => {
+        const wrapper = mount(
+            <Provider store={store}>
+                <Messages {...testMessageState} />
+            </Provider>
+        );
+        expect(wrapper.find(".card")).toBeDefined;
+    })
+    
+    it("has div with classname row", () => {
+        const wrapper = mount(
+            <Provider store={store}>
+                <Messages {...testMessageState} />
+            </Provider>
+        );
+        expect(wrapper.find(".row")).toBeDefined;
+    })
+    
+    it("has div with classname col-md", () => {
+        const wrapper = mount(
+            <Provider store={store}>
+                <Messages {...testMessageState} />
+            </Provider>
+        );
+        expect(wrapper.find(".col-md")).toBeDefined;
+    })
+
+    it("has p with classname card-text", () => {
+        const wrapper = mount(
+            <Provider store={store}>
+                <Messages {...testMessageState} />
+            </Provider>
+        );
+        expect(wrapper.find(".card-text")).toBeDefined;
+    })
+    
+    it("has ReplyModal component", () => {
+        const wrapper = mount(
+            <Provider store={store}>
+                <Messages {...testMessageState} />
+            </Provider>
+        );
+        expect(wrapper.find("ReplyModal")).toBeDefined;
+    })
+
 });

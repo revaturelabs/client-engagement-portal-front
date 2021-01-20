@@ -17,4 +17,49 @@ describe("Simple render test for PlanInterventionModalv2", () => {
         );
         expect(wrapper.find(".intervention-button")).toBeDefined;
     })
+
+    it("find Modal component", () => {
+        const wrapper = mount(
+            <Provider store={store}>
+                <PlanInterventionModalv2 />
+            </Provider>
+        );
+        expect(wrapper.find("Modal")).toBeDefined;
+    })
+
+    it("find ModalBody component", () => {
+        const wrapper = mount(
+            <Provider store={store}>
+                <PlanInterventionModalv2 />
+            </Provider>
+        );
+        expect(wrapper.find("ModalBody")).toBeDefined;
+    })
+
+    it("find Form component", () => {
+        const wrapper = mount(
+            <Provider store={store}>
+                <PlanInterventionModalv2 />
+            </Provider>
+        );
+        expect(wrapper.find("Form")).toBeDefined;
+    })
+
+    it("find FormGroup component", () => {
+        const wrapper = mount(
+            <Provider store={store}>
+                <PlanInterventionModalv2 />
+            </Provider>
+        );
+        expect(wrapper.find("FormGroup")).toBeDefined;
+    })
+    
+    it("find ModalHeader component", () => {
+        const wrapper = mount(
+            <Provider store={store}>
+                <PlanInterventionModalv2 />
+            </Provider>
+        );
+        expect(wrapper.find("ModalHeader")).toBeDefined;
+    })
 });

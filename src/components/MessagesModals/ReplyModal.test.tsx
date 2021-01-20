@@ -39,4 +39,58 @@ describe("Simple render tests for ReplyModal", () => {
         );
         expect(wrapper.find(".create-account-submit")).toBeDefined;
     })
+    
+    it("has Modal component", () => {
+        const wrapper = mount(
+            <Provider store={store}>
+                <ReplyModal {...testReplyProps} />
+            </Provider>
+        );
+        expect(wrapper.find("Modal")).toBeDefined;
+    })
+
+    it("has Form component", () => {
+        const wrapper = mount(
+            <Provider store={store}>
+                <ReplyModal {...testReplyProps} />
+            </Provider>
+        );
+        expect(wrapper.find("Form")).toBeDefined;
+    })
+
+    it("has ModalFooter component", () => {
+        const wrapper = mount(
+            <Provider store={store}>
+                <ReplyModal {...testReplyProps} />
+            </Provider>
+        );
+        expect(wrapper.find("ModalFooter")).toBeDefined;
+    })
+
+    it("has ModalBody component", () => {
+        const wrapper = mount(
+            <Provider store={store}>
+                <ReplyModal {...testReplyProps} />
+            </Provider>
+        );
+        expect(wrapper.find("ModalBody")).toBeDefined;
+    })
+
+    it("has FormGroup component", () => {
+        const wrapper = mount(
+            <Provider store={store}>
+                <ReplyModal {...testReplyProps} />
+            </Provider>
+        );
+        expect(wrapper.find("FormGroup")).toBeDefined;
+    })
+
+    it("has ModalHeader component", () => {
+        const wrapper = mount(
+            <Provider store={store}>
+                <ReplyModal {...testReplyProps} />
+            </Provider>
+        );
+        expect(wrapper.find("ModalHeader")).toBeDefined;
+    })
 });
