@@ -57,24 +57,7 @@ const GradeHistoryLineGraph: React.FC<{ batch: Batch; traineeId: string }> = ({ 
     //End of useEffect
     }, [associates, traineeId, chart]);
 
-    useEffect(() => {
-      if (window.innerWidth < 500 && chart.current)
-        chart.current.style.display = 'none';
-      window.addEventListener('resize', () => {
-        if (!chart.current) return;
-        console.log(window.innerWidth + " WIDTH");
-        if (window.innerWidth < 500) {
-          chart.current.style.display = 'none';
-        } else {
-          chart.current.style.display = 'block';
-        }
-      });
-    }, []);
-
     return (
-      // <div className="grade-history-line-graph">
-        /* {graphData && <Line data={graphData} />} */
-      /* </div> */
         <canvas className="graph-line-grade-history" ref={chart} />
     );
 }

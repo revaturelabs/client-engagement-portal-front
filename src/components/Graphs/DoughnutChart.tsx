@@ -81,20 +81,25 @@ const DoughnutChart: React.FC<{batch: Batch}> = ({batch}) => {
     return (
         <div className="chartContainer">
             <canvas className="gradesChart" ref={chart}></canvas>
-            <h2>Performance Standings</h2>
+            <h2 className="performance">Performance</h2><h2>Standings</h2>
             <style> { `
                 .chartContainer {
-                    // width: 30%;
+                    max-width: 220px;
+                    overflow: visible;
+                    margin: auto;
                 }
 
                 .chartContainer h2 {
                     text-align: center;
-                    margin-top: .5rem;
                     color: #999;
                     font-weight: 700;
                     letter-spacing: 1px;
-                    font-size: .90rem;
+                    font-size: 1.025rem;
                     text-align: center;
+                }
+
+                .chartContainer .performance {
+                    margin-top: .8rem;
                 }
             `}
             </style>

@@ -41,9 +41,9 @@ beforeAll(() => {
 /**
  * Sets a reference to the component using fake data.
  */
-beforeEach(() => {
-    wrapper = shallow(<AssociateCardModal {...fakeData}/>);
-});
+// beforeEach(() => {
+//     wrapper = shallow(<AssociateCardModal {...fakeData}/>);
+// });
 
 /**
  * There should be a Button to open the Modal as well

@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import Chart from "chart.js";
 import { Batch } from "../../types";
 import { findAverage } from '../../util';
+import GradeHistoryLineGraph from "./GradeHistoryLineGraph";
 
 const BatchAverageGraph: React.FC<{ batch: Batch }> = ({ batch }) => {
   const [chart, setChart] = useState<Chart>();
@@ -76,15 +77,9 @@ const BatchAverageGraph: React.FC<{ batch: Batch }> = ({ batch }) => {
         labels: chartLabels,
         datasets: [
           {
-            data: chartData,
-            label: "Average Grade",
-            backgroundColor: barColor,
-            hoverBackgroundColor: barColor,
-          },
-          {
             label: "Good Grade",
             fill: false,
-            borderColor: "lightgreen",
+            borderColor: "#474C55",
             data: goodGradeArray,
             pointRadius: 0,
             type: "line",
@@ -92,23 +87,31 @@ const BatchAverageGraph: React.FC<{ batch: Batch }> = ({ batch }) => {
           {
             label: "Passing Grade",
             fill: false,
-            borderColor: "lightblue",
+            borderColor: "#72A4C2",
             data: passingGradeArray,
             pointRadius: 0,
             type: "line",
           },
+          {
+            data: chartData,
+            label: "Average Grade",
+            backgroundColor: barColor,
+            hoverBackgroundColor: barColor,
+          },
         ],
       },
       options: {
+        maintainAspectRatio: false,
         title: {
           display: true,
           text: "Average Assessment Scores",
         },
         layout: {
-          padding: 5,
+          padding: 20,
         },
         legend: {
           labels: {
+            fontSize: 10,
             filter: function (legendItem, data) {
               // Remove label for bar chart as it is a duplicate of the chart title
               //   and doesn't match the multi colored bars.
@@ -120,6 +123,10 @@ const BatchAverageGraph: React.FC<{ batch: Batch }> = ({ batch }) => {
         scales: {
           xAxes: [
             {
+              ticks: { fontSize: 11,
+                maxRotation: 90,
+                minRotation: 90
+              },
               display: true,
               scaleLabel: {
                 display: true,
@@ -149,27 +156,11 @@ const BatchAverageGraph: React.FC<{ batch: Batch }> = ({ batch }) => {
 
   // Generate random background colors for bars
   const randomColor = () => {
-    return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+    return `#${Math.floor(Math.random() * (Math.floor(255) - Math.ceil(204) + 1) + Math.ceil(204)).toString(16) + Math.floor(Math.random() * (Math.floor(128) - Math.ceil(48) + 1) + Math.ceil(48)).toString(16) + Math.floor(Math.random() * (Math.floor(96) - Math.ceil(0) + 1) + Math.ceil(0)).toString(16)}`;
   };
 
-  useEffect(() => {
-    if (window.innerWidth < 500 && myChart.current)
-        myChart.current.style.display = 'none';
-    window.addEventListener('resize', () => {
-      if (!myChart.current) return;
-      console.log(window.innerWidth + " WIDTH");
-      if (window.innerWidth < 500) {
-        myChart.current.style.display = 'none';
-      } else {
-        myChart.current.style.display = 'block';
-      }
-    });
-  }, []);
-
-  chart && console.log(associate ? `Clicked bar for ${associate}` : 'Closed grade history');
-
   return <>
-    {/* associate && <LineGraph batch={batch} aid={associate} /> */}
+    {/* {associate && <GradeHistoryLineGraph batch={batch} traineeId={associate} />} */}
     <canvas id="myChart" ref={myChart} onClick={e => chart && setAssociate((chart.data.labels as string[])[(chart.getElementAtEvent(e)[0] as { _index:number })?._index])} />
   </>;
 };

@@ -31,12 +31,12 @@ const BatchInfoPageContent: React.FC<IBatchInfoPageContentProps> = (props) => {
       </NavBar>
       <Row className="justify-content-center">
         <Col sm="1" />
-        <Col sm="10" md="8" xl="5">
+        <Col sm="10" md="10" xl="10">
           <div id="batch-info-wrapper">
             <BatchCardLarge batch={props.batch} user={props.user} />
             <div
               className="batch-info-card"
-              style={{ background: "white", marginTop: "10px" }}
+              style={{ background: "white", marginTop: "10px", height: "30vh"}}
             >
               <BatchAverageGraph batch={props.batch}/>
             </div>
@@ -51,10 +51,6 @@ const BatchInfoPageContent: React.FC<IBatchInfoPageContentProps> = (props) => {
                 <Notifications/>
               }
             </div>
-            {props.batch.associateAssignments.map((a, index) => (
-              <AssociateCard key={index} associateAssignment={a} />
-            ))}
-            {props.user.role === "admin" && <Notifications />}
           </div>
         </Col>
         <Col xs="1" />

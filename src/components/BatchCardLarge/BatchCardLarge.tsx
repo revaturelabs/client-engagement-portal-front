@@ -6,6 +6,7 @@ import mockDonutGraph from '../../assets/mock-donut-graph.png';
 import '../../scss/batch-card-large.scss';
 import DoughnutChart from '../Graphs/DoughnutChart';
 import PercentageCircle from '../Graphs/PercentageCircle';
+import { Container } from 'react-bootstrap';
 
 interface IBatchCardLargeProps {
   batch: Batch;
@@ -40,11 +41,11 @@ const BatchCardLarge: React.FC<IBatchCardLargeProps> = (props) => {
               <small>Overall Batch Progress</small>
             </Col> */}
           </Row>
-          <Row>
-            <Col md={ 6 } sm={ 12 }>
+          <Row className="roundCharts">
+            <Col sm={12} md={6}>
               <DoughnutChart batch={props.batch}/>
             </Col>
-            <Col md={ 6 } sm={ 12 }>  
+            <Col sm={12} md={6} className="percentChart">  
               <PercentageCircle batch={props.batch}/>
             </Col>
           </Row>
