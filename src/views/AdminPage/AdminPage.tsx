@@ -43,11 +43,9 @@ export const AdminPage: React.FC = () => {
             lg="4"
             xl="2"
           >
-            <Row>
-              <NewClientButton
-                reloadClientDropdowns={() => setBatchFormRerender(true)}
-              />
-            </Row>
+            <NewClientButton
+              reloadClientDropdowns={() => setBatchFormRerender(true)}
+            />
           </Col>
           <Col xs="2" sm="3" md="4" lg="4" xl="5" />
         </Row>
