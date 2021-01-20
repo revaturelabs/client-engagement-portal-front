@@ -23,7 +23,8 @@ const PercentageCircle : React.FC<{batch:Batch}> = ({ batch }) => {
                     <h2>{(+percentage * 100).toFixed(2)}<span>%</span></h2>
                 </div>
             </div>
-            <h2  className="percentage-circle-title">Batch Average <h2></h2>Grade</h2>
+            <h2  className="percentage-circle-title">Batch Average </h2>
+            <h2>Grade</h2>
 
             <style>{`
                 .percentage-circle-container {

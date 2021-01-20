@@ -12,6 +12,8 @@ const GradeHistoryLineGraph: React.FC<{ batch: Batch; traineeId: string }> = ({ 
 
     //No dependencies so this code runs once at the start
     useEffect(() => {
+      console.log(associates);
+      console.log(traineeId);
       if (!associates.length || !chart.current) return;
       const [{ associate: { grades, firstName, lastName } }] = associates.filter(({ associate: { grades: [{traineeId:id}] } }) => traineeId === id);
       

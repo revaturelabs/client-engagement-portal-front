@@ -16,7 +16,7 @@ import GradeHistoryLineGraph from '../Graphs/GradeHistoryLineGraph';
  */
 export const AssociateCardModal:React.FC<{batch: Batch; traineeId: string}> = (props) => {
 
-    const [{ associate, associate: { grades, firstName, lastName } }] = props.batch.associateAssignments.filter(({ associate: { grades: [{traineeId:id}] } }) => props.traineeId === id);
+    const [{ associate: { grades, firstName, lastName } }] = props.batch.associateAssignments.filter(({ associate: { grades: [{traineeId:id}] } }) => props.traineeId === id);
 
     /**
      * @function toggle

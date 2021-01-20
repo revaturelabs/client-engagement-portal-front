@@ -19,7 +19,7 @@ export const AssociateCard: React.FC<IAssociateCardProps> = (props) => {
         if (!props.batch) return;
         const [{associate: newAssociate}] = props.batch.associateAssignments.filter(({ associate: { grades: [{traineeId:id}] } }) => props.traineeId === id);
         setAssociate(newAssociate);
-    }, [])
+    }, [props])
     
     /**
      * @constant avg
