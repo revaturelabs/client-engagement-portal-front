@@ -10,6 +10,7 @@ const mockStore = configureStore([ thunk ]);
 
 let homePageComp: any;
 let fakeHomePageComp: any;
+
 describe("HomePage", () => {
 
     beforeEach(() => {

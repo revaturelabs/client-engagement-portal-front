@@ -1,9 +1,9 @@
 import React from "react";
 import Adapter from "enzyme-adapter-react-16";
-import Enzyme, { configure, shallow, mount, render } from 'enzyme';
+import { configure, mount } from 'enzyme';
 import { Provider } from "react-redux";
 import { store } from "../../Store";
-import { IMessage, IMessageState } from "../../_reducers/MessagesReducer";
+import { IMessageState } from "../../_reducers/MessagesReducer";
 
 import Messages  from "./Messages";
 
