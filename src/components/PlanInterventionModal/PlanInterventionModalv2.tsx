@@ -104,7 +104,7 @@ const PlanInterventionModalv2: React.FC = () => {
         let mailOptions = {
           adminEmail: email,
           companyName: Company,
-          clientEmail:clientEmail,
+          clientEmail: clientEmail,
           message: Message,
         };
         emailjs
@@ -131,8 +131,8 @@ const PlanInterventionModalv2: React.FC = () => {
     for (let adminId2 of adminList) {
       (await axiosInstance())
         .post(`msg/client`, {
-          adminId: adminId2,
-          clientId: ClientId,
+          adminEmail: null,
+          clientEmail: clientEmail,
           message: Message,
         })
         .then((res) => {
