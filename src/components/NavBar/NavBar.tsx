@@ -14,7 +14,7 @@ import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import { logout } from "../../actions/UserActions";
 import firebase from "firebase/app";
 import "firebase/auth";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 /**
  * @function NavBar
@@ -26,7 +26,7 @@ import { Link } from "react-router-dom";
 export const NavBar: React.FC<any> = (props: any) => {
   const [navMenuOpen, setNavMenuOpen] = useState(false);
   const [hamOpen, setHamOpen] = useState(false);
-
+  const history = useHistory();
   /**
    * @function toggle
    * toggles the dropdown menu and the orientation of the hamburger menu
@@ -58,6 +58,9 @@ export const NavBar: React.FC<any> = (props: any) => {
   // if (props.route) {
   //     logoLink = props.route;
   // }
+  const navigateToMessages = () => {
+    history.push("/messages");
+  };
 
   return (
     <Row className="justify-content-around myNav">
@@ -67,10 +70,13 @@ export const NavBar: React.FC<any> = (props: any) => {
 
       <Col className="d-flex align-items-center justify-content-end auto test1">
         {/* <Link to={"/messages"}> */}
-        <a href="/messages" className="btn btn-primary mr-2">
+        {/* <a href="/messages" className="btn btn-primary mr-2">
           Messages
-        </a>
+        </a> */}
         {/* </Link> */}
+        <button className="btn btn-primary mr-2" onClick={navigateToMessages}>
+          Messages
+        </button>
         <ButtonDropdown isOpen={navMenuOpen} toggle={toggle}>
           {/* Mobile Hamburger Menu */}
           <DropdownToggle
