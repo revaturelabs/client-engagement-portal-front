@@ -91,7 +91,7 @@ const HomePageContent: React.FC<IHomePageContentProps> = (props) => {
         <Col />
         <Col className="text-left center-column" sm="10" lg="8" xl="5">
           {props.user.role === "client" && <RequestTalent />}
-          <h3>your batches</h3>
+          <h3>Your Batches</h3>
           <br />
           <input
             value={searchText}

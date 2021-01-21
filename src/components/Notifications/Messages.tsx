@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Accordion, Card } from "react-bootstrap";
 import { connect, useDispatch } from "react-redux";
 import { axiosInstance } from "../../util/axiosConfig";
-import { IRootState } from "../../_reducers";
 import { IMessageState } from "../../_reducers/MessagesReducer";
 import { setMessages } from "../../actions/MessageActions";
 import "../../scss/Notifications.scss";
@@ -11,6 +10,7 @@ import { ReplyModal } from "./../MessagesModals/ReplyModal";
 import "../../scss/Messages.scss";
 import { resolveModuleNameFromCache } from "typescript";
 import { render } from "enzyme";
+import { Store } from "../../types";
 
 const Messages: React.FC<IMessageState> = (props: IMessageState) => {
   const [showReply, setShowReply] = useState(false);
@@ -18,12 +18,12 @@ const Messages: React.FC<IMessageState> = (props: IMessageState) => {
   const [requests, gotRequests] = useState(false);
   const dispatch = useDispatch();
 
-  let userEmail = useSelector((state: IRootState) => {
+  let userEmail = useSelector((state: Store) => {
     var email = `${state.userState.user?.email}`;
     return email;
   });
 
-  let role = useSelector((state: IRootState) => {
+  let role = useSelector((state: Store) => {
     return `${state.userState.user?.role}`;
   });
 
@@ -61,7 +61,7 @@ const Messages: React.FC<IMessageState> = (props: IMessageState) => {
   return (
     <>
       {props.messages?.map((e, i) => (
-        <>
+        <div key={i}>
           <ReplyModal
             show={showReply}
             toggle={() => toggleReply()}
@@ -117,13 +117,13 @@ const Messages: React.FC<IMessageState> = (props: IMessageState) => {
             </div>
           </div>
           <br></br>
-        </>
+        </div>
       ))}
     </>
   );
 };
 
-const mapStateToProps = (state: IRootState) => {
+const mapStateToProps = (state: Store) => {
   return {
     messages: state.messageState.messages,
   };

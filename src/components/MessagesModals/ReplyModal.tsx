@@ -10,15 +10,15 @@ import {
   Input,
   ModalFooter,
 } from "reactstrap";
-import { IReplyModalProps } from "../../_reducers/MessageReducer";
 import { useSelector } from "react-redux";
-import { IRootState } from "./../../_reducers/index";
+import { IReplyModalProps } from "./../../_reducers/MessagesReducer";
+import { Store } from "../../types";
 
 export const ReplyModal: React.FC<IReplyModalProps> = (props) => {
-  let userEmail = useSelector((state: IRootState) => {
+  let userEmail = useSelector((state: Store) => {
     return `${state.userState.user?.email}`;
   });
-  let role = useSelector((state: IRootState) => {
+  let role = useSelector((state: Store) => {
     return `${state.userState.user?.role}`;
   });
 
@@ -27,24 +27,24 @@ export const ReplyModal: React.FC<IReplyModalProps> = (props) => {
     let title = (event.target as any).elements.title.value; // Not type safe, but had to get it in
     let body = (event.target as any).elements.body.value;
     let recipient = (event.target as any).elements.recipient.value.slice(4);
-    try {
-      if (role === "admin") {
-        (await axiosInstance()).post(`msg/admin`, {
+    if (role === "admin") {
+      (await axiosInstance())
+        .post(`msg/admin`, {
           adminEmail: userEmail,
           clientEmail: recipient,
           message: body,
           title: title,
-        });
-      } else {
-        (await axiosInstance()).post(`msg/client`, {
+        })
+        .catch((error) => console.log(error));
+    } else {
+      (await axiosInstance())
+        .post(`msg/client`, {
           adminEmail: recipient,
           clientEmail: userEmail,
           message: body,
           title: title,
-        });
-      }
-    } catch (error) {
-      console.log(error);
+        })
+        .catch((error) => console.log(error));
     }
     props.toggle();
   };

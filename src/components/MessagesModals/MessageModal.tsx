@@ -12,45 +12,38 @@ import {
 } from "reactstrap";
 import "./MessageModal.scss";
 import { useSelector } from "react-redux";
-import { INewMessageProps } from "./../../_reducers/MessageReducer";
-import { IUserState } from "../../_reducers/UserReducer";
-import { IRootState } from "../../_reducers";
+import { INewMessageProps } from "../../_reducers/MessagesReducer";
+import { Store } from "../../types";
 
 export const MessageModal: React.FC<INewMessageProps> = (props) => {
-  let userEmail = useSelector((state: IRootState) => {
+  let userEmail = useSelector((state: Store) => {
     return `${state.userState.user?.email}`;
   });
-  let role = useSelector((state: IRootState) => {
+  let role = useSelector((state: Store) => {
     return `${state.userState.user?.role}`;
   });
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     let title = (event.target as any).elements.title.value; // Not type safe, but had to get it in
     let body = (event.target as any).elements.body.value;
-    try {
-      if (role === "admin") {
-        let clientEmail = (event.target as any).elements.client.value;
-        (await axiosInstance()).post(`msg/admin`, {
+    if (role === "admin") {
+      let clientEmail = (event.target as any).elements.client.value;
+      (await axiosInstance())
+        .post(`msg/admin`, {
           adminEmail: userEmail,
           clientEmail: clientEmail,
           message: body,
           title: title,
-        });
-      } else {
-        (await axiosInstance())
-          .post(`msg/client`, {
-            clientEmail: userEmail,
-            message: body,
-            title: title,
-          })
-          .then((resp) => {
-            console.log(resp);
-          })
-          .catch((error) => console.log(error));
-      }
-    } catch (error) {
-      console.log(error);
-      return false;
+        })
+        .catch((error) => console.log(error));
+    } else {
+      (await axiosInstance())
+        .post(`msg/client`, {
+          clientEmail: userEmail,
+          message: body,
+          title: title,
+        })
+        .catch((error) => console.log(error));
     }
     props.toggle();
   };

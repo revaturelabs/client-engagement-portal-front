@@ -19,7 +19,7 @@ import Messages from "../../components/Notifications/Messages";
 import { axiosInstance } from "../../util/axiosConfig";
 import { MessageModal } from "../../components/MessagesModals/MessageModal";
 import { useSelector } from "react-redux";
-import { IRootState } from "./../../_reducers/index";
+import { Store } from "../../types";
 
 export const MessagesPage: React.FC = () => {
   const [show, setShow] = React.useState(false);
@@ -27,15 +27,14 @@ export const MessagesPage: React.FC = () => {
   const [admins, setAdmins] = React.useState([]);
   const [isAdmin, setIsAdmin] = React.useState(false);
   const toggleShow = () => setShow(!show);
-  let userEmail = useSelector((state: IRootState) => {
+  let userEmail = useSelector((state: Store) => {
     return `${state.userState.user?.email}`;
   });
-  let role = useSelector((state: IRootState) => {
+  let role = useSelector((state: Store) => {
     return `${state.userState.user?.role}`;
   });
 
   useEffect(() => {
-    console.log("hello");
     getClients();
   }, [show]);
 
@@ -51,7 +50,6 @@ export const MessagesPage: React.FC = () => {
     setClients([...tempArray]);
   };
 
-  console.log(clients);
   return (
     <>
       <Container

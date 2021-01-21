@@ -1,14 +1,17 @@
 import React, { useEffect, useState, useRef } from "react";
 import Chart from "chart.js";
 import { Batch } from "../../types";
-import { findAverage } from '../../util';
+import { findAverage } from "../../util";
 import GradeHistoryLineGraph from "./GradeHistoryLineGraph";
-import { Modal, ModalBody, Row, ModalHeader } from 'reactstrap';
+import { Modal, ModalBody, Row, ModalHeader } from "reactstrap";
 
+interface IBatchAverageGraphProps {
+  batch: Batch;
+}
 
-const BatchAverageGraph: React.FC<{ batch: Batch }> = ({ batch }) => {
+const BatchAverageGraph: React.FC<IBatchAverageGraphProps> = ({ batch }) => {
   const [chart, setChart] = useState<Chart>();
-  const [associate, setAssociate] = useState<string>('');
+  const [associate, setAssociate] = useState<string>("");
   const myChart = useRef<HTMLCanvasElement>(null);
   const [clickToggler, setClickToggler] = useState<boolean>(false);
 
@@ -64,7 +67,7 @@ const BatchAverageGraph: React.FC<{ batch: Batch }> = ({ batch }) => {
       chartLabels.push(associate.lastName);
       barColor.push(randomColor());
       // Calculate average grade for test
-      const avgGrade = Math.round( (findAverage(associate.grades) * 100 ) / 100);
+      const avgGrade = Math.round((findAverage(associate.grades) * 100) / 100);
 
       chartData.push(avgGrade);
     }
@@ -74,133 +77,182 @@ const BatchAverageGraph: React.FC<{ batch: Batch }> = ({ batch }) => {
     // console.log("Colors: ", barColor);
 
     // Generate chart
-    myChart.current && setChart(new Chart(myChart.current, {
-      type: "bar",
-      data: {
-        labels: chartLabels,
-        datasets: [
-          {
-            label: "Good Grade",
-            fill: false,
-            borderColor: "#474C55",
-            data: goodGradeArray,
-            pointRadius: 0,
-            type: "line",
+    myChart.current &&
+      setChart(
+        new Chart(myChart.current, {
+          type: "bar",
+          data: {
+            labels: chartLabels,
+            datasets: [
+              {
+                label: "Good Grade",
+                fill: false,
+                borderColor: "#474C55",
+                data: goodGradeArray,
+                pointRadius: 0,
+                type: "line",
+              },
+              {
+                label: "Passing Grade",
+                fill: false,
+                borderColor: "#72A4C2",
+                data: passingGradeArray,
+                pointRadius: 0,
+                type: "line",
+              },
+              {
+                data: chartData,
+                label: "Average Grade",
+                backgroundColor: barColor,
+                hoverBackgroundColor: barColor,
+              },
+            ],
           },
-          {
-            label: "Passing Grade",
-            fill: false,
-            borderColor: "#72A4C2",
-            data: passingGradeArray,
-            pointRadius: 0,
-            type: "line",
-          },
-          {
-            data: chartData,
-            label: "Average Grade",
-            backgroundColor: barColor,
-            hoverBackgroundColor: barColor,
-          },
-        ],
-      },
-      options: {
-        maintainAspectRatio: false,
-        title: {
-          display: true,
-          text: "Average Assessment Scores",
-        },
-        layout: {
-          padding: 20,
-        },
-        legend: {
-          labels: {
-            fontSize: 10,
-            filter: function (legendItem, data) {
-              // Remove label for bar chart as it is a duplicate of the chart title
-              //   and doesn't match the multi colored bars.
-              return legendItem.text !== "Average Grade";
+          options: {
+            maintainAspectRatio: false,
+            title: {
+              display: true,
+              text: "Average Assessment Scores",
             },
-          },
-          display: true,
-        },
-        scales: {
-          xAxes: [
-            {
-              ticks: { fontSize: 11,
-                maxRotation: 90,
-                minRotation: 90
+            layout: {
+              padding: 20,
+            },
+            legend: {
+              labels: {
+                fontSize: 10,
+                filter: function (legendItem, data) {
+                  // Remove label for bar chart as it is a duplicate of the chart title
+                  //   and doesn't match the multi colored bars.
+                  return legendItem.text !== "Average Grade";
+                },
               },
               display: true,
-              scaleLabel: {
-                display: true,
-                labelString: "Associate Last Name",
-              },
             },
-          ],
-          yAxes: [
-            {
-              display: true,
-              scaleLabel: {
-                display: true,
-                labelString: "Average Test Score",
-              },
-              ticks: {
-                beginAtZero: true,
-                stepSize: 10,
-                max: 100,
-                fontSize: 8
-              },
+            scales: {
+              xAxes: [
+                {
+                  ticks: { fontSize: 11, maxRotation: 90, minRotation: 90 },
+                  display: true,
+                  scaleLabel: {
+                    display: true,
+                    labelString: "Associate Last Name",
+                  },
+                },
+              ],
+              yAxes: [
+                {
+                  display: true,
+                  scaleLabel: {
+                    display: true,
+                    labelString: "Average Test Score",
+                  },
+                  ticks: {
+                    beginAtZero: true,
+                    stepSize: 10,
+                    max: 100,
+                    fontSize: 8,
+                  },
+                },
+              ],
             },
-          ],
-        },
-      },
-    }));
+          },
+        })
+      );
   }, [batch]);
 
   // Generate random background colors for bars
   const randomColor = () => {
-    return `#${Math.floor(Math.random() * (Math.floor(255) - Math.ceil(204) + 1) + Math.ceil(204)).toString(16) + Math.floor(Math.random() * (Math.floor(128) - Math.ceil(48) + 1) + Math.ceil(48)).toString(16) + Math.floor(Math.random() * (Math.floor(96) - Math.ceil(0) + 1) + Math.ceil(0)).toString(16)}`;
+    return `#${
+      Math.floor(
+        Math.random() * (Math.floor(255) - Math.ceil(204) + 1) + Math.ceil(204)
+      ).toString(16) +
+      Math.floor(
+        Math.random() * (Math.floor(128) - Math.ceil(48) + 1) + Math.ceil(48)
+      ).toString(16) +
+      Math.floor(
+        Math.random() * (Math.floor(96) - Math.ceil(0) + 1) + Math.ceil(0)
+      ).toString(16)
+    }`;
   };
 
-  return <>
-    <LineGraphModal batch={batch} traineeId={associate} clickToggler={clickToggler} />
-    <canvas id="myChart" ref={myChart} onClick={e => {
-      setClickToggler(!clickToggler);
-      if (!chart || !batch?.associateAssignments?.length) return;
-      const associateName = (chart.data.labels as string[])[(chart.getElementAtEvent(e)[0] as { _index:number })?._index];
-      const [associateAssignment] = batch.associateAssignments.filter(({associate:{lastName}}) => lastName === associateName);
-      if (!associateAssignment) return setAssociate('');
-      const { associate: {grades} } = associateAssignment;
-      setAssociate(grades[0].traineeId);
-    }} />
-  </>;
+  return (
+    <>
+      <LineGraphModal
+        batch={batch}
+        traineeId={associate}
+        clickToggler={clickToggler}
+      />
+      <canvas
+        id="myChart"
+        ref={myChart}
+        onClick={(e) => {
+          setClickToggler(!clickToggler);
+          if (!chart || !batch?.associateAssignments?.length) return;
+          const associateName = (chart.data.labels as string[])[
+            (chart.getElementAtEvent(e)[0] as { _index: number })?._index
+          ];
+          const [associateAssignment] = batch.associateAssignments.filter(
+            ({ associate: { lastName } }) => lastName === associateName
+          );
+          if (!associateAssignment) return setAssociate("");
+          const {
+            associate: { grades },
+          } = associateAssignment;
+          setAssociate(grades[0].traineeId);
+        }}
+      />
+    </>
+  );
 };
 
-const LineGraphModal: React.FC<{batch:Batch;traineeId:string;clickToggler:boolean;}> = (props) => {
+const LineGraphModal: React.FC<{
+  batch: Batch;
+  traineeId: string;
+  clickToggler: boolean;
+}> = (props) => {
   const [show, setShow] = React.useState<boolean>(true);
 
-  useEffect (() => {
+  useEffect(() => {
     setShow(true);
-  },[props]);
+  }, [props]);
 
-  if (!props.batch || !props.batch.associateAssignments || !props.batch.associateAssignments.length || !props.traineeId) return <></>;
-  const [associateAssignment] = props.batch.associateAssignments.filter(({ associate: { grades: [{traineeId:id}] } }) => props.traineeId === id);
-  const  associate  = associateAssignment.associate;
+  if (
+    !props.batch ||
+    !props.batch.associateAssignments ||
+    !props.batch.associateAssignments.length ||
+    !props.traineeId
+  )
+    return <></>;
+  const [associateAssignment] = props.batch.associateAssignments.filter(
+    ({
+      associate: {
+        grades: [{ traineeId: id }],
+      },
+    }) => props.traineeId === id
+  );
+  const associate = associateAssignment.associate;
   const firstName = associate.firstName;
-  const lastName  = associate.lastName;
+  const lastName = associate.lastName;
 
-  return <Modal isOpen={show} toggle={() => setShow(!show) }>
-      <ModalHeader toggle={() => setShow(!show) }>
-        <h3 id="associateName">{firstName} {lastName}</h3>
+  return (
+    <Modal isOpen={show} toggle={() => setShow(!show)}>
+      <ModalHeader toggle={() => setShow(!show)}>
+        <h3 id="associateName">
+          {firstName} {lastName}
+        </h3>
       </ModalHeader>
       <ModalBody>
         <div className="aso-info">
           <Row>
-            <GradeHistoryLineGraph batch={props.batch} traineeId={props.traineeId}/>
+            <GradeHistoryLineGraph
+              batch={props.batch}
+              traineeId={props.traineeId}
+            />
           </Row>
         </div>
       </ModalBody>
     </Modal>
-}
+  );
+};
 
 export default BatchAverageGraph;

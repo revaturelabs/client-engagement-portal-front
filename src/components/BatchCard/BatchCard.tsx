@@ -62,11 +62,8 @@ const BatchCard = (props: IBatchCardProps) => {
           />
         </Col>
         <Col className="right flex-column">
-          <div className="p-2">
+          <div>
             <img src={imgSrc} alt="skill logo" />
-          </div>
-          <div className="bar-chart-wrapper mt-auto">
-            <BarChartIcon width={36} height={36} />
           </div>
         </Col>
       </Row>

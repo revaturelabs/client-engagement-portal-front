@@ -61,24 +61,6 @@ export interface AssociateAssignment {
   active: boolean;
 }
 
-export interface BasicBatchData {
-  batchId: string;
-  skill: BatchSkill;
-  name: string;
-}
-
-export interface Batch extends BasicBatchData {
-  startDate: string;
-  endDate: string;
-  location: string;
-  type: string;
-  goodGrade: number;
-  passingGrade: number;
-  currentWeek: number;
-  employeeAssignments: EmployeeAssignment[];
-  associateAssignments: AssociateAssignment[];
-}
-
 // Interfaces
 
 /* Users */
@@ -142,10 +124,13 @@ export interface BasicBatchData {
 }
 
 export interface Batch extends BasicBatchData {
+  startDate: string;
   endDate: string;
-  trainer: string;
+  location: string;
+  type: string;
   goodGrade: number;
   passingGrade: number;
+  currentWeek: number;
   employeeAssignments: EmployeeAssignment[];
   associateAssignments: AssociateAssignment[];
 }
