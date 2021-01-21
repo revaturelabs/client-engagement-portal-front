@@ -31,8 +31,7 @@ const BatchCard = (props: IBatchCardProps) => {
   const imgSrc = batchSkillToImage[batch.skill];
 
   return (
-    <Container className="batch-card" fluid>
-      <Row>
+      <Row className='batch-card m-1'>
         <Col xs="7" sm="8" className="left">
           <p className="name-line" onClick={goToBatchPage}>
             <ExternalLinkIcon width={20} height={20} />
@@ -67,7 +66,6 @@ const BatchCard = (props: IBatchCardProps) => {
           </div>
         </Col>
       </Row>
-    </Container>
   );
 };
 
