@@ -1,4 +1,4 @@
-import 'firebase/auth'
+import "firebase/auth";
 import React, { ChangeEvent, useState } from "react";
 import {
   Button,
@@ -14,12 +14,12 @@ import {
   Col,
   Container,
 } from "reactstrap";
-import '../../scss/NewClientButton.scss';
+import "../../scss/NewClientButton.scss";
 import { axiosInstance } from "../../util/axiosConfig";
-import {signUp} from "../../util/FirebaseContainer";
+import { signUp } from "../../util/FirebaseContainer";
 
 interface IProps {
-  reloadClientDropdowns: () => void
+  reloadClientDropdowns: () => void;
 }
 
 /**
@@ -28,7 +28,7 @@ interface IProps {
  *
  * This also has a modal form that pops up when the button is clicked
  *
-  */
+ */
 export const NewClientButton: React.FC<IProps> = (props: IProps) => {
   const [modal, setModal] = useState(false);
 
@@ -65,7 +65,7 @@ export const NewClientButton: React.FC<IProps> = (props: IProps) => {
     let companyName;
     let phoneNumber;
 
-    if (role === 'client') {
+    if (role === "client") {
       companyName = event.currentTarget["companyName"].value;
       phoneNumber = event.currentTarget["phoneNumber"].value;
     } else {
@@ -76,7 +76,6 @@ export const NewClientButton: React.FC<IProps> = (props: IProps) => {
     setModal(!modal);
 
     try {
-
       signUp(email, password);
 
       if (role === "client") {
@@ -90,14 +89,13 @@ export const NewClientButton: React.FC<IProps> = (props: IProps) => {
 
         props.reloadClientDropdowns();
       } else if (role === "admin") {
-        (await axiosInstance()).post("/admin/new", { 
+        (await axiosInstance()).post("/admin/new", {
           adminId: 0,
           email: email,
           firstName: firstName,
-          lastName: lastName
-        })
+          lastName: lastName,
+        });
       }
-
     } catch (error) {
       return false;
     }
@@ -117,15 +115,24 @@ export const NewClientButton: React.FC<IProps> = (props: IProps) => {
 
   return (
     <>
-      <Button onClick={toggle} className="create-account-button">
-        Create Account
-      </Button>
-
-      <Modal isOpen={modal} toggle={toggle}>
-        <ModalHeader toggle={toggle} className="container create-account-modal-header">
+      <div className="text-center">
+        <Button onClick={toggle} className="create-account-button w-100">
           Create Account
-            </ModalHeader>
-        <Form onSubmit={(event: React.FormEvent<HTMLFormElement>) => registerUser(event)} id="new-client-button-form">
+        </Button>
+      </div>
+      <Modal isOpen={modal} toggle={toggle}>
+        <ModalHeader
+          toggle={toggle}
+          className="container create-account-modal-header"
+        >
+          Create Account
+        </ModalHeader>
+        <Form
+          onSubmit={(event: React.FormEvent<HTMLFormElement>) =>
+            registerUser(event)
+          }
+          id="new-client-button-form"
+        >
           <ModalBody>
             {/* <Form onSubmit={registerUser}> */}
             <FormGroup>
@@ -137,42 +144,71 @@ export const NewClientButton: React.FC<IProps> = (props: IProps) => {
                 placeholder="Client Type"
                 onChange={changeForm}
               >
-                <option value="client" defaultValue="client">Client</option>
-                <option value="admin" defaultValue="admin">Admin</option>
+                <option value="client" defaultValue="client">
+                  Client
+                </option>
+                <option value="admin" defaultValue="admin">
+                  Admin
+                </option>
               </Input>
             </FormGroup>
             <FormGroup>
               <Label>Email</Label>
               <Input type="email" required name="email" id="email"></Input>
             </FormGroup>
-            {accountType === "client" ? (<>
-              <FormGroup>
-                <Label>Company Name</Label>
-                <Input type="text" required name="companyName" id="companyName"></Input>
-              </FormGroup>
-              <FormGroup>
-                <Label>Phone Number</Label>
-                <Input type="tel" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required name="phoneNumber" id="phoneNumber"></Input>
-              </FormGroup>
-            </>
+            {accountType === "client" ? (
+              <>
+                <FormGroup>
+                  <Label>Company Name</Label>
+                  <Input
+                    type="text"
+                    required
+                    name="companyName"
+                    id="companyName"
+                  ></Input>
+                </FormGroup>
+                <FormGroup>
+                  <Label>Phone Number</Label>
+                  <Input
+                    type="tel"
+                    placeholder="123-456-7890"
+                    pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                    required
+                    name="phoneNumber"
+                    id="phoneNumber"
+                  ></Input>
+                </FormGroup>
+              </>
             ) : (
-                <><Container>
-                <Row>
-                  <Col>
-                    <FormGroup>
-                      <Label>First Name</Label>
-                      <Input type="text" required name="firstName" id="firstName"></Input>
-                    </FormGroup>
-                  </Col>
-                  <Col>
-                    <FormGroup>
-                      <Label>Last Name</Label>
-                      <Input type="text" required name="lastName" id="lastName"></Input>
-                    </FormGroup>
-                  </Col>
-                </Row>
-              </Container></>
-              )}
+              <>
+                <Container>
+                  <Row>
+                    <Col>
+                      <FormGroup>
+                        <Label>First Name</Label>
+                        <Input
+                          type="text"
+                          required
+                          name="firstName"
+                          id="firstName"
+                        ></Input>
+                      </FormGroup>
+                    </Col>
+                    <Col>
+                      <FormGroup>
+                        <Label>Last Name</Label>
+                        <Input
+                          type="text"
+                          required
+                          name="lastName"
+                          id="lastName"
+                        ></Input>
+                      </FormGroup>
+                    </Col>
+                  </Row>
+                </Container>
+              </>
+            )}
             <FormGroup>
               <Label>Password</Label>
               <Input
@@ -190,7 +226,11 @@ export const NewClientButton: React.FC<IProps> = (props: IProps) => {
           </ModalBody>
 
           <ModalFooter>
-            <Input type="submit" value="Submit" className="create-account-submit" />
+            <Input
+              type="submit"
+              value="Submit"
+              className="create-account-submit"
+            />
           </ModalFooter>
         </Form>
       </Modal>

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { Col, Container, DropdownItem, Row } from 'reactstrap';
+import { Col, Container, DropdownItem, Row } from "reactstrap";
 import { BatchForms } from "../../components/BatchForms/BatchForms";
 import { NavBar } from "../../components/NavBar/NavBar";
 import { NewClientButton } from "../../components/NewClientButton/NewClientButton";
 import Notifications from "../../components/Notifications/Notifications";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 /**
  * @function AdminPage
@@ -23,7 +23,7 @@ export const AdminPage: React.FC = () => {
         }}
       >
         <NavBar>
-          <Link to='/home'>
+          <Link to="/home">
             <DropdownItem>Home</DropdownItem>
           </Link>
         </NavBar>
@@ -33,9 +33,16 @@ export const AdminPage: React.FC = () => {
           doRerender={() => setBatchFormRerender(false)}
         />
 
-        <Row style={{ marginTop: "20px" }}>
+        <Row className="justify-content-between mt-3">
           <Col xs="2" sm="3" md="4" lg="4" xl="5" />
-          <Col xs="8" sm="6" md="4" lg="4" xl="2">
+          <Col
+            className="justify-content-center"
+            xs="8"
+            sm="6"
+            md="4"
+            lg="4"
+            xl="2"
+          >
             <NewClientButton
               reloadClientDropdowns={() => setBatchFormRerender(true)}
             />
@@ -43,7 +50,7 @@ export const AdminPage: React.FC = () => {
           <Col xs="2" sm="3" md="4" lg="4" xl="5" />
         </Row>
       </Container>
-      <Notifications/>
+      <Notifications />
       {/* sticky footer */}
     </>
   );

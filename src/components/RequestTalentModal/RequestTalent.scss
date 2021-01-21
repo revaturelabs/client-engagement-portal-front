@@ -1,37 +1,36 @@
-@import '../../scss/revature-colors.scss';
-
+@import "../../scss/revature-colors.scss";
 
 input.talentSubmit {
-    border: 3px solid $rev-orange;
-    border-radius: 4px;
-    background-color: $rev-orange;
-    color: white;
-    width: 200px;
-    max-width: 100%;
-    height: 30px;
-    margin: 15px auto 0px;
-    padding: 1px 6px;
-    display: inherit;
+  border: 3px solid $rev-orange;
+  border-radius: 4px;
+  background-color: $rev-orange;
+  color: white;
+  width: 200px;
+  max-width: 100%;
+  height: 30px;
+  margin: 15px auto 0px;
+  padding: 1px 6px;
+  display: inherit;
 }
 input.talentSubmit:focus {
-    outline: none;
+  outline: none;
 }
 input.talentSubmit:hover {
-    background-color: white;
-    color: $rev-orange;
+  background-color: white;
+  color: $rev-orange;
 }
 textarea.talentTextAreaInput {
-    resize: none;
-    max-width: 100%;
-    height: 200px !important;
-    padding: 10px;
-    outline: none;
-    border: 1px solid $rev-superlgray;
-    border-radius: 8px;
-    transition: all .1s ease-in-out;
+  resize: none;
+  max-width: 100%;
+  height: 200px !important;
+  padding: 10px;
+  outline: none;
+  border: 1px solid $rev-superlgray;
+  border-radius: 8px;
+  transition: all 0.1s ease-in-out;
 }
 .talentTextAreaInput:focus {
-    transition: all .1s ease-in-out;
-    border: 1px solid rgb(123, 176, 255);
-    box-shadow: 0 0 5px 2px rgb(123, 176, 255);
+  transition: all 0.1s ease-in-out;
+  border: 1px solid rgb(123, 176, 255);
+  box-shadow: 0 0 5px 2px rgb(123, 176, 255);
 }

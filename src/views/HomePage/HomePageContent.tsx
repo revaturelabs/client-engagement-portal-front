@@ -1,25 +1,25 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 import React, { ChangeEvent, useEffect, useState } from "react";
-import { Batch } from '../../types';
-import { Col, Container, DropdownItem, Row } from 'reactstrap';
+import { Batch } from "../../types";
+import { Col, Container, DropdownItem, Row } from "reactstrap";
 import { NavBar } from "../../components/NavBar/NavBar";
 import BatchCard from "../../components/BatchCard/BatchCard";
 import "firebase/auth";
 import "../../scss/home-page.scss";
-import { Link } from 'react-router-dom';
-import { User } from '../../types';
-import RequestTalent from '../../components/RequestTalentModal/RequestTalent';
-import Notifications from '../../components/Notifications/Notifications';
+import { Link } from "react-router-dom";
+import { User } from "../../types";
+import RequestTalent from "../../components/RequestTalentModal/RequestTalent";
+import Notifications from "../../components/Notifications/Notifications";
 
 interface IHomePageContentProps {
   user: User;
   batches: Batch[];
 }
 
-const HomePageContent: React.FC<IHomePageContentProps> = props => {
+const HomePageContent: React.FC<IHomePageContentProps> = (props) => {
   const [hiddenBatchIds, setHiddenBatchIds] = useState<Set<string>>(
-      new Set<string>()
+    new Set<string>()
   );
   const [searchText, setSearchText] = useState<string>("");
   const [searchTexts, setSearchTexts] = useState<string[]>([]);
@@ -30,11 +30,11 @@ const HomePageContent: React.FC<IHomePageContentProps> = props => {
     const searchText = e.target.value;
     setSearchText(searchText);
     setSearchTexts(
-        searchText
-            .trim()
-            .split("`")
-            .map((s) => s.trim().toLowerCase())
-            .filter((s) => !!s)
+      searchText
+        .trim()
+        .split("`")
+        .map((s) => s.trim().toLowerCase())
+        .filter((s) => !!s)
     );
   };
 
@@ -53,8 +53,8 @@ const HomePageContent: React.FC<IHomePageContentProps> = props => {
     for (const b of props.batches) {
       const date = `${b.startDate} to ${b.endDate}`;
       const trainers = b.employeeAssignments
-          .map((e) => `${e.employee.firstName} ${e.employee.lastName || ""}`)
-          .join(", ");
+        .map((e) => `${e.employee.firstName} ${e.employee.lastName || ""}`)
+        .join(", ");
 
       const haystacks: string[] = [
         b.name.toLowerCase(),
@@ -79,53 +79,38 @@ const HomePageContent: React.FC<IHomePageContentProps> = props => {
   };
 
   return (
-      <Container className="home-page" fluid>
-        <NavBar>
-          {
-            props.user.role === 'admin' &&
-            (
-                <Link to='/admin'>
-                  <DropdownItem>Map Clients</DropdownItem>
-                </Link>
-            )
-          }
-        </NavBar>
-        <Row className="justify-content-center">
-          <Col />
-          <Col className="text-left center-column" sm="10" lg="8" xl="5">
-            {
-              props.user.role === 'client' &&
-              <RequestTalent/>
-            }
-            <h3>your batches</h3>
-            <br/>
-            <input
-                value={searchText}
-                onChange={onInputChange}
-                placeholder="new york`349"
-                onKeyDown={handleKeyDown}
-            />
-            <br/>
-            <br/>
-            {
-              props.batches
-                  .filter((b) => !hiddenBatchIds.has(b.batchId))
-                  .map((batch, index) => (
-                      <BatchCard
-                          key={index}
-                          batch={batch}
-                          searchTexts={searchTexts}
-                      />
-                  ))
-            }
-            {
-              props.user.role === 'admin' &&
-              <Notifications/>
-            }
-          </Col>
-          <Col />
-        </Row>
-      </Container>
+    <Container className="home-page" fluid>
+      <NavBar>
+        {props.user.role === "admin" && (
+          <Link to="/admin">
+            <DropdownItem>Map Clients</DropdownItem>
+          </Link>
+        )}
+      </NavBar>
+      <Row className="justify-content-center">
+        <Col />
+        <Col className="text-left center-column" sm="10" lg="8" xl="5">
+          {props.user.role === "client" && <RequestTalent />}
+          <h3>Your Batches</h3>
+          <br />
+          <input
+            value={searchText}
+            onChange={onInputChange}
+            placeholder="new york`349"
+            onKeyDown={handleKeyDown}
+          />
+          <br />
+          <br />
+          {props.batches
+            .filter((b) => !hiddenBatchIds.has(b.batchId))
+            .map((batch, index) => (
+              <BatchCard key={index} batch={batch} searchTexts={searchTexts} />
+            ))}
+          {props.user.role === "admin" && <Notifications />}
+        </Col>
+        <Col />
+      </Row>
+    </Container>
   );
 };
 
