@@ -1,7 +1,7 @@
 export interface IMessage {
   //basic structure of the message
   messageId: number;
-  title: String;
+  title: string;
   dateSent: string;
   adminTheSender: boolean;
   message: string;
@@ -28,10 +28,10 @@ export interface INewMessageProps {
 }
 
 export interface IReplyModalProps {
-  title: String;
+  title: string;
   show: boolean;
   toggle: () => void;
-  recipient: String;
+  recipient: string;
 }
 
 export interface IMessageState {

@@ -62,9 +62,12 @@ export const MessagesPage: React.FC = () => {
         <NavBar>
           <Link to="/home">
             <DropdownItem>
-              Return to {role === "admin" ? "Admin" : "Client"} Home
+              Home
             </DropdownItem>
           </Link>
+          {role === "admin" && <Link to="/admin">
+            <DropdownItem>Map Clients</DropdownItem>
+          </Link>}
         </NavBar>
 
         <br></br>

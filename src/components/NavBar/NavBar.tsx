@@ -104,9 +104,6 @@ export const NavBar: React.FC<any> = (props: any) => {
           {/* Desktop Menu */}
           <DropdownMenu right>
             {props.children}
-            <DropdownItem id="test-head" header>
-              Account Options
-            </DropdownItem>
             <a href="/messages">
               <DropdownItem onClick={navigateToMessages}>Messages</DropdownItem>
             </a>
