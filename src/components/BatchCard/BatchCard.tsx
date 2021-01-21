@@ -1,7 +1,6 @@
 import React from "react";
 import { Batch, batchSkillToImage } from "../../types";
-import { Col, Container, Row } from "reactstrap";
-import { ReactComponent as BarChartIcon } from "../../assets/bar-chart.svg";
+import { Col, Row } from "reactstrap";
 import { ReactComponent as ExternalLinkIcon } from "../../assets/external-link-square.svg";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import MatchTextComponent from "../../components/MatchTextComponent/MatchTextComponent";
@@ -31,8 +30,7 @@ const BatchCard = (props: IBatchCardProps) => {
   const imgSrc = batchSkillToImage[batch.skill];
 
   return (
-    <Container className="batch-card" fluid>
-      <Row>
+      <Row className='batch-card m-1'>
         <Col xs="7" sm="8" className="left">
           <p className="name-line" onClick={goToBatchPage}>
             <ExternalLinkIcon width={20} height={20} />
@@ -67,7 +65,6 @@ const BatchCard = (props: IBatchCardProps) => {
           </div>
         </Col>
       </Row>
-    </Container>
   );
 };
 

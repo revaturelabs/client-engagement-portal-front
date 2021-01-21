@@ -1,47 +1,48 @@
 pipeline {
-  agent {
-    docker {
-     image 'node:lts-alpine3.10'
-     args '-p 3000:3000'
-    }
-  }
+  agent none
   environment {
     CI = ''
     HOME = '.'
     npm_config_cache = 'npm-cache'
   }
   stages {
-    stage('clear cache') {
-      steps {
-        sh 'npm cache clean --force'
+    stage('build') {
+      agent {
+        docker { image 'node:lts-alpine3.10'}
       }
-    }
-    stage('Delete node_modules & package-lock.json') {
       steps {
-        sh 'rm -rf node_modules package-lock.json'
-      }
-    }
-    stage('Install Packages') {
-      steps {
-        sh 'npm install'
-      }
-    }
-    stage('Create Build Artifacts') {
-      steps {
+        sh 'npm i'
         sh 'npm run build'
       }
     }
-    stage('Production') {
-    steps {
-      withAWS(region:'us-east-1',credentials:'AWSCredentialsID') {
-        s3Delete(bucket: 'robert-connell-batch-906-frontend', path:'**/*')
-        s3Upload(bucket: 'robert-connell-batch-906-frontend', workingDir:'build', includePathPattern:'**/*');
+
+    stage ('image') {
+      agent any
+      steps {
+        sh 'docker build . -t cep-front-image'
+      }
+    }
+
+    stage('Clean') {
+      agent any
+      steps {
+        script {
+          try {
+            sh 'docker stop cep-front'
+            sh 'docker rm cep-front'
+            sh 'docker system prune -f'
+          } catch (all) {
+            echo 'No previous containers/images'
+          }
         }
       }
     }
-    stage('Post-Production') {
+
+    stage('Deploy') {
+      agent any
       steps {
-        sh 'rm -rf node_modules npm-cache/_cacache'
+        sh 'docker run -d -p 80:80 --name cep-front cep-front-image'
+        sh 'docker ps'
       }
     }
    }
