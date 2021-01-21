@@ -1,7 +1,6 @@
 import React from "react";
 import { Batch, batchSkillToImage } from "../../types";
-import { Col, Container, Row } from "reactstrap";
-import { ReactComponent as BarChartIcon } from "../../assets/bar-chart.svg";
+import { Col, Row } from "reactstrap";
 import { ReactComponent as ExternalLinkIcon } from "../../assets/external-link-square.svg";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import MatchTextComponent from "../../components/MatchTextComponent/MatchTextComponent";
