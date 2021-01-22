@@ -1,44 +1,154 @@
-@import "revature-colors.scss";
+@import "./revature-colors.scss";
 
-.rev-card
-{
-    max-width: 200px;
-    min-width: 100px;
-    background-color: white;
-    padding: 20px;
-    border: 1px solid #F26925;
-    box-shadow: 3px 3px 15px #72A4C260;
-    border-radius: 20px;
-    margin: 10px;
+.batch-card {
+  background-color: white;
+  margin: 10px;
+  padding: 20px;
+  border: 1px solid $rev-orange;
+  box-shadow: 3px 3px 15px #72A4C260;
+  border-radius: 7px;
+
+  .left {
+    .match-text-highlight {
+      background-color: rgba(0,0,0,0.12);
+    }
+
+    .name-line {
+      margin-bottom: 0;
+
+      svg {
+        fill: rgba(0,0,0,0.12);
+        margin-right: 5px;
+        margin-bottom: 3px;
+      }
+
+      span {
+        font-weight: 500;
+      }
+
+      &:hover {
+        * {
+          fill: $rev-orange;
+          text-decoration: underline;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .detail {
+      font-weight: 500;
+      color: #474c55dd;
+      margin: 4px 4px 4px 0;
+    }
+
+    .date-line {
+      font-style: italic;
+    }
+  }
+
+  .right {
+    text-align: center;
+
+    img {
+      max-width: 150px;
+      max-height: 50px;
+      overflow: hidden;
+    }
+
+    .bar-chart-wrapper {
+      padding-top: 0.5rem;
+
+      svg {
+        fill: rgba(0,0,0,0.12);
+
+        &:hover {
+          fill: $rev-orange;
+          cursor: pointer;
+        }
+      }
+    }
+  }
 }
 
-.pic
-{
-    max-width: 150px;
-    max-height: 50px;
-    overflow: hidden;
+/*
+  info to display
+  -
+  img
+  name
+  skill
+  location
+  trainer first/last names
+  start/end date
+  -- graph icon to view graphs
+  -- view icon to view that batch
+  -- put these in a control row?
+
+  filters:
+  - completedTraining
+  - inTraining
+  - text
+    (can be split on ` in which case there is an
+    or evaluation)
+    - name
+    - skill
+    - location
+    - trainer name
+    - start/end date
+
+default/only sort is by batch finish date in
+desc order
+ */
+
+.rev-card {
+  max-width: 200px;
+  min-width: 100px;
+  background-color: white;
+  padding: 20px;
+  border: 1px solid #f26925;
+  box-shadow: 3px 3px 15px #72a4c260;
+  border-radius: 20px;
+  margin: 10px;
 }
 
-.spec-text
-{
-    font-size: 12px;
-    overflow: hidden;
+.pic {
+  max-width: 150px;
+  max-height: 50px;
+  overflow: hidden;
 }
 
-.view-btn
-{
-    box-sizing: border-box;
-    line-height: 1.5;
-    width: 70%;
-    border: 3px solid $rev-orange;
-    background-color: $rev-orange;
-    color: white;
-    font-size: 20px;
-    transition: all 0.15s ease 0s;
+.spec-text {
+  font-size: 12px;
+  overflow: hidden;
 }
 
-.view-btn:hover
-{
-    background-color: white;
-    color: $rev-orange;
+.view-btn {
+  box-sizing: border-box;
+  line-height: 1.5;
+  width: 70%;
+  border: 3px solid $rev-orange;
+  background-color: $rev-orange;
+  color: white;
+  font-size: 20px;
+  transition: all 0.15s ease 0s;
 }
+
+.view-btn:hover {
+  background-color: white;
+  color: $rev-orange;
+}
+
+.roundCharts {
+  padding: .5rem 0;
+}
+
+
+
+@media(
+  max-width: 576px
+){
+  .percentChart {
+    padding-top: 1rem;
+  }
+}
+
+

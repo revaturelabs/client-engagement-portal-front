@@ -1,7 +1,8 @@
 import React from 'react';
-import { Modal, Button, ModalBody, Row, ModalHeader } from 'reactstrap';
+import { Modal, ModalBody, Row, ModalHeader } from 'reactstrap';
 import '../../scss/associate-card.scss';
-import {IAssociateSingle} from '../../_reducers/AssociateReducer'
+import {Batch} from '../../types'
+import GradeHistoryLineGraph from '../Graphs/GradeHistoryLineGraph';
 
 
 /**
@@ -13,7 +14,9 @@ import {IAssociateSingle} from '../../_reducers/AssociateReducer'
  *
  * @returns TSX Element to render
  */
-export const AssociateCardModal:React.FC<IAssociateSingle> = (props:IAssociateSingle) => {
+export const AssociateCardModal:React.FC<{batch: Batch; traineeId: string}> = (props) => {
+
+    const [{ associate: { firstName, lastName } }] = props.batch.associateAssignments.filter(({ associate: { grades: [{traineeId:id}] } }) => props.traineeId === id);
 
     /**
      * @function toggle
@@ -26,18 +29,18 @@ export const AssociateCardModal:React.FC<IAssociateSingle> = (props:IAssociateSi
      * This will map the grades and date the grade was received to TSX elements,
      * as well as calculate the average grade.
      */
-    let gradeMap;
-    let averageGrade = 0;
-    if(props.grades !== undefined){
-        let numGrades = 0;
-        gradeMap = props.grades.map((g) => <div id="grade" key={g.gradeId}><p>Date {g.dateReceived}: {g.score.toFixed(2)}%</p><div className="h-divider"></div></div>);
-        for(const grade of props.grades){
+    // let gradeMap;
+    // let averageGrade = 0;
+    // if(grades !== undefined){
+    //     let numGrades = 0;
+    //     gradeMap = grades.map((g) => <div id="grade" key={g.gradeId}><p>Date {g.dateReceived}: {g.score.toFixed(2)}%</p><div className="h-divider"></div></div>);
+    //     for(const grade of grades){
 
-            averageGrade += grade.score;
-            numGrades++;
-        }
-        averageGrade = averageGrade / numGrades;
-    }
+    //         averageGrade += grade.score;
+    //         numGrades++;
+    //     }
+    //     averageGrade = averageGrade / numGrades;
+    // }
 
     /**
      * @function return
@@ -47,29 +50,15 @@ export const AssociateCardModal:React.FC<IAssociateSingle> = (props:IAssociateSi
      */
     return (
         <>
-                <Button id="openBtn" className="view-btn" onClick={toggle}>View</Button>
+                <button id="openBtn" className="view-btn" onClick={toggle}>View</button>
                 <Modal isOpen={show} toggle={toggle}>
                     <ModalHeader toggle={toggle}>
-                        <h3 id="associateName">{props.firstName} {props.lastName}</h3>
+                        <h3 id="associateName">{firstName} {lastName}</h3>
                     </ModalHeader>
                     <ModalBody>
                     <div className="aso-info">
                     <Row>
-                        {/* div for scroll area */}
-                        <div className="col-9" style={{maxHeight: "400px"}}>
-                        <div>Weekly Assessments</div>
-                        <div className="aso-scroll-container">
-                            <div className="aso-scroll" >
-                            {/* Week #    grade% */}
-                             <div id="gradeMap">{gradeMap}</div>
-                            </div>
-                        </div>
-                        </div>
-                        {/* div for average grade */}
-                        <div className="aso-average col-1">
-                            <h6>Average</h6>
-                            <h6 id="avgTest">{averageGrade.toFixed(2)}%</h6>
-                        </div>
+                        <GradeHistoryLineGraph batch={props.batch} traineeId={props.traineeId}/>
                     </Row>
 
                 </div>

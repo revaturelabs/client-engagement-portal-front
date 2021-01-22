@@ -1,35 +1,38 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 import { AssociateCard } from './AssociateCard';
-import { IAssociateSingle } from '../../_reducers/AssociateReducer';
+import { Associate } from '../../types';
 
 let wrapper:any;
-let fakeData:IAssociateSingle;
+let fakeData:Associate;
+let salesforceId = 'SF-1234';
 
 /**
  * This represents associate data to be used in the tests below.
  */
 beforeAll(() => {
     fakeData = {
+        email: 'billgates@ms.com',
+        salesforceId,
         firstName: "Bill",
         lastName: "Gates",
         grades: [{
             dateReceived: "2020-10-21",
             gradeId: 2,
             score: 90,
-            traineeId: "TR-1111"
+            traineeId: salesforceId
         },
         {
             dateReceived: "2020-10-14",
             gradeId: 1,
             score: 60,
-            traineeId: "TR-1111"
+            traineeId: salesforceId
         },
         {
             dateReceived: "2020-10-28",
             gradeId: 3,
             score: 72,
-            traineeId: "TR-1111"
+            traineeId: salesforceId
         }
         ]
     };
@@ -39,7 +42,7 @@ beforeAll(() => {
  * This beforeEach function creates a wrapper with the AssociateCard inside it before every test
  */
 beforeEach(() => {
-    wrapper = shallow(<AssociateCard {...fakeData}/>)
+    wrapper = shallow(<AssociateCard associateAssignment={{ trainingStatus: 'fail', startDate: 'sometime', endDate: 'later time', associate: fakeData, active: true }}/>)
 });
 
 /**

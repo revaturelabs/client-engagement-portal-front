@@ -1,0 +1,20 @@
+@import "./revature-colors.scss";
+button.btn{
+    box-sizing: border-box;
+    margin: auto;
+    background-color: #f26925;
+    color: white;
+    font-family: futura-pt, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    width: auto;
+    border: 3px solid #f26925;
+    transition: all 0.3s ease 0s;
+}
+button.btn:hover{
+    background-color:white;
+    border: 3px solid #F26925;
+    box-shadow: none;
+    color: #F26925;
+    font-weight: bold;
+}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { AssociateCard } from './AssociateCard';
-import {IAssociate} from '../../_reducers/AssociateReducer'
+import {AssociateAssignment} from '../../types';
 import Carousel from "react-multi-carousel";
 
 
@@ -13,7 +13,7 @@ import Carousel from "react-multi-carousel";
  *
  * @returns TSX Element to render
  */
-export const AssociateCardFactory:React.FC<any> = (props:IAssociate) => {
+export const AssociateCardFactory:React.FC<{ associateAssignments?: AssociateAssignment[] }> = (props) => {
 
     /**
      * @constant cards
@@ -32,11 +32,13 @@ export const AssociateCardFactory:React.FC<any> = (props:IAssociate) => {
        * Loop through the associateAssignments array that was passed in the props
        * and add them to the cards array.
        */
-      try{
-        for(const assoc of props.associateAssignments){
-          cards.push(<AssociateCard {...assoc.associate} key={assoc.associate.lastName}/>);
-         }
-      } catch (error){
+        try{
+          if (props.associateAssignments) {
+            for(const assoc of props.associateAssignments){
+              cards.push(<AssociateCard associateAssignment={{active: true, trainingStatus:'', startDate: '', endDate: '', associate: assoc.associate}} key={assoc.associate.lastName}/>);
+            }
+          }
+        } catch (error){
       }
     })();
 

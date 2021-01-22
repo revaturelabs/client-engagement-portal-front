@@ -1,0 +1,41 @@
+@import "./revature-colors.scss";
+
+.batch-info-card {
+  border-radius: 20px !important;
+  border: 1px solid #f26925 !important;
+  box-shadow: 3px 3px 15px #72a4c260;
+
+  div.card-header {
+    text-align: center;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+
+    h4 {
+      margin-top: 6px;
+      color: $rev-orange;
+    }
+  }
+
+  div.card-footer {
+    text-align: center;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+  }
+
+  .card-body {
+    color: $rev-dgray;
+
+    .row {
+      margin-top: 15px;
+    }
+  }
+
+  .logo-container {
+    text-align: center;
+
+    img {
+      max-width: 60%;
+      max-height: 80px;
+    }
+  }
+}
